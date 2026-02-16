@@ -8,7 +8,6 @@
 
   &::after {
     content: attr(data-requests);
-    /*content: "0 API Requests";*/
     position: absolute;
     bottom: 0.525rem;
     right: 0.4rem;
