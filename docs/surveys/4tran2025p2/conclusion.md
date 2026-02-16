@@ -7,15 +7,7 @@ image: https://desiresaregrey.com/assets/surveys/4tran2025p2/thumb-conclusion.pn
 
 <link rel="stylesheet" href="/stylesheets/surveys/4tran2025p2.css">
 <link rel="stylesheet" href="/stylesheets/socialmedia.css">
-<script type="importmap">
-{
-  "imports": {
-    "apexcharts": "https://esm.sh/apexcharts",
-    "d3": "https://esm.sh/d3",
-    "d3-cloud": "https://esm.sh/d3-cloud"
-  }
-}
-</script>
+
 <script type="module" src="/js/surveys/4tran2025p2/4tran2025p2.js"></script>
 
 # Extended 4tran Survey (2025.2)

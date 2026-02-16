@@ -6,15 +6,7 @@ image: https://desiresaregrey.com/assets/surveys/4tran2025p2/thumb-measurements.
 <script src="/js/utils/header-title-changer.js" data-title="Page 2 - Measurements"></script>
 
 <link rel="stylesheet" href="/stylesheets/surveys/4tran2025p2.css">
-<script type="importmap">
-{
-  "imports": {
-    "apexcharts": "https://esm.sh/apexcharts",
-    "d3": "https://esm.sh/d3",
-    "d3-cloud": "https://esm.sh/d3-cloud"
-  }
-}
-</script>
+
 <script type="module" src="/js/surveys/4tran2025p2/measurements.js"></script>
 <script type="module" src="/js/surveys/4tran2025p2/4tran2025p2.js"></script>
 

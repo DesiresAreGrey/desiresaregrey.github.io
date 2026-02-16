@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/DesiresAreGrey/Website#readme",
   "dependencies": {
+    "@fingerprintjs/fingerprintjs": "^5.0.1",
     "apexcharts": "^5.3.6",
     "d3": "^7.9.0",
     "d3-cloud": "^1.2.8"

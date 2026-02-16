@@ -6,13 +6,6 @@ image: https://desiresaregrey.com/assets/misc/minecraft/thumb.png
 <script src="/js/utils/header-title-changer.js" data-mobile-title="Modded Minecraft Versions"></script>
 
 <link rel="stylesheet" href="/stylesheets/misc/moddedminecraftversions.css">
-<script type="importmap">
-{
-  "imports": {
-    "apexcharts": "https://esm.sh/apexcharts"
-  }
-}
-</script>
 <script type="module" src="/js/misc/moddedminecraftversions.js"></script>
 
 # Popularity of Modded Minecraft Versions
