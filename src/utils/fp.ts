@@ -5,7 +5,7 @@ export class Fingerprint {
     
     static get agent(): Promise<GetResult> {
         this.#agentPromise ??= (async () => (await FingerprintJS.load({
-            debug: true
+            debug: false
         })).get())();
         return this.#agentPromise!;
     }
