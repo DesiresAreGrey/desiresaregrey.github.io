@@ -1,10 +1,10 @@
 import { API } from "../utils/api.js";
+import { Cache } from "../utils/cache.js";
 import { JsonFetch } from "../utils/jsonfetch.js";
 import { TimeSpan } from "../utils/timespan.js";
-import { Utils } from "../utils/utils.js";
 
 {
-    const cached = Utils.getCache<string>("apex-season-banner");
+    const cached = Cache.get<string>("apex-season-banner");
     const card = $("#apex-weapon-stats-card") as HTMLElement;
 
     if (cached) {
@@ -21,12 +21,12 @@ import { Utils } from "../utils/utils.js";
         const imageUrl = (await API.get("misc/apex/season-banner"))?.url;
         card?.style.setProperty(`--image`, `url('${imageUrl}')`);
         card?.classList.add("loaded");
-        Utils.setCache("apex-season-banner", imageUrl, TimeSpan.fromHours(12).ms);
+        Cache.set("apex-season-banner", imageUrl, TimeSpan.fromHours(12).ms);
     }
 }
 
 {
-    const cached = Utils.getCache<string>("minecraft-update-banner");
+    const cached = Cache.get<string>("minecraft-update-banner");
     const card = $("#modded-minecraft-versions-card") as HTMLElement;
 
     if (cached) {
@@ -48,6 +48,6 @@ import { Utils } from "../utils/utils.js";
         
         card?.style.setProperty(`--image`, `url('${imageUrl}')`);
         card?.classList.add("loaded");
-        Utils.setCache("minecraft-update-banner", imageUrl, TimeSpan.fromHours(12).ms);
+        Cache.set("minecraft-update-banner", imageUrl, TimeSpan.fromHours(12).ms);
     }
 }

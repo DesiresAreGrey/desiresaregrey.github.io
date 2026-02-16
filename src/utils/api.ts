@@ -1,20 +1,21 @@
+import { Cache } from "./cache.js";
 import { JsonFetch } from "./jsonfetch.js";
 import { TimeSpan } from "./timespan.js";
-import { Utils } from "./utils.js";
+import "./utils.js";
 
 export class API {
     static #urlPromise: Promise<string> | null = null;
 
     static get url(): Promise<string> {
         this.#urlPromise ??= (async () => {
-            const cached = Utils.getCache<string>("api-url");
+            const cached = Cache.get<string>("api-url");
             if (cached && cached == "https://api.desiresaregrey.com/") {
                 return cached;
             }
             try {
                 const isReachable = await JsonFetch.isReachable("https://api.desiresaregrey.com/status");
                 if (isReachable)
-                    Utils.setCache("api-url", "https://api.desiresaregrey.com/", TimeSpan.fromHours(1).ms);
+                    Cache.set("api-url", "https://api.desiresaregrey.com/", TimeSpan.fromHours(1).ms);
                 return isReachable ? "https://api.desiresaregrey.com/" : "https://desiresapi.runasp.net/";
             } 
             catch {

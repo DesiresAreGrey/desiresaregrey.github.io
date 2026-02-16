@@ -1,4 +1,4 @@
-import "../utils/utils.js";
+import "./utils.js";
 
 export class LoadingBar {
     private static instance: LoadingBar | null = null;

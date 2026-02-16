@@ -53,18 +53,8 @@ export class Utils {
         return 0;
     }
 
-    static setCache<T>(key: string, value: T, LifetimeMs: number): void {
-        const expiresAt = Date.now() + LifetimeMs;
-        localStorage.setItem(key, { value, expiresAt }.toJson());
-    }
-
-    static getCache<T>(key: string): T | null {
-        const cached = localStorage.getItem(key)?.parseJson();
-
-        if (cached && cached.expiresAt > Date.now())
-            return cached.value as T;
-        localStorage.removeItem(key);
-        return null;
+    static testAppend(text: string) {
+        $(".md-content__inner.md-typeset div")?.appendHtml(`<p>${text}</p>`);
     }
 }
 
