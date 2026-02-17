@@ -59,7 +59,13 @@ if (charts.length > 0) {
         const scaleLinear = el.dataset.scaleLinear != undefined;
 
         if (el.classList.contains('wordcloud')) {
-            WordCloud.createWordCloud(el.id, master[dataKey], height, minSize, maxSize, padding, color, scaleLinear);
+            WordCloud.createWordCloud(el.id, master[dataKey], height, color, {
+                minSize: minSize,
+                maxSize: maxSize,
+                padding: padding,
+                scaleLinear: scaleLinear,
+                units: "responses"
+            });
         }
 
         loadedAmount++;

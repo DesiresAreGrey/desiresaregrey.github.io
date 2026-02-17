@@ -1,5 +1,7 @@
 export class JsonFetch {
-    static async get<T = any>(url: string): Promise<T> {
+    static async get<T = any>(url: string, params?: any): Promise<T> {
+        if (params)
+            url += (url.includes('?') ? '&' : '?') + new URLSearchParams(params).toString();
         const response = await fetch(url);
         if (!response.ok)
             throw new Error(`Failed to get JSON from ${url}: ${response.status} ${response.statusText}`);

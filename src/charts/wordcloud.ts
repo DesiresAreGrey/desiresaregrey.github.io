@@ -8,6 +8,14 @@ interface WordCloudData {
     maxSize: number;
 }
 
+type WordCloudOptions = {
+    minSize: number;
+    maxSize: number;
+    padding: number;
+    scaleLinear: boolean;
+    units: string;
+}
+
 export class WordCloud {
     static get isMobile() { return window.innerWidth > 768 ? false : true; }
 
@@ -17,12 +25,12 @@ export class WordCloud {
         return [...WordCloud.#wordclouds]; 
     }
 
-    static createWordCloud(cloudId: string, data: any[], height: number, minSize: number, maxSize: number, padding: number, color: string, scaleLinear: boolean): void {
+    static createWordCloud(cloudId: string, data: any[], height: number, color: string, options: WordCloudOptions): void {
         const start = performance.now();
 
         if (WordCloud.isMobile){
-            minSize *= 0.85;
-            maxSize *= 0.5;
+            options.minSize *= 0.85;
+            options.maxSize *= 0.5;
         }
 
         const counts = data.map(d => d.count);
@@ -32,11 +40,11 @@ export class WordCloud {
 
         let fontSize: any = d3.scaleSqrt()
             .domain([minCount, maxCount])
-            .range([minSize, maxSize]);
-        if (scaleLinear) {
+            .range([options.minSize, options.maxSize]);
+        if (options.scaleLinear) {
             fontSize = d3.scaleLinear()
                 .domain([minCount, maxCount])
-                .range([minSize, maxSize]);
+                .range([options.minSize, options.maxSize]);
         }
         const opacity = d3.scaleLog()
             .domain([minCount, maxCount])
@@ -61,7 +69,7 @@ export class WordCloud {
         const layout = cloud()
             .size([width, height])
             .words(myWords)
-            .padding(padding)
+            .padding(options.padding)
             .rotate(rotate ? (_, index) => index == 0 ? 0 : ~~(Math.random() * 2) * 90 : 0)
             .font("Bitter")
             .fontSize(d => d.size!)
@@ -99,7 +107,7 @@ export class WordCloud {
 
                 tooltip.innerHTML = `
                     <div class="word">${word}</div>
-                    <span class="place">#${place}</span> <span class="count">(${count} respondents)</span>
+                    <span class="place">#${place}</span> <span class="count">(${count} ${options.units})</span>
                     `;
 
                 if (!tooltip.classList.contains('active')) {
@@ -132,8 +140,8 @@ export class WordCloud {
         WordCloud.#wordclouds.push({
             id: cloudId,
             loadTime: (performance.now() - start).roundTo(0),
-            minSize: minSize,
-            maxSize: maxSize
+            minSize: options.minSize,
+            maxSize: options.maxSize
         });
     }
 }

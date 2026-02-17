@@ -25,10 +25,10 @@ export class API {
         return this.#urlPromise!;
     }
 
-    static async get<T = any>(endpoint: string): Promise<T> {
+    static async get<T = any>(endpoint: string, params?: any): Promise<T> {
         if (endpoint.startsWith('/'))
             endpoint = endpoint.substring(1);
-        return JsonFetch.get(await API.url + endpoint);
+        return JsonFetch.get(await API.url + endpoint, params);
     }
 
     static async post<T = any>(endpoint: string, data: unknown): Promise<T> {
