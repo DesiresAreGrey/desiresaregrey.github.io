@@ -7,6 +7,8 @@ console.log('Fingerprint visitor ID:', visitorId);
 
 let userWordList: string[];
 
+await document.fonts.load("700 1em 'Bitter'");
+
 loadWordcloud();
 
 async function loadWordcloud(reload = false) {
