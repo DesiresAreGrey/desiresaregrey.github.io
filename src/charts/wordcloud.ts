@@ -13,7 +13,7 @@ type WordCloudOptions = {
     maxSize: number;
     padding: number;
     scaleLinear: boolean;
-    units: string;
+    unit: string;
 }
 
 export class WordCloud {
@@ -107,7 +107,7 @@ export class WordCloud {
 
                 tooltip.innerHTML = `
                     <div class="word">${word}</div>
-                    <span class="place">#${place}</span> <span class="count">(${count} ${options.units})</span>
+                    <span class="place">#${place}</span> <span class="count">(${count} ${options.unit + (Number(count) > 1 ? "s" : "")})</span>
                     `;
 
                 if (!tooltip.classList.contains('active')) {

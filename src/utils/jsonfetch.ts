@@ -4,7 +4,7 @@ export class JsonFetch {
             url += (url.includes('?') ? '&' : '?') + new URLSearchParams(params).toString();
         const response = await fetch(url);
         if (!response.ok)
-            throw new Error(`Failed to get JSON from ${url}: ${response.status} ${response.statusText}`);
+            throw new JsonFetchError(response);
         return response.json() as Promise<T>;
     }
 
@@ -18,7 +18,7 @@ export class JsonFetch {
         });
 
         if (!response.ok)
-            throw new Error(`Failed to post JSON to ${url}: ${response.status} ${response.statusText}`);
+            throw new JsonFetchError(response, "POST");
 
         return response.json() as Promise<T>;
     }
@@ -32,4 +32,17 @@ export class JsonFetch {
             return false;
         }
     }
+}
+
+export class JsonFetchError extends Error {
+    constructor(response: Response, method: string = "GET") {
+        super(`Failed to fetch ${method} JSON: ${response.status} ${response.statusText}`);
+        this.name = "JsonFetchError";
+        this.method = method;
+        this.status = response.status;
+        this.statusText = response.statusText;
+    }
+    method: string;
+    status: number;
+    statusText: string;
 }

@@ -64,7 +64,7 @@ if (charts.length > 0) {
                 maxSize: maxSize,
                 padding: padding,
                 scaleLinear: scaleLinear,
-                units: "responses"
+                unit: "respondent"
             });
         }
 
