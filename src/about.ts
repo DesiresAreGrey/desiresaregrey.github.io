@@ -19,7 +19,7 @@ async function loadWordcloud(reload = false) {
     WordCloud.createWordCloud(el.id, wordcloudData, height, "#a46fff", {
         minSize: 15,
         maxSize: 80,
-        padding: 3,
+        padding: 2,
         scaleLinear: false,
         unit: "submission"
     });
