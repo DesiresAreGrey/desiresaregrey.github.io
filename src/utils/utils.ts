@@ -83,6 +83,7 @@ declare global {
     interface String {
         parseJson(): any | null;
         parseFloat(): number | null;
+        unquote(): string;
     }
 
     interface Number {
@@ -149,7 +150,15 @@ Object.defineProperty(String.prototype, 'parseFloat', {
         if (isNaN(parsed)) 
             return null;
         return parsed;
-    } 
+    }
+});
+
+Object.defineProperty(String.prototype, 'unquote', { 
+    value: function(this: string) { 
+        if ((this.startsWith('"') && this.endsWith('"')) || (this.startsWith("'") && this.endsWith("'")))
+            return this.slice(1, -1);
+        return this;
+    }
 });
 
 Object.defineProperty(Number.prototype, 'roundTo', { 

@@ -3,8 +3,10 @@ export class JsonFetch {
         if (params)
             url += (url.includes('?') ? '&' : '?') + new URLSearchParams(params).toString();
         const response = await fetch(url);
-        if (!response.ok)
+
+        if (!response.ok) {
             throw new JsonFetchError(response);
+        }
         return response.json() as Promise<T>;
     }
 
@@ -17,9 +19,9 @@ export class JsonFetch {
             body: JSON.stringify(data)
         });
 
-        if (!response.ok)
+        if (!response.ok) {
             throw new JsonFetchError(response, "POST");
-
+        }
         return response.json() as Promise<T>;
     }
 
@@ -39,10 +41,15 @@ export class JsonFetchError extends Error {
         super(`Failed to fetch ${method} JSON: ${response.status} ${response.statusText}`);
         this.name = "JsonFetchError";
         this.method = method;
-        this.status = response.status;
-        this.statusText = response.statusText;
+        this.response = response;
+        try {
+            this.responseMessage = response.json().then(json => json.detail ?? json);
+        }
+        catch {
+            this.responseMessage = Promise.resolve("Unknown error");
+        }
     }
     method: string;
-    status: number;
-    statusText: string;
+    response: Response;
+    responseMessage: Promise<string>;
 }

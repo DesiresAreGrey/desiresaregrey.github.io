@@ -1,11 +1,14 @@
 import { API } from './utils/api.js';
 import { Fingerprint } from './utils/fp.js';
 import { WordCloud } from './charts/wordcloud.js';
+import { Utils } from './utils/utils.js';
+import { JsonFetchError } from './utils/jsonfetch.js';
+import { LoadingBar } from './utils/loadingbar.js';
 
 const visitorId = await Fingerprint.visitorId;
 console.log('Fingerprint visitor ID:', visitorId);
 
-let userWordList: string[];
+let userWordList: string[] = [];
 
 await document.fonts.load("700 1em 'Bitter'");
 
@@ -30,12 +33,19 @@ async function loadWordcloud(reload = false) {
 
     console.log(updateButton);
 
-    try {
-        const user = await API.get("about/wordcloud/user", { fingerprint: visitorId });
-        console.log(user);
-        userWordList = user.wordList;
-        input.value = userWordList.join(", ");
-    } catch {}
+    if (userWordList.length === 0) {
+        try {
+            const user = await API.get("about/wordcloud/user", { fingerprint: visitorId });
+            console.log(user);
+            userWordList = user.wordList;
+            input.value = userWordList.join(", ");
+        } catch (e) {
+            console.error(e);
+            if (e instanceof JsonFetchError) {
+                showMessage(await e.responseMessage);
+            }
+        }
+    }
 
     toggleUpdateButton(updateButton, input.value);
     
@@ -53,13 +63,23 @@ async function loadWordcloud(reload = false) {
             if (parseWordList(input.value).join(", ") === userWordList?.join(", "))
                 return;
 
-            const response = await API.post("about/wordcloud/submit", { fingerprint: visitorId, wordList: parseWordList(input.value) });
-            console.log(response);
-            if (response.wordList.length > 0) {
-                userWordList = response.wordList;
-                input.value = userWordList.join(", ");
-                loadWordcloud(true);
+            LoadingBar.startTrickle();
+            try {
+                const response = await API.post("about/wordcloud/submit", { fingerprint: visitorId, wordList: parseWordList(input.value) });
+                console.log(response);
+                if (response.wordList.length > 0) {
+                    userWordList = response.wordList;
+                    input.value = userWordList.join(", ");
+                    loadWordcloud(true);
+                    showMessage("Success");
+                }
             }
+            catch (e) {
+                console.error(e);
+                if (e instanceof JsonFetchError)
+                    showMessage(await e.responseMessage);
+            }
+            LoadingBar.finish();
         });
     }
 }
@@ -73,4 +93,13 @@ function parseWordList(input: string) {
 
 function toggleUpdateButton(button: HTMLElement, input: string) {
     button.classList.toggle("disabled", parseWordList(input).join(", ") === userWordList?.join(", "));
+}
+
+function showMessage(message: string) {
+    const inputWrapper = $(".input-wrapper") as HTMLDivElement;
+    if (inputWrapper) {
+        inputWrapper.classList.add("show-message");
+        inputWrapper.setAttribute("data-message", message);
+        Utils.runAfter(() => inputWrapper.classList.remove("show-message"), 2500, inputWrapper);
+    }
 }
