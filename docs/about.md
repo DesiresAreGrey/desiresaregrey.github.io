@@ -11,9 +11,11 @@ image: https://desiresaregrey.com/assets/DesiresAreGrey.png
 
 ## Wordcloud
 
-Here you can add words to the wordcloud that you think describe me. The bigger the word, the more people have used that word for me. You can add a
-maximum of 5 words/phrases, each separated by a comma or newline. The word/phrase has a maximum character length of 25 and there can only be 4 words
-within 1 phrase. The textbox will remember your previous input, so you can edit and submit again to update your submission.
+Add words to the wordcloud that you think describe me!
+
+<p style="font-size: 13px; color: #999">You can add a maximum of 5 words/phrases, each separated by a comma or newline. The word/phrase has a maximum
+character length of 25 and there can only be 4 words within 1 phrase. The textbox will remember your previous input, so you can edit and submit again
+to update your submission.</p>
 
 <div id="your-wordcloud" class="wordcloud" style="height: 400px;"></div>
 
