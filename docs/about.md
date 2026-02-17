@@ -24,5 +24,5 @@ to update your submission.</p>
   <div id="submit-button" class="button disabled fa-solid fa-circle-arrow-up" style="margin: 0 0 1px -3px;"></div>
 </div>
 <div class="input-wrapper">
-  <textarea id="words-input" class="big-input" rows="1" placeholder="Word 1, Word 2, Word 3..."></textarea>
+  <textarea id="words-input" class="big-input" rows="1" placeholder="Word 1, Word 2, Word 3..." spellcheck="false"></textarea>
 </div>
