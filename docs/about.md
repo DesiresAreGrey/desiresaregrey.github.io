@@ -7,13 +7,15 @@ image: https://desiresaregrey.com/assets/DesiresAreGrey.png
 
 <script type="module" src="/js/about.js"></script>
 
-# DesiresAreGrey
+# About
+
+Hi, I'm Diana, aka DesiresAreGrey!
 
 ## Wordcloud
 
 Add words to the wordcloud that you think describe me!
 
-<p style="font-size: 13px; color: #999">You can add a maximum of 5 words/phrases, each separated by a comma or newline. The word/phrase has a maximum
+<p style="font-size: 13px; color: #999; margin-top: -0.5rem;">You can add a maximum of 5 words/phrases, each separated by a comma or newline. The word/phrase has a maximum
 character length of 25 and there can only be 4 words within 1 phrase. The textbox will remember your previous input, so you can edit and submit again
 to update your submission.</p>
 
