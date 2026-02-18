@@ -1,5 +1,6 @@
 @import url("/stylesheets/charts/wordcloud.css");
 @import url("/stylesheets/socialmedia.css");
+@import url("/stylesheets/cards.css");
 
 .input-wrapper {
   position: relative;
