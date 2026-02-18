@@ -1,12 +1,12 @@
 import { API } from './utils/api.js';
-import { Fingerprint } from './utils/fp.js';
+import { BrowserIdentity } from './utils/identity.js';
 import { WordCloud } from './charts/wordcloud.js';
 import { Utils } from './utils/utils.js';
 import { JsonFetchError } from './utils/jsonfetch.js';
 import { LoadingBar } from './utils/loadingbar.js';
 
-const visitorId = await Fingerprint.visitorId;
-console.log('Fingerprint visitor ID:', visitorId);
+const identityId = await BrowserIdentity.id;
+console.log('Identity ID:', identityId);
 
 let userWordList: string[] = [];
 
@@ -15,7 +15,7 @@ await document.fonts.load("700 1em 'Bitter'");
 loadWordcloud();
 
 async function loadWordcloud(reload = false) {
-    const wordcloudData = await API.get("about/wordcloud" + (reload ? `?reload=${Date.now()}` : ""), { fingerprint: visitorId });
+    const wordcloudData = await API.get("about/wordcloud" + (reload ? `?reload=${Date.now()}` : ""), { id: identityId });
 
     const el = $id("your-wordcloud")!;
     const height = el.style.height.replace("px", "")?.parseFloat() ?? 300;
@@ -27,15 +27,12 @@ async function loadWordcloud(reload = false) {
         unit: "submission"
     });
     
-    
     const input = $id("words-input") as HTMLTextAreaElement;
     const updateButton = $id("submit-button") as HTMLElement;
 
-    console.log(updateButton);
-
     if (userWordList.length === 0) {
         try {
-            const user = await API.get("about/wordcloud/user", { fingerprint: visitorId });
+            const user = await API.get("about/wordcloud/user", { id: identityId });
             console.log(user);
             userWordList = user.wordList;
             input.value = userWordList.join(", ");
@@ -65,7 +62,7 @@ async function loadWordcloud(reload = false) {
 
             LoadingBar.startTrickle();
             try {
-                const response = await API.post("about/wordcloud/submit", { fingerprint: visitorId, wordList: parseWordList(input.value) });
+                const response = await API.post("about/wordcloud/submit", { identity: identityId, wordList: parseWordList(input.value) });
                 console.log(response);
                 if (response.wordList.length > 0) {
                     userWordList = response.wordList;

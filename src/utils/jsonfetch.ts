@@ -43,7 +43,7 @@ export class JsonFetchError extends Error {
         this.method = method;
         this.response = response;
         try {
-            this.responseMessage = response.json().then(json => json.detail ?? json);
+            this.responseMessage = response.json().then(json => json.detail ?? json.message ?? json);
         }
         catch {
             this.responseMessage = Promise.resolve("Unknown error");
