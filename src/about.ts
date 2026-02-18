@@ -15,7 +15,7 @@ await document.fonts.load("700 1em 'Bitter'");
 loadWordcloud();
 
 async function loadWordcloud(reload = false) {
-    const wordcloudData = await API.get("about/wordcloud" + (reload ? `?reload=${Date.now()}` : ""), { id: identityId });
+    const wordcloudData = await API.get("about/wordcloud" + (reload ? `?reload=${Date.now()}` : ""), { identity: identityId });
 
     const el = $id("your-wordcloud")!;
     const height = el.style.height.replace("px", "")?.parseFloat() ?? 300;
@@ -32,7 +32,7 @@ async function loadWordcloud(reload = false) {
 
     if (userWordList.length === 0) {
         try {
-            const user = await API.get("about/wordcloud/user", { id: identityId });
+            const user = await API.get("about/wordcloud/user", { identity: identityId });
             console.log(user);
             userWordList = user.wordList;
             input.value = userWordList.join(", ");
