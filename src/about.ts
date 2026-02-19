@@ -38,7 +38,7 @@ async function loadWordcloud(reload = false) {
             input.value = userWordList.join(", ");
         } catch (e) {
             console.error(e);
-            if (e instanceof JsonFetchError) {
+            if (e instanceof JsonFetchError && e.response.status !== 404) {
                 showMessage(await e.responseMessage);
             }
         }
