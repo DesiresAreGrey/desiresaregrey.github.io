@@ -44,7 +44,36 @@ LoadingBar.finish();
 let video: Video | null = null;
 
 const videoPreview = $id('video-preview') as HTMLVideoElement;
+
 const fileInput = $id('video-input') as HTMLInputElement;
+fileInput.addEventListener('change', selectedVideo);
+
+const heightInput = $id('res-height-input') as HTMLInputElement;
+const widthDisplay = $id('res-width') as HTMLSpanElement;
+const frameRateInput = $id('frame-rate-input') as HTMLInputElement;
+
+heightInput.addEventListener('input', () => {
+    if (video?.videoStream == null)
+        return;
+
+    let height = parseInt(heightInput.value);
+    if (height > video.videoStream.height)
+        height = video.videoStream.height;
+    else if (height < 1)
+        height = 1;
+    const width = Math.round(height * video.aspectRatio);
+
+    heightInput.value = height.toString();
+    widthDisplay.textContent = width.toString();
+});
+
+frameRateInput.addEventListener('input', () => {
+    const frameRate = parseInt(frameRateInput.value);
+    if (frameRate < 1)
+        frameRateInput.value = '1';
+    else if (frameRate > 60)
+        frameRateInput.value = '60';
+});
 
 const convertButton = $id('convert-button') as HTMLButtonElement;
 convertButton.addEventListener('click', convertToGif);
@@ -52,7 +81,7 @@ convertButton.addEventListener('click', convertToGif);
 const outputImg = $id('output-gif') as HTMLImageElement;
 const downloadButton = $id('download-button') as HTMLButtonElement;
 
-fileInput.addEventListener('change', async () => {
+async function selectedVideo() {
     if (!fileInput.files || fileInput.files.length === 0)
         return;
     const file = fileInput.files[0];
@@ -69,10 +98,14 @@ fileInput.addEventListener('change', async () => {
         return;
     }
 
+    heightInput.value = (video.videoStream.height / 2).toString();
+    widthDisplay.textContent = (video.videoStream.width / 2).toString();
+    frameRateInput.value = (video.fps / 2).toString();
+
     const infoEl = $id('video-info') as HTMLParagraphElement;
     infoEl.innerHTML = getInfoHtml(video);
     convertButton.disabled = false;
-});
+}
 
 async function convertToGif() {
     if (!video)
@@ -90,10 +123,14 @@ async function convertToGif() {
     convertButton.textContent = "Converting...";
     
     updateProgress = (progress: number) => LoadingBar.update(progress.remap(0.333, 0.666));
+
+    const newWidth = Math.round(parseInt(heightInput.value) * video.aspectRatio);
+    const frameRate = frameRateInput.value.parseFloat() ?? 15;
+
     await ffmpeg.exec([
         '-v', 'info',
         '-i', 'input.mp4', 
-        '-vf', 'fps=15,scale=500:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse',
+        '-vf', `fps=${frameRate},scale=${newWidth}:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse`,
         '-c:v', 'gif', 
         'unoptimized.gif'
     ]);
@@ -147,7 +184,7 @@ function getInfoHtml(media: Video | Gif) {
         •
         Dimensions: <span style="font-weight: bold;">${media.videoStream.width}x${media.videoStream.height}</span>
         •
-        FPS: <span style="font-weight: bold;">${eval(media.videoStream.r_frame_rate).roundTo(2)}</span>
+        FPS: <span style="font-weight: bold;">${media.fps.roundTo(2)}</span>
         •
         Duration: <span style="font-weight: bold;">${TimeSpan.fromSeconds(media.format.duration).toTrimmedHms()}</span>
     `
@@ -164,6 +201,14 @@ class Video {
     }
     get audioStream() {
         return this.streams.find(s => s.codec_type === 'audio');
+    }
+
+    get fps() {
+        return eval(this.videoStream.r_frame_rate);
+    }
+
+    get aspectRatio() {
+        return this.videoStream.width / this.videoStream.height;
     }
 
     constructor(video: File, format: any, streams: any[]) {
@@ -201,6 +246,14 @@ class Gif {
 
     get videoStream() {
         return this.streams.find(s => s.codec_type === 'video');
+    }
+
+    get fps() {
+        return eval(this.videoStream.r_frame_rate).roundTo(2);
+    }
+
+    get aspectRatio() {
+        return this.videoStream.width / this.videoStream.height;
     }
 
     constructor(gif: File, format: any, streams: any[]) {

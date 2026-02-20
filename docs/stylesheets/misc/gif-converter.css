@@ -21,3 +21,32 @@
   }
 }
 
+.settings {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.input {
+  height: 30px;
+  max-height: 30px;
+  padding: .15rem;
+  background: #252525;
+  border: .1rem solid;
+  border-radius: 50vw;
+  border-color: transparent;
+  font-weight: 200;
+  font-size: 17px;
+  font-family: Inter, sans-serif;
+  text-align: center;
+  color: #ccc;
+  transition: border-color 200ms ease;
+  &:hover {
+    border-color: var(--md-primary-fg-color);
+  }
+  &:focus-visible {
+    border-color: #9152ff;
+  }
+}
+
