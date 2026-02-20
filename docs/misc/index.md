@@ -20,9 +20,9 @@ h1 {
       <h2>Popular Modded Minecraft Versions</h2>
       <p>Charts showing the number of mods for different Minecraft versions on Modrinth and Curseforge</p>
     </a>
-    <a class="card hidden" href="dotnet-wasm-test">
-      <h2>.NET WebAssembly Test</h2>
-      <p>Test of .NET/C# WebAssembly using the default stopwatch template</p>
+    <a class="card loaded" href="gif-converter" style="--image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Rotating_earth_%28large%29.gif/250px-Rotating_earth_%28large%29.gif'); --scale: 1.1;">
+      <h2>MP4 to GIF Converter</h2>
+      <p>Convert MP4 videos to GIFs in your browser without being uploaded/processed to a server</p>
     </a>
   </div>
 </div>
