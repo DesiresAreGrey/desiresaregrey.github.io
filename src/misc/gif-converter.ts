@@ -108,6 +108,24 @@ async function updatePercentages() {
     fpsPercent.textContent = `${Math.round((frameRate / video.fps) * 100)}%`;
 }
 
+const optimizationInput = $id('optimization-input') as HTMLInputElement;
+const optimizationEnabled = $id('optimization-enabled') as HTMLSpanElement;
+optimizationInput.addEventListener('input', () => {
+    let compression = parseInt(optimizationInput.value);
+    if (isNaN(compression) || compression < 1) {
+        compression = 0;
+        optimizationEnabled.textContent = "Optimization Disabled";
+    }
+    else {
+        optimizationEnabled.textContent = "";
+    }
+        
+    if (compression > 200)
+        compression = 200;
+
+    optimizationInput.value = compression.toString();
+});
+
 const convertButton = $id('convert-button') as HTMLButtonElement;
 convertButton.addEventListener('click', convertToGif);
 
@@ -166,44 +184,66 @@ async function convertToGif() {
     const fileData = await fetchFile(video.file);
     await ffmpeg.writeFile('input.mp4', fileData);
 
-    LoadingBar.update(0.333);
+    LoadingBar.update(0.1);
     convertButton.textContent = "Converting...";
-    
-    updateProgress = (progress: number) => LoadingBar.update(progress.remap(0.333, 0.666));
 
     const newWidth = widthInput.value.parseFloat()?.roundTo(0) ?? video.videoStream.width / 4;
     const frameRate = frameRateInput.value.parseFloat()?.roundTo(0) ?? 15;
+    const compression = optimizationInput.value.parseFloat()?.roundTo(0) ?? 0;
+    const compressionEnabled = compression > 0;
+    
+    updateProgress = (progress: number) => LoadingBar.update(progress.remap(0.1, compressionEnabled ? 0.8 : 1));
 
-    await ffmpeg.exec([
+    const command = [
         '-v', 'info',
         '-i', 'input.mp4', 
         '-vf', `fps=${frameRate},scale=${newWidth}:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse`,
         '-c:v', 'gif', 
         'unoptimized.gif'
-    ]);
+    ];
 
-    LoadingBar.update(0.666);
-    convertButton.textContent = "Optimizing...";
+    console.log("FFmpeg", command.join(' '));
 
-    const unoptimizedData = await ffmpeg.readFile('unoptimized.gif');
-    const unoptimizedBlob = new Blob([new Uint8Array(unoptimizedData as Uint8Array)], { type: 'image/gif' });
+    await ffmpeg.exec(command);
 
-    const optimizedFiles: File[] = await gifsicle.run({
-        input: [{
-            file: unoptimizedBlob,
-            name: "unoptimized.gif"
-        }],
-        command: ['-O1 --lossy=80 unoptimized.gif -o /out/final.gif']
-    });
+    if (compressionEnabled) {
+        LoadingBar.update(0.8);
+        convertButton.textContent = "Optimizing...";
 
-    const finalBlob = new Blob([optimizedFiles[0]], { type: 'image/gif' });
-    const url = URL.createObjectURL(finalBlob);
-    outputImg.src = url;
-    downloadUrl = url;
-    
-    const infoEl = $id('gif-info') as HTMLParagraphElement;
-    if (infoEl)
-        infoEl.innerHTML = getInfoHtml(await Gif.fromFile(optimizedFiles[0]));
+        const unoptimizedData = await ffmpeg.readFile('unoptimized.gif');
+        const unoptimizedBlob = new Blob([new Uint8Array(unoptimizedData as Uint8Array)], { type: 'image/gif' });
+
+        const command = `-O1 --lossy=${compression} unoptimized.gif -o /out/final.gif`;
+
+        console.log("gifsicle", command);
+        const optimizedFiles: File[] = await gifsicle.run({
+            input: [{
+                file: unoptimizedBlob,
+                name: "unoptimized.gif"
+            }],
+            command: [command]
+        });
+
+        const finalBlob = new Blob([optimizedFiles[0]], { type: 'image/gif' });
+        const url = URL.createObjectURL(finalBlob);
+        outputImg.src = url;
+        downloadUrl = url;
+
+        const infoEl = $id('gif-info') as HTMLParagraphElement;
+        if (infoEl)
+            infoEl.innerHTML = getInfoHtml(await Gif.fromFile(optimizedFiles[0]));
+    }
+    else {
+        const data = await ffmpeg.readFile('unoptimized.gif');
+        const blob = new Blob([new Uint8Array(data as Uint8Array)], { type: 'image/gif' });
+        const url = URL.createObjectURL(blob);
+        outputImg.src = url;
+        downloadUrl = url;
+
+        const infoEl = $id('gif-info') as HTMLParagraphElement;
+        if (infoEl)
+            infoEl.innerHTML = getInfoHtml(await Gif.fromFile(new File([blob], "output.gif")));
+    }
 
     downloadButton.disabled = false;
 
