@@ -6,6 +6,9 @@ import { fetchFile } from '@ffmpeg/util';
 // @ts-ignore
 import gifsicle from 'gifsicle-wasm-browser';
 
+let deferredPrompt: any;
+await pwaSetup();
+
 LoadingBar.startTrickle();
 
 const ffmpeg = new FFmpeg();
@@ -398,12 +401,54 @@ class Gif {
     }
 }
 
-// fml
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.getRegistrations().then(function(registrations) {
-    for (let registration of registrations) {
-      registration.unregister();
-      console.log('Zombie Service Worker Unregistered!');
+async function pwaSetup() {
+    const installButton = $id('install-button');
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        if (installButton)
+            installButton.style.display = 'block';
+    });
+    installButton?.addEventListener('click', async () => {
+        if (!deferredPrompt)
+            return;
+
+        deferredPrompt?.prompt();
+
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted')
+            console.log('User accepted the install prompt');
+        else
+            console.log('User dismissed the install prompt');
+        
+        deferredPrompt = null;
+        installButton.style.display = 'none';
+    });
+    window.addEventListener('appinstalled', () => {
+        if (installButton)
+            installButton.style.display = 'none';
+        deferredPrompt = null;
+        console.log('PWA was installed');
+    });
+
+    if ('serviceWorker' in navigator) {
+        try {
+            const registration = await navigator.serviceWorker.register('sw.js', { scope: '/misc/gif-converter/' });
+            if (registration.installing)
+                console.log("Service worker installing");
+            else if (registration.waiting)
+                console.log("Service worker installed");
+            else if (registration.active)
+                console.log("Service worker active");
+            console.log("Registration scope:", registration.scope);
+        }
+        catch (error) {
+            console.error("Registration failed with", error);
+        }
+        for (let registration of await navigator.serviceWorker.getRegistrations()) {
+            if (!registration.active?.scriptURL.endsWith('sw.js')) {
+                registration.unregister();
+            }
+        }
     }
-  });
 }
