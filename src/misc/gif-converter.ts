@@ -170,6 +170,7 @@ async function selectedVideo() {
     const infoEl = $id('video-info') as HTMLParagraphElement;
     infoEl.innerHTML = getInfoHtml(video);
     convertButton.disabled = false;
+    $(".settings")?.classList.remove('disabled');
 }
 
 async function convertToGif() {

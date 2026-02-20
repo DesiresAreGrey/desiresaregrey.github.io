@@ -26,6 +26,13 @@
   flex-direction: column;
   gap: 0.25rem;
   margin-top: 0.5rem;
+
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
 }
 
 .input {

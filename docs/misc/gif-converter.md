@@ -1,13 +1,14 @@
 ---
-title: Gif Converter (Clientside)
-description: Convert/Optimize gifs on your browser without uploading them to a server.
+title: MP4 to GIF Converter
+description: Convert/Optimize gifs in your browser without uploading them to a server.
 image: https://desiresaregrey.com/assets/misc/minecraft/thumb.png
 ---
 <script src="/coi-serviceworker.js"></script>
 <script type="module" src="/js/misc/gif-converter.js"></script>
 <link rel="stylesheet" href="/stylesheets/misc/gif-converter.css">
 
-# Gif Converter (Clientside)
+# MP4 to GIF Converter
+The conversion happens in your browser without being uploaded/processed on a server.
 
 <div class="gif-converter-container">
 
@@ -20,7 +21,7 @@ image: https://desiresaregrey.com/assets/misc/minecraft/thumb.png
     <p id="video-info" style="font-size: 13px; color: #999; margin-top: 0.1rem; margin-bottom: 0; text-align: center;">Input Video</p>
   </div>
 
-  <div class="settings">
+  <div class="settings disabled">
     <div>
       <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; font-size: 18px; font-variation-settings: 'wght' 600; opacity: 0.75">Resolution</span>
       <span id="res-percent" style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; margin-right: -0.1rem; font-size: 10px; font-variation-settings: 'wght' 400; opacity: 0.5">100%</span>
