@@ -49,8 +49,8 @@ const fileInput = $id('video-input') as HTMLInputElement;
 fileInput.addEventListener('change', selectedVideo);
 
 const heightInput = $id('res-height-input') as HTMLInputElement;
-const widthDisplay = $id('res-width') as HTMLSpanElement;
-const frameRateInput = $id('frame-rate-input') as HTMLInputElement;
+const widthInput = $id('res-width-input') as HTMLInputElement;
+const resPercent = $id('res-percent') as HTMLSpanElement;
 
 heightInput.addEventListener('input', () => {
     if (video?.videoStream == null)
@@ -64,8 +64,28 @@ heightInput.addEventListener('input', () => {
     const width = Math.round(height * video.aspectRatio);
 
     heightInput.value = height.toString();
-    widthDisplay.textContent = width.toString();
+    widthInput.value = width.toString();
+    updatePercentages();
 });
+widthInput.addEventListener('input', () => {
+    if (video?.videoStream == null)
+        return;
+
+    let width = parseInt(widthInput.value);
+    if (width > video.videoStream.width)
+        width = video.videoStream.width;
+    else if (width < 1)
+        width = 1;
+    const height = Math.round(width / video.aspectRatio);
+
+    heightInput.value = height.toString();
+    widthInput.value = width.toString();
+
+    updatePercentages();
+});
+
+const frameRateInput = $id('frame-rate-input') as HTMLInputElement;
+const fpsPercent = $id('fps-percent') as HTMLSpanElement;
 
 frameRateInput.addEventListener('input', () => {
     const frameRate = parseInt(frameRateInput.value);
@@ -73,13 +93,39 @@ frameRateInput.addEventListener('input', () => {
         frameRateInput.value = '1';
     else if (frameRate > 60)
         frameRateInput.value = '60';
+
+    updatePercentages();
 });
+
+async function updatePercentages() {
+    if (!video)
+        return;
+
+    const width = parseInt(widthInput.value);
+    resPercent.textContent = `${Math.round((width / video.videoStream.width) * 100)}%`;
+
+    const frameRate = parseInt(frameRateInput.value);
+    fpsPercent.textContent = `${Math.round((frameRate / video.fps) * 100)}%`;
+}
 
 const convertButton = $id('convert-button') as HTMLButtonElement;
 convertButton.addEventListener('click', convertToGif);
 
 const outputImg = $id('output-gif') as HTMLImageElement;
 const downloadButton = $id('download-button') as HTMLButtonElement;
+
+let downloadUrl: string | null = null;
+downloadButton.addEventListener('click', () => {
+    if (!downloadUrl)
+        return;
+    const anchor = document.createElement('a');
+    anchor.href = downloadUrl;
+    anchor.download = (video?.file.name.split('.').slice(0, -1).join('.') ?? "output") + '.gif';
+
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+});
 
 async function selectedVideo() {
     if (!fileInput.files || fileInput.files.length === 0)
@@ -99,8 +145,9 @@ async function selectedVideo() {
     }
 
     heightInput.value = (video.videoStream.height / 2).toString();
-    widthDisplay.textContent = (video.videoStream.width / 2).toString();
-    frameRateInput.value = (video.fps / 2).toString();
+    widthInput.value = (video.videoStream.width / 2).toString();
+    frameRateInput.value = "15";
+    updatePercentages();
 
     const infoEl = $id('video-info') as HTMLParagraphElement;
     infoEl.innerHTML = getInfoHtml(video);
@@ -124,8 +171,8 @@ async function convertToGif() {
     
     updateProgress = (progress: number) => LoadingBar.update(progress.remap(0.333, 0.666));
 
-    const newWidth = Math.round(parseInt(heightInput.value) * video.aspectRatio);
-    const frameRate = frameRateInput.value.parseFloat() ?? 15;
+    const newWidth = widthInput.value.parseFloat()?.roundTo(0) ?? video.videoStream.width / 4;
+    const frameRate = frameRateInput.value.parseFloat()?.roundTo(0) ?? 15;
 
     await ffmpeg.exec([
         '-v', 'info',
@@ -146,26 +193,18 @@ async function convertToGif() {
             file: unoptimizedBlob,
             name: "unoptimized.gif"
         }],
-        command: ['--lossy=80 unoptimized.gif -o /out/final.gif']
+        command: ['-O1 --lossy=80 unoptimized.gif -o /out/final.gif']
     });
 
     const finalBlob = new Blob([optimizedFiles[0]], { type: 'image/gif' });
     const url = URL.createObjectURL(finalBlob);
     outputImg.src = url;
+    downloadUrl = url;
     
     const infoEl = $id('gif-info') as HTMLParagraphElement;
     if (infoEl)
         infoEl.innerHTML = getInfoHtml(await Gif.fromFile(optimizedFiles[0]));
-    
-    downloadButton.addEventListener('click', () => {
-        const anchor = document.createElement('a');
-        anchor.href = url;
-        anchor.download = 'output.gif';
 
-        document.body.appendChild(anchor);
-        anchor.click();
-        document.body.removeChild(anchor);
-    });
     downloadButton.disabled = false;
 
     void ffmpeg.deleteFile('input.mp4');

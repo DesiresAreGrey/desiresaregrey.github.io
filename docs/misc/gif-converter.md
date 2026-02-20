@@ -23,15 +23,16 @@ image: https://desiresaregrey.com/assets/misc/minecraft/thumb.png
   <div class="settings">
     <div>
       <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; font-size: 18px; font-variation-settings: 'wght' 600; opacity: 0.75">Resolution</span>
+      <span id="res-percent" style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; margin-right: -0.1rem; font-size: 10px; font-variation-settings: 'wght' 400; opacity: 0.5">100%</span>
       <div style="float: right;">
-        <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; margin-right: -0.1rem; font-size: 14px; font-variation-settings: 'wght' 400; opacity: 0.5">
-          <span id="res-width">1920</span><span style="margin-left: 0.075rem; font-size: 12px;">x</span>
-        </span>
+        <input id="res-width-input" class="input" type="number" inputmode="decimal" step="1" value="1920" style="width: 3rem;">
+        <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; margin-right: -0.1rem; margin-left: -0.1rem; font-size: 12px; font-variation-settings: 'wght' 400; opacity: 0.5">x</span>
         <input id="res-height-input" class="input" type="number" inputmode="decimal" step="1" value="1080" style="width: 3rem;">
       </div>
     </div>
     <div>
       <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; font-size: 18px; font-variation-settings: 'wght' 600; opacity: 0.75">Frame Rate</span>
+      <span id="fps-percent" style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; margin-right: -0.1rem; font-size: 10px; font-variation-settings: 'wght' 400; opacity: 0.5">100%</span>
       <div style="float: right;">
         <input id="frame-rate-input" class="input" type="number" inputmode="decimal" step="1" value="30" style="width: 3rem;">
         <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; margin-left: -0.1rem; font-size: 14px; font-variation-settings: 'wght' 400; opacity: 0.5">FPS</span>
