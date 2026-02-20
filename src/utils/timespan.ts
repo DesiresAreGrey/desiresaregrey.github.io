@@ -35,7 +35,7 @@ export class TimeSpan {
     }
 
     toHms(): string {
-        return `${this.hours.toString().padStart(2, '0')}:${this.minutes.toString().padStart(2, '0')}:${this.seconds.toString().padStart(2, '0')}.${(this.milliseconds % 1000).roundTo(3).toString().padStart(3, '0')}`;
+        return `${this.hours.toString().padStart(2, '0')}:${this.minutes.toString().padStart(2, '0')}:${this.seconds.toString().padStart(2, '0')}.${(this.milliseconds % 1000).roundTo(0).toString().padStart(3, '0')}`;
     }
 
     toTrimmedHms(): string {
