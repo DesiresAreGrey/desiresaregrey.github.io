@@ -397,3 +397,13 @@ class Gif {
         return new Gif(file, json.format, json.streams);
     }
 }
+
+// fml
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistrations().then(function(registrations) {
+    for (let registration of registrations) {
+      registration.unregister();
+      console.log('Zombie Service Worker Unregistered!');
+    }
+  });
+}
