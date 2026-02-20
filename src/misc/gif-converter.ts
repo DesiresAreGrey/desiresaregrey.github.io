@@ -91,8 +91,8 @@ frameRateInput.addEventListener('input', () => {
     const frameRate = parseInt(frameRateInput.value);
     if (frameRate < 1)
         frameRateInput.value = '1';
-    else if (frameRate > 60)
-        frameRateInput.value = '60';
+    else if (frameRate > 50)
+        frameRateInput.value = '50';
 
     updatePercentages();
 });
@@ -178,6 +178,7 @@ async function convertToGif() {
         return;
 
     convertButton.disabled = true;
+    $(".settings")?.classList.add('disabled');
     LoadingBar.start();
 
     convertButton.textContent = "Loading...";
@@ -229,6 +230,7 @@ async function convertToGif() {
         const url = URL.createObjectURL(finalBlob);
         outputImg.src = url;
         downloadUrl = url;
+        videoPreview.load();
 
         const infoEl = $id('gif-info') as HTMLParagraphElement;
         if (infoEl)
@@ -240,6 +242,7 @@ async function convertToGif() {
         const url = URL.createObjectURL(blob);
         outputImg.src = url;
         downloadUrl = url;
+        videoPreview.load();
 
         const infoEl = $id('gif-info') as HTMLParagraphElement;
         if (infoEl)
@@ -253,6 +256,7 @@ async function convertToGif() {
     
     convertButton.textContent = "Convert to GIF";
     convertButton.disabled = false;
+    $(".settings")?.classList.remove('disabled');
     LoadingBar.finish();
 
     updateProgress = progress;
