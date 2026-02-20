@@ -1,3 +1,5 @@
+import "./utils.js";
+
 export class TimeSpan {
     constructor(public milliseconds: number) {}
 

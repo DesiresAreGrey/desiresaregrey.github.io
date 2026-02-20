@@ -63,6 +63,10 @@ screen so it can be used offline.</p>
     <p id="gif-info" style="font-size: 13px; color: #999; margin-top: 0.1rem; margin-bottom: 0; text-align: center;">Output GIF</p>
   </div>
   
-  <button id="download-button" disabled>Download GIF</button>
+  <div style="display: flex; gap: 0.25rem;">
+    <button id="share-button" disabled>Share GIF</button>
+    <button id="download-button" disabled>Download GIF</button>
+  </div>
+  
 
 </div>

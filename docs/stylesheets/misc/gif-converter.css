@@ -90,6 +90,10 @@ img[src=""] {
   }
 }
 
+button {
+  flex: 1;
+}
+
 @media (display-mode: standalone) {
   header {
     .md-header__inner {

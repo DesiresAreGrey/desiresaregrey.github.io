@@ -153,6 +153,7 @@ const convertButton = $id('convert-button') as HTMLButtonElement;
 convertButton.addEventListener('click', convertToGif);
 
 const outputImg = $id('output-gif') as HTMLImageElement;
+
 const downloadButton = $id('download-button') as HTMLButtonElement;
 
 let downloadUrl: string | null = null;
@@ -166,6 +167,27 @@ downloadButton.addEventListener('click', () => {
     document.body.appendChild(anchor);
     anchor.click();
     document.body.removeChild(anchor);
+});
+
+const shareButton = $id('share-button') as HTMLButtonElement;
+if (!(navigator.canShare && navigator.canShare({ files: [new File(["test"], "test.gif", { type: 'image/gif' })] }))) {
+    shareButton.style.display = 'none';
+}
+
+shareButton.addEventListener('click', async () => {
+    if (!downloadUrl)
+        return;
+
+    const response = await fetch(downloadUrl);
+    const blob = await response.blob();
+    const file = new File([blob], (video?.file.name.split('.').slice(0, -1).join('.') ?? "output") + '.gif', { type: 'image/gif' });
+    const shareData = {
+      title: (video?.file.name.split('.').slice(0, -1).join('.') ?? "output"),
+      files: [file] 
+    };
+
+    if (navigator.canShare && navigator.canShare(shareData))
+        await navigator.share(shareData);
 });
 
 async function selectedVideo() {
@@ -283,6 +305,7 @@ async function convertToGif() {
     }
 
     downloadButton.disabled = false;
+    shareButton.disabled = false;
 
     void ffmpeg.deleteFile('input.mp4');
     void ffmpeg.deleteFile('unoptimized.gif');
