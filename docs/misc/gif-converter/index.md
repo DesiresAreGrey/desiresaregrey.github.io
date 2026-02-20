@@ -9,9 +9,8 @@ pwa_icon: /assets/DesiresAreGrey192x.png
 <link rel="stylesheet" href="/stylesheets/misc/gif-converter.css">
 
 # MP4 to GIF Converter
-<p class="description">The conversion happens in your browser without being uploaded/processed on a server.</p>
-
-<button id="install-button"><i class="fa-solid fa-square-plus"></i> Add to Home Screen</button>
+<p class="description">The conversion happens in your browser without being uploaded/processed on a server. The page can also be added to your home
+screen so it can be used offline.</p>
 
 <div class="drop-overlay">
   <i class="fa-solid fa-arrow-up-from-bracket" style="font-size: 48px;"></i>

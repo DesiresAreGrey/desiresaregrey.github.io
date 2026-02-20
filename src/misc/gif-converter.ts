@@ -6,7 +6,6 @@ import { fetchFile } from '@ffmpeg/util';
 // @ts-ignore
 import gifsicle from 'gifsicle-wasm-browser';
 
-let deferredPrompt: any;
 await pwaSetup();
 
 LoadingBar.startTrickle();
@@ -402,35 +401,6 @@ class Gif {
 }
 
 async function pwaSetup() {
-    const installButton = $id('install-button');
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        if (installButton)
-            installButton.style.display = 'block';
-    });
-    installButton?.addEventListener('click', async () => {
-        if (!deferredPrompt)
-            return;
-
-        deferredPrompt?.prompt();
-
-        const { outcome } = await deferredPrompt.userChoice;
-        if (outcome === 'accepted')
-            console.log('User accepted the install prompt');
-        else
-            console.log('User dismissed the install prompt');
-        
-        deferredPrompt = null;
-        installButton.style.display = 'none';
-    });
-    window.addEventListener('appinstalled', () => {
-        if (installButton)
-            installButton.style.display = 'none';
-        deferredPrompt = null;
-        console.log('PWA was installed');
-    });
-
     if ('serviceWorker' in navigator) {
         try {
             const registration = await navigator.serviceWorker.register('sw.js', { scope: '/misc/gif-converter/' });
