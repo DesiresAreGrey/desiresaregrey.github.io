@@ -7,6 +7,8 @@ const cacheUrls = [
     "/js/utils/loadingbar.js",
     "/js/utils/timespan.js",
     "/js/utils/utils.js",
+    "/assets/DesiresAreGrey192x.png",
+    "/assets/DesiresAreGrey-Circle.png",
     "/assets/misc/ffmpeg/core/ffmpeg-core.js",
     "/assets/misc/ffmpeg/core/ffmpeg-core.wasm",
     "/assets/misc/ffmpeg/ffmpeg/classes.js",
