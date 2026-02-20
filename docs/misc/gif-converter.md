@@ -1,6 +1,6 @@
 ---
 title: MP4 to GIF Converter
-description: Convert/Optimize gifs in your browser without uploading them to a server.
+description: Convert+optimize videos into gifs entirely in your browser without uploading them to a server.
 image: https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Rotating_earth_%28large%29.gif/250px-Rotating_earth_%28large%29.gif
 ---
 <script src="/coi-serviceworker.js"></script>
