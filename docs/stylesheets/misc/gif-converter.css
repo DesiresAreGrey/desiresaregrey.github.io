@@ -145,9 +145,9 @@ button {
 @media (display-mode: standalone) and (max-width: 768px) {
   .md-main__inner.md-grid {
     margin-top: 1rem;
-    
+
     article {
-      padding-bottom: 1.5rem;
+      padding-bottom: 1.25rem;
     }
   }
 }
