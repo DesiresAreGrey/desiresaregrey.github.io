@@ -191,11 +191,17 @@ button {
   transition: all 200ms ease !important;
   text-align: center;
   font-size: 16px;
-}
-button:hover {
-  background-color: var(--md-primary-fg-color);
-  border-color: var(--md-primary-fg-color);
-  color: #fff !important;
+
+  &:hover {
+    background-color: var(--md-primary-fg-color);
+    border-color: var(--md-primary-fg-color);
+    color: #fff !important;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 }
 
 .big-button {
@@ -255,6 +261,29 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+input[type="file"] {
+  &::file-selector-button {
+    border: .1rem solid;
+    padding: 0.4em 1em;
+    border-radius: 100vh;
+    margin-right: 0.25rem;
+    border-color: var(--md-primary-fg-color);
+    color: var(--md-primary-fg-color) !important;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 200ms ease !important;
+    text-align: center;
+    font-size: 16px;
+  }
+
+  &:hover::file-selector-button {
+    background-color: var(--md-primary-fg-color);
+    border-color: var(--md-primary-fg-color);
+    color: #fff !important;
+  }
 }
 
 .dropdown {

@@ -34,6 +34,18 @@ export class TimeSpan {
         return Math.floor(this.totalDays);
     }
 
+    toHms(): string {
+        return `${this.hours.toString().padStart(2, '0')}:${this.minutes.toString().padStart(2, '0')}:${this.seconds.toString().padStart(2, '0')}.${(this.milliseconds % 1000).toString().padStart(3, '0')}`;
+    }
+
+    toTrimmedHms(): string {
+        const h = this.hours > 0 ? `${this.hours.toString().padStart(2, '0')}:` : "";
+        const m = this.minutes > 0 ? `${this.minutes.toString().padStart(2, '0')}:` : "";
+        const s = this.seconds > 0 ? `${this.seconds.toString().padStart(2, '0')}.` : "";
+        const ms = (this.milliseconds % 1000).toString().padStart(3, '0');
+        return (h + m + s + ms).trim();
+    }
+
     static fromSeconds(seconds: number): TimeSpan {
         return new TimeSpan(seconds * 1000);
     }

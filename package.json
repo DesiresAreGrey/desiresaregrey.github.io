@@ -28,8 +28,12 @@
   },
   "homepage": "https://github.com/DesiresAreGrey/Website#readme",
   "dependencies": {
+    "@ffmpeg/core": "^0.12.10",
+    "@ffmpeg/ffmpeg": "^0.12.15",
+    "@ffmpeg/util": "^0.12.2",
     "apexcharts": "^5.3.6",
     "d3": "^7.9.0",
-    "d3-cloud": "^1.2.8"
+    "d3-cloud": "^1.2.8",
+    "gifsicle-wasm-browser": "^1.5.19"
   }
 }

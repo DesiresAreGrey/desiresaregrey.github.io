@@ -1,0 +1,23 @@
+.gif-converter-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.preview-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 320px;
+  background: #000;
+
+  corner-shape: squircle;
+  border-radius: calc(16px * var(--br-mult));
+  border: 1px solid #333;
+
+  .preview {
+    height: inherit !important;
+  }
+}
+
