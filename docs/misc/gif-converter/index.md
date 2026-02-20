@@ -9,7 +9,7 @@ pwa_icon: /assets/DesiresAreGrey192x.png
 <link rel="stylesheet" href="/stylesheets/misc/gif-converter.css">
 
 # MP4 to GIF Converter
-The conversion happens in your browser without being uploaded/processed on a server.
+<p class="description">The conversion happens in your browser without being uploaded/processed on a server.</p>
 
 <div class="drop-overlay">
   <i class="fa-solid fa-arrow-up-from-bracket" style="font-size: 48px;"></i>
