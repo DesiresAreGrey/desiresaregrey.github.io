@@ -48,6 +48,27 @@ const videoPreview = $id('video-preview') as HTMLVideoElement;
 const fileInput = $id('video-input') as HTMLInputElement;
 fileInput.addEventListener('change', selectedVideo);
 
+const dropOverlay = $('.drop-overlay') as HTMLDivElement;
+
+document.addEventListener('dragover', (e) => {
+    if (!e.dataTransfer?.types.includes('Files'))
+        return;
+    e.preventDefault();
+    dropOverlay.classList.add('active');
+});
+document.addEventListener('dragleave', (e) => {
+    e.preventDefault();
+    dropOverlay.classList.remove('active');
+});
+document.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropOverlay.classList.remove('active');
+    if (e.dataTransfer?.files?.item(0)) {
+        fileInput.files = e.dataTransfer.files;
+        selectedVideo();
+    }
+});
+
 const heightInput = $id('res-height-input') as HTMLInputElement;
 const widthInput = $id('res-width-input') as HTMLInputElement;
 const resPercent = $id('res-percent') as HTMLSpanElement;
@@ -149,6 +170,9 @@ async function selectedVideo() {
     if (!fileInput.files || fileInput.files.length === 0)
         return;
     const file = fileInput.files[0];
+    if (!file.type.startsWith('video/'))
+        return;
+
     videoPreview.src = URL.createObjectURL(file);
 
     LoadingBar.startTrickle();
@@ -215,6 +239,8 @@ async function convertToGif() {
         const unoptimizedData = await ffmpeg.readFile('unoptimized.gif');
         const unoptimizedBlob = new Blob([new Uint8Array(unoptimizedData as Uint8Array)], { type: 'image/gif' });
 
+        console.log("File size before optimization:", (unoptimizedBlob.size / (1024 * 1024)).roundTo(2), "MB");
+
         const command = `-O1 --lossy=${compression} unoptimized.gif -o /out/final.gif`;
 
         console.log("gifsicle", command);
@@ -232,6 +258,9 @@ async function convertToGif() {
         downloadUrl = url;
         videoPreview.load();
 
+        console.log("File size after optimization:", (finalBlob.size / (1024 * 1024)).roundTo(2), "MB");
+        console.log("File size reduction:", ((finalBlob.size - unoptimizedBlob.size) / (1024 * 1024)).roundTo(2), "MB");
+
         const infoEl = $id('gif-info') as HTMLParagraphElement;
         if (infoEl)
             infoEl.innerHTML = getInfoHtml(await Gif.fromFile(optimizedFiles[0]));
@@ -243,6 +272,8 @@ async function convertToGif() {
         outputImg.src = url;
         downloadUrl = url;
         videoPreview.load();
+
+        console.log("File size:", (blob.size / (1024 * 1024)).roundTo(2), "MB");
 
         const infoEl = $id('gif-info') as HTMLParagraphElement;
         if (infoEl)

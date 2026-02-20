@@ -10,9 +10,13 @@ image: https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Rotating_earth_
 # MP4 to GIF Converter
 The conversion happens in your browser without being uploaded/processed on a server.
 
+<div class="drop-overlay">
+  <i class="fa-solid fa-arrow-up-from-bracket" style="font-size: 48px;"></i>
+</div>
+
 <div class="gif-converter-container">
 
-  <input id="video-input" type="file"  accept="video/mp4" />
+  <input id="video-input" type="file" accept="video/*" />
   
   <div>
     <div class="preview-wrapper noselect">
