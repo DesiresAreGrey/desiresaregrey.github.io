@@ -20,7 +20,13 @@
 
   .preview {
     height: inherit !important;
+    width: 100%;
+    object-fit: contain;
   }
+}
+img:not([src]), 
+img[src=""] {
+    visibility: hidden;
 }
 
 .settings {
