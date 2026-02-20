@@ -22,6 +22,10 @@
     {% if page and page.meta and page.meta.pwa_manifest %}
       {% set pwa_manifest = page.meta.pwa_manifest %}
     {% endif %}
+    {% set pwa_icon = None %}
+    {% if page and page.meta and page.meta.pwa_icon %}
+      {% set pwa_icon = page.meta.pwa_icon %}
+    {% endif %}
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content="{{ title }}" />
@@ -29,6 +33,7 @@
     <meta property="og:description" content="{{ description }}" />
     {% if image %}<meta property="og:image" content="{{ image }}" />{% endif %}
     {% if pwa_manifest %}<link rel="manifest" href="{{ pwa_manifest }}" />{% endif %}
+    {% if pwa_icon %}<link rel="apple-touch-icon" href="{{ pwa_icon }}" />{% endif %}
     <meta name="theme-color" data-react-helmet="true" content="#4e389d"/>
     <meta name="darkreader-lock" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
