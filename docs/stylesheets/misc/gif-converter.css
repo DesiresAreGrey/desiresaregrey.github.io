@@ -127,5 +127,9 @@ img[src=""] {
       margin-top: -1.5rem;
     }
   }
+
+  footer {
+    display: none;
+  }
 }
 

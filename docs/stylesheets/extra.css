@@ -264,6 +264,7 @@ input::-webkit-inner-spin-button {
 }
 
 input[type="file"] {
+  cursor: pointer;
   &::file-selector-button {
     border: .1rem solid;
     padding: 0.4em 1em;
@@ -272,7 +273,6 @@ input[type="file"] {
     border-color: var(--md-primary-fg-color);
     color: var(--md-primary-fg-color) !important;
     background-color: transparent;
-    cursor: pointer;
     font-weight: 700;
     transition: all 200ms ease !important;
     text-align: center;
