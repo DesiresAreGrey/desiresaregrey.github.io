@@ -121,20 +121,34 @@ button {
     }
   }
 
-  article {
-    h1 {
-      display: none;
-    }
-    .description {
-      display: none;
-    }
-    .gif-converter-container {
-      margin-top: -1.5rem;
+  .md-main__inner.md-grid {
+    margin-top: 0.5rem;
+
+    article {
+      h1 {
+        display: none;
+      }
+      .description {
+        display: none;
+      }
+      .gif-converter-container {
+        margin-top: -1.5rem;
+      }
     }
   }
 
   footer {
     display: none;
+  }
+}
+
+@media (display-mode: standalone) and (max-width: 768px) {
+  .md-main__inner.md-grid {
+    margin-top: 1rem;
+    
+    article {
+      padding-bottom: 1.5rem;
+    }
   }
 }
 
