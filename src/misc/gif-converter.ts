@@ -212,8 +212,6 @@ async function selectedVideo() {
     LoadingBar.startTrickle();
     video = await Video.fromFile(file);
     LoadingBar.finish();
-
-    console.log(video);
     
     if (!video.videoStream) {
         console.log('No video stream found in the file.');
@@ -256,8 +254,8 @@ async function convertToGif() {
     updateProgress = (progress: number) => LoadingBar.update((progress * speed).remap(0.1, compressionEnabled ? 0.8 : 1));
 
     const filters = [
-        `fps=${frameRate}`,
         speed !== 1 ? `setpts=PTS/${speed}` : null,
+        `fps=${frameRate}`,
         `scale=${newWidth}:-1:flags=lanczos`,
         `split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse`
     ];
@@ -337,6 +335,7 @@ async function convertToGif() {
 }
 
 function getInfoHtml(media: Video | Gif) {
+    console.log(media);
     return `
         Size: <span style="font-weight: bold;">${(media.format.size / (1024 * 1024)).roundTo(2)} MB</span>
         •
@@ -362,7 +361,7 @@ class Video {
     }
 
     get fps() {
-        return eval(this.videoStream.r_frame_rate);
+        return eval(this.videoStream.avg_frame_rate);
     }
 
     get aspectRatio() {
@@ -407,7 +406,7 @@ class Gif {
     }
 
     get fps() {
-        return eval(this.videoStream.r_frame_rate).roundTo(2);
+        return (this.videoStream.avg_frame_rate).roundTo(2);
     }
 
     get aspectRatio() {
