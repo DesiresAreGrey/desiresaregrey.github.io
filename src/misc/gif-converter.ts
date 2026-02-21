@@ -129,7 +129,14 @@ async function updatePercentages() {
 
     const frameRate = parseFloat(frameRateInput.value);
     const speed = parseFloat(speedInput.value) / 100;
-    fpsPercent.textContent = `${Math.round((frameRate / (video.fps * speed)) * 100)}%`;
+    
+    const fpsPercentValue = (frameRate / (video.fps * speed)) * 100;
+    if (fpsPercentValue >= 10)
+        fpsPercent.textContent = fpsPercentValue.roundTo(1) + "%";
+    else if (fpsPercentValue >= 1)
+        fpsPercent.textContent = fpsPercentValue.roundTo(2) + "%";
+    else
+        fpsPercent.textContent =  fpsPercentValue.roundTo(3) + "%";
 }
 
 const optimizationInput = $id('optimization-input') as HTMLInputElement;
@@ -239,6 +246,7 @@ async function convertToGif() {
     convertButton.disabled = true;
     $(".settings")?.classList.add('disabled');
     LoadingBar.start();
+    const start = performance.now();
 
     convertButton.textContent = "Loading...";
 
@@ -249,8 +257,8 @@ async function convertToGif() {
     convertButton.textContent = "Converting...";
 
     const newWidth = widthInput.value.parseFloat()?.roundTo(0) ?? video.videoStream.width / 4;
-    const frameRate = frameRateInput.value.parseFloat()?.roundTo(0) ?? 15;
-    const speed = (speedInput.value.parseFloat()?.roundTo(0) ?? 100) / 100;
+    const frameRate = frameRateInput.value.parseFloat()?.roundTo(2) ?? 15;
+    const speed = (speedInput.value.parseFloat()?.roundTo(2) ?? 100) / 100;
     const compression = optimizationInput.value.parseFloat()?.roundTo(0) ?? 0;
     const compressionEnabled = compression > 0;
     
@@ -333,6 +341,7 @@ async function convertToGif() {
     convertButton.disabled = false;
     $(".settings")?.classList.remove('disabled');
     LoadingBar.finish();
+    console.log("Conversion completed in", ((performance.now() - start) / 1000).roundTo(2), "seconds");
 
     updateProgress = progress;
 }
