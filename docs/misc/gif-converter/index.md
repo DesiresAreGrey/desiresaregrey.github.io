@@ -47,6 +47,13 @@ screen so it can be used offline.</p>
       </div>
     </div>
     <div>
+      <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; font-size: 18px; font-variation-settings: 'wght' 600; opacity: 0.75">Speed</span>
+      <div style="float: right;">
+        <input id="speed-input" class="input" type="number" inputmode="decimal" step="1" value="100" style="width: 3rem;">
+        <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; margin-left: -0.1rem; font-size: 14px; font-variation-settings: 'wght' 400; opacity: 0.5">%</span>
+      </div>
+    </div>
+    <div>
       <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; font-size: 18px; font-variation-settings: 'wght' 600; opacity: 0.75">Compression</span>
       <span id="optimization-enabled" style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; margin-right: -0.1rem; font-size: 10px; font-variation-settings: 'wght' 400; opacity: 0.5"></span>
       <div style="float: right;">

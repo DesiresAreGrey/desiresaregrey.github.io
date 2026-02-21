@@ -149,6 +149,16 @@ optimizationInput.addEventListener('input', () => {
     optimizationInput.value = compression.toString();
 });
 
+const speedInput = $id('speed-input') as HTMLInputElement;
+speedInput.addEventListener('input', () => {
+    let speed = parseInt(speedInput.value);
+    if (isNaN(speed) || speed < 1)
+        speed = 1;
+    else if (speed > 10000)
+        speed = 10000;
+    speedInput.value = speed.toString();
+});
+
 const convertButton = $id('convert-button') as HTMLButtonElement;
 convertButton.addEventListener('click', convertToGif);
 
@@ -239,15 +249,23 @@ async function convertToGif() {
 
     const newWidth = widthInput.value.parseFloat()?.roundTo(0) ?? video.videoStream.width / 4;
     const frameRate = frameRateInput.value.parseFloat()?.roundTo(0) ?? 15;
+    const speed = (speedInput.value.parseFloat()?.roundTo(0) ?? 100) / 100;
     const compression = optimizationInput.value.parseFloat()?.roundTo(0) ?? 0;
     const compressionEnabled = compression > 0;
     
-    updateProgress = (progress: number) => LoadingBar.update(progress.remap(0.1, compressionEnabled ? 0.8 : 1));
+    updateProgress = (progress: number) => LoadingBar.update((progress * speed).remap(0.1, compressionEnabled ? 0.8 : 1));
+
+    const filters = [
+        `fps=${frameRate}`,
+        speed !== 1 ? `setpts=PTS/${speed}` : null,
+        `scale=${newWidth}:-1:flags=lanczos`,
+        `split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse`
+    ];
 
     const command = [
         '-v', 'info',
         '-i', 'input.mp4', 
-        '-vf', `fps=${frameRate},scale=${newWidth}:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse`,
+        '-vf', filters.filter(f => f !== null).join(','),
         '-c:v', 'gif', 
         'unoptimized.gif'
     ];
