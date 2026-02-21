@@ -110,12 +110,26 @@ widthInput.addEventListener('input', () => {
 const frameRateInput = $id('frame-rate-input') as HTMLInputElement;
 const fpsPercent = $id('fps-percent') as HTMLSpanElement;
 
-frameRateInput.addEventListener('input', () => {
+frameRateInput.addEventListener('input', updatePercentages);
+frameRateInput.addEventListener('blur', () => {
     const frameRate = parseFloat(frameRateInput.value);
     if (frameRate < 1)
         frameRateInput.value = '1';
     else if (frameRate > 50)
         frameRateInput.value = '50';
+
+    updatePercentages();
+});
+
+const speedInput = $id('speed-input') as HTMLInputElement;
+speedInput.addEventListener('input', updatePercentages);
+speedInput.addEventListener('blur', () => {
+    let speed = parseFloat(speedInput.value);
+    if (isNaN(speed) || speed < 1)
+        speed = 1;
+    else if (speed > 10000)
+        speed = 10000;
+    speedInput.value = speed.toString();
 
     updatePercentages();
 });
@@ -141,7 +155,7 @@ async function updatePercentages() {
 
 const optimizationInput = $id('optimization-input') as HTMLInputElement;
 const optimizationEnabled = $id('optimization-enabled') as HTMLSpanElement;
-optimizationInput.addEventListener('input', () => {
+optimizationInput.addEventListener('blur', () => {
     let compression = parseInt(optimizationInput.value);
     if (isNaN(compression) || compression < 1) {
         compression = 0;
@@ -155,18 +169,6 @@ optimizationInput.addEventListener('input', () => {
         compression = 200;
 
     optimizationInput.value = compression.toString();
-});
-
-const speedInput = $id('speed-input') as HTMLInputElement;
-speedInput.addEventListener('input', () => {
-    let speed = parseFloat(speedInput.value);
-    if (isNaN(speed) || speed < 1)
-        speed = 1;
-    else if (speed > 10000)
-        speed = 10000;
-    speedInput.value = speed.toString();
-
-    updatePercentages();
 });
 
 const convertButton = $id('convert-button') as HTMLButtonElement;
