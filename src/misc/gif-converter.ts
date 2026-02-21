@@ -111,7 +111,7 @@ const frameRateInput = $id('frame-rate-input') as HTMLInputElement;
 const fpsPercent = $id('fps-percent') as HTMLSpanElement;
 
 frameRateInput.addEventListener('input', () => {
-    const frameRate = parseInt(frameRateInput.value);
+    const frameRate = parseFloat(frameRateInput.value);
     if (frameRate < 1)
         frameRateInput.value = '1';
     else if (frameRate > 50)
@@ -127,8 +127,9 @@ async function updatePercentages() {
     const width = parseInt(widthInput.value);
     resPercent.textContent = `${Math.round((width / video.videoStream.width) * 100)}%`;
 
-    const frameRate = parseInt(frameRateInput.value);
-    fpsPercent.textContent = `${Math.round((frameRate / video.fps) * 100)}%`;
+    const frameRate = parseFloat(frameRateInput.value);
+    const speed = parseFloat(speedInput.value) / 100;
+    fpsPercent.textContent = `${Math.round((frameRate / (video.fps * speed)) * 100)}%`;
 }
 
 const optimizationInput = $id('optimization-input') as HTMLInputElement;
@@ -151,12 +152,14 @@ optimizationInput.addEventListener('input', () => {
 
 const speedInput = $id('speed-input') as HTMLInputElement;
 speedInput.addEventListener('input', () => {
-    let speed = parseInt(speedInput.value);
+    let speed = parseFloat(speedInput.value);
     if (isNaN(speed) || speed < 1)
         speed = 1;
     else if (speed > 10000)
         speed = 10000;
     speedInput.value = speed.toString();
+
+    updatePercentages();
 });
 
 const convertButton = $id('convert-button') as HTMLButtonElement;
