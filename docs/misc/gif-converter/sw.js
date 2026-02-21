@@ -1,3 +1,5 @@
+const version = "1.0.0";
+
 const cacheUrls = [
     "/misc/gif-converter/",
     "/misc/gif-converter/index.html",
