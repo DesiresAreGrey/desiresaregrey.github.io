@@ -406,7 +406,7 @@ class Gif {
     }
 
     get fps() {
-        return (this.videoStream.avg_frame_rate).roundTo(2);
+        return eval(this.videoStream.avg_frame_rate);
     }
 
     get aspectRatio() {
