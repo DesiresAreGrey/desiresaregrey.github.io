@@ -30,8 +30,8 @@ screen so it can be used offline.</p>
 
   <div class="settings disabled">
     <div>
-      <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; font-size: 18px; font-variation-settings: 'wght' 600; opacity: 0.75">Resolution</span>
-      <span id="res-percent" style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; margin-right: -0.1rem; font-size: 10px; font-variation-settings: 'wght' 400; opacity: 0.5">100%</span>
+      <span class="title">Resolution</span>
+      <span id="res-percent" class="subtitle">100%</span>
       <div style="float: right;">
         <input id="res-width-input" class="input" type="number" inputmode="decimal" step="1" value="1920" style="width: 3rem;">
         <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; margin-right: -0.1rem; margin-left: -0.1rem; font-size: 12px; font-variation-settings: 'wght' 400; opacity: 0.5">x</span>
@@ -39,22 +39,22 @@ screen so it can be used offline.</p>
       </div>
     </div>
     <div>
-      <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; font-size: 18px; font-variation-settings: 'wght' 600; opacity: 0.75">Frame Rate</span>
-      <span id="fps-percent" style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; margin-right: -0.1rem; font-size: 10px; font-variation-settings: 'wght' 400; opacity: 0.5">100%</span>
+      <span class="title">Frame Rate</span>
+      <span id="fps-percent" class="subtitle">100%</span>
       <div style="float: right;">
         <input id="frame-rate-input" class="input" type="number" inputmode="decimal" step="1" value="30" style="width: 3rem;">
         <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; margin-left: -0.1rem; font-size: 14px; font-variation-settings: 'wght' 400; opacity: 0.5">FPS</span>
       </div>
     </div>
     <div>
-      <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; font-size: 18px; font-variation-settings: 'wght' 600; opacity: 0.75">Speed</span>
+      <span class="title">Speed</span>
       <div style="float: right;">
         <input id="speed-input" class="input" type="number" inputmode="decimal" step="1" value="100" style="width: 3rem;">
         <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; margin-left: -0.1rem; font-size: 14px; font-variation-settings: 'wght' 400; opacity: 0.5">%</span>
       </div>
     </div>
     <div>
-      <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; font-size: 18px; font-variation-settings: 'wght' 600; opacity: 0.75">Quality</span>
+      <span class="title tooltip" data-tooltip="The quality of the output GIF's color palette.&#10;Higher qualities takes longer to process and are usually larger.&#10;&#10;High - Generates the palette from the whole video&#10;Medium - Generates the palette from the first frame of the video&#10;Fast - Uses the default color palette">Quality</span>
       <div style="float: right;">
         <select id="palette-quality-select" class="input noselect" style="width: 5rem;">
           <option value="high">High</option>
@@ -64,8 +64,8 @@ screen so it can be used offline.</p>
       </div>
     </div>
     <div>
-      <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; font-size: 18px; font-variation-settings: 'wght' 600; opacity: 0.75">Compression</span>
-      <span id="optimization-enabled" style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; margin-right: -0.1rem; font-size: 10px; font-variation-settings: 'wght' 400; opacity: 0.5"></span>
+      <span class="title tooltip" data-tooltip="The compression level of the output GIF using Gifsicle.&#10;Setting the compression level to 0 disables compression and optimization.">Compression</span>
+      <span id="optimization-enabled" class="subtitle"></span>
       <div style="float: right;">
         <input id="optimization-input" class="input" type="number" inputmode="decimal" step="1" value="50" style="width: 3rem;">
       </div>
