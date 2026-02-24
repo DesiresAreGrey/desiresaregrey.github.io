@@ -4,6 +4,7 @@ const cacheUrls = [
     "/misc/gif-converter/",
     "/misc/gif-converter/index.html",
     "/misc/gif-converter/manifest.json",
+    "/stylesheets/extra.min.css",
     "/stylesheets/misc/gif-converter.css",
     "/js/misc/gif-converter.js",
     "/js/utils/loadingbar.js",
