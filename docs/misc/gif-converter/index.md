@@ -54,6 +54,16 @@ screen so it can be used offline.</p>
       </div>
     </div>
     <div>
+      <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; font-size: 18px; font-variation-settings: 'wght' 600; opacity: 0.75">Quality</span>
+      <div style="float: right;">
+        <select id="palette-quality-select" class="input noselect" style="width: 5rem;">
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="fast">Fast</option>
+        </select>
+      </div>
+    </div>
+    <div>
       <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; font-size: 18px; font-variation-settings: 'wght' 600; opacity: 0.75">Compression</span>
       <span id="optimization-enabled" style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; margin-right: -0.1rem; font-size: 10px; font-variation-settings: 'wght' 400; opacity: 0.5"></span>
       <div style="float: right;">

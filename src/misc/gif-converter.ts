@@ -123,6 +123,8 @@ async function updatePercentages() {
         fpsPercent.textContent =  fpsPercentValue.roundTo(3) + "%";
 }
 
+const paletteQuality = $id('palette-quality-select') as HTMLSelectElement;
+
 const optimizationInput = $id('optimization-input') as HTMLInputElement;
 const optimizationEnabled = $id('optimization-enabled') as HTMLSpanElement;
 optimizationInput.addEventListener('blur', () => {
@@ -234,14 +236,18 @@ async function convertToGif() {
     const compression = optimizationInput.value.parseFloat()?.roundTo(0) ?? 0;
     const compressionEnabled = compression > 0;
 
-    FFmpegHelper.durationMod = d => d ? d / speed : 0;
-    FFmpegHelper.onProgress = (progress: number) => LoadingBar.update(progress.remap(0.1, compressionEnabled ? 0.8 : 1));
+    let palette: string | null = null;
+    switch (paletteQuality.value) {
+        case "high": palette = "split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse"; break;
+        case "medium": palette = "split[s0][s1];[s0]select='eq(n\\,0)',palettegen[p];[s1][p]paletteuse"; break;
+        case "fast": palette = null; break;
+    }
 
     const filters = [
         speed !== 1 ? `setpts=PTS/${speed}` : null,
         `fps=${frameRate}`,
         `scale=${newWidth}:-1:flags=lanczos`,
-        `split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse`
+        palette 
     ];
 
     const command = [
@@ -253,11 +259,14 @@ async function convertToGif() {
 
     console.log("FFmpeg", command.join(' '));
 
+    FFmpegHelper.durationMod = d => d ? d / speed : 0;
+    FFmpegHelper.onProgress = (progress: number) => LoadingBar.update(progress.remap(0.1, compressionEnabled ? 0.8 : 1));
     await FFmpegHelper.run(video, command);
 
     if (compressionEnabled) {
         LoadingBar.update(0.8);
         convertButton.textContent = "Optimizing...";
+        console.log("FFmpeg completed in", ((performance.now() - start) / 1000).roundTo(2), "seconds");
 
         const unoptimizedData = await FFmpegHelper.readFile('unoptimized.gif');
         const unoptimizedBlob = new Blob([new Uint8Array(unoptimizedData as Uint8Array)], { type: 'image/gif' });
