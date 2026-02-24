@@ -1,14 +1,14 @@
 import "./utils.js";
 
 export class TimeSpan {
-    constructor(public milliseconds: number) {}
+    constructor(public ms: number) {}
 
-    get ms(): number {
-        return this.milliseconds;
+    get totalMilliseconds(): number {
+        return this.ms;
     }
 
     get totalSeconds(): number {
-        return this.milliseconds / 1000;
+        return this.ms / 1000;
     }
 
     get totalMinutes(): number {
@@ -37,14 +37,14 @@ export class TimeSpan {
     }
 
     toHms(): string {
-        return `${this.hours.toString().padStart(2, '0')}:${this.minutes.toString().padStart(2, '0')}:${this.seconds.toString().padStart(2, '0')}.${(this.milliseconds % 1000).roundTo(0).toString().padStart(3, '0')}`;
+        return `${this.hours.toString().padStart(2, '0')}:${this.minutes.toString().padStart(2, '0')}:${this.seconds.toString().padStart(2, '0')}.${(this.ms % 1000).roundTo(0).toString().padStart(3, '0')}`;
     }
 
     toTrimmedHms(): string {
         const h = this.hours > 0 ? `${this.hours.toString().padStart(2, '0')}:` : "";
         const m = this.minutes > 0 ? `${this.minutes.toString().padStart(2, '0')}:` : "";
         const s = this.seconds > 0 ? `${this.seconds.toString().padStart(2, '0')}.` : "";
-        const ms = (this.milliseconds % 1000).roundTo(0).toString().padStart(3, '0');
+        const ms = (this.ms % 1000).roundTo(0).toString().padStart(3, '0');
         return (h + m + s + ms).trim();
     }
 

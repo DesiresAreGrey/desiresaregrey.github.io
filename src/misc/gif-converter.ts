@@ -1,8 +1,7 @@
 import { LoadingBar } from '../utils/loadingbar.js';
 import { TimeSpan } from '../utils/timespan.js';
+import { FFmpegHelper, Video, Gif, Media } from '../utils/ffmpeg.js';
 import '../utils/utils.js';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
-import { fetchFile } from '@ffmpeg/util';
 // @ts-ignore
 import gifsicle from 'gifsicle-wasm-browser';
 
@@ -10,36 +9,7 @@ await pwaSetup();
 
 LoadingBar.startTrickle();
 
-const ffmpeg = new FFmpeg();
-
-const progress = (progress: number) => LoadingBar.update(progress);
-let updateProgress = progress;
-
-let latestDuration = 0;
-ffmpeg.on('log', ({ message }) => {
-    console.log('[FFmpeg]', message);
-
-    if (message.includes("Duration:")) {
-        const durationMatch = message.match(/Duration: (\d{2}):(\d{2}):(\d{2})\.(\d{2})/) ?? [];
-        const duration = (+durationMatch[1]) * 3600 + (+durationMatch[2]) * 60 + (+durationMatch[3]) + (+durationMatch[4]) / 100;
-        console.log(`Video duration: ${duration} seconds`);
-        latestDuration = duration;
-    }
-    if (message.includes("time=")) {
-        const timeMatch = message.match(/time=(\d{2}):(\d{2}):(\d{2})\.(\d{2})/) ?? [];
-        const currentTime = (+timeMatch[1]) * 3600 + (+timeMatch[2]) * 60 + (+timeMatch[3]) + (+timeMatch[4]) / 100;
-        if (latestDuration > 0) {
-            const progress = (currentTime / latestDuration * 100).roundTo(2);
-            updateProgress(currentTime / latestDuration);
-            console.log(`Progress: ${progress}%`);
-        }
-    }
-});
-
-await ffmpeg.load({
-    coreURL: '/assets/misc/ffmpeg/core/ffmpeg-core.js',
-    wasmURL: '/assets/misc/ffmpeg/core/ffmpeg-core.wasm',
-});
+await FFmpegHelper.loadFFmpeg()
 
 LoadingBar.finish();
 
@@ -135,7 +105,7 @@ speedInput.addEventListener('blur', () => {
 });
 
 async function updatePercentages() {
-    if (!video)
+    if (!video?.videoStream)
         return;
 
     const width = parseInt(widthInput.value);
@@ -252,19 +222,20 @@ async function convertToGif() {
 
     convertButton.textContent = "Loading...";
 
-    const fileData = await fetchFile(video.file);
-    await ffmpeg.writeFile('input.mp4', fileData);
+    const fileData = await FFmpegHelper.fetchFile(video);
+    await FFmpegHelper.writeFile('input.mp4', fileData);
 
     LoadingBar.update(0.1);
     convertButton.textContent = "Converting...";
 
-    const newWidth = widthInput.value.parseFloat()?.roundTo(0) ?? video.videoStream.width / 4;
+    const newWidth = widthInput.value.parseFloat()?.roundTo(0) ?? video.videoStream!.width / 4;
     const frameRate = frameRateInput.value.parseFloat()?.roundTo(2) ?? 15;
     const speed = (speedInput.value.parseFloat()?.roundTo(2) ?? 100) / 100;
     const compression = optimizationInput.value.parseFloat()?.roundTo(0) ?? 0;
     const compressionEnabled = compression > 0;
-    
-    updateProgress = (progress: number) => LoadingBar.update((progress * speed).remap(0.1, compressionEnabled ? 0.8 : 1));
+
+    FFmpegHelper.durationMod = d => d ? d / speed : 0;
+    FFmpegHelper.onProgress = (progress: number) => LoadingBar.update(progress.remap(0.1, compressionEnabled ? 0.8 : 1));
 
     const filters = [
         speed !== 1 ? `setpts=PTS/${speed}` : null,
@@ -274,7 +245,6 @@ async function convertToGif() {
     ];
 
     const command = [
-        '-v', 'info',
         '-i', 'input.mp4', 
         '-vf', filters.filter(f => f !== null).join(','),
         '-c:v', 'gif', 
@@ -283,13 +253,13 @@ async function convertToGif() {
 
     console.log("FFmpeg", command.join(' '));
 
-    await ffmpeg.exec(command);
+    await FFmpegHelper.run(video, command);
 
     if (compressionEnabled) {
         LoadingBar.update(0.8);
         convertButton.textContent = "Optimizing...";
 
-        const unoptimizedData = await ffmpeg.readFile('unoptimized.gif');
+        const unoptimizedData = await FFmpegHelper.readFile('unoptimized.gif');
         const unoptimizedBlob = new Blob([new Uint8Array(unoptimizedData as Uint8Array)], { type: 'image/gif' });
 
         console.log("File size before optimization:", (unoptimizedBlob.size / (1024 * 1024)).roundTo(2), "MB");
@@ -319,7 +289,7 @@ async function convertToGif() {
             infoEl.innerHTML = getInfoHtml(await Gif.fromFile(optimizedFiles[0]));
     }
     else {
-        const data = await ffmpeg.readFile('unoptimized.gif');
+        const data = await FFmpegHelper.readFile('unoptimized.gif');
         const blob = new Blob([new Uint8Array(data as Uint8Array)], { type: 'image/gif' });
         const url = URL.createObjectURL(blob);
         outputImg.src = url;
@@ -336,122 +306,28 @@ async function convertToGif() {
     downloadButton.disabled = false;
     shareButton.disabled = false;
 
-    void ffmpeg.deleteFile('input.mp4');
-    void ffmpeg.deleteFile('unoptimized.gif');
+    void FFmpegHelper.deleteFiles(['input.mp4', 'unoptimized.gif']);
     
     convertButton.textContent = "Convert to GIF";
     convertButton.disabled = false;
     $(".settings")?.classList.remove('disabled');
     LoadingBar.finish();
-    console.log("Conversion completed in", ((performance.now() - start) / 1000).roundTo(2), "seconds");
+    FFmpegHelper.resetOnProgress();
 
-    updateProgress = progress;
+    console.log("Conversion completed in", ((performance.now() - start) / 1000).roundTo(2), "seconds");
 }
 
-function getInfoHtml(media: Video | Gif) {
+function getInfoHtml(media: Media) {
     console.log(media);
     return `
         Size: <span style="font-weight: bold;">${(media.format.size / (1024 * 1024)).roundTo(2)} MB</span>
         •
-        Dimensions: <span style="font-weight: bold;">${media.videoStream.width}x${media.videoStream.height}</span>
+        Dimensions: <span style="font-weight: bold;">${media.videoStream?.width ?? "??"}x${media.videoStream?.height ?? "??"}</span>
         •
         FPS: <span style="font-weight: bold;">${media.fps.roundTo(2)}</span>
         •
         Duration: <span style="font-weight: bold;">${TimeSpan.fromSeconds(media.format.duration).toTrimmedHms()}</span>
     `
-}
-
-class Video {
-    file: File;
-
-    format: any;
-    streams: any[];
-
-    get videoStream() {
-        return this.streams.find(s => s.codec_type === 'video');
-    }
-    get audioStream() {
-        return this.streams.find(s => s.codec_type === 'audio');
-    }
-
-    get fps() {
-        return eval(this.videoStream.avg_frame_rate);
-    }
-
-    get aspectRatio() {
-        return this.videoStream.width / this.videoStream.height;
-    }
-
-    constructor(video: File, format: any, streams: any[]) {
-        this.file = video;
-        this.format = format;
-        this.streams = streams;
-    }
-
-    static async fromFile(file: File): Promise<Video> {
-        await ffmpeg.writeFile('input.mp4', await fetchFile(file));
-
-        await ffmpeg.ffprobe([
-            '-v', 'quiet',
-            '-print_format', 'json',
-            '-show_format',
-            '-show_streams',
-            'input.mp4',
-            '-o', 'metadata.json'
-        ]);
-
-        void ffmpeg.deleteFile('input.mp4');
-
-        const rawData = await ffmpeg.readFile('metadata.json');
-        const jsonString = new TextDecoder().decode(rawData as Uint8Array);
-        const json = jsonString.parseJson();
-        return new Video(file, json.format, json.streams);
-    }
-}
-
-class Gif {
-    file: File;
-
-    format: any;
-    streams: any[];
-
-    get videoStream() {
-        return this.streams.find(s => s.codec_type === 'video');
-    }
-
-    get fps() {
-        return eval(this.videoStream.avg_frame_rate);
-    }
-
-    get aspectRatio() {
-        return this.videoStream.width / this.videoStream.height;
-    }
-
-    constructor(gif: File, format: any, streams: any[]) {
-        this.file = gif;
-        this.format = format;
-        this.streams = streams;
-    }
-
-    static async fromFile(file: File): Promise<Gif> {
-        await ffmpeg.writeFile('input.gif', await fetchFile(file));
-
-        await ffmpeg.ffprobe([
-            '-v', 'quiet',
-            '-print_format', 'json',
-            '-show_format',
-            '-show_streams',
-            'input.gif',
-            '-o', 'metadata.json'
-        ]);
-
-        void ffmpeg.deleteFile('input.gif');
-
-        const rawData = await ffmpeg.readFile('metadata.json');
-        const jsonString = new TextDecoder().decode(rawData as Uint8Array);
-        const json = jsonString.parseJson();
-        return new Gif(file, json.format, json.streams);
-    }
 }
 
 async function pwaSetup() {
