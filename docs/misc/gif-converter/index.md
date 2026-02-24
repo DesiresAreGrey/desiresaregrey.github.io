@@ -56,7 +56,7 @@ screen so it can be used offline.</p>
     <div>
       <span class="title tooltip" data-tooltip="The quality of the output GIF's color palette.&#10;Higher qualities takes longer to process and are usually larger.&#10;&#10;High - Generates the palette from the whole video&#10;Medium - Generates the palette from the first frame of the video&#10;Fast - Uses the default color palette">Quality</span>
       <div style="float: right;">
-        <select id="palette-quality-select" class="input noselect" style="width: 5rem;">
+        <select id="palette-quality-select" class="input noselect" style="width: 5.5rem;">
           <option value="high">High</option>
           <option value="medium">Medium</option>
           <option value="fast">Fast</option>

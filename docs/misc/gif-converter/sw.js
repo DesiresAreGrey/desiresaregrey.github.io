@@ -28,7 +28,7 @@ const cacheUrls = [
     "/assets/misc/ffmpeg/util/index.js",
     "/assets/misc/ffmpeg/util/types.js",
     "https://esm.sh/gifsicle-wasm-browser@1.0.1",
-    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css",
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 ];
 
 self.addEventListener('install', (event) => {
