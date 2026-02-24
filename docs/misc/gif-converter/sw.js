@@ -1,4 +1,4 @@
-const version = "1.0.4";
+const version = "1.1.0";
 
 const cacheUrls = [
     "/misc/gif-converter/",
@@ -9,6 +9,7 @@ const cacheUrls = [
     "/js/utils/loadingbar.js",
     "/js/utils/timespan.js",
     "/js/utils/utils.js",
+    "/js/utils/ffmpeg.js",
     "/assets/DesiresAreGrey192x.png",
     "/assets/DesiresAreGrey-Circle.png",
     "/assets/misc/ffmpeg/core/ffmpeg-core.js",
