@@ -298,6 +298,7 @@ input[type="file"] {
   font-size: 17px;
   font-family: Inter, sans-serif;
   text-align: center;
+  text-align-last: center;
   color: #ccc;
   transition: all 200ms ease;
 
