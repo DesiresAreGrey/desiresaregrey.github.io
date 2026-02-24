@@ -250,6 +250,7 @@ button {
 
 select {
   background-color: #252525 !important;
+  text-align-last: center !important;
 }
 input[type='number'] {
     -moz-appearance: textfield;
@@ -298,7 +299,7 @@ input[type="file"] {
   font-size: 17px;
   font-family: Inter, sans-serif;
   text-align: center;
-  text-align-last: center;
+  text-align-last: center !important;
   color: #ccc;
   transition: all 200ms ease;
 
