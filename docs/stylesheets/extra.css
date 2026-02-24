@@ -266,6 +266,7 @@ input::-webkit-inner-spin-button {
 input[type="file"] {
   cursor: pointer;
   &::file-selector-button {
+    cursor: pointer;
     border: .1rem solid;
     padding: 0.4em 1em;
     border-radius: 100vh;
