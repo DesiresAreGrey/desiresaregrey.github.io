@@ -104,7 +104,6 @@ img[src=""] {
 .input {
   height: 30px;
   max-height: 30px;
-  padding: .15rem;
   background: #252525;
   border: .1rem solid;
   border-radius: 50vw;
@@ -113,6 +112,7 @@ img[src=""] {
   font-size: 17px;
   font-family: Inter, sans-serif;
   text-align: center;
+  text-align-last: center;
   color: #ccc;
   transition: border-color 200ms ease;
   &:hover {
