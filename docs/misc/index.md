@@ -1,7 +1,11 @@
+---
+extra_head: |
+  <script type="module" src="/js/misc/updatemisccards.js"></script>
+  <link rel="stylesheet" href="/stylesheets/cards.css">
+---
+
 # Miscellaneous
 
-<script type="module" async src="/js/misc/updatemisccards.js"></script>
-<link rel="stylesheet" href="/stylesheets/cards.css">
 <style>
 h1 {
     text-align: center;

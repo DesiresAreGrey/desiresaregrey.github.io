@@ -18,17 +18,9 @@
       {% set image = page.meta.image %}
     {% endif %}
 
-    {% set pwa_manifest = None %}
-    {% if page and page.meta and page.meta.pwa_manifest %}
-      {% set pwa_manifest = page.meta.pwa_manifest %}
-    {% endif %}
-    {% set pwa_icon = None %}
-    {% if page and page.meta and page.meta.pwa_icon %}
-      {% set pwa_icon = page.meta.pwa_icon %}
-    {% endif %}
-    {% set pwa_splash = None %}
-    {% if page and page.meta and page.meta.pwa_splash %}
-      {% set pwa_splash = page.meta.pwa_splash %}
+    {% set extra_head = None %}
+    {% if page and page.meta and page.meta.extra_head %}
+      {% set extra_head = page.meta.extra_head %}
     {% endif %}
 
     <meta property="og:type" content="website" />
@@ -36,9 +28,6 @@
     <meta property="og:site_name" content="{{ config.site_name }}" />
     <meta property="og:description" content="{{ description }}" />
     {% if image %}<meta property="og:image" content="{{ image }}" />{% endif %}
-    {% if pwa_manifest %}<link rel="manifest" href="{{ pwa_manifest }}" />{% endif %}
-    {% if pwa_icon %}<link rel="apple-touch-icon" href="{{ pwa_icon }}" />{% endif %}
-    {% if pwa_splash %}<link rel="apple-touch-startup-image" href="{{ pwa_splash }}" />{% endif %}
     <meta name="theme-color" data-react-helmet="true" content="#4e389d"/>
     <meta name="darkreader-lock" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,4 +45,7 @@
       }
     }
     </script>
+    {% if extra_head %}
+      {{ extra_head }}
+    {% endif %}
 {% endblock %}
