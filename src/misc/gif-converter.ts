@@ -217,12 +217,21 @@ copyMarkdownButton.addEventListener('click', () => {
     navigator.clipboard.writeText(`![GIF](${currentUploadUrl})`);
 });
 
+let lastDownloadUrl: string | null = null;
 const uploadButton = $id('upload-button') as HTMLButtonElement;
 uploadButton.addEventListener('click', async () => {
     if (!downloadUrl)
         return;
 
+    if (uploadedOverlay && downloadUrl === lastDownloadUrl && currentUploadUrl) {
+        uploadedOverlay.style.display = 'flex';
+        void uploadedOverlay.offsetHeight;
+        uploadedOverlay.classList.add('active');
+        return;
+    }
+
     LoadingBar.start();
+    uploadButton.disabled = true;
     
     const response = await fetch(downloadUrl);
     const blob = await response.blob();
@@ -239,15 +248,14 @@ uploadButton.addEventListener('click', async () => {
             });
             console.log(upload.image.url);
             currentUploadUrl = upload.image.url;
+            lastDownloadUrl = downloadUrl;
 
             if (!uploadedOverlay)
                 return;
 
-            uploadedOverlay.style.display = 'flex';
-            void uploadedOverlay.offsetHeight;
-            uploadedOverlay.classList.add('active');
-
             const uploadedImg = $id('uploaded-gif') as HTMLImageElement;
+            uploadedImg.src = '';
+            void uploadedImg.offsetWidth;
             uploadedImg.src = currentUploadUrl!;
 
             const uploadedLink = $id('uploaded-link') as HTMLParagraphElement;
@@ -255,9 +263,14 @@ uploadButton.addEventListener('click', async () => {
 
             copyLinkButton.disabled = false;
             copyMarkdownButton.disabled = false;
+
+            uploadedOverlay.style.display = 'flex';
+            void uploadedOverlay.offsetHeight;
+            uploadedOverlay.classList.add('active');
         }
 
         LoadingBar.finish();
+        uploadButton.disabled = false;
     }
     reader.readAsDataURL(file);
 });

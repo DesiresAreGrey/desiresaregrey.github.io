@@ -140,7 +140,7 @@ img[src=""] {
   opacity: 0;
   pointer-events: none;
   transition: opacity 200ms ease, backdrop-filter 200ms ease;
-  z-index: 1;
+  z-index: 999;
 
   &.active {
     backdrop-filter: blur(4px);
@@ -163,7 +163,7 @@ img[src=""] {
   font-family: Inter, sans-serif;
   opacity: 0;
   transition: opacity 200ms ease, backdrop-filter 200ms ease;
-  z-index: 1;
+  z-index: 999;
 
   &.active {
     backdrop-filter: blur(4px);
