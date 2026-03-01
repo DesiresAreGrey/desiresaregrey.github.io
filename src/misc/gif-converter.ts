@@ -214,7 +214,7 @@ copyLinkButton.addEventListener('click', () => {
 copyMarkdownButton.addEventListener('click', () => {
     if (!currentUploadUrl)
         return;
-    navigator.clipboard.writeText(`![GIF](${currentUploadUrl})`);
+    navigator.clipboard.writeText(`![${video?.file.name.split('.').slice(0, -1).join('.') ?? "GIF"}](${currentUploadUrl})`);
 });
 
 let lastDownloadUrl: string | null = null;
