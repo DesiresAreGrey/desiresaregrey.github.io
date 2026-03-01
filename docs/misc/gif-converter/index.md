@@ -19,7 +19,7 @@ screen so it can be used offline.</p>
 
 <div class="uploaded-overlay" style="display: none;">
   <div class="popup">
-    <i class="fa-solid fa-x close"></i>
+    <i class="fa-solid fa-xmark close"></i>
     <div class="title" style="text-align: center;">GIF Uploaded</div>
     <div class="preview-wrapper noselect">
       <img id="uploaded-gif" class="preview no-lb" />
