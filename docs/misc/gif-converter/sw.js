@@ -1,4 +1,4 @@
-const version = "1.1.1";
+const version = "1.2.0";
 
 const cacheUrls = [
     "/misc/gif-converter/",
@@ -7,6 +7,8 @@ const cacheUrls = [
     "/stylesheets/extra.min.css",
     "/stylesheets/misc/gif-converter.css",
     "/js/misc/gif-converter.js",
+    "/js/utils/api.js",
+    "/js/utils/jsonfetch.js",
     "/js/utils/loadingbar.js",
     "/js/utils/timespan.js",
     "/js/utils/utils.js",

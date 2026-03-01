@@ -1,7 +1,9 @@
 import { LoadingBar } from '../utils/loadingbar.js';
 import { TimeSpan } from '../utils/timespan.js';
 import { FFmpegHelper, Video, Gif, Media } from '../utils/ffmpeg.js';
-import '../utils/utils.js';
+import { API } from '../utils/api.js';
+import { JsonFetch } from '../utils/jsonfetch.js';
+import { Utils } from '../utils/utils.js';
 // @ts-ignore
 import gifsicle from 'gifsicle-wasm-browser';
 
@@ -26,11 +28,15 @@ document.addEventListener('dragover', (e) => {
     if (!e.dataTransfer?.types.includes('Files'))
         return;
     e.preventDefault();
-    dropOverlay.classList.add('active');
+    
+    dropOverlay.style.display = 'flex';
+    void dropOverlay.offsetHeight;
+    dropOverlay.classList.add('active')
 });
 document.addEventListener('dragleave', (e) => {
     e.preventDefault();
     dropOverlay.classList.remove('active');
+    Utils.runAfter(() => dropOverlay.style.display = 'none', 200, dropOverlay);
 });
 document.addEventListener('drop', (e) => {
     e.preventDefault();
@@ -151,6 +157,7 @@ const outputImg = $id('output-gif') as HTMLImageElement;
 const downloadButton = $id('download-button') as HTMLButtonElement;
 
 let downloadUrl: string | null = null;
+let downloadSize: number | null = null;
 downloadButton.addEventListener('click', () => {
     if (!downloadUrl)
         return;
@@ -182,6 +189,77 @@ shareButton.addEventListener('click', async () => {
 
     if (navigator.canShare && navigator.canShare(shareData))
         await navigator.share(shareData);
+});
+
+const uploadedOverlay = $('.uploaded-overlay');
+uploadedOverlay?.addEventListener('click', (e) => {
+    if (e.target === uploadedOverlay) {
+        uploadedOverlay.classList.remove('active');
+        Utils.runAfter(() => uploadedOverlay.style.display = 'none', 200, uploadedOverlay);
+    }
+});
+uploadedOverlay?.$('.close')?.addEventListener('click', () => {
+    uploadedOverlay.classList.remove('active');
+    Utils.runAfter(() => uploadedOverlay.style.display = 'none', 200, uploadedOverlay);
+});
+
+let currentUploadUrl: string | null = null;
+const copyLinkButton = $id('copy-link-button') as HTMLButtonElement;
+const copyMarkdownButton = $id('copy-markdown-button') as HTMLButtonElement;
+copyLinkButton.addEventListener('click', () => {
+    if (!currentUploadUrl)
+        return;
+    navigator.clipboard.writeText(currentUploadUrl!);
+});
+copyMarkdownButton.addEventListener('click', () => {
+    if (!currentUploadUrl)
+        return;
+    navigator.clipboard.writeText(`![GIF](${currentUploadUrl})`);
+});
+
+const uploadButton = $id('upload-button') as HTMLButtonElement;
+uploadButton.addEventListener('click', async () => {
+    if (!downloadUrl)
+        return;
+
+    LoadingBar.start();
+    
+    const response = await fetch(downloadUrl);
+    const blob = await response.blob();
+    const file = new File([blob], (video?.file.name.split('.').slice(0, -1).join('.') ?? "output") + '.gif', { type: 'image/gif' });
+    if (file.size > 50 * 1024 * 1024)
+        return;
+
+    const reader = new FileReader();
+    reader.onload = async () => {
+        const base64String = reader.result?.toString().replace("data:", "").replace(/^.+,/, "");
+        if (base64String) {
+            const upload = await API.post("proxy/freeimage/upload", {
+                base64Image: base64String,
+            });
+            console.log(upload.image.url);
+            currentUploadUrl = upload.image.url;
+
+            if (!uploadedOverlay)
+                return;
+
+            uploadedOverlay.style.display = 'flex';
+            void uploadedOverlay.offsetHeight;
+            uploadedOverlay.classList.add('active');
+
+            const uploadedImg = $id('uploaded-gif') as HTMLImageElement;
+            uploadedImg.src = currentUploadUrl!;
+
+            const uploadedLink = $id('uploaded-link') as HTMLParagraphElement;
+            uploadedLink.textContent = currentUploadUrl;
+
+            copyLinkButton.disabled = false;
+            copyMarkdownButton.disabled = false;
+        }
+
+        LoadingBar.finish();
+    }
+    reader.readAsDataURL(file);
 });
 
 async function selectedVideo() {
@@ -288,6 +366,7 @@ async function convertToGif() {
         const url = URL.createObjectURL(finalBlob);
         outputImg.src = url;
         downloadUrl = url;
+        downloadSize = finalBlob.size;
         videoPreview.load();
 
         console.log("File size after optimization:", (finalBlob.size / (1024 * 1024)).roundTo(2), "MB");
@@ -303,6 +382,7 @@ async function convertToGif() {
         const url = URL.createObjectURL(blob);
         outputImg.src = url;
         downloadUrl = url;
+        downloadSize = blob.size;
         videoPreview.load();
 
         console.log("File size:", (blob.size / (1024 * 1024)).roundTo(2), "MB");
@@ -324,6 +404,11 @@ async function convertToGif() {
     FFmpegHelper.resetOnProgress();
 
     console.log("Conversion completed in", ((performance.now() - start) / 1000).roundTo(2), "seconds");
+
+    if (downloadSize < 50 * 1024 * 1024 && await JsonFetch.isReachable(await API.url))
+        uploadButton.disabled = false;
+    else
+        uploadButton.disabled = true;
 }
 
 function getInfoHtml(media: Media) {

@@ -13,8 +13,23 @@ extra_head: |
 <p class="description">The conversion happens in your browser without being uploaded/processed on a server. The page can also be added to your home
 screen so it can be used offline.</p>
 
-<div class="drop-overlay">
+<div class="drop-overlay" style="display: none;">
   <i class="fa-solid fa-arrow-up-from-bracket" style="font-size: 48px;"></i>
+</div>
+
+<div class="uploaded-overlay" style="display: none;">
+  <div class="popup">
+    <i class="fa-solid fa-x close"></i>
+    <div class="title" style="text-align: center;">GIF Uploaded</div>
+    <div class="preview-wrapper noselect">
+      <img id="uploaded-gif" class="preview no-lb" />
+    </div>
+    <p id="uploaded-link" style="font-size: 13px; color: #999; margin-top: 0.1rem; margin-bottom: 0; text-align: center;">Output GIF</p>
+    <div class="button-row" style="margin-top: 0.5rem;">
+      <button id="copy-link-button" disabled><i class="fa-solid fa-copy"></i> Link</button>
+      <button id="copy-markdown-button" disabled><i class="fa-solid fa-copy"></i> MD</button>
+    </div>
+  </div>
 </div>
 
 <div class="gif-converter-container">
@@ -81,10 +96,11 @@ screen so it can be used offline.</p>
     <p id="gif-info" style="font-size: 13px; color: #999; margin-top: 0.1rem; margin-bottom: 0; text-align: center;">Output GIF</p>
   </div>
   
-  <div style="display: flex; gap: 0.25rem;">
+  <div class="button-row">
     <button id="share-button" disabled>Share GIF</button>
+    <button id="upload-button" disabled>Upload GIF</button>
+  </div>
+  <div class="button-row">
     <button id="download-button" disabled>Download GIF</button>
   </div>
-  
-
 </div>
