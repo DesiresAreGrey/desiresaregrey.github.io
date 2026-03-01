@@ -87,7 +87,8 @@ img[src=""] {
       outline-width: thin;
       outline-color: #333333;
       outline-offset: -1px;
-      border-radius: 0.5rem;
+      corner-shape: squircle;
+      border-radius: calc(10px * var(--br-mult));
 
       z-index: 1000;
       pointer-events: none;
