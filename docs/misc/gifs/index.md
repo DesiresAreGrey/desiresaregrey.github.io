@@ -1,6 +1,7 @@
 ---
 title: GIFs
 description: GIFs from Tranistan
+image: https://desiresaregrey.com/assets/misc/tranistan/Tranistan512x.png
 extra_head: |
   <script type="module" src="/js/misc/tranistan-gifs.js"></script>
   <link rel="stylesheet" href="/stylesheets/misc/tranistan-gifs.css">
