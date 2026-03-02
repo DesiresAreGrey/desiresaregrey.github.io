@@ -22,10 +22,10 @@ extra_head: |
       <option value="TopAll">Top</option>
       <option value="New">New</option>
     </select>
-    <!-- <select id="category-select" class="input noselect" style="width: 7rem;">
+    <select id="category-select" class="input noselect" style="width: 7rem;">
       <option value="all">All</option>
-      <option value="new" selected>SFW Only</option>
-    </select> -->
+      <option value="sfw" selected>SFW Only</option>
+    </select>
   </div>
 </div>
 

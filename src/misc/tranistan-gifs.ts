@@ -30,6 +30,8 @@ class Gif {
     title: string;
     link: string;
 
+    nsfw: boolean;
+
     constructor(post: Post) {
         this.name = post.name;
         this.url = post.url;
@@ -40,39 +42,42 @@ class Gif {
 
         this.title = post.name + (this.tags.length > 0 ? ` [${this.tags.map(t => `#${t}`).join(", ")}]` : "");
         this.link = post.ap_id;
+        this.nsfw = post.nsfw;
 
         console.log(this);
     }
 }
 
-LoadingBar.start();
-
 const gifList = $("gif-list"); 
 const sortSelect = $("#sort-select") as HTMLSelectElement;
+const categorySelect = $("#category-select") as HTMLSelectElement;
 const searchInput = $("#search-input") as HTMLInputElement;
 
 let gifs = await getGifs(sortSelect.value);
 sortSelect.addEventListener("change", async () => {
     gifs = await getGifs(sortSelect.value);
-    if (searchInput.value)
-        updateList(gifs.filter(g => g.name.toLowerCase().includes(searchInput.value.toLowerCase()) || g.tags.some(t => t.toLowerCase().includes(searchInput.value.toLowerCase()))));
-    else
-        updateList(gifs);
-    
+    updateAndFilter();
 });
-searchInput.addEventListener("input", async () => {
-    if (searchInput.value)
-        updateList(gifs.filter(g => g.name.toLowerCase().includes(searchInput.value.toLowerCase()) || g.tags.some(t => t.toLowerCase().includes(searchInput.value.toLowerCase()))));
-    else
-        updateList(gifs);
-});
-updateList(gifs);
+categorySelect.addEventListener("change", () => updateAndFilter());
+searchInput.addEventListener("input", () => updateAndFilter());
+updateAndFilter();
 
-LoadingBar.finish();
+function updateAndFilter() {
+    console.log("Filtering gifs...");
+    let filteredGifs = gifs;
+    if (searchInput.value)
+        filteredGifs = filteredGifs.filter(g => g.name.toLowerCase().includes(searchInput.value.toLowerCase()) || g.tags.some(t => t.toLowerCase().includes(searchInput.value.toLowerCase())));
+    if (categorySelect.value === "sfw")
+        filteredGifs = filteredGifs.filter(g => !g.nsfw);
+
+    updateList(filteredGifs);
+}
 
 async function getGifs(sort: string): Promise<Gif[]> {
-    const gifPosts: Post[] = (await JsonFetch.get(`https://tranistan.com/api/v3/post/list?community_name=gifs&sort=${sort}`)).posts.map((item: any) => item.post);
+    LoadingBar.start();
+    const gifPosts: Post[] = (await JsonFetch.get(`https://tranistan.com/api/v3/post/list?community_name=gifs&show_nsfw=true&limit=50&sort=${sort}`)).posts.map((item: any) => item.post);
     console.log(gifPosts);
+    LoadingBar.finish();
     return gifPosts.filter(p => p.url_content_type === "image/gif").map(p => new Gif(p));
 }
 
