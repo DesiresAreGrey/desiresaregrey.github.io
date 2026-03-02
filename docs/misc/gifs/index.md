@@ -4,6 +4,8 @@ description: GIFs from Tranistan
 extra_head: |
   <script type="module" src="/js/misc/tranistan-gifs.js"></script>
   <link rel="stylesheet" href="/stylesheets/misc/tranistan-gifs.css">
+  <link rel="manifest" href="/misc/gifs/manifest.json"/>
+  <link rel="apple-touch-icon" href="/assets/misc/tranistan/Tranistan192x.png" />
 ---
 
 
