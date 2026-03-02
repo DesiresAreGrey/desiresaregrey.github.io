@@ -75,7 +75,15 @@ function updateAndFilter() {
 
 async function getGifs(sort: string): Promise<Gif[]> {
     LoadingBar.start();
-    const gifPosts: Post[] = (await JsonFetch.get(`https://tranistan.com/api/v3/post/list?community_name=gifs&show_nsfw=true&limit=50&sort=${sort}`)).posts.map((item: any) => item.post);
+
+    const gifPosts: Post[] = [];
+    let cursor: string | null = null;
+    do {
+        const response: any = await JsonFetch.get(`https://tranistan.com/api/v3/post/list?community_name=gifs&show_nsfw=true&limit=50&sort=${sort}${cursor ? `&page_cursor=${cursor}` : ""}`);
+        gifPosts.push(...response.posts.map((item: any) => item.post));
+        cursor = response.next_page;
+    } while (cursor);
+    
     console.log(gifPosts);
     LoadingBar.finish();
     return gifPosts.filter(p => p.url_content_type === "image/gif").map(p => new Gif(p));
