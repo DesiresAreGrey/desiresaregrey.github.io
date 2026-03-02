@@ -241,32 +241,37 @@ uploadButton.addEventListener('click', async () => {
 
     const reader = new FileReader();
     reader.onload = async () => {
-        const base64String = reader.result?.toString().replace("data:", "").replace(/^.+,/, "");
-        if (base64String) {
-            const upload = await API.post("proxy/freeimage/upload", {
-                base64Image: base64String,
-            });
-            console.log(upload.image.url);
-            currentUploadUrl = upload.image.url;
-            lastDownloadUrl = downloadUrl;
+        try {
+            const base64String = reader.result?.toString().replace("data:", "").replace(/^.+,/, "");
+            if (base64String) {
+                const upload = await API.post("proxy/freeimage/upload", {
+                    base64Image: base64String,
+                });
+                console.log(upload.image.url);
+                currentUploadUrl = upload.image.url;
+                lastDownloadUrl = downloadUrl;
 
-            if (!uploadedOverlay)
-                return;
+                if (!uploadedOverlay)
+                    return;
 
-            const uploadedImg = $id('uploaded-gif') as HTMLImageElement;
-            uploadedImg.src = '';
-            void uploadedImg.offsetWidth;
-            uploadedImg.src = currentUploadUrl!;
+                const uploadedImg = $id('uploaded-gif') as HTMLImageElement;
+                uploadedImg.src = '';
+                void uploadedImg.offsetWidth;
+                uploadedImg.src = currentUploadUrl!;
 
-            const uploadedLink = $id('uploaded-link') as HTMLParagraphElement;
-            uploadedLink.textContent = currentUploadUrl;
+                const uploadedLink = $id('uploaded-link') as HTMLParagraphElement;
+                uploadedLink.textContent = currentUploadUrl;
 
-            copyLinkButton.disabled = false;
-            copyMarkdownButton.disabled = false;
+                copyLinkButton.disabled = false;
+                copyMarkdownButton.disabled = false;
 
-            uploadedOverlay.style.display = 'flex';
-            void uploadedOverlay.offsetHeight;
-            uploadedOverlay.classList.add('active');
+                uploadedOverlay.style.display = 'flex';
+                void uploadedOverlay.offsetHeight;
+                uploadedOverlay.classList.add('active');
+            }
+        }
+        catch (error) {
+            console.error("Upload failed", error);
         }
 
         LoadingBar.finish();
