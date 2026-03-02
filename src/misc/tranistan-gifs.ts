@@ -84,7 +84,9 @@ function updateList(gifs: Gif[]) {
         const item = document.createElement("gif-item");
         item.innerHTML = `
             <img src="${gif.url}" alt="${gif.name}" class="gif-preview"/>
-            <a class="name" href="${gif.link}" target="_blank">${gif.title}</a>
+            <div id="name">
+                <a href="${gif.link}" target="_blank">${gif.title}</a>
+            </div>
             <div class="buttons noselect">
                 <div id="copy-link" class="button"><i class="fa-solid fa-copy"></i> Link</div>
                 <div id="copy-md" class="button"><i class="fa-solid fa-copy"></i> MD</div>

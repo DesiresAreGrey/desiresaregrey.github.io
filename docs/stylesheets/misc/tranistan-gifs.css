@@ -25,22 +25,26 @@ gif-list {
       border-radius: calc(8px * var(--br-mult));
     }
 
-    .name {
+    #name {
       position: absolute;
       bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      color: #fff;
-      text-shadow: 0 0 4px rgba(0, 0, 0, 1);
+      width: 100%;
+      justify-content: center;
+      display: flex;
       opacity: 0;
       transition: opacity 200ms ease;
 
-      &:hover {
+      a {
         color: #fff;
-        text-decoration: underline;
-      }
-      &:focus, &:visited {
-        color: #fff;
+        text-shadow: 0 0 4px rgba(0, 0, 0, 1);
+        
+        &:hover {
+          color: #fff;
+          text-decoration: underline;
+        }
+        &:focus, &:visited {
+          color: #fff;
+        }
       }
     }
 
@@ -76,13 +80,13 @@ gif-list {
     }
 
      &:hover {
-       .name, .buttons {
+       #name, .buttons {
          opacity: 1;
        }
      }
 
     &:hover {
-      .name {
+      #name {
         opacity: 1;
       }
     }
