@@ -192,7 +192,14 @@ button {
   text-align: center;
   font-size: 16px;
 
-  &:hover {
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--md-primary-fg-color);
+      border-color: var(--md-primary-fg-color);
+      color: #fff !important;
+    }
+  }
+  &:active {
     background-color: var(--md-primary-fg-color);
     border-color: var(--md-primary-fg-color);
     color: #fff !important;
@@ -219,8 +226,16 @@ button {
   padding: 0.5rem;
   font-size: 20px;
 
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--md-primary-fg-color);
+      border-color: var(--md-primary-fg-color);
+      color: #fff !important;
+    }
+  }
+
   &:focus, 
-  &:hover {
+  &:active {
     background-color: var(--md-primary-fg-color);
     border-color: var(--md-primary-fg-color);
     color: #fff !important;
@@ -281,7 +296,14 @@ input[type="file"] {
     font-size: 16px;
   }
 
-  &:hover::file-selector-button {
+  @media (hover: hover) {
+     &:hover::file-selector-button {
+      background-color: var(--md-primary-fg-color);
+      border-color: var(--md-primary-fg-color);
+      color: #fff !important;
+    }
+  }
+  &:active::file-selector-button {
     background-color: var(--md-primary-fg-color);
     border-color: var(--md-primary-fg-color);
     color: #fff !important;
