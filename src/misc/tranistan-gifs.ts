@@ -94,17 +94,18 @@ function updateList(gifs: Gif[]) {
         return;
     console.log(gifs);
     gifList.innerHTML = "";
-    gifs.forEach(gif => {
+    gifs.forEach((gif, i) => {
         const item = document.createElement("gif-item");
         item.innerHTML = `
             <img src="${gif.url}" alt="${gif.name}" class="gif-preview"/>
             <div id="name">
-                <a href="${gif.link}" target="_blank">${gif.title}</a>
+                <a href="${gif.link}" target="_blank">${gif.name}${gif.tags.length > 0 ? ` <span style="color: #ccc; font-size: 10px">${gif.tags.map(t => `#${t}`).join(" ")}</span>` : ""}</a>
             </div>
             <div class="buttons noselect">
                 <div id="copy-link" class="button"><i class="fa-solid fa-copy"></i> Link</div>
                 <div id="copy-md" class="button"><i class="fa-solid fa-copy"></i> MD</div>
             </div>
+            <div id="rank">#${i + 1}</div>
         `;
         const copyLinkButton = item.$id("copy-link")!;
         copyLinkButton.addEventListener("click", async () => {

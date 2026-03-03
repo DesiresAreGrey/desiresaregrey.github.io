@@ -36,7 +36,10 @@ gif-list {
 
       a {
         color: #fff;
-        text-shadow: 0 0 4px rgba(0, 0, 0, 1);
+        text-shadow: 
+          0 0 8px rgba(0, 0, 0, 0.5),
+          0 0 4px rgba(0, 0, 0, 0.75),
+          0 0 1px rgba(0, 0, 0, 1);
         text-align: center;
 
         &:hover {
@@ -80,14 +83,21 @@ gif-list {
       }
     }
 
-     &:hover {
-       #name, .buttons {
-         opacity: 1;
-       }
-     }
+    #rank {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      color: #fff;
+      opacity: 0;
+      text-shadow: 
+        0 0 8px rgba(0, 0, 0, 0.5),
+        0 0 4px rgba(0, 0, 0, 0.75),
+        0 0 1px rgba(0, 0, 0, 1);
+      transition: opacity 200ms ease;
+    }
 
     &:hover {
-      #name {
+      #name, .buttons, #rank {
         opacity: 1;
       }
     }
