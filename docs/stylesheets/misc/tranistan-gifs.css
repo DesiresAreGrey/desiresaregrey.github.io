@@ -42,10 +42,17 @@ gif-list {
           0 0 1px rgba(0, 0, 0, 1);
         text-align: center;
 
-        &:hover {
+        @media (hover: hover) {
+          &:hover {
+            color: #fff;
+            text-decoration: underline;
+          }
+        }
+        &:active {
           color: #fff;
           text-decoration: underline;
         }
+        
         &:focus, &:visited {
           color: #fff;
         }
@@ -77,7 +84,12 @@ gif-list {
         width: fit-content;
         text-align: center;
 
-        &:hover {
+        @media (hover: hover) {
+          &:hover {
+            color: #aaa;
+          }
+        }
+        &:active {
           color: #aaa;
         }
       }
