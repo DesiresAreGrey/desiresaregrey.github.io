@@ -72,7 +72,7 @@ updateAndFilter();
 function updateAndFilter() {
     let filteredGifs = gifs;
     if (searchInput.value)
-        filteredGifs = filteredGifs.filter(g => g.name.toLowerCase().includes(searchInput.value.toLowerCase()) || g.tags.some(t => t.toLowerCase().includes(searchInput.value.toLowerCase())));
+        filteredGifs = filteredGifs.filter(g => g.name.toLowerCase().includes(searchInput.value.toLowerCase()) || g.tags.some(t => t.toLowerCase().includes(searchInput.value.replace("#", "").toLowerCase())));
     if (categorySelect.value === "sfw")
         filteredGifs = filteredGifs.filter(g => !g.nsfw);
 
