@@ -210,11 +210,25 @@ copyLinkButton.addEventListener('click', () => {
     if (!currentUploadUrl)
         return;
     navigator.clipboard.writeText(currentUploadUrl!);
+    const icon = copyLinkButton.$("i")!;
+    icon.classList.remove("fa-copy");
+    icon.classList.add("fa-check");
+    Utils.runAfter(() => {
+        icon.classList.remove("fa-check");
+        icon.classList.add("fa-copy");
+    }, 2500, copyLinkButton);
 });
 copyMarkdownButton.addEventListener('click', () => {
     if (!currentUploadUrl)
         return;
     navigator.clipboard.writeText(`![${video?.file.name.split('.').slice(0, -1).join('.') ?? "GIF"}](${currentUploadUrl})`);
+    const icon = copyMarkdownButton.$("i")!;
+    icon.classList.remove("fa-copy");
+    icon.classList.add("fa-check");
+    Utils.runAfter(() => {
+        icon.classList.remove("fa-check");
+        icon.classList.add("fa-copy");
+    }, 2500, copyMarkdownButton);
 });
 
 let lastDownloadUrl: string | null = null;
