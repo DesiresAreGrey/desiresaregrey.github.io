@@ -2,7 +2,8 @@ import { TimeSpan } from "./timespan.js";
 import "./utils.js";
 
 export class Cache {
-    static set<T>(key: string, value: T, lifetimeMs: number = TimeSpan.fromDays(1).ms): void {
+    static set<T>(key: string, value: T, lifetime: number | TimeSpan = TimeSpan.fromDays(1)): void {
+        const lifetimeMs = lifetime instanceof TimeSpan ? lifetime.ms : lifetime;
         const expiresAt = Date.now() + lifetimeMs;
         localStorage.setItem(key, { value, expiresAt }.toJson());
     }

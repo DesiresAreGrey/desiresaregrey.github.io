@@ -2,6 +2,8 @@ import { JsonFetch } from "../utils/jsonfetch.js";
 import { LoadingBar } from "../utils/loadingbar.js";
 import "../utils/utils.js";
 import { Utils } from "../utils/utils.js";
+import { Cache } from "../utils/cache.js";
+import { TimeSpan } from "../utils/timespan.js";
 
 interface Post {
     id: number;
@@ -43,8 +45,6 @@ class Gif {
         this.title = post.name + (this.tags.length > 0 ? ` [${this.tags.map(t => `#${t}`).join(", ")}]` : "");
         this.link = post.ap_id;
         this.nsfw = post.nsfw;
-
-        console.log(this);
     }
 }
 
@@ -53,17 +53,23 @@ const sortSelect = $("#sort-select") as HTMLSelectElement;
 const categorySelect = $("#category-select") as HTMLSelectElement;
 const searchInput = $("#search-input") as HTMLInputElement;
 
+sortSelect.value = Cache.get("tranistan-gifs-sort") ?? "TopAll";
+categorySelect.value = Cache.get("tranistan-gifs-category") ?? "sfw";
+
 let gifs = await getGifs(sortSelect.value);
 sortSelect.addEventListener("change", async () => {
     gifs = await getGifs(sortSelect.value);
     updateAndFilter();
+    Cache.set("tranistan-gifs-sort", sortSelect.value, TimeSpan.fromDays(1));
 });
-categorySelect.addEventListener("change", () => updateAndFilter());
+categorySelect.addEventListener("change", () => {
+    updateAndFilter();
+    Cache.set("tranistan-gifs-category", categorySelect.value, TimeSpan.fromDays(1));
+});
 searchInput.addEventListener("input", () => updateAndFilter());
 updateAndFilter();
 
 function updateAndFilter() {
-    console.log("Filtering gifs...");
     let filteredGifs = gifs;
     if (searchInput.value)
         filteredGifs = filteredGifs.filter(g => g.name.toLowerCase().includes(searchInput.value.toLowerCase()) || g.tags.some(t => t.toLowerCase().includes(searchInput.value.toLowerCase())));
@@ -84,7 +90,7 @@ async function getGifs(sort: string): Promise<Gif[]> {
         cursor = response.next_page;
     } while (cursor);
     
-    console.log(gifPosts);
+    console.log("gifPosts", gifPosts);
     LoadingBar.finish();
     return gifPosts.filter(p => p.url_content_type === "image/gif").map(p => new Gif(p));
 }
@@ -92,7 +98,7 @@ async function getGifs(sort: string): Promise<Gif[]> {
 function updateList(gifs: Gif[]) {
     if (!gifList)
         return;
-    console.log(gifs);
+    console.log("gifs", gifs);
     gifList.innerHTML = "";
     gifs.forEach((gif, i) => {
         const item = document.createElement("gif-item");

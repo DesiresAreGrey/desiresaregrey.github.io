@@ -27,7 +27,7 @@ gif-list {
 
     #name {
       position: absolute;
-      bottom: 0;
+      bottom: 4px;
       width: 100%;
       justify-content: center;
       display: flex;
@@ -41,6 +41,7 @@ gif-list {
           0 0 4px rgba(0, 0, 0, 0.75),
           0 0 1px rgba(0, 0, 0, 1);
         text-align: center;
+        line-height: 100%;
 
         @media (hover: hover) {
           &:hover {
