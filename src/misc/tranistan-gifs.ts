@@ -92,6 +92,7 @@ async function getGifs(sort: string): Promise<Gif[]> {
 function updateList(gifs: Gif[]) {
     if (!gifList)
         return;
+    console.log(gifs);
     gifList.innerHTML = "";
     gifs.forEach(gif => {
         const item = document.createElement("gif-item");
