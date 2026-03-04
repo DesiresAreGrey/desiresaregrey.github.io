@@ -92,7 +92,7 @@ async function getGifs(sort: string): Promise<Gif[]> {
     
     console.log("gifPosts", gifPosts);
     LoadingBar.finish();
-    return gifPosts.filter(p => p.url_content_type === "image/gif").map(p => new Gif(p));
+    return gifPosts.filter(p => p.url_content_type === "image/gif" && (p.url?.includes("cdn.discordapp.com") == false)).map(p => new Gif(p));
 }
 
 function updateList(gifs: Gif[]) {
