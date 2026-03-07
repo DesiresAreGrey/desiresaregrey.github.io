@@ -4,10 +4,13 @@ import { FFmpegHelper, Video, Gif, Media } from '../utils/ffmpeg.js';
 import { API } from '../utils/api.js';
 import { JsonFetch } from '../utils/jsonfetch.js';
 import { Utils } from '../utils/utils.js';
+import { WebHaptics } from 'web-haptics';
 // @ts-ignore
 import gifsicle from 'gifsicle-wasm-browser';
 
 await pwaSetup();
+
+const haptics = new WebHaptics();
 
 LoadingBar.startTrickle();
 
@@ -168,6 +171,10 @@ downloadButton.addEventListener('click', () => {
     document.body.appendChild(anchor);
     anchor.click();
     document.body.removeChild(anchor);
+    // selection
+    haptics.trigger([
+        { duration: 8 },
+    ], { intensity: 0.3 });
 });
 
 const shareButton = $id('share-button') as HTMLButtonElement;
@@ -186,6 +193,11 @@ shareButton.addEventListener('click', async () => {
       title: (video?.file.name.split('.').slice(0, -1).join('.') ?? "output"),
       files: [file] 
     };
+
+    // selection
+    haptics.trigger([
+        { duration: 8 },
+    ], { intensity: 0.3 });
 
     if (navigator.canShare && navigator.canShare(shareData))
         await navigator.share(shareData);
@@ -213,6 +225,12 @@ copyLinkButton.addEventListener('click', () => {
     const icon = copyLinkButton.$("i")!;
     icon.classList.remove("fa-copy");
     icon.classList.add("fa-check");
+
+    // selection
+    haptics.trigger([
+        { duration: 8 },
+    ], { intensity: 0.3 });
+
     Utils.runAfter(() => {
         icon.classList.remove("fa-check");
         icon.classList.add("fa-copy");
@@ -225,6 +243,12 @@ copyMarkdownButton.addEventListener('click', () => {
     const icon = copyMarkdownButton.$("i")!;
     icon.classList.remove("fa-copy");
     icon.classList.add("fa-check");
+
+    // selection
+    haptics.trigger([
+        { duration: 8 },
+    ], { intensity: 0.3 });
+
     Utils.runAfter(() => {
         icon.classList.remove("fa-check");
         icon.classList.add("fa-copy");
@@ -243,6 +267,11 @@ uploadButton.addEventListener('click', async () => {
         uploadedOverlay.classList.add('active');
         return;
     }
+
+    // selection
+    haptics.trigger([
+        { duration: 8 },
+    ], { intensity: 0.3 });
 
     LoadingBar.start();
     uploadButton.disabled = true;
@@ -282,6 +311,12 @@ uploadButton.addEventListener('click', async () => {
                 uploadedOverlay.style.display = 'flex';
                 void uploadedOverlay.offsetHeight;
                 uploadedOverlay.classList.add('active');
+
+                // success
+                haptics.trigger([
+                    { duration: 30 },
+                    { delay: 60, duration: 40, intensity: 1 },
+                ]);
             }
         }
         catch (error) {
@@ -300,6 +335,11 @@ async function selectedVideo() {
     const file = fileInput.files[0];
     if (!file.type.startsWith('video/'))
         return;
+
+    // selection
+    haptics.trigger([
+        { duration: 8 },
+    ], { intensity: 0.3 });
 
     videoPreview.src = URL.createObjectURL(file);
 
@@ -326,6 +366,11 @@ async function selectedVideo() {
 async function convertToGif() {
     if (!video)
         return;
+
+    // selection
+    haptics.trigger([
+        { duration: 8 },
+    ], { intensity: 0.3 });
 
     convertButton.disabled = true;
     $(".settings")?.classList.add('disabled');
@@ -434,6 +479,12 @@ async function convertToGif() {
     $(".settings")?.classList.remove('disabled');
     LoadingBar.finish();
     FFmpegHelper.resetOnProgress();
+    
+    // success
+    haptics.trigger([
+        { duration: 30 },
+        { delay: 60, duration: 40, intensity: 1 },
+    ]);
 
     console.log("Conversion completed in", ((performance.now() - start) / 1000).roundTo(2), "seconds");
 

@@ -1,4 +1,4 @@
-const version = "1.2.2.2";
+const version = "1.3.0.0";
 
 const cacheUrls = [
     "/misc/gif-converter/",
@@ -30,6 +30,7 @@ const cacheUrls = [
     "/assets/misc/ffmpeg/util/index.js",
     "/assets/misc/ffmpeg/util/types.js",
     "https://esm.sh/gifsicle-wasm-browser@1.0.1",
+    "https://esm.sh/web-haptics",
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 ];
 
