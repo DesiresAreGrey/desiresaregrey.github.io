@@ -4,6 +4,7 @@ import "../utils/utils.js";
 import { Utils } from "../utils/utils.js";
 import { Cache } from "../utils/cache.js";
 import { TimeSpan } from "../utils/timespan.js";
+import { defaultPatterns, WebHaptics } from "web-haptics";
 
 interface Post {
     id: number;
@@ -47,6 +48,8 @@ class Gif {
         this.nsfw = post.nsfw;
     }
 }
+
+const haptics = new WebHaptics();
 
 const gifList = $("gif-list"); 
 const sortSelect = $("#sort-select") as HTMLSelectElement;
@@ -119,6 +122,7 @@ function updateList(gifs: Gif[]) {
             const icon = copyLinkButton.$("i")!;
             icon.classList.remove("fa-copy");
             icon.classList.add("fa-check");
+            haptics.trigger(defaultPatterns.selection);
             Utils.runAfter(() => {
                 icon.classList.remove("fa-check");
                 icon.classList.add("fa-copy");
@@ -130,6 +134,7 @@ function updateList(gifs: Gif[]) {
             const icon = copyMdButton.$("i")!;
             icon.classList.remove("fa-copy");
             icon.classList.add("fa-check");
+            haptics.trigger(defaultPatterns.selection);
             Utils.runAfter(() => {
                 icon.classList.remove("fa-check");
                 icon.classList.add("fa-copy");
