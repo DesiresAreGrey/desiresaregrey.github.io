@@ -8,7 +8,8 @@
     "rootDir": "src",
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
-    "removeComments": true
+    "removeComments": true,
+    "skipLibCheck": true
   },
 
   "include": ["src/**/*"]
