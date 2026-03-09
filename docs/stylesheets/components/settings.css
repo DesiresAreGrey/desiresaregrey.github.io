@@ -1,6 +1,5 @@
 setting-item {
   display: block;
-  --tooltip: attr(tooltip);
 
   .info {
     position: relative;
@@ -28,41 +27,48 @@ setting-item {
       opacity: 0.5;
       cursor: default;
     }
-  }
 
-  &[tooltip] .info {
-    &::after {
-      content: var(--tooltip);
-      position: absolute;
-      left: calc(100% + 8px);
-      transform-origin: bottom center;
-      width: max-content;
-      
-      font-size: 13px;
-      font-variation-settings: 'wght' 400;
-      white-space: pre-wrap;
-      text-align: left;
-      line-height: 125%;
+    &[tooltip] {
+      &::after {
+        content: attr(tooltip);
+        position: absolute;
+        left: calc(100% + 8px);
+        transform-origin: bottom center;
+        width: max-content;
+        
+        font-size: 13px;
+        font-variation-settings: 'wght' 400;
+        white-space: pre-wrap;
+        text-align: left;
+        line-height: 125%;
 
-      padding: 7px 10px;
-      background: rgba(8, 8, 8, .8) !important;
-      box-shadow: 2px 2px 6px -4px #000 !important;
-      backdrop-filter: blur(3px);
-      outline: solid;
-      outline-width: thin;
-      outline-color: #333333;
-      outline-offset: -1px;
-      corner-shape: squircle;
-      border-radius: calc(10px * var(--br-mult));
+        padding: 7px 10px;
+        background: rgba(8, 8, 8, .8) !important;
+        box-shadow: 2px 2px 6px -4px #000 !important;
+        backdrop-filter: blur(3px);
+        outline: solid;
+        outline-width: thin;
+        outline-color: #333333;
+        outline-offset: -1px;
+        corner-shape: squircle;
+        border-radius: calc(10px * var(--br-mult));
 
-      z-index: 1000;
-      pointer-events: none;
+        z-index: 1000;
+        pointer-events: none;
 
-      opacity: 0;
-      transition: transform 150ms ease, opacity 150ms ease;
-    }
-    &:hover::after {
-      opacity: 1;
+        opacity: 0;
+        transition: transform 150ms ease, opacity 150ms ease;
+
+        @media (max-width: 768px) {
+          left: 0;
+          top: 100%;
+          margin-top: 4px;
+          max-width: calc(100vw - (16px * 2));
+        }
+      }
+      &:hover::after {
+        opacity: 1;
+      }
     }
   }
 
@@ -102,3 +108,4 @@ setting-group {
     user-select: none;
   }
 }
+

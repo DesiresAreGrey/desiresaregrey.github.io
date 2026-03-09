@@ -2,9 +2,10 @@ class SettingItem extends HTMLElement {
     connectedCallback() {
         const name = this.getAttribute("name");
         const subtitle = this.getAttribute("subtitle") ?? "";
+        const tooltip = this.getAttribute("tooltip");
 
         this.innerHTML = /* html */`
-            <span class="info">
+            <span class="info" ${tooltip ? `tooltip="${tooltip}"` : ''}>
                 <span class="name">${name}</span>
                 <span class="subtitle">${subtitle}</span>
             </span>
