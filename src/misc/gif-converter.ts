@@ -50,9 +50,9 @@ document.addEventListener('drop', (e) => {
     }
 });
 
-const heightInput = $id('res-height-input') as HTMLInputElement;
-const widthInput = $id('res-width-input') as HTMLInputElement;
-const resPercent = $id('res-percent') as HTMLSpanElement;
+const heightInput = $id('setting-resolution')?.$('.height') as HTMLInputElement;
+const widthInput = $id('setting-resolution')?.$('.width') as HTMLInputElement;
+const resPercent = $id('setting-resolution')?.$('.subtitle') as HTMLSpanElement;
 
 heightInput.addEventListener('input', () => {
     if (video?.videoStream == null)
@@ -86,8 +86,8 @@ widthInput.addEventListener('input', () => {
     updatePercentages();
 });
 
-const frameRateInput = $id('frame-rate-input') as HTMLInputElement;
-const fpsPercent = $id('fps-percent') as HTMLSpanElement;
+const frameRateInput = $id('setting-fps')?.$('input') as HTMLInputElement;
+const fpsPercent = $id('setting-fps')?.$('.subtitle') as HTMLSpanElement;
 
 frameRateInput.addEventListener('input', updatePercentages);
 frameRateInput.addEventListener('blur', () => {
@@ -100,7 +100,7 @@ frameRateInput.addEventListener('blur', () => {
     updatePercentages();
 });
 
-const speedInput = $id('speed-input') as HTMLInputElement;
+const speedInput = $id('setting-speed')?.$('input') as HTMLInputElement;
 speedInput.addEventListener('input', updatePercentages);
 speedInput.addEventListener('blur', () => {
     let speed = parseFloat(speedInput.value);
@@ -118,24 +118,22 @@ async function updatePercentages() {
         return;
 
     const width = parseInt(widthInput.value);
-    resPercent.textContent = `${Math.round((width / video.videoStream.width) * 100)}%`;
+    resPercent.textContent = `${((width / video.videoStream.width) * 100).roundTo(1)}%`;
 
     const frameRate = parseFloat(frameRateInput.value);
     const speed = parseFloat(speedInput.value) / 100;
     
     const fpsPercentValue = (frameRate / (video.fps * speed)) * 100;
-    if (fpsPercentValue >= 10)
-        fpsPercent.textContent = fpsPercentValue.roundTo(1) + "%";
-    else if (fpsPercentValue >= 1)
+    if (fpsPercentValue >= 5)
         fpsPercent.textContent = fpsPercentValue.roundTo(2) + "%";
     else
         fpsPercent.textContent =  fpsPercentValue.roundTo(3) + "%";
 }
 
-const paletteQuality = $id('palette-quality-select') as HTMLSelectElement;
+const paletteQuality = $id('setting-quality')?.$('select') as HTMLSelectElement;
 
-const optimizationInput = $id('optimization-input') as HTMLInputElement;
-const optimizationEnabled = $id('optimization-enabled') as HTMLSpanElement;
+const optimizationInput = $id('setting-optimization')?.$('input') as HTMLInputElement;
+const optimizationEnabled = $id('setting-optimization')?.$('.subtitle') as HTMLSpanElement;
 optimizationInput.addEventListener('blur', () => {
     let compression = parseInt(optimizationInput.value);
     if (isNaN(compression) || compression < 1) {
@@ -332,13 +330,16 @@ async function selectedVideo() {
 
     heightInput.value = (video.videoStream.height / 2).toString();
     widthInput.value = (video.videoStream.width / 2).toString();
-    frameRateInput.value = "15";
+    if (video.fps > 30)
+        frameRateInput.value = (video.fps.roundTo() / 4).toString();
+    else
+        frameRateInput.value = (video.fps.roundTo() / 2).toString();
     updatePercentages();
 
     const infoEl = $id('video-info') as HTMLParagraphElement;
     infoEl.innerHTML = getInfoHtml(video);
     convertButton.disabled = false;
-    $(".settings")?.classList.remove('disabled');
+    $("setting-group")?.removeAttribute('disabled');
 }
 
 async function convertToGif() {
@@ -348,7 +349,7 @@ async function convertToGif() {
     haptics.trigger(defaultPatterns.selection);
 
     convertButton.disabled = true;
-    $(".settings")?.classList.add('disabled');
+    $("setting-group")?.setAttribute('disabled', '');
     LoadingBar.start();
     const start = performance.now();
 
@@ -451,7 +452,7 @@ async function convertToGif() {
     
     convertButton.textContent = "Convert to GIF";
     convertButton.disabled = false;
-    $(".settings")?.classList.remove('disabled');
+    $("setting-group")?.removeAttribute('disabled');
     LoadingBar.finish();
     FFmpegHelper.resetOnProgress();
     

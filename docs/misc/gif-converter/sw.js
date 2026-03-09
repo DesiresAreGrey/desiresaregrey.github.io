@@ -1,4 +1,4 @@
-const version = "1.3.0.0";
+const version = "1.3.1.0";
 
 const cacheUrls = [
     "/misc/gif-converter/",
@@ -6,6 +6,8 @@ const cacheUrls = [
     "/misc/gif-converter/manifest.json",
     "/stylesheets/extra.min.css",
     "/stylesheets/misc/gif-converter.css",
+    "/stylesheets/components/settings.css",
+    "/js/components/settings.js",
     "/js/misc/gif-converter.js",
     "/js/utils/api.js",
     "/js/utils/jsonfetch.js",

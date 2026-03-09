@@ -3,8 +3,10 @@ title: MP4 to GIF Converter
 description: Convert+optimize videos into gifs entirely in your browser without uploading them to a server.
 image: https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Rotating_earth_%28large%29.gif/250px-Rotating_earth_%28large%29.gif
 extra_head: |
+  <script src="/js/components/settings.js"></script>
+  <link rel="stylesheet" href="/stylesheets/components/settings.css">
   <link rel="manifest" href="/misc/gif-converter/manifest.json"/>
-  <link rel="apple-touch-icon" href="/assets/DesiresAreGrey192x.png" />
+  <link rel="apple-touch-icon" href="/assets/DesiresAreGrey192x.png"/>
 ---
 <script type="module" src="/js/misc/gif-converter.js"></script>
 <link rel="stylesheet" href="/stylesheets/misc/gif-converter.css">
@@ -43,49 +45,45 @@ screen so it can be used offline.</p>
     <p id="video-info" style="font-size: 13px; color: #999; margin-top: 0.1rem; margin-bottom: 0; text-align: center;">Input Video</p>
   </div>
 
-  <div class="settings disabled">
-    <div>
-      <span class="title">Resolution</span>
-      <span id="res-percent" class="subtitle">100%</span>
-      <div style="float: right;">
-        <input id="res-width-input" class="input" type="number" inputmode="decimal" step="1" value="1920" style="width: 3rem;">
-        <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; margin-right: -0.1rem; margin-left: -0.1rem; font-size: 12px; font-variation-settings: 'wght' 400; opacity: 0.5">x</span>
-        <input id="res-height-input" class="input" type="number" inputmode="decimal" step="1" value="1080" style="width: 3rem;">
-      </div>
-    </div>
-    <div>
-      <span class="title">Frame Rate</span>
-      <span id="fps-percent" class="subtitle">100%</span>
-      <div style="float: right;">
-        <input id="frame-rate-input" class="input" type="number" inputmode="decimal" step="1" value="30" style="width: 3rem;">
-        <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; margin-left: -0.1rem; font-size: 14px; font-variation-settings: 'wght' 400; opacity: 0.5">FPS</span>
-      </div>
-    </div>
-    <div>
-      <span class="title">Speed</span>
-      <div style="float: right;">
-        <input id="speed-input" class="input" type="number" inputmode="decimal" step="1" value="100" style="width: 3rem;">
-        <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; margin-left: -0.1rem; font-size: 14px; font-variation-settings: 'wght' 400; opacity: 0.5">%</span>
-      </div>
-    </div>
-    <div>
-      <span class="title tooltip" data-tooltip="The quality of the output GIF's color palette.&#10;Higher qualities takes longer to process and are usually larger.&#10;&#10;High - Generates the palette from the whole video&#10;Medium - Generates the palette from the first frame of the video&#10;Fast - Uses the default color palette">Quality</span>
-      <div style="float: right;">
-        <select id="palette-quality-select" class="input noselect" style="width: 5.5rem;">
-          <option value="high">High</option>
-          <option value="medium">Medium</option>
-          <option value="fast">Fast</option>
-        </select>
-      </div>
-    </div>
-    <div>
-      <span class="title tooltip" data-tooltip="The compression level of the output GIF using Gifsicle.&#10;Setting the compression level to 0 disables compression and optimization.">Compression</span>
-      <span id="optimization-enabled" class="subtitle"></span>
-      <div style="float: right;">
-        <input id="optimization-input" class="input" type="number" inputmode="decimal" step="1" value="50" style="width: 3rem;">
-      </div>
-    </div>
-  </div>
+  <setting-group disabled>
+    <setting-item 
+      id="setting-resolution"
+      type="width-height"
+      name="Resolution"
+      subtitle="100%"
+      default="1920x1080">
+    </setting-item>
+    <setting-item 
+      id="setting-fps"
+      type="number"
+      name="Frame Rate"
+      subtitle="100%"
+      default="30"
+      suffix="FPS">
+    </setting-item>
+    <setting-item 
+      id="setting-speed"
+      type="number"
+      name="Speed"
+      default="100"
+      suffix="%">
+    </setting-item>
+    <setting-item 
+      id="setting-quality"
+      type="dropdown"
+      name="Quality"
+      tooltip="The quality of the output GIF's color palette.&#10;Higher qualities takes longer to process and are usually larger.&#10;&#10;High - Generates the palette from the whole video&#10;Medium - Generates the palette from the first frame of the video&#10;Fast - Uses the default color palette"
+      options="high:High,medium:Medium,fast:Fast"
+      default="high">
+    </setting-item>
+    <setting-item 
+      id="setting-optimization"
+      type="number"
+      name="Compression"
+      tooltip="The compression level of the output GIF using Gifsicle.&#10;Setting the compression level to 0 disables compression and optimization.&#10;&#10;Range: 0-200"
+      default="50">
+    </setting-item>
+  </setting-group>
   
   <button id="convert-button" disabled>Convert to GIF</button>
   

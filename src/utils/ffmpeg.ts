@@ -85,7 +85,7 @@ export class Media {
         return this.streams.filter(s => s.codec_type === 'audio') as AudioStream[];
     }
 
-    get fps() {
+    get fps(): number {
         return this.videoStream ? eval(this.videoStream.avg_frame_rate) : 0;
     }
 
