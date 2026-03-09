@@ -51,14 +51,14 @@ screen so it can be used offline.</p>
       type="width-height"
       name="Resolution"
       subtitle="100%"
-      default="1920x1080">
+      default="640x360">
     </setting-item>
     <setting-item 
       id="setting-fps"
       type="number"
       name="Frame Rate"
       subtitle="100%"
-      default="30"
+      default="15"
       suffix="FPS">
     </setting-item>
     <setting-item 
