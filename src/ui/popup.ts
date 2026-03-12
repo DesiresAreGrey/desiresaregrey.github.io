@@ -11,8 +11,6 @@ export class Popup {
 
         const popup = document.createElement("div");
         popup.classList.add("popup-overlay");
-        popup.style.display = "flex";
-
         popup.innerHTML = /* html */ `
             <div class="popup">
                 <div class="close">
