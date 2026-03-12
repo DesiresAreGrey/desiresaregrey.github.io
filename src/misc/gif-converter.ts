@@ -1,4 +1,5 @@
-import { LoadingBar } from '../utils/loadingbar.js';
+import { LoadingBar } from '../ui/loadingbar.js';
+import { Popup } from '../ui/popup.js';
 import { TimeSpan } from '../utils/timespan.js';
 import { FFmpegHelper, Video, Gif, Media } from '../utils/ffmpeg.js';
 import { API } from '../utils/api.js';
@@ -195,62 +196,16 @@ shareButton.addEventListener('click', async () => {
         await navigator.share(shareData);
 });
 
-const uploadedOverlay = $('.uploaded-overlay');
-uploadedOverlay?.addEventListener('click', (e) => {
-    if (e.target === uploadedOverlay) {
-        uploadedOverlay.classList.remove('active');
-        Utils.runAfter(() => uploadedOverlay.style.display = 'none', 200, uploadedOverlay);
-    }
-});
-uploadedOverlay?.$('.close')?.addEventListener('click', () => {
-    uploadedOverlay.classList.remove('active');
-    Utils.runAfter(() => uploadedOverlay.style.display = 'none', 200, uploadedOverlay);
-});
-
 let currentUploadUrl: string | null = null;
-const copyLinkButton = $id('copy-link-button') as HTMLButtonElement;
-const copyMarkdownButton = $id('copy-markdown-button') as HTMLButtonElement;
-copyLinkButton.addEventListener('click', () => {
-    if (!currentUploadUrl)
-        return;
-    navigator.clipboard.writeText(currentUploadUrl!);
-    const icon = copyLinkButton.$("i")!;
-    icon.classList.remove("fa-copy");
-    icon.classList.add("fa-check");
-
-    haptics.trigger(defaultPatterns.selection);
-
-    Utils.runAfter(() => {
-        icon.classList.remove("fa-check");
-        icon.classList.add("fa-copy");
-    }, 2500, copyLinkButton);
-});
-copyMarkdownButton.addEventListener('click', () => {
-    if (!currentUploadUrl)
-        return;
-    navigator.clipboard.writeText(`![${video?.file.name.split('.').slice(0, -1).join('.') ?? "GIF"}](${currentUploadUrl})`);
-    const icon = copyMarkdownButton.$("i")!;
-    icon.classList.remove("fa-copy");
-    icon.classList.add("fa-check");
-
-    haptics.trigger(defaultPatterns.selection);
-
-    Utils.runAfter(() => {
-        icon.classList.remove("fa-check");
-        icon.classList.add("fa-copy");
-    }, 2500, copyMarkdownButton);
-});
-
 let lastDownloadUrl: string | null = null;
+
 const uploadButton = $id('upload-button') as HTMLButtonElement;
 uploadButton.addEventListener('click', async () => {
     if (!downloadUrl)
         return;
 
-    if (uploadedOverlay && downloadUrl === lastDownloadUrl && currentUploadUrl) {
-        uploadedOverlay.style.display = 'flex';
-        void uploadedOverlay.offsetHeight;
-        uploadedOverlay.classList.add('active');
+    if (downloadUrl === lastDownloadUrl && currentUploadUrl) {
+        showUploadedPopup();
         return;
     }
 
@@ -277,23 +232,7 @@ uploadButton.addEventListener('click', async () => {
                 currentUploadUrl = upload.image.url;
                 lastDownloadUrl = downloadUrl;
 
-                if (!uploadedOverlay)
-                    return;
-
-                const uploadedImg = $id('uploaded-gif') as HTMLImageElement;
-                uploadedImg.src = '';
-                void uploadedImg.offsetWidth;
-                uploadedImg.src = currentUploadUrl!;
-
-                const uploadedLink = $id('uploaded-link') as HTMLParagraphElement;
-                uploadedLink.textContent = currentUploadUrl;
-
-                copyLinkButton.disabled = false;
-                copyMarkdownButton.disabled = false;
-
-                uploadedOverlay.style.display = 'flex';
-                void uploadedOverlay.offsetHeight;
-                uploadedOverlay.classList.add('active');
+                showUploadedPopup();
                 
                 haptics.trigger(defaultPatterns.success);
             }
@@ -477,6 +416,53 @@ function getInfoHtml(media: Media) {
         •
         Duration: <span style="font-weight: bold;">${TimeSpan.fromSeconds(media.format.duration).toTrimmedHms()}</span>
     `
+}
+
+async function showUploadedPopup() {
+    const popup = await Popup.showPopup( /* html */ `
+        <div class="title" style="text-align: center;">GIF Uploaded</div>
+        <div class="preview-wrapper noselect">
+            <img id="uploaded-gif" class="preview no-lb"  src="${currentUploadUrl}"/>
+        </div>
+        <p id="uploaded-link" style="font-size: 13px; color: #999; margin-top: 0.1rem; margin-bottom: 0; text-align: center;">${currentUploadUrl}</p>
+        <div class="button-row" style="margin-top: 0.5rem;">
+            <button id="copy-link-button"><i class="fa-solid fa-copy"></i> Link</button>
+            <button id="copy-markdown-button"><i class="fa-solid fa-copy"></i> MD</button>
+        </div>
+    `);
+
+    const copyLinkButton = popup.$id('copy-link-button') as HTMLButtonElement;
+    const copyMarkdownButton = popup.$id('copy-markdown-button') as HTMLButtonElement;
+    copyLinkButton.addEventListener('click', () => {
+        if (!currentUploadUrl)
+            return;
+        navigator.clipboard.writeText(currentUploadUrl!);
+        const icon = copyLinkButton.$("i")!;
+        icon.classList.remove("fa-copy");
+        icon.classList.add("fa-check");
+
+        haptics.trigger(defaultPatterns.selection);
+
+        Utils.runAfter(() => {
+            icon.classList.remove("fa-check");
+            icon.classList.add("fa-copy");
+        }, 2500, copyLinkButton);
+    });
+    copyMarkdownButton.addEventListener('click', () => {
+        if (!currentUploadUrl)
+            return;
+        navigator.clipboard.writeText(`![${video?.file.name.split('.').slice(0, -1).join('.') ?? "GIF"}](${currentUploadUrl})`);
+        const icon = copyMarkdownButton.$("i")!;
+        icon.classList.remove("fa-copy");
+        icon.classList.add("fa-check");
+
+        haptics.trigger(defaultPatterns.selection);
+
+        Utils.runAfter(() => {
+            icon.classList.remove("fa-check");
+            icon.classList.add("fa-copy");
+        }, 2500, copyMarkdownButton);
+    });
 }
 
 async function pwaSetup() {

@@ -1,6 +1,6 @@
 import { Apex } from "../../charts/apex.js";
 import { JsonFetch } from "../../utils/jsonfetch.js";
-import { LoadingBar } from "../../utils/loadingbar.js";
+import { LoadingBar } from "../../ui/loadingbar.js";
 import { WordCloud } from "../../charts/wordcloud.js";
 import "../../utils/utils.js";
 

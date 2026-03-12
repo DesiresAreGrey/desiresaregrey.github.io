@@ -1,0 +1,27 @@
+export class CSSUtils {
+    private static appliedStylesheets: Set<string> = new Set();
+
+    static async getStylesheet(url: string) {
+        const response = await fetch(url);
+        if (!response.ok)     
+            throw new Error(`Failed to load stylesheet: ${response.status} ${response.statusText}`);
+        const css = await response.text();
+
+        const sheet = new CSSStyleSheet();
+        return await sheet.replace(css);
+    }
+
+    static async applyStylesheet(url: string) {
+        if (this.appliedStylesheets.has(url))
+            return;
+        this.appliedStylesheets.add(url);
+        try {
+            const sheet = await this.getStylesheet(url);
+            document.adoptedStyleSheets.push(sheet);
+        }
+        catch (e) {
+            this.appliedStylesheets.delete(url);
+            console.error(`Error applying stylesheet ${url}:`, e);
+        }
+    }
+}

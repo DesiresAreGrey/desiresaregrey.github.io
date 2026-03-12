@@ -1,6 +1,6 @@
 import { Apex } from "../charts/apex.js";
 import { API } from "../utils/api.js";
-import { LoadingBar } from "../utils/loadingbar.js";
+import { LoadingBar } from "../ui/loadingbar.js";
 import { Utils } from "../utils/utils.js";
 
 const loaderColors = ['rgba(236, 186, 149, 1)', 'rgba(170, 85, 255, 1)', 'rgb(216, 130, 49)', 'rgba(79, 120, 202, 1)'];

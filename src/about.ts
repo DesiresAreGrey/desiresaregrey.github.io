@@ -3,7 +3,7 @@ import { BrowserIdentity } from './utils/identity.js';
 import { WordCloud } from './charts/wordcloud.js';
 import { Utils } from './utils/utils.js';
 import { JsonFetchError } from './utils/jsonfetch.js';
-import { LoadingBar } from './utils/loadingbar.js';
+import { LoadingBar } from './ui/loadingbar.js';
 
 const identityId = await BrowserIdentity.id;
 console.log('Identity ID:', identityId);

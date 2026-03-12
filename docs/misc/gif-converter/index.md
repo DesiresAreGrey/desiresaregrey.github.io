@@ -19,21 +19,6 @@ screen so it can be used offline.</p>
   <i class="fa-solid fa-arrow-up-from-bracket" style="font-size: 48px;"></i>
 </div>
 
-<div class="uploaded-overlay" style="display: none;">
-  <div class="popup">
-    <i class="fa-solid fa-xmark close"></i>
-    <div class="title" style="text-align: center;">GIF Uploaded</div>
-    <div class="preview-wrapper noselect">
-      <img id="uploaded-gif" class="preview no-lb" />
-    </div>
-    <p id="uploaded-link" style="font-size: 13px; color: #999; margin-top: 0.1rem; margin-bottom: 0; text-align: center;">Output GIF</p>
-    <div class="button-row" style="margin-top: 0.5rem;">
-      <button id="copy-link-button" disabled><i class="fa-solid fa-copy"></i> Link</button>
-      <button id="copy-markdown-button" disabled><i class="fa-solid fa-copy"></i> MD</button>
-    </div>
-  </div>
-</div>
-
 <div class="gif-converter-container">
 
   <input id="video-input" type="file" accept="video/*" />
