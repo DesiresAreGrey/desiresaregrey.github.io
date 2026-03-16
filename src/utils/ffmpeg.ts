@@ -20,6 +20,8 @@ export class FFmpegHelper {
         this.durationMod = d => d ?? 0;
     }
 
+    public static errors: Set<string> = new Set();
+
     public static currentMedia: Media | null = null;
 
     public static async loadFFmpeg() {
@@ -29,6 +31,12 @@ export class FFmpegHelper {
                 const timeMatch = message.match(/time=(\d{2}):(\d{2}):(\d{2})\.(\d{2})/) ?? [];
                 const currentTime = (+timeMatch[1]) * 3600 + (+timeMatch[2]) * 60 + (+timeMatch[3]) + (+timeMatch[4]) / 100;
                 this.progressEvent(currentTime / this.durationMod(this.currentMedia?.format.duration));
+            }
+            if (message.startsWith("Error ")) {
+                this.errors.add(message);
+            }
+            if (message.includes("Your platform doesn't sup") && message.includes("AV1 decoding")) {
+                this.errors.add(message.replace(/^\[.*?]\s*/, '').replace("suppport", "support"));
             }
         });
 
@@ -40,6 +48,7 @@ export class FFmpegHelper {
 
     public static async run(media: Media, args: string[]) {
         this.currentMedia = media;
+        this.errors = new Set();
         try {
             return await this.ffmpeg.exec(['-v', 'info', ...args]);
         }

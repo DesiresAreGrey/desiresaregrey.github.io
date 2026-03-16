@@ -1,5 +1,6 @@
 import { LoadingBar } from '../ui/loadingbar.js';
 import { Popup } from '../ui/popup.js';
+import { ErrorPopup } from '../ui/errorpopup.js';
 import { TimeSpan } from '../utils/timespan.js';
 import { FFmpegHelper, Video, Gif, Media } from '../utils/ffmpeg.js';
 import { API } from '../utils/api.js';
@@ -237,8 +238,10 @@ uploadButton.addEventListener('click', async () => {
                 haptics.trigger(defaultPatterns.success);
             }
         }
-        catch (error) {
-            console.error("Upload failed", error);
+        catch (e) {
+            haptics.trigger(defaultPatterns.error);
+            console.error("Upload failed", e);
+            ErrorPopup.show(e, "Upload Failed");
         }
 
         LoadingBar.finish();
@@ -292,117 +295,126 @@ async function convertToGif() {
     LoadingBar.start();
     const start = performance.now();
 
-    convertButton.textContent = "Loading...";
+    try {
+        convertButton.textContent = "Loading...";
 
-    const fileData = await FFmpegHelper.fetchFile(video);
-    await FFmpegHelper.writeFile('input.mp4', fileData);
+        const fileData = await FFmpegHelper.fetchFile(video);
+        await FFmpegHelper.writeFile('input.mp4', fileData);
 
-    LoadingBar.update(0.1);
-    convertButton.textContent = "Converting...";
+        LoadingBar.update(0.1);
+        convertButton.textContent = "Converting...";
 
-    const newWidth = widthInput.value.parseFloat()?.roundTo(0) ?? video.videoStream!.width / 4;
-    const frameRate = frameRateInput.value.parseFloat()?.roundTo(2) ?? 15;
-    const speed = (speedInput.value.parseFloat()?.roundTo(2) ?? 100) / 100;
-    const compression = optimizationInput.value.parseFloat()?.roundTo(0) ?? 0;
-    const compressionEnabled = compression > 0;
+        const newWidth = widthInput.value.parseFloat()?.roundTo(0) ?? video.videoStream!.width / 4;
+        const frameRate = frameRateInput.value.parseFloat()?.roundTo(2) ?? 15;
+        const speed = (speedInput.value.parseFloat()?.roundTo(2) ?? 100) / 100;
+        const compression = optimizationInput.value.parseFloat()?.roundTo(0) ?? 0;
+        const compressionEnabled = compression > 0;
 
-    let palette: string | null = null;
-    switch (paletteQuality.value) {
-        case "high": palette = "split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse"; break;
-        case "medium": palette = "split[s0][s1];[s0]select='eq(n\\,0)',palettegen[p];[s1][p]paletteuse"; break;
-        case "fast": palette = null; break;
+        let palette: string | null = null;
+        switch (paletteQuality.value) {
+            case "high": palette = "split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse"; break;
+            case "medium": palette = "split[s0][s1];[s0]select='eq(n\\,0)',palettegen[p];[s1][p]paletteuse"; break;
+            case "fast": palette = null; break;
+        }
+
+        const filters = [
+            speed !== 1 ? `setpts=PTS/${speed}` : null,
+            `fps=${frameRate}`,
+            `scale=${newWidth}:-1:flags=lanczos`,
+            palette 
+        ];
+
+        const command = [
+            '-i', 'input.mp4', 
+            '-vf', filters.filter(f => f !== null).join(','),
+            '-c:v', 'gif', 
+            'unoptimized.gif'
+        ];
+
+        console.log("FFmpeg", command.join(' '));
+
+        FFmpegHelper.durationMod = d => d ? d / speed : 0;
+        FFmpegHelper.onProgress = (progress: number) => LoadingBar.update(progress.remap(0.1, compressionEnabled ? 0.8 : 1));
+        if (await FFmpegHelper.run(video, command) !== 0) {
+            throw "FFMpeg error(s):<br>" + [...FFmpegHelper.errors].join('<br>');
+        }
+
+        if (compressionEnabled) {
+            LoadingBar.update(0.8);
+            convertButton.textContent = "Optimizing...";
+            console.log("FFmpeg completed in", ((performance.now() - start) / 1000).roundTo(2), "seconds");
+
+            const unoptimizedData = await FFmpegHelper.readFile('unoptimized.gif');
+            const unoptimizedBlob = new Blob([new Uint8Array(unoptimizedData as Uint8Array)], { type: 'image/gif' });
+
+            console.log("File size before optimization:", (unoptimizedBlob.size / (1024 * 1024)).roundTo(2), "MB");
+
+            const command = `-O1 --lossy=${compression} unoptimized.gif -o /out/final.gif`;
+
+            console.log("gifsicle", command);
+            const optimizedFiles: File[] = await gifsicle.run({
+                input: [{
+                    file: unoptimizedBlob,
+                    name: "unoptimized.gif"
+                }],
+                command: [command]
+            });
+
+            const finalBlob = new Blob([optimizedFiles[0]], { type: 'image/gif' });
+            const url = URL.createObjectURL(finalBlob);
+            outputImg.src = url;
+            downloadUrl = url;
+            downloadSize = finalBlob.size;
+            videoPreview.load();
+
+            console.log("File size after optimization:", (finalBlob.size / (1024 * 1024)).roundTo(2), "MB");
+            console.log("File size reduction:", ((finalBlob.size - unoptimizedBlob.size) / (1024 * 1024)).roundTo(2), "MB");
+
+            const infoEl = $id('gif-info') as HTMLParagraphElement;
+            if (infoEl)
+                infoEl.innerHTML = getInfoHtml(await Gif.fromFile(optimizedFiles[0]));
+        }
+        else {
+            const data = await FFmpegHelper.readFile('unoptimized.gif');
+            const blob = new Blob([new Uint8Array(data as Uint8Array)], { type: 'image/gif' });
+            const url = URL.createObjectURL(blob);
+            outputImg.src = url;
+            downloadUrl = url;
+            downloadSize = blob.size;
+            videoPreview.load();
+
+            console.log("File size:", (blob.size / (1024 * 1024)).roundTo(2), "MB");
+
+            const infoEl = $id('gif-info') as HTMLParagraphElement;
+            if (infoEl)
+                infoEl.innerHTML = getInfoHtml(await Gif.fromFile(new File([blob], "output.gif")));
+        }
+
+        downloadButton.disabled = false;
+        shareButton.disabled = false;
+
+        void FFmpegHelper.deleteFiles(['input.mp4', 'unoptimized.gif']);
+        
+        haptics.trigger(defaultPatterns.success);
+
+        console.log("Conversion completed in", ((performance.now() - start) / 1000).roundTo(2), "seconds");
+
+        if (downloadSize < 20 * 1024 * 1024 && await JsonFetch.isReachable(await API.url))
+            uploadButton.disabled = false;
+        else
+            uploadButton.disabled = true;
     }
-
-    const filters = [
-        speed !== 1 ? `setpts=PTS/${speed}` : null,
-        `fps=${frameRate}`,
-        `scale=${newWidth}:-1:flags=lanczos`,
-        palette 
-    ];
-
-    const command = [
-        '-i', 'input.mp4', 
-        '-vf', filters.filter(f => f !== null).join(','),
-        '-c:v', 'gif', 
-        'unoptimized.gif'
-    ];
-
-    console.log("FFmpeg", command.join(' '));
-
-    FFmpegHelper.durationMod = d => d ? d / speed : 0;
-    FFmpegHelper.onProgress = (progress: number) => LoadingBar.update(progress.remap(0.1, compressionEnabled ? 0.8 : 1));
-    await FFmpegHelper.run(video, command);
-
-    if (compressionEnabled) {
-        LoadingBar.update(0.8);
-        convertButton.textContent = "Optimizing...";
-        console.log("FFmpeg completed in", ((performance.now() - start) / 1000).roundTo(2), "seconds");
-
-        const unoptimizedData = await FFmpegHelper.readFile('unoptimized.gif');
-        const unoptimizedBlob = new Blob([new Uint8Array(unoptimizedData as Uint8Array)], { type: 'image/gif' });
-
-        console.log("File size before optimization:", (unoptimizedBlob.size / (1024 * 1024)).roundTo(2), "MB");
-
-        const command = `-O1 --lossy=${compression} unoptimized.gif -o /out/final.gif`;
-
-        console.log("gifsicle", command);
-        const optimizedFiles: File[] = await gifsicle.run({
-            input: [{
-                file: unoptimizedBlob,
-                name: "unoptimized.gif"
-            }],
-            command: [command]
-        });
-
-        const finalBlob = new Blob([optimizedFiles[0]], { type: 'image/gif' });
-        const url = URL.createObjectURL(finalBlob);
-        outputImg.src = url;
-        downloadUrl = url;
-        downloadSize = finalBlob.size;
-        videoPreview.load();
-
-        console.log("File size after optimization:", (finalBlob.size / (1024 * 1024)).roundTo(2), "MB");
-        console.log("File size reduction:", ((finalBlob.size - unoptimizedBlob.size) / (1024 * 1024)).roundTo(2), "MB");
-
-        const infoEl = $id('gif-info') as HTMLParagraphElement;
-        if (infoEl)
-            infoEl.innerHTML = getInfoHtml(await Gif.fromFile(optimizedFiles[0]));
+    catch (e) {
+        haptics.trigger(defaultPatterns.error);
+        ErrorPopup.show(e, "Conversion Failed");
     }
-    else {
-        const data = await FFmpegHelper.readFile('unoptimized.gif');
-        const blob = new Blob([new Uint8Array(data as Uint8Array)], { type: 'image/gif' });
-        const url = URL.createObjectURL(blob);
-        outputImg.src = url;
-        downloadUrl = url;
-        downloadSize = blob.size;
-        videoPreview.load();
-
-        console.log("File size:", (blob.size / (1024 * 1024)).roundTo(2), "MB");
-
-        const infoEl = $id('gif-info') as HTMLParagraphElement;
-        if (infoEl)
-            infoEl.innerHTML = getInfoHtml(await Gif.fromFile(new File([blob], "output.gif")));
+    finally {
+        convertButton.textContent = "Convert to GIF";
+        convertButton.disabled = false;
+        $("setting-group")?.removeAttribute('disabled');
+        LoadingBar.finish();
+        FFmpegHelper.resetOnProgress();
     }
-
-    downloadButton.disabled = false;
-    shareButton.disabled = false;
-
-    void FFmpegHelper.deleteFiles(['input.mp4', 'unoptimized.gif']);
-    
-    convertButton.textContent = "Convert to GIF";
-    convertButton.disabled = false;
-    $("setting-group")?.removeAttribute('disabled');
-    LoadingBar.finish();
-    FFmpegHelper.resetOnProgress();
-    
-    haptics.trigger(defaultPatterns.success);
-
-    console.log("Conversion completed in", ((performance.now() - start) / 1000).roundTo(2), "seconds");
-
-    if (downloadSize < 50 * 1024 * 1024 && await JsonFetch.isReachable(await API.url))
-        uploadButton.disabled = false;
-    else
-        uploadButton.disabled = true;
 }
 
 function getInfoHtml(media: Media) {

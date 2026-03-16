@@ -6,11 +6,11 @@ export class ErrorPopup {
         await CSSUtils.applyStylesheet("/stylesheets/ui/errorpopup.css");
     }
 
-    static async show(error: unknown) {
+    static async show(error: unknown, title: string = "Error") {
         await this.init();
 
         Popup.show( /* html */ `
-            <div class="title">An error occurred</div>
+            <div class="title">${title}</div>
             <div class="message">${error instanceof Error ? error.stack : error}</div>
         `, "error-popup");
     }

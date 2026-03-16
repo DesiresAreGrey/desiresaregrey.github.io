@@ -21,7 +21,7 @@ screen so it can be used offline.</p>
 
 <div class="gif-converter-container">
 
-  <input id="video-input" type="file" accept="video/*" />
+  <input id="video-input" type="file" accept="video/*,.mkv" />
   
   <div>
     <div class="preview-wrapper noselect">
