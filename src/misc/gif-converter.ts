@@ -419,10 +419,10 @@ function getInfoHtml(media: Media) {
 }
 
 async function showUploadedPopup() {
-    const popup = await Popup.showPopup( /* html */ `
+    const popup = await Popup.show( /* html */ `
         <div class="title" style="text-align: center;">GIF Uploaded</div>
         <div class="preview-wrapper noselect">
-            <img id="uploaded-gif" class="preview no-lb"  src="${currentUploadUrl}"/>
+            <img id="uploaded-gif" class="preview no-lb" src="${currentUploadUrl}"/>
         </div>
         <p id="uploaded-link" style="font-size: 13px; color: #999; margin-top: 0.1rem; margin-bottom: 0; text-align: center;">${currentUploadUrl}</p>
         <div class="button-row" style="margin-top: 0.5rem;">

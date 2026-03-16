@@ -1,0 +1,21 @@
+#error-popup {
+  width: calc(100px + 35vw);
+  @media (max-width: 768px) {
+    width: 90vw;
+  }
+
+  .title {
+    text-align: center;
+  }
+
+  .message {
+    border: 1px solid #333;
+    corner-shape: squircle;
+    border-radius: calc(8px * var(--br-mult));
+    padding: 1rem;
+    margin-top: 8px;
+    background: #040404;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 14px;
+  }
+}

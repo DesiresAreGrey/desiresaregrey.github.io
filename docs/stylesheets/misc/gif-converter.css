@@ -54,57 +54,6 @@ img[src=""] {
   }
 }
 
-.uploaded-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.333);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  font-size: 24px;
-  font-family: Inter, sans-serif;
-  opacity: 0;
-  transition: opacity 200ms ease, backdrop-filter 200ms ease;
-  z-index: 999;
-
-  &.active {
-    backdrop-filter: blur(4px);
-    opacity: 1;
-  }
-
-  .popup {
-    position: relative;
-    width: 50vw;
-    align-items: center;
-    gap: 1rem; background: #090909;
-    padding: 2rem;
-    corner-shape: squircle;
-    border-radius: calc(16px * var(--br-mult));
-    border: 1px solid #333;
-
-    .close {
-      position: absolute;
-      top: 0.5rem;
-      right: 0.5rem;
-      font-size: 18px;
-      cursor: pointer;
-      transition: opacity 200ms ease;
-
-      &:hover {
-        opacity: 0.67;
-      }
-    }
-
-    @media (max-width: 768px) {
-      width: 90vw;
-    }
-  }
-}
-
 button {
   flex: 1;
 }
