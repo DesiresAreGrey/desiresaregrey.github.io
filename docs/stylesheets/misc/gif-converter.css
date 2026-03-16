@@ -87,6 +87,15 @@ button {
         width: 100%;
         transition: none;
       }
+      .md-header__ellipsis {
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: pointer;
+        transition: opacity 200ms ease;
+        &:hover {
+          opacity: 0.67;
+        }
+      }
     }
   }
 

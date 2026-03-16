@@ -51,6 +51,13 @@ document.addEventListener('drop', (e) => {
         selectedVideo();
     }
 });
+if (window.matchMedia('(display-mode: standalone)').matches) {
+    $('header .md-header__title .md-header__ellipsis')?.addEventListener('click', () => {
+        console.log("Copying URL to clipboard");
+        navigator.clipboard.writeText(window.location.href);
+        haptics.trigger(defaultPatterns.selection);
+    });
+}
 
 const heightInput = $id('setting-resolution')?.$('.height') as HTMLInputElement;
 const widthInput = $id('setting-resolution')?.$('.width') as HTMLInputElement;
