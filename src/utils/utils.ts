@@ -74,6 +74,7 @@ declare global {
         $id<T extends HTMLElement>(id: string): T | null;
         $$<T extends HTMLElement>(selector: string): NodeListOf<T>;
         appendHtml(htmlString: string): void;
+        runAfter(callback: () => void, delay: number): void;
     }
 
     interface Object {
@@ -126,6 +127,11 @@ Object.defineProperty(HTMLElement.prototype, '$$', { value: function(this: HTMLE
 
 Object.defineProperty(HTMLElement.prototype, 'appendHtml', { 
     value: function(this: HTMLElement, htmlString: string) { this.insertAdjacentHTML('beforeend', htmlString); } 
+});
+Object.defineProperty(HTMLElement.prototype, 'runAfter', { 
+    value: function(this: HTMLElement, callback: () => void, delay: number) { 
+        Utils.runAfter(callback, delay, this);
+    } 
 });
 
 Object.defineProperty(Object.prototype, 'toJson', { 

@@ -123,10 +123,10 @@ function updateList(gifs: Gif[]) {
             icon.classList.remove("fa-copy");
             icon.classList.add("fa-check");
             haptics.trigger(defaultPatterns.selection);
-            Utils.runAfter(() => {
+            copyLinkButton.runAfter(() => {
                 icon.classList.remove("fa-check");
                 icon.classList.add("fa-copy");
-            }, 1000, copyLinkButton);
+            }, 1000);
         });
         const copyMdButton = item.$id("copy-md")!;
         copyMdButton.addEventListener("click", async () => {
@@ -135,10 +135,10 @@ function updateList(gifs: Gif[]) {
             icon.classList.remove("fa-copy");
             icon.classList.add("fa-check");
             haptics.trigger(defaultPatterns.selection);
-            Utils.runAfter(() => {
+            copyMdButton.runAfter(() => {
                 icon.classList.remove("fa-check");
                 icon.classList.add("fa-copy");
-            }, 1000, copyMdButton);
+            }, 1000);
         });
         gifList.appendChild(item);
     });

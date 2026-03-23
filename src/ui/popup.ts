@@ -1,5 +1,5 @@
 import { CSSUtils } from "../utils/css.js";
-import { Utils } from "../utils/utils.js";
+import "../utils/utils.js";
 
 export class Popup {
     static async init() {
@@ -26,12 +26,12 @@ export class Popup {
         popup.addEventListener('click', (e) => {
             if (e.target === popup) {
                 popup.classList.remove('active');
-                Utils.runAfter(() => popup.remove(), 250, popup);
+                popup.runAfter(() => popup.remove(), 250);
             }
         });
         popup.$('.close')?.addEventListener('click', () => {
             popup.classList.remove('active');
-            Utils.runAfter(() => popup.remove(), 250, popup);
+            popup.runAfter(() => popup.remove(), 250);
         });
 
         return popup;
