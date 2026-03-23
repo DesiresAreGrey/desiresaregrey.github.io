@@ -24,4 +24,10 @@ export class CSSUtils {
             console.error(`Error applying stylesheet ${url}:`, e);
         }
     }
+
+    static async applyCss(css: string) {
+        const sheet = new CSSStyleSheet();
+        await sheet.replace(css);
+        document.adoptedStyleSheets.push(sheet);
+    }
 }

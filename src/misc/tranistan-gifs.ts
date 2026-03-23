@@ -1,10 +1,9 @@
 import { JsonFetch } from "../utils/jsonfetch.js";
 import { LoadingBar } from "../ui/loadingbar.js";
-import "../utils/utils.js";
-import { Utils } from "../utils/utils.js";
 import { Cache } from "../utils/cache.js";
 import { TimeSpan } from "../utils/timespan.js";
 import { defaultPatterns, WebHaptics } from "web-haptics";
+import "../utils/utils.js";
 
 interface Post {
     id: number;
@@ -123,6 +122,7 @@ function updateList(gifs: Gif[]) {
             icon.classList.remove("fa-copy");
             icon.classList.add("fa-check");
             haptics.trigger(defaultPatterns.selection);
+            console.log(`Copied ${gif.url} to clipboard`);
             copyLinkButton.runAfter(() => {
                 icon.classList.remove("fa-check");
                 icon.classList.add("fa-copy");
@@ -135,6 +135,7 @@ function updateList(gifs: Gif[]) {
             icon.classList.remove("fa-copy");
             icon.classList.add("fa-check");
             haptics.trigger(defaultPatterns.selection);
+            console.log(`Copied ![${gif.name}](${gif.url}) to clipboard`);
             copyMdButton.runAfter(() => {
                 icon.classList.remove("fa-check");
                 icon.classList.add("fa-copy");

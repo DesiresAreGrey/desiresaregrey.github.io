@@ -1,14 +1,17 @@
 import { LoadingBar } from '../ui/loadingbar.js';
 import { Popup } from '../ui/popup.js';
 import { ErrorPopup } from '../ui/errorpopup.js';
+import OutLog from '../ui/outlog.js';
 import { TimeSpan } from '../utils/timespan.js';
 import { FFmpegHelper, Video, Gif, Media } from '../utils/ffmpeg.js';
 import { API } from '../utils/api.js';
 import { JsonFetch } from '../utils/jsonfetch.js';
-import { Utils } from '../utils/utils.js';
+import '../utils/utils.js';
 import { WebHaptics, defaultPatterns } from 'web-haptics';
 // @ts-ignore
 import gifsicle from 'gifsicle-wasm-browser';
+
+OutLog.show();
 
 await pwaSetup();
 
@@ -16,7 +19,9 @@ const haptics = new WebHaptics();
 
 LoadingBar.startTrickle();
 
-await FFmpegHelper.loadFFmpeg()
+console.log("Loading FFmpeg...");
+await FFmpegHelper.loadFFmpeg();
+console.log("FFmpeg loaded");
 
 LoadingBar.finish();
 
@@ -41,7 +46,7 @@ document.addEventListener('dragover', (e) => {
 document.addEventListener('dragleave', (e) => {
     e.preventDefault();
     dropOverlay.classList.remove('active');
-    Utils.runAfter(() => dropOverlay.style.display = 'none', 200, dropOverlay);
+    dropOverlay.runAfter(() => dropOverlay.style.display = 'none', 200);
 });
 document.addEventListener('drop', (e) => {
     e.preventDefault();
@@ -462,10 +467,10 @@ async function showUploadedPopup() {
 
         haptics.trigger(defaultPatterns.selection);
 
-        Utils.runAfter(() => {
+        copyLinkButton.runAfter(() => {
             icon.classList.remove("fa-check");
             icon.classList.add("fa-copy");
-        }, 2500, copyLinkButton);
+        }, 2500);
     });
     copyMarkdownButton.addEventListener('click', () => {
         if (!currentUploadUrl)
@@ -477,10 +482,10 @@ async function showUploadedPopup() {
 
         haptics.trigger(defaultPatterns.selection);
 
-        Utils.runAfter(() => {
+        copyMarkdownButton.runAfter(() => {
             icon.classList.remove("fa-check");
             icon.classList.add("fa-copy");
-        }, 2500, copyMarkdownButton);
+        }, 2500);
     });
 }
 

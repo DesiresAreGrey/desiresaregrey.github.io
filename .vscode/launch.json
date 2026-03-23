@@ -7,6 +7,20 @@
       "request": "launch",
       "command": "powershell -ExecutionPolicy Bypass -File server.ps1",
       "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "ngrok Tunnel",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "ngrok http 8000",
+      "cwd": "${workspaceFolder}"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "ngrok + MkDocs Serve",
+      "configurations": ["MkDocs Serve", "ngrok Tunnel"],
+      "stopAll": true
     }
   ]
 }
