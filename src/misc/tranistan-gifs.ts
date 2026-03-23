@@ -106,9 +106,9 @@ function updateList(gifs: Gif[]) {
     gifs.forEach((gif, i) => {
         const item = document.createElement("gif-item");
         item.innerHTML = `
-            <img src="${gif.url}" alt="${gif.name}" class="gif-preview"/>
+            <img src="${gif.url}" alt="${gif.name.escapeHTML()}" class="gif-preview"/>
             <div id="name">
-                <a href="${gif.link}" target="_blank">${gif.name}${gif.tags.length > 0 ? ` <span style="color: #ccc; font-size: 10px">${gif.tags.map(t => `#${t}`).join(" ")}</span>` : ""}</a>
+                <a href="${gif.link}" target="_blank">${gif.name.escapeHTML()}${gif.tags.length > 0 ? ` <span style="color: #ccc; font-size: 10px">${gif.tags.map(t => `#${t}`).join(" ")}</span>` : ""}</a>
             </div>
             <div class="buttons noselect">
                 <div id="copy-link" class="button"><i class="fa-solid fa-copy"></i> Link</div>

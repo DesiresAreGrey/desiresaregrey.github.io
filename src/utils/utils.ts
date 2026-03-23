@@ -84,6 +84,7 @@ declare global {
         parseJson(): any | null;
         parseFloat(): number | null;
         unquote(): string;
+        escapeHTML(): string;
     }
 
     interface Number {
@@ -150,6 +151,16 @@ Object.defineProperty(String.prototype, 'parseFloat', {
         if (isNaN(parsed)) 
             return null;
         return parsed;
+    }
+});
+
+Object.defineProperty(String.prototype, 'escapeHTML', { 
+    value: function(this: string) { 
+        return this.replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
     }
 });
 
