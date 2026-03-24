@@ -1,19 +1,29 @@
 import { CSSUtils } from "../utils/css.js";
 
 export default class OutLog {
-    static async init(minimized = true) {
+    private static minimized = true;
+
+    static async init(minimized ?: boolean) {
+        if (minimized !== undefined)
+            this.minimized = minimized;
+
         await CSSUtils.applyStylesheet("/stylesheets/ui/outlog.css");
 
         if ($id("out-log")) {
             const logContainer = $id("out-log")!;
             logContainer.style.display = "block";
-            if (minimized)
+            if (this.minimized == true)
                 logContainer.$("pre")!.style.display = "none";
+            if (logContainer.style.opacity === "0") {
+                void logContainer.offsetHeight;
+                logContainer.style.opacity = "1";
+            }
             return;
         }
         const logContainer = document.createElement("div");
         logContainer.id = "out-log";
         logContainer.style.display = "none";
+        logContainer.style.opacity = "0";
         logContainer.innerHTML = /* html */ `
             <div id="header">
                 Log
@@ -25,7 +35,7 @@ export default class OutLog {
         `;
         document.body.appendChild(logContainer);
         const log = logContainer.$("pre")!;
-        if (minimized) {
+        if (this.minimized == true) {
             log.style.display = "none";
             logContainer.$("#close")!.style.transform = `rotate(-45deg)`;
         }
@@ -62,18 +72,28 @@ export default class OutLog {
         console.log("Created OutLog");
     }
 
-    static async show() {
-        await this.init();
+    static async show(minimized ?: boolean) {
+        await this.init(minimized);
 
         const logContainer = $id("out-log");
-        if (logContainer)
+        if (logContainer) {
             logContainer.style.display = "block";
+            logContainer.runAfter(() => {
+                if (logContainer.style.opacity === "0") {
+                    void logContainer.offsetHeight;
+                    logContainer.style.opacity = "1";
+                }
+            }, 100);
+            
+        }
     }
 
     static hide() {
         const logContainer = $id("out-log");
-        if (logContainer)
-            logContainer.style.display = "none";
+        if (logContainer) {
+            logContainer.style.opacity = "0";
+            logContainer.runAfter(() => logContainer.style.display = "none", 250);
+        }
     }
 }
 void OutLog.init();
