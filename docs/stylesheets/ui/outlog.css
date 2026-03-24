@@ -87,7 +87,11 @@
   }
 
   @media (display-mode: standalone) {
-    bottom: 15px;
-    right: 25px;
+    bottom: 10px;
+    right: 30px;
+    pre {
+      font-size: 10px;
+      max-width: calc(100vw - (30px * 2));
+    }
   }
 }
