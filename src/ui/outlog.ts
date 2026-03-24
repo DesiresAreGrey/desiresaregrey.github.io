@@ -44,12 +44,18 @@ export default class OutLog {
         });
         const consoleLog = console.log;
         console.log = function () {
+            log.innerHTML += '<span class="prefix">&gt;</span>';
             for (let i = 0; i < arguments.length; i++) {
-                if (typeof arguments[i] == 'object')
-                    log.innerHTML += (JSON && JSON.stringify ? JSON.stringify(arguments[i], undefined, 2) : arguments[i]) + '<br />'; 
-                else
-                    log.innerHTML += arguments[i] + '<br />';
+                if (typeof arguments[i] == 'object') {
+                    const type = (arguments[i] as { constructor?: { name?: string } }).constructor?.name ?? "Object";
+                    const objectString = JSON.stringify(arguments[i], undefined, 2) ?? arguments[i];
+                    log.innerHTML += type + ' ' + objectString + ' '; 
+                }
+                else {
+                    log.innerHTML += arguments[i] + ' ';
+                }
             }
+            log.innerHTML += '<br />';
             log.scrollTop = log.scrollHeight;
             consoleLog.apply(console, arguments as any);
         };
