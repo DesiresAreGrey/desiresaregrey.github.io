@@ -63,12 +63,6 @@ button {
   gap: 0.25rem;
 }
 
-@keyframes tap-opacity {
-  0% { opacity: 1; }
-  1% { opacity: 0.67; }
-  100% { opacity: 1; }
-}
-
 @media (display-mode: standalone) {
   header {
     .md-header__inner {
@@ -104,8 +98,10 @@ button {
           }
         }
         @media (hover: none) {
-          &:hover {
-            animation: tap-opacity 200ms ease;
+          cursor: pointer;
+          &:active {
+            opacity: 0.67;
+            transition: opacity 20ms ease;
           }
         }
       }
