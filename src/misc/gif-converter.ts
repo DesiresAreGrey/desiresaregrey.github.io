@@ -6,6 +6,7 @@ import { TimeSpan } from '../utils/timespan.js';
 import { FFmpegHelper, Video, Gif, Media } from '../utils/ffmpeg.js';
 import { API } from '../utils/api.js';
 import { JsonFetch } from '../utils/jsonfetch.js';
+import ImageUpload from '../utils/imageupload.js';
 import '../utils/utils.js';
 import { WebHaptics, defaultPatterns } from 'web-haptics';
 // @ts-ignore
@@ -229,37 +230,25 @@ uploadButton.addEventListener('click', async () => {
     
     const response = await fetch(downloadUrl);
     const blob = await response.blob();
-    const file = new File([blob], (video?.file.name.split('.').slice(0, -1).join('.') ?? "output") + '.gif', { type: 'image/gif' });
-    if (file.size > 50 * 1024 * 1024)
-        return;
 
-    const reader = new FileReader();
-    reader.onload = async () => {
-        try {
-            const base64String = reader.result?.toString().replace("data:", "").replace(/^.+,/, "");
-            if (base64String) {
-                const upload = await API.post("proxy/freeimage/upload", {
-                    base64Image: base64String,
-                });
-                console.log(upload.image.url);
-                currentUploadUrl = upload.image.url;
-                lastDownloadUrl = downloadUrl;
+    try {
+        const uploadedUrl = await ImageUpload.upload(blob);
+        console.log(uploadedUrl);
+        currentUploadUrl = uploadedUrl;
+        lastDownloadUrl = downloadUrl;
 
-                showUploadedPopup();
-                
-                haptics.trigger(defaultPatterns.success);
-            }
-        }
-        catch (e) {
-            haptics.trigger(defaultPatterns.error);
-            console.error("Upload failed", e);
-            ErrorPopup.show(e, "Upload Failed");
-        }
-
+        haptics.trigger(defaultPatterns.success);
+        showUploadedPopup();
+    }
+    catch (e) {
+        haptics.trigger(defaultPatterns.error);
+        console.error("Upload failed", e);
+        ErrorPopup.show(e ?? "Unknown error occurred", "Upload Failed");
+    }
+    finally {
         LoadingBar.finish();
         uploadButton.disabled = false;
     }
-    reader.readAsDataURL(file);
 });
 
 async function selectedVideo() {
