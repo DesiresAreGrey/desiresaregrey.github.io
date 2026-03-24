@@ -3,7 +3,7 @@ import { API } from "../utils/api.js";
 import { LoadingBar } from "../ui/loadingbar.js";
 import { Utils } from "../utils/utils.js";
 
-const loaderColors = ['rgba(236, 186, 149, 1)', 'rgba(170, 85, 255, 1)', 'rgb(216, 130, 49)', 'rgba(79, 120, 202, 1)'];
+const loaderColors = ['rgb(236, 186, 149)', 'rgb(170, 85, 255)', 'rgb(216, 130, 49)', 'rgb(79, 120, 202)'];
 const startingVersions = [
     "1.7.10",
     "1.12.2",
@@ -18,7 +18,8 @@ const startingVersions = [
     "1.21",
     "1.21.1",
     "1.21.10",
-    "1.21.11"
+    "1.21.11",
+    "26.1"
 ];
 
 const parseVersions = (input: string) => input
