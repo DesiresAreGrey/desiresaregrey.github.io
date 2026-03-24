@@ -90,6 +90,7 @@ button {
       .md-header__ellipsis {
         -webkit-user-select: none;
         user-select: none;
+        -webkit-tap-highlight-color: transparent;
         cursor: pointer;
         transition: opacity 200ms ease;
         @media (hover: hover) {
@@ -98,7 +99,6 @@ button {
           }
         }
         @media (hover: none) {
-          cursor: pointer;
           &:active {
             opacity: 0.67;
             transition: opacity 20ms ease;
