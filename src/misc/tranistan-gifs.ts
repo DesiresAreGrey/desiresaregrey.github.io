@@ -56,7 +56,10 @@ const categorySelect = $("#category-select") as HTMLSelectElement;
 const searchInput = $("#search-input") as HTMLInputElement;
 
 sortSelect.value = Cache.get("tranistan-gifs-sort") ?? "TopAll";
+Cache.set("tranistan-gifs-sort", sortSelect.value, TimeSpan.fromDays(1));
+
 categorySelect.value = Cache.get("tranistan-gifs-category") ?? "sfw";
+Cache.set("tranistan-gifs-category", categorySelect.value, TimeSpan.fromDays(1));
 
 let gifs = await getGifs(sortSelect.value);
 sortSelect.addEventListener("change", async () => {
