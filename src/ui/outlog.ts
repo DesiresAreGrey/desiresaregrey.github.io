@@ -54,22 +54,25 @@ export default class OutLog {
         });
         const consoleLog = console.log;
         console.log = function () {
-            log.innerHTML += '<span class="prefix">&gt;</span>';
+            let line = '<span class="prefix">&gt;</span>';
             for (let i = 0; i < arguments.length; i++) {
-                if (typeof arguments[i] == 'object') {
+                if (typeof arguments[i] == 'number' || typeof arguments[i] == 'boolean') {
+                    line += `<span class="highlighted">${arguments[i]}</span> `; 
+                }
+                else if (typeof arguments[i] == 'object') {
                     const type = (arguments[i] as { constructor?: { name?: string } }).constructor?.name ?? "Object";
                     const objectString = JSON.stringify(arguments[i], undefined, 2) ?? arguments[i];
-                    log.innerHTML += type + ' ' + objectString + ' '; 
+                    line += `<span class="highlighted">${type}</span> ${objectString} `; 
                 }
                 else {
-                    log.innerHTML += arguments[i] + ' ';
+                    line += `${arguments[i]} `;
                 }
             }
-            log.innerHTML += '<br />';
+            log.innerHTML += line.trim() + '<br/>';
             log.scrollTop = log.scrollHeight;
             consoleLog.apply(console, arguments as any);
         };
-        console.log("Created OutLog");
+        console.log("Created Log Window");
     }
 
     static async show(minimized ?: boolean) {
