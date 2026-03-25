@@ -273,7 +273,7 @@ async function selectedVideo() {
 
     heightInput.value = (video.videoStream.height / 2).toString();
     widthInput.value = (video.videoStream.width / 2).toString();
-    if (video.fps > 30)
+    if (video.fps > 40)
         frameRateInput.value = (video.fps.roundTo() / 4).toString();
     else
         frameRateInput.value = (video.fps.roundTo() / 2).toString();
