@@ -17,6 +17,27 @@
   }
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #aaa;
+  border-radius: 100vh;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #fff;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+  background: #111111;
+  border-left: #191919 solid 1px;
+}
+
 /* Scroll Margin */
 h1, h2, h3, h4, h5, h6 {
   scroll-margin-top: 2.5rem !important; 
