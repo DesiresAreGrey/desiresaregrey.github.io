@@ -22,6 +22,6 @@ extra_head: |
   <video id="video-preview" class="preview" autoplay controls playsinline disablePictureInPicture></video>
   <img id="image-preview" class="preview no-lb"/>
 </div>
-<p id="file-info" style="font-size: 13px; color: #999; margin-top: 0.1rem; margin-bottom: 0; text-align: center;">0 MB</p>
+<p id="file-info" style="font-size: 13px; color: #999; margin-top: 0.1rem; margin-bottom: 0; text-align: center;">Select File</p>
 
 <button id="upload-button" disabled>Upload</button>

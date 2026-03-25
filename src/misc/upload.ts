@@ -1,13 +1,12 @@
 import { WebHaptics, defaultPatterns } from "web-haptics";
 import Catbox from "../utils/catbox.js";
 import ImageUpload from "../utils/imageupload.js";
+import { Popup } from "../ui/popup.js";
 import { ErrorPopup } from "../ui/errorpopup.js";
 import { LoadingBar } from "../ui/loadingbar.js";
 import { JsonFetch } from "../utils/jsonfetch.js";
 import { API } from "../utils/api.js";
 import '../utils/utils.js';
-import { Utils } from "../utils/utils.js";
-import { Popup } from "../ui/popup.js";
 
 const haptics = new WebHaptics();
 
@@ -75,7 +74,7 @@ async function selectedFile() {
     else if (file.size < 200 * 1024 * 1024) {
         uploadButton.disabled = false;
     }
-    fileInfo.textContent = `${(file.size / (1024 * 1024)).roundTo(2)} MB`;
+    fileInfo.textContent = `${file.name} • ${(file.size / (1024 * 1024)).roundTo(2)} MB`;
 }
 
 async function upload() {
@@ -85,11 +84,9 @@ async function upload() {
         return;
     }
     const file = fileInput.files[0];
-
-    console.log(file.size / 5000000);
+    
     const startTime = performance.now();
-    LoadingBar.startTrickle(file.size / 500000);
-    Utils.runAfter(() => LoadingBar.update(0.1, 1), 100);
+    LoadingBar.startFullTrickle((file.size / 1250000 + 1).roundTo(0));
     uploadButton.disabled = true;
 
     if (file.type.startsWith("image/") && file.size < 20 * 1024 * 1024) {
@@ -117,6 +114,7 @@ async function upload() {
 
     LoadingBar.finish();
     uploadButton.disabled = false;
+    videoPreview.pause();
 }
 
 async function showUploadedPopup(url: string, fileType: string) {

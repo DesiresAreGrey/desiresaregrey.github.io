@@ -93,6 +93,17 @@ export class LoadingBar {
         bar.lastUpdateTime = performance.now();
     }
 
+    static startFullTrickle(trickleDuration = 10): void {
+        this.startTrickle();
+        const bar = this.instance;
+        if (!bar)
+            return;
+        void bar.element.offsetWidth;
+
+        bar.animation?.cancel();
+        bar.animation = bar.element.animate([ { width: `5%` }, { width: `95%` } ], { duration: trickleDuration * 1000, fill: 'forwards' });
+    }
+
     static update(progress: number, trickleTo?: number): void {
         if (progress === 0)
             this.start();
@@ -101,14 +112,13 @@ export class LoadingBar {
         if (!bar)
             return;
 
-        if (bar.animation && trickleTo)
-        {
+        if (bar.animation && trickleTo) {
             const newWidth = (progress * 90 + 5).roundTo(0).clamp(0, 100);
             const nextWidth = (trickleTo * 90 + 5).roundTo(0).clamp(0, 100);
             const tickSize = nextWidth - newWidth;
             const trickleDuration = bar.animationTime * tickSize;
 
-            //console.log(`Trickle to ${nextWidth}% over ${trickleDuration}ms`);
+            //console.log(`Trickle to ${nextWidth}% over ${trickleDuration}ms (anim time ${bar.animationTime}s, tick size ${tickSize}%)`);
 
             bar._progress = progress.clamp();
 
@@ -141,6 +151,8 @@ export class LoadingBar {
             return;
         
         bar.animation?.cancel();
+        void bar.element.offsetWidth;
+        
         bar.element.style.transition = 'width 500ms ease-out, opacity 500ms ease';
         bar._progress = 1;
         bar.element.style.width = `100%`;
