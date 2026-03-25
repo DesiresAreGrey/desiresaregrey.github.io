@@ -94,7 +94,7 @@ async function upload() {
             const url = await ImageUpload.upload(file);
             console.log("Image uploaded to:", url);
             console.log("Upload completed in", ((performance.now() - startTime) / 1000).roundTo(2), "seconds");
-            void showUploadedPopup(url, file.type);
+            await showUploadedPopup(url, file.type);
         }
         catch (e) {
             ErrorPopup.show(e, "Upload Failed");
