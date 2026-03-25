@@ -23,13 +23,17 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #aaa;
+  background-color: #aaa;
   border-radius: 100vh;
   border: 2px solid transparent;
   background-clip: content-box;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #fff;
+  background-color: #ccc;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:active {
+  background-color: #fff;
   background-clip: content-box;
 }
 ::-webkit-scrollbar-track,
