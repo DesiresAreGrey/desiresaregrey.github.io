@@ -191,6 +191,7 @@ button {
   transition: all 200ms ease !important;
   text-align: center;
   font-size: 16px;
+  -webkit-tap-highlight-color: transparent;
 
   @media (hover: hover) {
     &:hover {
@@ -198,11 +199,19 @@ button {
       border-color: var(--md-primary-fg-color);
       color: #fff !important;
     }
+    &:active {
+      background-color: var(--md-primary-fg-color);
+      border-color: var(--md-primary-fg-color);
+      color: #fff !important;
+    }
   }
-  &:active {
-    background-color: var(--md-primary-fg-color);
-    border-color: var(--md-primary-fg-color);
-    color: #fff !important;
+  @media (hover: none) {
+    &:active {
+      background-color: var(--md-primary-fg-color);
+      border-color: var(--md-primary-fg-color);
+      color: #fff !important;
+      transition: all 10ms ease !important;
+    }
   }
 
   &:disabled {
@@ -225,6 +234,7 @@ button {
   text-align: center;
   padding: 0.5rem;
   font-size: 20px;
+  -webkit-tap-highlight-color: transparent;
 
   @media (hover: hover) {
     &:hover {
@@ -232,13 +242,21 @@ button {
       border-color: var(--md-primary-fg-color);
       color: #fff !important;
     }
-  }
 
-  &:focus, 
-  &:active {
-    background-color: var(--md-primary-fg-color);
-    border-color: var(--md-primary-fg-color);
-    color: #fff !important;
+    &:focus, 
+    &:active {
+      background-color: var(--md-primary-fg-color);
+      border-color: var(--md-primary-fg-color);
+      color: #fff !important;
+    }
+  }
+  @media (hover: none) {
+    &:active {
+      background-color: var(--md-primary-fg-color);
+      border-color: var(--md-primary-fg-color);
+      color: #fff !important;
+      transition: all 10ms ease !important;
+    }
   }
 
   &[disabled] {
@@ -280,6 +298,7 @@ input::-webkit-inner-spin-button {
 
 input[type="file"] {
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
   &::file-selector-button {
     cursor: pointer;
     border: .1rem solid;
@@ -303,10 +322,13 @@ input[type="file"] {
       color: #fff !important;
     }
   }
-  &:active::file-selector-button {
-    background-color: var(--md-primary-fg-color);
-    border-color: var(--md-primary-fg-color);
-    color: #fff !important;
+  @media (hover: none) {
+    &:active::file-selector-button {
+      background-color: var(--md-primary-fg-color);
+      border-color: var(--md-primary-fg-color);
+      color: #fff !important;
+      transition: all 10ms ease !important;
+    }
   }
 }
 

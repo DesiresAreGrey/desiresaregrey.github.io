@@ -101,7 +101,7 @@ button {
         @media (hover: none) {
           &:active {
             opacity: 0.67;
-            transition: opacity 20ms ease;
+            transition: opacity 10ms ease;
           }
         }
       }
