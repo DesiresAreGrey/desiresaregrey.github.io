@@ -10,13 +10,13 @@ export class JsonFetch {
         return response.json() as Promise<T>;
     }
 
-    static async post<T = any>(url: string, data: unknown): Promise<T> {
+    static async post<T = any>(url: string, data: unknown | FormData): Promise<T> {
         const response = await fetch(url, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
+            headers: data instanceof FormData ? undefined : {
+                "Content-Type":  "application/json"
             },
-            body: JSON.stringify(data)
+            body: data instanceof FormData ? data : JSON.stringify(data)
         });
 
         if (!response.ok) {
