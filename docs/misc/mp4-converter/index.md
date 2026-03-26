@@ -28,8 +28,6 @@ screen so it can be used offline.</p>
     </div>
     <p id="video-info" style="font-size: 13px; color: #999; margin-top: 0.1rem; margin-bottom: 0; text-align: center;">Input Video</p>
   </div>
-  
-  <button id="convert-button" disabled>Convert to MP4</button>
 
   <setting-group disabled>
     <setting-item 
@@ -60,6 +58,8 @@ screen so it can be used offline.</p>
     </setting-group>
   </setting-group>
   
+  <button id="convert-button" disabled>Convert to MP4</button>
+
   <div>
     <div class="preview-wrapper noselect">
       <video id="out-video-preview" class="preview" autoplay controls playsinline disablePictureInPicture></video>
