@@ -1,6 +1,6 @@
 ---
 title: Video to MP4 Converter
-description: Convert videos into MP4/H.264 files entirely in your browser without uploading them to a server.
+description: Convert and compress videos into MP4/H.264 files entirely in your browser without uploading them to a server.
 extra_head: |
   <script src="/js/components/settings.js"></script>
   <link rel="stylesheet" href="/stylesheets/components/settings.css">
@@ -33,9 +33,9 @@ screen so it can be used offline.</p>
     <setting-item 
       id="setting-reencode"
       type="dropdown"
-      name="Reencode Video"
+      name="Transcode Video"
       width="4.5rem"
-      tooltip="Reencode the video or just change the container to MP4.&#10;Reencoding takes significantly longer but can fix compatibility issues and reduce file size."
+      tooltip="Transcode the video or just change the container to MP4.&#10;Transcoding takes significantly longer but can fix compatibility issues and reduce file size."
       options="true:Yes,false:No"
       default="false">
     </setting-item>
@@ -45,7 +45,7 @@ screen so it can be used offline.</p>
         type="dropdown"
         name="Speed"
         width="7rem"
-        tooltip="Faster presets result in faster encoding but larger file sizes and potentially lower quality"
+        tooltip="Faster presets result in faster encoding but larger file sizes and potentially lower quality.&#10;Ultra Fast produces very large files compared to the rest, usually not worth using over Super Fast."
         options="ultrafast:Ultra Fast,superfast:Super Fast,veryfast:Very Fast,faster:Faster,fast:Fast,medium:Medium,slow:Slow,slower:Slower,veryslow:Very Slow"
         default="veryfast">
       </setting-item>

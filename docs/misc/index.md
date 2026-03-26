@@ -28,5 +28,9 @@ h1 {
       <h2>MP4 to GIF Converter</h2>
       <p>Convert MP4 videos to GIFs in your browser without being uploaded/processed to a server</p>
     </a>
+    <a class="card loaded" href="mp4-converter" style="--image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/YUV_UV_plane.svg/960px-YUV_UV_plane.svg.png'); --scale: 1.1;">
+      <h2>Video to MP4 Converter</h2>
+      <p>Convert and compress videos to MP4/H.264 files in your browser without uploading them to a server</p>
+    </a>
   </div>
 </div>
