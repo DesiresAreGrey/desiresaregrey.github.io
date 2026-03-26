@@ -104,6 +104,8 @@ declare global {
         multFloor(multiplier: number): number;
         multRound(multiplier: number): number;
 
+        approx(other: number, tolerance?: number): boolean;
+
         appendOrdinal(): string;
 
         toFeetInches(decimals?: number, fromUnit?: UnitSystem): string;
@@ -215,6 +217,12 @@ Object.defineProperty(Number.prototype, 'remap', {
 Object.defineProperty(Number.prototype, 'mult', { value: function(this: number, multiplier: number) { return this * multiplier } });
 Object.defineProperty(Number.prototype, 'multFloor', { value: function(this: number, multiplier: number) { return Math.floor(this * multiplier) } });
 Object.defineProperty(Number.prototype, 'multRound', { value: function(this: number, multiplier: number) { return Math.round(this * multiplier) } });
+
+Object.defineProperty(Number.prototype, 'approx', { 
+    value: function(this: number, other: number, tolerance: number = 0.0001) { 
+        return Math.abs(this - other) < tolerance;
+    }
+});
 
 Object.defineProperty(Number.prototype, 'appendOrdinal', { 
     value: function(this: number) {

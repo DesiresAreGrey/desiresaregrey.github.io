@@ -1,6 +1,10 @@
 setting-item {
   display: block;
 
+  &[hidden] {
+    display: none;
+  }
+
   .info {
     position: relative;
     -webkit-user-select: none;

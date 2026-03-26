@@ -23,6 +23,8 @@ console.log("Loading FFmpeg...");
 await FFmpegHelper.loadFFmpeg();
 console.log("FFmpeg loaded");
 
+await customElements.whenDefined('setting-item');
+
 LoadingBar.finish();
 
 let video: Video | null = null;
@@ -76,9 +78,42 @@ function changedReencodeSetting() {
     }
 }
 
+// settings
 const speedSetting = $id('setting-speed') as SettingItem;
-
 const qualitySetting = $id('setting-quality') as SettingItem;
+
+const startEndSetting = $id('setting-start-end') as SettingItem;
+const [startInput, endInput] = startEndSetting.inputs;
+
+// inVideoPreview.addEventListener("timeupdate", () => {
+//     if (video && (inVideoPreview.currentTime < Number(startInput.value) || (!Number(endInput.value).approx(video.format.duration, 0.1) && inVideoPreview.currentTime >= Number(endInput.value)))) {
+//         inVideoPreview.currentTime = Number(startInput.value);
+//     }
+// });
+
+inVideoPreview.addEventListener('play', () => requestAnimationFrame(updateTime));
+function updateTime() {
+    if (video && (inVideoPreview.currentTime < Number(startInput.value) || (!Number(endInput.value).approx(video.format.duration, 0.1) && inVideoPreview.currentTime >= Number(endInput.value))))
+        inVideoPreview.currentTime = Number(startInput.value);
+
+    if (!inVideoPreview.paused && !inVideoPreview.ended)
+        requestAnimationFrame(updateTime);
+}
+
+startInput.addEventListener('blur', startEndChanged);
+endInput.addEventListener('blur', startEndChanged);
+
+function startEndChanged() {
+    const startValue = Number(startInput.value);
+    const endValue = Number(endInput.value);
+    inVideoPreview.currentTime = startValue;
+    if (startValue !== 0 || (!endValue.approx(video?.format.duration ?? 0, 0.1) && endValue > startValue)) {
+        startEndSetting.subtitle = 'Trimming Enabled';
+    }
+    else {
+        startEndSetting.subtitle = '';
+    }
+}
 
 const convertButton = $id('convert-button') as HTMLButtonElement;
 convertButton.addEventListener('click', convertToMp4);
@@ -201,6 +236,9 @@ async function selectedVideo() {
     }
     changedReencodeSetting();
 
+    startEndSetting.show();
+    startEndSetting.setAttribute('duration', video.format.duration.toString());
+
     const infoEl = $id('video-info') as HTMLParagraphElement;
     infoEl.innerHTML = getInfoHtml(video);
     convertButton.disabled = false;
@@ -238,8 +276,20 @@ async function convertToMp4() {
             ];
         }
         else {
+            const startSeconds = Number(startInput.value);
+            const endSeconds = Number(endInput.value);
+            FFmpegHelper.durationMod = () => (endSeconds - startSeconds) / 1;
+
+            const trimArgs: string[] = [
+                ...(startSeconds > 0 ? ['-ss', String(startSeconds)] : []),
+                ...(!endSeconds.approx(video.format.duration, 0.1) && endSeconds > startSeconds
+                    ? ['-t', (endSeconds - startSeconds).toString()]
+                    : [])
+            ];
+
             command = [
-                '-i', `input.${ext}`, 
+                '-i', `input.${ext}`,
+                ...trimArgs,
                 '-c:v', 'libx264', 
                 '-preset', speedSetting.input.value,
                 '-crf', qualitySetting.input.value,
@@ -248,7 +298,7 @@ async function convertToMp4() {
                 'output.mp4'
             ];
         }
-
+        
         console.log("FFmpeg", command.join(' '));
         FFmpegHelper.onProgress = (progress: number) => LoadingBar.update(progress.remap(0.1, 1));
         if (await FFmpegHelper.run(video, command) !== 0)
@@ -274,7 +324,10 @@ async function convertToMp4() {
 
         console.log("File size:", (downloadSize / (1024 * 1024)).roundTo(2), "MB");
 
-        void FFmpegHelper.deleteFiles([`input.${ext}`, 'output.mp4']);
+        try {
+            void FFmpegHelper.deleteFiles([`input.${ext}`, 'output.mp4']);
+        }
+        catch {}
                 
         haptics.trigger(defaultPatterns.success);
 

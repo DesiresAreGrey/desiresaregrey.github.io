@@ -58,6 +58,12 @@ screen so it can be used offline.</p>
         max="28"
         default="25">
       </setting-item>
+      <setting-item 
+        id="setting-start-end"
+        type="start-end"
+        name="Start/End Time"
+        hidden>
+      </setting-item>
     </setting-group>
   </setting-group>
   
