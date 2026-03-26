@@ -98,6 +98,7 @@ setting-item {
     border: .1rem solid;
     border-radius: 50vw;
     border-color: transparent;
+    outline: none;
     font-weight: 200;
     font-size: 17px;
     font-family: Inter, sans-serif;
