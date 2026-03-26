@@ -293,7 +293,7 @@ async function selectedVideo() {
     widthInput.value = video.videoStream.width.toString();
     resolutionSetting.show();
     
-    fpsSetting.value = video.fps;
+    fpsSetting.value = video.fps.roundTo(2);
     fpsSetting.show();
 
     startInput.value = '0';
