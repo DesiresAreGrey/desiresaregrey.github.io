@@ -106,11 +106,22 @@ setting-item {
     text-align-last: center;
     color: #ccc;
     transition: border-color 200ms ease;
-    &:hover {
-      border-color: var(--md-primary-fg-color);
+
+    @media (hover: hover) {
+      &:hover {
+        border-color: var(--md-primary-fg-color);
+      }
+      &:focus-visible {
+        border-color: #9152ff;
+      }
     }
-    &:focus-visible {
-      border-color: #9152ff;
+    @media (hover: none) {
+      &:active {
+        border-color: var(--md-primary-fg-color);
+      }
+      &:focus-visible {
+        border-color: #9152ff;
+      }
     }
   }
 

@@ -1,4 +1,4 @@
-const version = "1.0.4.4";
+const version = "1.0.4.5";
 
 const cacheUrls = [
     "/misc/mp4-converter/",
