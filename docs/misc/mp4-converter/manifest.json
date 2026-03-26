@@ -1,6 +1,6 @@
 {
-  "name": "MP4 to GIF Converter",
-  "short_name": "MP4 to GIF",
+  "name": "Video to MP4 Converter",
+  "short_name": "Video to MP4",
   "icons": [
     {
       "src": "/assets/DesiresAreGrey192x.png",
@@ -14,7 +14,7 @@
     }
   ],
   "start_url": ".",
-  "id": "/misc/gif-converter/",
+  "id": "/misc/mp4-converter/",
   "display": "standalone",
   "theme_color": "black",
   "background_color": "black"
