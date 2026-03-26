@@ -18,7 +18,7 @@ await pwaSetup();
 
 const haptics = new WebHaptics();
 
-LoadingBar.startTrickle();
+LoadingBar.startFullTrickle();
 
 console.log("Loading FFmpeg...");
 await FFmpegHelper.loadFFmpeg();
