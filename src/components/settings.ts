@@ -121,7 +121,7 @@ class SettingItem extends HTMLElement {
             });
         }
         else if (this.getAttribute("type") === "number") {
-            const defaultValue = this.getAttribute("default");
+            const defaultValue = this.getAttribute("default") ?? "0";
             const suffix = this.getAttribute("suffix") ?? "";
             const step = this.getAttribute("step") ?? "1";
             this.innerHTML += /* html */ `
@@ -165,9 +165,7 @@ class SettingItem extends HTMLElement {
             `;
 
             const select = this.querySelector('.setting-input') as HTMLSelectElement;
-            select.addEventListener('change', () => {
-                select.setAttribute("selected", select.value);
-            });
+            select.addEventListener('change', () => select.setAttribute("selected", select.value));
         }
     }
 }

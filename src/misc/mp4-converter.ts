@@ -79,16 +79,40 @@ function changedReencodeSetting() {
 const speedSetting = $id('setting-speed') as NumberSettingItem;
 const qualitySetting = $id('setting-quality') as NumberSettingItem;
 
+const fpsSetting = $id('setting-fps') as NumberSettingItem;
+
 const startEndSetting = $id('setting-start-end') as StartEndSettingItem;
 const [startInput, endInput] = startEndSetting.inputs;
 
 inVideoPreview.addEventListener('play', () => requestAnimationFrame(updateTime));
 function updateTime() {
-    if (video && (inVideoPreview.currentTime < Number(startInput.value) || (!Number(endInput.value).approx(video.format.duration, 0.1) && inVideoPreview.currentTime >= Number(endInput.value))))
+    if (video && (inVideoPreview.currentTime < Number(startInput.value) || (!Number(endInput.value).approx(video.format.duration, 0.05) && inVideoPreview.currentTime >= Number(endInput.value))))
         inVideoPreview.currentTime = Number(startInput.value);
 
     if (!inVideoPreview.paused && !inVideoPreview.ended)
         requestAnimationFrame(updateTime);
+}
+
+fpsSetting.input.addEventListener('input', updatePercentages);
+fpsSetting.input.addEventListener('blur', () => {
+    const frameRate = fpsSetting.value;
+    if (frameRate < 1)
+        fpsSetting.value = 1;
+
+    updatePercentages();
+});
+
+async function updatePercentages() {
+    if (!video?.videoStream)
+        return;
+
+    const speed = 1;
+    
+    const fpsPercentValue = (fpsSetting.value / (video.fps * speed)) * 100;
+    if (fpsPercentValue >= 5)
+        fpsSetting.subtitle = fpsPercentValue.roundTo(2) + "%";
+    else
+        fpsSetting.subtitle =  fpsPercentValue.roundTo(3) + "%";
 }
 
 startInput.addEventListener('blur', startEndChanged);
@@ -98,7 +122,7 @@ function startEndChanged() {
     const startValue = Number(startInput.value);
     const endValue = Number(endInput.value);
     inVideoPreview.currentTime = startValue;
-    if (startValue !== 0 || (!endValue.approx(video?.format.duration ?? 0, 0.1) && endValue > startValue)) {
+    if (startValue !== 0 || (!endValue.approx(video?.format.duration ?? 0, 0.05) && endValue > startValue)) {
         startEndSetting.subtitle = 'Enabled';
     }
     else {
@@ -226,10 +250,13 @@ async function selectedVideo() {
         transcodeSetting.disable();
     }
     changedReencodeSetting();
-
-    startEndSetting.show();
+    
     startInput.value = '0';
     startEndSetting.setAttribute('duration', video.format.duration.toString());
+    startEndSetting.show();
+    
+    fpsSetting.value = video.fps;
+    fpsSetting.show();
 
     const infoEl = $id('video-info') as HTMLParagraphElement;
     infoEl.innerHTML = getInfoHtml(video);
@@ -275,9 +302,14 @@ async function convertToMp4() {
 
             const trimArgs: string[] = [
                 ...(startSeconds > 0 ? ['-ss', String(startSeconds)] : []),
-                ...(!endSeconds.approx(video.format.duration, 0.1) && endSeconds > startSeconds
+                ...(!endSeconds.approx(video.format.duration, 0.05) && endSeconds > startSeconds
                     ? ['-t', (endSeconds - startSeconds).toString()]
                     : [])
+            ];
+
+            const filters = [
+                video.fps.approx(fpsSetting.value, 0.05) ? `fps=${fpsSetting.value}` : null,
+                `format=yuv420p` 
             ];
 
             command = [
@@ -287,7 +319,7 @@ async function convertToMp4() {
                 '-preset', speedSetting.value.toString(),
                 '-crf', qualitySetting.value.toString(),
                 '-c:a', 'aac',
-                '-vf', 'format=yuv420p',
+                '-vf', filters.filter(f => f !== null).join(','),
                 '-movflags', '+faststart',
                 'output.mp4'
             ];

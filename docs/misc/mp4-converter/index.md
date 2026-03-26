@@ -39,13 +39,20 @@ screen so it can be used offline.</p>
     </setting-item>
     <setting-group id="transcoding-settings">
       <setting-item 
-        id="setting-speed"
-        type="dropdown"
-        name="Speed"
-        width="7rem"
-        tooltip="Faster presets result in faster encoding but larger file sizes and potentially lower quality.&#10;Ultra Fast produces very large files compared to the rest, while also having significantly more artifacts. Almost never worth using over Super Fast."
-        options="ultrafast:Ultra Fast,superfast:Super Fast,veryfast:Very Fast,faster:Faster,fast:Fast,medium:Medium,slow:Slow,slower:Slower,veryslow:Very Slow"
-        default="veryfast">
+        id="setting-fps"
+        type="number"
+        name="Frame Rate"
+        subtitle="100%"
+        suffix="FPS"
+        hidden>
+      </setting-item>
+      <setting-item 
+        id="setting-start-end"
+        type="start-end"
+        name="Trim"
+        tooltip="Set the start and end time of the output video.&#10;You can preview the trim on the input video"
+        width="3.5rem"
+        hidden>
       </setting-item>
       <setting-item 
         id="setting-quality"
@@ -58,12 +65,13 @@ screen so it can be used offline.</p>
         default="23">
       </setting-item>
       <setting-item 
-        id="setting-start-end"
-        type="start-end"
-        name="Trim"
-        tooltip="Set the start and end time of the output video.&#10;You can preview the trim on the input video"
-        width="3.5rem"
-        hidden>
+        id="setting-speed"
+        type="dropdown"
+        name="Preset"
+        width="7rem"
+        tooltip="Faster presets result in faster encoding but larger file sizes and potentially lower quality.&#10;Ultra Fast produces very large files compared to the rest, while also having significantly more artifacts. Almost never worth using over Super Fast."
+        options="ultrafast:Ultra Fast,superfast:Super Fast,veryfast:Very Fast,faster:Faster,fast:Fast,medium:Medium,slow:Slow,slower:Slower,veryslow:Very Slow"
+        default="veryfast">
       </setting-item>
     </setting-group>
   </setting-group>
