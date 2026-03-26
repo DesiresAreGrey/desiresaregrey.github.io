@@ -33,7 +33,7 @@ screen so it can be used offline.</p>
     <setting-item 
       id="setting-reencode"
       type="dropdown"
-      name="Transcode Video"
+      name="Transcode"
       width="4.5rem"
       tooltip="Transcode the video or just change the container to MP4.&#10;Transcoding takes significantly longer but can fix compatibility issues and reduce file size."
       options="true:Yes,false:No"
@@ -52,7 +52,8 @@ screen so it can be used offline.</p>
       <setting-item 
         id="setting-quality"
         type="number"
-        name="Quality (CRF)"
+        name="Quality"
+        subtitle="CRF"
         tooltip="The quality of the output video using Constant Rate Factor.&#10;A lower value generally leads to higher quality, consider 17 or 18 to be visually lossless or nearly so. The range is exponential, so increasing the CRF value +6 results in roughly half the bitrate / file size, while -6 leads to roughly twice the bitrate."
         min="17"
         max="28"
@@ -61,7 +62,9 @@ screen so it can be used offline.</p>
       <setting-item 
         id="setting-start-end"
         type="start-end"
-        name="Start/End Time"
+        name="Trim"
+        tooltip="Set the start and end time of the output video.&#10;You can preview the trim on the input video"
+        width="3.5rem"
         hidden>
       </setting-item>
     </setting-group>

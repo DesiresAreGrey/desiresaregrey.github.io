@@ -85,12 +85,6 @@ const qualitySetting = $id('setting-quality') as SettingItem;
 const startEndSetting = $id('setting-start-end') as SettingItem;
 const [startInput, endInput] = startEndSetting.inputs;
 
-// inVideoPreview.addEventListener("timeupdate", () => {
-//     if (video && (inVideoPreview.currentTime < Number(startInput.value) || (!Number(endInput.value).approx(video.format.duration, 0.1) && inVideoPreview.currentTime >= Number(endInput.value)))) {
-//         inVideoPreview.currentTime = Number(startInput.value);
-//     }
-// });
-
 inVideoPreview.addEventListener('play', () => requestAnimationFrame(updateTime));
 function updateTime() {
     if (video && (inVideoPreview.currentTime < Number(startInput.value) || (!Number(endInput.value).approx(video.format.duration, 0.1) && inVideoPreview.currentTime >= Number(endInput.value))))
@@ -108,7 +102,7 @@ function startEndChanged() {
     const endValue = Number(endInput.value);
     inVideoPreview.currentTime = startValue;
     if (startValue !== 0 || (!endValue.approx(video?.format.duration ?? 0, 0.1) && endValue > startValue)) {
-        startEndSetting.subtitle = 'Trimming Enabled';
+        startEndSetting.subtitle = 'Enabled';
     }
     else {
         startEndSetting.subtitle = '';

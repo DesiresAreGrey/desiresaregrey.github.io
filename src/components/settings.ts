@@ -5,12 +5,12 @@ class SettingItem extends HTMLElement {
     get value() {
         return this.input.value;
     }
+    set value(val: string | number) {
+        this.input.value = val.toString();
+    }
 
     get inputs() {
         return [...this.querySelectorAll('.setting-input')] as HTMLInputElement[];
-    }
-    get values() {
-        return this.inputs.map(input => input.value);
     }
 
     hide() {
@@ -72,9 +72,9 @@ class SettingItem extends HTMLElement {
         else if (this.getAttribute("type") === "start-end") {
             this.innerHTML += /* html */ `
                 <div style="float: right;">
-                    <input class="setting-input start" type="number" inputmode="decimal" step="1" value="0.0" style="width: ${width ?? '3rem'};">
-                    <span style="vertical-align: 2px; min-width: 12ch; margin-right: -0.1rem; margin-left: -0.1rem; font-size: 14px; font-variation-settings: 'wght' 600; opacity: 0.5">-</span>
-                    <input class="setting-input end" type="number" inputmode="decimal" step="1" value="${Number(this.getAttribute("duration"))?.toFixed(1) ?? '10.0'}" style="width: ${width ?? '3rem'};">
+                    <input class="setting-input start" type="number" inputmode="decimal" step="any" value="0.0" style="width: ${width ?? '3rem'};">
+                    <span style="vertical-align: 2px; min-width: 12ch; margin-right: -0.1rem; margin-left: -0.1rem; font-size: 15px; font-variation-settings: 'wght' 550; opacity: 0.5">-</span>
+                    <input class="setting-input end" type="number" inputmode="decimal" step="any" value="${Number(this.getAttribute("duration"))?.toFixed(1) ?? '10.0'}" style="width: ${width ?? '3rem'};">
                 </div>
             `;
 
@@ -100,9 +100,10 @@ class SettingItem extends HTMLElement {
         else if (this.getAttribute("type") === "number") {
             const defaultValue = this.getAttribute("default");
             const suffix = this.getAttribute("suffix") ?? "";
+            const step = this.getAttribute("step") ?? "1";
             this.innerHTML += /* html */ `
                 <div style="float: right;">
-                    <input class="setting-input" type="number" inputmode="decimal" step="1" value="${defaultValue}" style="width: ${width ?? '3rem'};">
+                    <input class="setting-input" type="number" inputmode="decimal" step="${step}" value="${defaultValue}" style="width: ${width ?? '3rem'};">
                     <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; margin-left: -0.1rem; font-size: 14px; font-variation-settings: 'wght' 400; opacity: 0.5">${suffix}</span>
                 </div>
             `;
