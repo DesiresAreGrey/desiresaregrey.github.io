@@ -76,8 +76,11 @@ function changedReencodeSetting() {
 }
 
 // settings
-const speedSetting = $id('setting-speed') as NumberSettingItem;
+const presetSetting = $id('setting-preset') as NumberSettingItem;
 const qualitySetting = $id('setting-quality') as NumberSettingItem;
+
+const resolutionSetting = $id('setting-resolution') as WidthHeightSettingItem;
+const [widthInput, heightInput] = resolutionSetting.inputs;
 
 const fpsSetting = $id('setting-fps') as NumberSettingItem;
 
@@ -93,6 +96,38 @@ function updateTime() {
         requestAnimationFrame(updateTime);
 }
 
+heightInput.addEventListener('input', () => {
+    if (video?.videoStream == null)
+        return;
+
+    let height = parseInt(heightInput.value);
+    if (height > video.videoStream.height)
+        height = video.videoStream.height;
+    else if (height < 1)
+        height = 1;
+    const width = Math.round(height * video.aspectRatio);
+
+    heightInput.value = height.toString();
+    widthInput.value = width.toString();
+    updatePercentages();
+});
+widthInput.addEventListener('input', () => {
+    if (video?.videoStream == null)
+        return;
+
+    let width = parseInt(widthInput.value);
+    if (width > video.videoStream.width)
+        width = video.videoStream.width;
+    else if (width < 1)
+        width = 1;
+    const height = Math.round(width / video.aspectRatio);
+
+    heightInput.value = height.toString();
+    widthInput.value = width.toString();
+
+    updatePercentages();
+});
+
 fpsSetting.input.addEventListener('input', updatePercentages);
 fpsSetting.input.addEventListener('blur', () => {
     const frameRate = fpsSetting.value;
@@ -105,6 +140,9 @@ fpsSetting.input.addEventListener('blur', () => {
 async function updatePercentages() {
     if (!video?.videoStream)
         return;
+
+    const width = Number(widthInput.value);
+    resolutionSetting.subtitle = `${((width / video.videoStream.width) * 100).roundTo(1)}%`;
 
     const speed = 1;
     
@@ -251,12 +289,16 @@ async function selectedVideo() {
     }
     changedReencodeSetting();
     
-    startInput.value = '0';
-    startEndSetting.setAttribute('duration', video.format.duration.toString());
-    startEndSetting.show();
+    heightInput.value = video.videoStream.height.toString();
+    widthInput.value = video.videoStream.width.toString();
+    resolutionSetting.show();
     
     fpsSetting.value = video.fps;
     fpsSetting.show();
+
+    startInput.value = '0';
+    startEndSetting.setAttribute('duration', video.format.duration.toString());
+    startEndSetting.show();
 
     const infoEl = $id('video-info') as HTMLParagraphElement;
     infoEl.innerHTML = getInfoHtml(video);
@@ -308,7 +350,8 @@ async function convertToMp4() {
             ];
 
             const filters = [
-                video.fps.approx(fpsSetting.value, 0.05) ? `fps=${fpsSetting.value}` : null,
+                !video.fps.approx(fpsSetting.value, 0.05) ? `fps=${fpsSetting.value}` : null,
+                !video.videoStream!.width.approx(Number(widthInput.value), 0.05) ? `scale=${widthInput.value.parseFloat()?.roundTo(0) ?? video.videoStream!.width}:-1:flags=lanczos` : null,
                 `format=yuv420p` 
             ];
 
@@ -316,7 +359,7 @@ async function convertToMp4() {
                 '-i', `input.${ext}`,
                 ...trimArgs,
                 '-c:v', 'libx264', 
-                '-preset', speedSetting.value.toString(),
+                '-preset', presetSetting.value.toString(),
                 '-crf', qualitySetting.value.toString(),
                 '-c:a', 'aac',
                 '-vf', filters.filter(f => f !== null).join(','),

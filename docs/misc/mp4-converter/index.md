@@ -39,6 +39,14 @@ screen so it can be used offline.</p>
     </setting-item>
     <setting-group id="transcoding-settings">
       <setting-item 
+        id="setting-resolution"
+        type="width-height"
+        name="Resolution"
+        subtitle="100%"
+        default="1920x1080"
+        hidden>
+      </setting-item>
+      <setting-item 
         id="setting-fps"
         type="number"
         name="Frame Rate"
@@ -65,7 +73,7 @@ screen so it can be used offline.</p>
         default="23">
       </setting-item>
       <setting-item 
-        id="setting-speed"
+        id="setting-preset"
         type="dropdown"
         name="Preset"
         width="7rem"
