@@ -237,6 +237,7 @@ async function selectedVideo() {
     changedReencodeSetting();
 
     startEndSetting.show();
+    startInput.value = '0';
     startEndSetting.setAttribute('duration', video.format.duration.toString());
 
     const infoEl = $id('video-info') as HTMLParagraphElement;
