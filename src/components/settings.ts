@@ -127,7 +127,7 @@ class SettingItem extends HTMLElement {
             this.innerHTML += /* html */ `
                 <div style="float: right;">
                     <input id="${this.id}-input" class="setting-input" type="number" inputmode="decimal" step="${step}" value="${defaultValue}" style="width: ${width ?? '3rem'};">
-                    <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; margin-left: -0.1rem; font-size: 14px; font-variation-settings: 'wght' 400; opacity: 0.5">${suffix}</span>
+                    <span class="suffix">${suffix}</span>
                 </div>
             `;
             this.querySelector('.setting-input')?.addEventListener('blur', (e) => {
@@ -149,7 +149,7 @@ class SettingItem extends HTMLElement {
                     <select id="${this.id}-input" class="setting-input" style="width: ${width ?? '5.5rem'};">
                         ${options.map(o => `<option value="${o.value}" ${o.value === defaultValue ? 'selected' : ''}>${o.label}</option>`).join('')}
                     </select>
-                    <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; margin-left: -0.1rem; font-size: 14px; font-variation-settings: 'wght' 400; opacity: 0.5">${suffix}</span>
+                    <span class="suffix">${suffix}</span>
                 </div>
             `;
         }

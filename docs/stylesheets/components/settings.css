@@ -77,6 +77,20 @@ setting-item {
     }
   }
 
+  .suffix {
+    min-width: 12ch;
+    margin-top: 4px;
+    margin-bottom: -0.325rem;
+    margin-left: -0.1rem;
+    font-size: 14px;
+    font-variation-settings: 'wght' 400;
+    opacity: 0.5;
+
+    &:empty {
+      display: none;
+    }
+  }
+
   .setting-input {
     height: 30px;
     max-height: 30px;
