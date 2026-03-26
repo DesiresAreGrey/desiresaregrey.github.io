@@ -1,4 +1,8 @@
 class SettingItem extends HTMLElement {
+    get input() {
+        return this.querySelector('.setting-input') as HTMLInputElement | HTMLSelectElement;
+    }
+
     connectedCallback() {
         const name = this.getAttribute("name");
         const subtitle = this.getAttribute("subtitle") ?? "";
@@ -24,6 +28,8 @@ class SettingItem extends HTMLElement {
         }
         else if (this.getAttribute("type") === "number") {
             const defaultValue = this.getAttribute("default");
+            const min = this.getAttribute("min");
+            const max = this.getAttribute("max");
             const suffix = this.getAttribute("suffix") ?? "";
             this.innerHTML += /* html */`
                 <div style="float: right;">
@@ -31,6 +37,13 @@ class SettingItem extends HTMLElement {
                     <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; margin-left: -0.1rem; font-size: 14px; font-variation-settings: 'wght' 400; opacity: 0.5">${suffix}</span>
                 </div>
             `;
+            this.querySelector('.setting-input')?.addEventListener('blur', (e) => {
+                const input = e.target as HTMLInputElement;
+                if (min !== null && parseFloat(input.value) < parseFloat(min))
+                    input.value = min;
+                if (max !== null && parseFloat(input.value) > parseFloat(max))
+                    input.value = max;
+            });
         }
         else if (this.getAttribute("type") === "dropdown") {
             const defaultValue = this.getAttribute("default");

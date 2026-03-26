@@ -30,6 +30,35 @@ screen so it can be used offline.</p>
   </div>
   
   <button id="convert-button" disabled>Convert to MP4</button>
+
+  <setting-group disabled>
+    <setting-item 
+      id="setting-reencode"
+      type="dropdown"
+      name="Reencode Video"
+      tooltip="Reencode the video or just change the container to MP4.&#10;Reencoding takes significantly longer but can fix compatibility issues and reduce file size."
+      options="true:Yes,false:No"
+      default="false">
+    </setting-item>
+    <setting-group id="reencode-settings" style="margin-top: 0">
+      <setting-item 
+        id="setting-speed"
+        type="dropdown"
+        name="Speed"
+        options="ultrafast:Ultra Fast,superfast:Super Fast,veryfast:Very Fast,faster:Faster,fast:Fast,medium:Medium,slow:Slow,slower:Slower,veryslow:Very Slow"
+        default="veryfast">
+      </setting-item>
+      <setting-item 
+        id="setting-quality"
+        type="number"
+        name="Quality (CRF)"
+        tooltip="The quality of the output video using Constant Rate Factor.&#10;A lower value generally leads to higher quality, consider 17 or 18 to be visually lossless or nearly so. The range is exponential, so increasing the CRF value +6 results in roughly half the bitrate / file size, while -6 leads to roughly twice the bitrate."
+        min="17"
+        max="28"
+        default="25">
+      </setting-item>
+    </setting-group>
+  </setting-group>
   
   <div>
     <div class="preview-wrapper noselect">

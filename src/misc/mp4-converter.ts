@@ -64,6 +64,22 @@ if (window.matchMedia('(display-mode: standalone)').matches) {
     });
 }
 
+const reencodeSetting = $id('setting-reencode') as SettingItem;
+reencodeSetting.input.addEventListener('change', changedReencodeSetting);
+
+function changedReencodeSetting() {
+    if (reencodeSetting.input.value === 'true') {
+        $id('reencode-settings')?.removeAttribute('disabled');
+    }
+    else {
+        $id('reencode-settings')?.setAttribute('disabled', '');
+    }
+}
+
+const speedSetting = $id('setting-speed') as SettingItem;
+
+const qualitySetting = $id('setting-quality') as SettingItem;
+
 const convertButton = $id('convert-button') as HTMLButtonElement;
 convertButton.addEventListener('click', convertToMp4);
 
@@ -175,6 +191,16 @@ async function selectedVideo() {
         return;
     }
 
+    if (video.videoStream.codec_name === 'h264') {
+        reencodeSetting.input.value = 'false';
+        reencodeSetting.removeAttribute('disabled');
+    }
+    else {
+        reencodeSetting.input.value = 'true';
+        reencodeSetting.setAttribute('disabled', '');
+    }
+    changedReencodeSetting();
+
     const infoEl = $id('video-info') as HTMLParagraphElement;
     infoEl.innerHTML = getInfoHtml(video);
     convertButton.disabled = false;
@@ -203,7 +229,7 @@ async function convertToMp4() {
         convertButton.textContent = "Converting...";
 
         let command: string[];
-        if (video.videoStream.codec_name === 'h264') {
+        if (reencodeSetting.input.value === 'false') {
             command = [
                 '-i', `input.${ext}`, 
                 '-c:v', 'copy',
@@ -215,8 +241,8 @@ async function convertToMp4() {
             command = [
                 '-i', `input.${ext}`, 
                 '-c:v', 'libx264', 
-                '-preset', 'superfast',
-                '-crf', '25',
+                '-preset', speedSetting.input.value,
+                '-crf', qualitySetting.input.value,
                 '-c:a', 'aac',
                 '-vf', 'format=yuv420p',
                 'output.mp4'
@@ -268,6 +294,7 @@ async function convertToMp4() {
         convertButton.disabled = false;
         LoadingBar.finish();
         FFmpegHelper.resetOnProgress();
+        $("setting-group")?.removeAttribute('disabled');
     }
 }
 
