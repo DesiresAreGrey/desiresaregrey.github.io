@@ -1,3 +1,5 @@
+import { TimeSpan } from "./timespan.js";
+
 export class Utils {
     static readableDateTime(timestamp: string): string {
         return new Date(timestamp).toLocaleString(undefined, {
@@ -16,7 +18,8 @@ export class Utils {
         document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", () => resolve(), { once: true }) : resolve();
     });
 
-    static async wait(ms: number): Promise<void> {
+    static async wait(time: number | TimeSpan): Promise<void> {
+        const ms = time instanceof TimeSpan ? time.ms : time;
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 

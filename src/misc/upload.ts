@@ -6,6 +6,7 @@ import { ErrorPopup } from "../ui/errorpopup.js";
 import { LoadingBar } from "../ui/loadingbar.js";
 import { JsonFetch } from "../utils/jsonfetch.js";
 import { API } from "../utils/api.js";
+import { TimeSpan } from "../utils/timespan.js";
 import '../utils/utils.js';
 
 const haptics = new WebHaptics();
@@ -86,7 +87,7 @@ async function upload() {
     const file = fileInput.files[0];
     
     const startTime = performance.now();
-    LoadingBar.startFullTrickle((file.size / 1250000 + 1).roundTo(0));
+    LoadingBar.startFullTrickle(TimeSpan.fromSeconds((file.size / 1250000 + 1).roundTo(0)));
     uploadButton.disabled = true;
 
     if (file.type.startsWith("image/") && file.size < 20 * 1024 * 1024) {

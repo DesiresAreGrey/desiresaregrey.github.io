@@ -1,3 +1,4 @@
+import { TimeSpan } from "../utils/timespan.js";
 import "../utils/utils.js";
 
 export class LoadingBar {
@@ -93,7 +94,7 @@ export class LoadingBar {
         bar.lastUpdateTime = performance.now();
     }
 
-    static startFullTrickle(trickleDuration = 10): void {
+    static startFullTrickle(trickleDuration: TimeSpan | number = TimeSpan.fromSeconds(10)): void {
         this.startTrickle();
         const bar = this.instance;
         if (!bar)
@@ -101,7 +102,7 @@ export class LoadingBar {
         void bar.element.offsetWidth;
 
         bar.animation?.cancel();
-        bar.animation = bar.element.animate([ { width: `5%` }, { width: `95%` } ], { duration: trickleDuration * 1000, fill: 'forwards' });
+        bar.animation = bar.element.animate([ { width: `5%` }, { width: `95%` } ], { duration: trickleDuration instanceof TimeSpan ? trickleDuration.ms : trickleDuration * 1000, fill: 'forwards' });
     }
 
     static update(progress: number, trickleTo?: number): void {
@@ -149,11 +150,17 @@ export class LoadingBar {
         const bar = this.instance;
         if (!bar)
             return;
-        
-        bar.animation?.cancel();
-        void bar.element.offsetWidth;
-        
-        bar.element.style.transition = 'width 500ms ease-out, opacity 500ms ease';
+
+        if (bar.animation) {
+            const currentWidth = `${bar.element.getBoundingClientRect().width}px`;
+            bar.animation.cancel();
+            bar.animation = bar.element.animate([ { width: currentWidth }, { width: "100%" } ], { duration: 200, fill: 'forwards' });
+        }
+        else {
+            bar.element.style.transition = 'width 500ms ease-out, opacity 500ms ease';
+            void bar.element.offsetWidth;
+        }
+
         bar._progress = 1;
         bar.element.style.width = `100%`;
         setTimeout(() => bar.element.style.setProperty('opacity', '0'), 250);
