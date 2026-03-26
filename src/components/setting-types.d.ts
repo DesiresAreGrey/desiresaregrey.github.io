@@ -13,13 +13,16 @@ declare global {
         get value(): number;
         set value(val: number);
     }
-
     class DropdownSettingItem extends SimpleSettingItem {
         get input(): HTMLSelectElement;
         get value(): string;
         set value(val: string);
     }
-
+    class ToggleSettingItem extends SimpleSettingItem {
+        get input(): HTMLSelectElement;
+        get value(): boolean;
+        set value(val: boolean);
+    }
 
     class ComplexSettingItem extends SettingItem {
         get input(): never;
@@ -30,7 +33,7 @@ declare global {
         set duration(value: never);
     }
     class WidthHeightSettingItem extends ComplexSettingItem {}
-    
+
     class StartEndSettingItem extends SettingItem {
         get input(): never;
         get value(): never;

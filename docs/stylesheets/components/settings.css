@@ -122,15 +122,29 @@ setting-group {
     display: none;
   }
 
+  setting-group {
+    margin-top: 0;
+  }
+
   &[disabled] {
     opacity: 0.5;
     pointer-events: none;
     -webkit-user-select: none;
     user-select: none;
 
-    .setting-input {
-      -webkit-user-select: none;
-      user-select: none;
+    setting-group[disabled] {
+      opacity: 1;
+    }
+
+    setting-item {
+      .setting-input {
+        -webkit-user-select: none;
+        user-select: none;
+      }
+
+      &[disabled] {
+        opacity: 1;
+      }
     }
   }
 }

@@ -32,14 +32,13 @@ screen so it can be used offline.</p>
   <setting-group disabled>
     <setting-item 
       id="setting-transcode"
-      type="dropdown"
+      type="toggle"
       name="Transcode"
       width="4.5rem"
       tooltip="Transcode the video or just change the container to MP4.&#10;Transcoding takes significantly longer but can fix compatibility issues and reduce file size."
-      options="true:Yes,false:No"
       default="false">
     </setting-item>
-    <setting-group id="transcoding-settings" style="margin-top: 0">
+    <setting-group id="transcoding-settings">
       <setting-item 
         id="setting-speed"
         type="dropdown"

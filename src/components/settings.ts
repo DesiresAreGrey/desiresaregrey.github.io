@@ -2,12 +2,14 @@ class SettingItem extends HTMLElement {
     get input(): HTMLInputElement | HTMLSelectElement {
         return this.querySelector('.setting-input') as HTMLInputElement | HTMLSelectElement;
     }
-    get value(): string | number {
+    get value(): string | number | boolean {
         if (this.getAttribute("type") === "number")
             return Number(this.input.value);
+        if (this.getAttribute("type") === "toggle")
+            return this.input.value === "true";
         return this.input.value;
     }
-    set value(val: string | number) {
+    set value(val: string | number | boolean) {
         this.input.value = val.toString();
     }
 
@@ -81,18 +83,18 @@ class SettingItem extends HTMLElement {
             const [defaultWidth, defaultHeight] = defaultValue.split("x").map(Number);
             this.innerHTML += /* html */ `
                 <div style="float: right;">
-                    <input class="setting-input width" type="number" inputmode="decimal" step="1" value="${defaultWidth}" style="width: ${width ?? '3rem'};">
+                    <input id="${this.id}-input-width" class="setting-input width" type="number" inputmode="decimal" step="1" value="${defaultWidth}" style="width: ${width ?? '3rem'};">
                     <span style="vertical-align: 2px; min-width: 12ch; margin-right: -0.1rem; margin-left: -0.1rem; font-size: 12px; font-variation-settings: 'wght' 400; opacity: 0.5">x</span>
-                    <input class="setting-input height" type="number" inputmode="decimal" step="1" value="${defaultHeight}" style="width: ${width ?? '3rem'};">
+                    <input id="${this.id}-input-height" class="setting-input height" type="number" inputmode="decimal" step="1" value="${defaultHeight}" style="width: ${width ?? '3rem'};">
                 </div>
             `;
         }
         else if (this.getAttribute("type") === "start-end") {
             this.innerHTML += /* html */ `
                 <div style="float: right;">
-                    <input class="setting-input start" type="number" inputmode="decimal" step="any" value="0.0" style="width: ${width ?? '3rem'};">
+                    <input id="${this.id}-input-start" class="setting-input start" type="number" inputmode="decimal" step="any" value="0.0" style="width: ${width ?? '3rem'};">
                     <span style="vertical-align: 1px; min-width: 12ch; margin-right: -0.1rem; margin-left: -0.1rem; font-size: 15px; font-variation-settings: 'wght' 550; opacity: 0.5">-</span>
-                    <input class="setting-input end" type="number" inputmode="decimal" step="any" value="${Number(this.getAttribute("duration"))?.toFixed(1) ?? '10.0'}" style="width: ${width ?? '3rem'};">
+                    <input id="${this.id}-input-end" class="setting-input end" type="number" inputmode="decimal" step="any" value="${Number(this.getAttribute("duration"))?.toFixed(1) ?? '10.0'}" style="width: ${width ?? '3rem'};">
                 </div>
             `;
 
@@ -121,7 +123,7 @@ class SettingItem extends HTMLElement {
             const step = this.getAttribute("step") ?? "1";
             this.innerHTML += /* html */ `
                 <div style="float: right;">
-                    <input class="setting-input" type="number" inputmode="decimal" step="${step}" value="${defaultValue}" style="width: ${width ?? '3rem'};">
+                    <input id="${this.id}-input" class="setting-input" type="number" inputmode="decimal" step="${step}" value="${defaultValue}" style="width: ${width ?? '3rem'};">
                     <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; margin-left: -0.1rem; font-size: 14px; font-variation-settings: 'wght' 400; opacity: 0.5">${suffix}</span>
                 </div>
             `;
@@ -141,10 +143,21 @@ class SettingItem extends HTMLElement {
             const suffix = this.getAttribute("suffix") ?? "";
             this.innerHTML += /* html */ `
                 <div style="float: right;">
-                    <select class="setting-input" style="width: ${width ?? '5.5rem'};">
+                    <select id="${this.id}-input" class="setting-input" style="width: ${width ?? '5.5rem'};">
                         ${options.map(o => `<option value="${o.value}" ${o.value === defaultValue ? 'selected' : ''}>${o.label}</option>`).join('')}
                     </select>
                     <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; margin-left: -0.1rem; font-size: 14px; font-variation-settings: 'wght' 400; opacity: 0.5">${suffix}</span>
+                </div>
+            `;
+        }
+        else if (this.getAttribute("type") === "toggle") {
+            const defaultValue = this.getAttribute("default") ?? "true";
+            this.innerHTML += /* html */ `
+                <div style="float: right;">
+                    <select id="${this.id}-input" class="setting-input" style="width: ${width ?? '5.5rem'};">
+                        <option value="true" ${defaultValue === "true" ? 'selected' : ''}>Yes</option>
+                        <option value="false" ${defaultValue === "false" ? 'selected' : ''}>No</option>
+                    </select>
                 </div>
             `;
         }

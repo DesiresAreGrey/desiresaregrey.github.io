@@ -66,18 +66,13 @@ if (window.matchMedia('(display-mode: standalone)').matches) {
     });
 }
 
-const transcodeSetting = $id('setting-transcode') as DropdownSettingItem;
+const transcodeSetting = $id('setting-transcode') as ToggleSettingItem;
 transcodeSetting.input.addEventListener('change', changedReencodeSetting);
 
 function changedReencodeSetting() {
     const transcodingSettings = $id('transcoding-settings') as SettingGroup;
 
-    if (transcodeSetting.value === 'true') {
-        transcodingSettings.enable();
-    }
-    else {
-        transcodingSettings.disable();
-    }
+    transcodeSetting.value ? transcodingSettings.enable() : transcodingSettings.disable();
 }
 
 // settings
@@ -223,11 +218,11 @@ async function selectedVideo() {
     }
 
     if (video.videoStream.codec_name === 'h264') {
-        transcodeSetting.value = 'false';
+        transcodeSetting.value = false;
         transcodeSetting.enable();
     }
     else {
-        transcodeSetting.value = 'true';
+        transcodeSetting.value = true;
         transcodeSetting.disable();
     }
     changedReencodeSetting();
@@ -264,7 +259,7 @@ async function convertToMp4() {
         convertButton.textContent = "Converting...";
 
         let command: string[];
-        if (transcodeSetting.value === 'false') {
+        if (!transcodeSetting.value) {
             command = [
                 '-i', `input.${ext}`, 
                 '-c:v', 'copy',
