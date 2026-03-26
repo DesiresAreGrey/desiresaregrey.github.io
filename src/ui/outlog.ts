@@ -60,9 +60,14 @@ export default class OutLog {
                     line += `<span class="highlighted">${arguments[i]}</span> `; 
                 }
                 else if (typeof arguments[i] == 'object') {
-                    const type = (arguments[i] as { constructor?: { name?: string } }).constructor?.name ?? "Object";
-                    const objectString = JSON.stringify(arguments[i], undefined, 2) ?? arguments[i];
-                    line += `<span class="highlighted">${type}</span> ${objectString} `; 
+                    try {
+                        const type = (arguments[i] as { constructor?: { name?: string } }).constructor?.name ?? "Object";
+                        const objectString = JSON.stringify(arguments[i], undefined, 2) ?? arguments[i];
+                        line += `<span class="highlighted">${type}</span> ${objectString} `; 
+                    }
+                    catch {
+                        line += `${arguments[i]} `;
+                    }
                 }
                 else {
                     line += `${arguments[i]} `;

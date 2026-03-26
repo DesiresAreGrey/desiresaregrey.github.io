@@ -111,14 +111,15 @@ export class Media {
 
 export class Video extends Media {
     static async fromFile(file: File): Promise<Video> {
-        await FFmpegHelper.writeFile('input.mp4', await fetchFile(file));
+        const ext = file.name.split('.').slice(-1)[0];
+        await FFmpegHelper.writeFile(`input.${ext}`, await fetchFile(file));
 
         await FFmpegHelper.ffmpeg.ffprobe([
             '-v', 'quiet',
             '-print_format', 'json',
             '-show_format',
             '-show_streams',
-            'input.mp4',
+            `input.${ext}`,
             '-o', 'metadata.json'
         ]);
 
@@ -126,7 +127,7 @@ export class Video extends Media {
         const jsonString = new TextDecoder().decode(rawData as Uint8Array);
         const json = jsonString.parseJson();
 
-        void FFmpegHelper.deleteFiles(['input.mp4', 'metadata.json']);
+        void FFmpegHelper.deleteFiles([`input.${ext}`, 'metadata.json']);
 
         return new Video(file, json.format, json.streams);
     }
@@ -166,6 +167,8 @@ interface VideoStream {
     avg_frame_rate: string;
     bit_rate: number;
 
+    codec_name: string;
+    codec_long_name: string;
 }
 interface AudioStream {
     index: number;

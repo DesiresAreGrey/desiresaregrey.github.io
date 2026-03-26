@@ -8,7 +8,7 @@ export default class Catbox {
             throw new Error("File size exceeds 200MB limit");
 
         const formData = new FormData();
-        formData.append('fileToUpload', file);
+        formData.append('fileToUpload', file, file instanceof File ? file.name : undefined);
         try {
             const response = await API.post("proxy/catbox/upload", formData);
             return response.url;
