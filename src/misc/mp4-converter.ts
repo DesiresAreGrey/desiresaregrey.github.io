@@ -351,7 +351,7 @@ async function convertToMp4() {
 
             const filters = [
                 !video.fps.approx(fpsSetting.value, 0.05) ? `fps=${fpsSetting.value}` : null,
-                !video.videoStream!.width.approx(Number(widthInput.value), 0.05) ? `scale=${widthInput.value.parseFloat()?.roundTo(0) ?? video.videoStream!.width}:-1:flags=lanczos` : null,
+                !video.videoStream!.width.approx(Number(widthInput.value), 0.25) ? `scale=${widthInput.value.parseFloat()?.roundTo(0) ?? video.videoStream!.width}:-2:flags=lanczos` : null,
                 `format=yuv420p` 
             ];
 
