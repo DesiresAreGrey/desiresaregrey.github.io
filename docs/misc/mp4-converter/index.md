@@ -34,7 +34,6 @@ screen so it can be used offline.</p>
       id="setting-transcode"
       type="toggle"
       name="Transcode"
-      width="4.5rem"
       tooltip="Transcode the video or just change the container to MP4.&#10;Transcoding takes significantly longer but can fix compatibility issues and reduce file size."
       default="false">
     </setting-item>

@@ -110,6 +110,18 @@ setting-item {
       user-select: none;
     }
   }
+
+  &[type="toggle"] {
+    div {
+      position: relative;
+      &:has(.setting-input[selected="true"]) {
+        select {
+          background-color: #999 !important;
+          color: #252525 !important;
+        }
+      }
+    }
+  }
 }
 
 setting-group {

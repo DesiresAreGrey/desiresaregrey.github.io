@@ -11,6 +11,9 @@ class SettingItem extends HTMLElement {
     }
     set value(val: string | number | boolean) {
         this.input.value = val.toString();
+        if (this.getAttribute("type") === "toggle") {
+            (this.input as HTMLSelectElement).setAttribute("selected", this.input.value);
+        }
     }
 
     get inputs(): HTMLInputElement[] {
@@ -154,12 +157,17 @@ class SettingItem extends HTMLElement {
             const defaultValue = this.getAttribute("default") ?? "true";
             this.innerHTML += /* html */ `
                 <div style="float: right;">
-                    <select id="${this.id}-input" class="setting-input" style="width: ${width ?? '5.5rem'};">
+                    <select id="${this.id}-input" class="setting-input" style="width: ${width ?? '4.5rem'}; selected=${defaultValue};">
                         <option value="true" ${defaultValue === "true" ? 'selected' : ''}>Yes</option>
                         <option value="false" ${defaultValue === "false" ? 'selected' : ''}>No</option>
                     </select>
                 </div>
             `;
+
+            const select = this.querySelector('.setting-input') as HTMLSelectElement;
+            select.addEventListener('change', () => {
+                select.setAttribute("selected", select.value);
+            });
         }
     }
 }
