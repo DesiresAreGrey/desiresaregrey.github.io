@@ -3,11 +3,25 @@ class SettingItem extends HTMLElement {
         return this.querySelector('.setting-input') as HTMLInputElement | HTMLSelectElement;
     }
 
+    static get observedAttributes() {
+        return [
+            "hidden",
+        ]; 
+    }
+
+    attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
+        if (name === "hidden") {
+            this.style.display = newValue !== null ? "none" : "";
+        }
+    }
+
     connectedCallback() {
         const name = this.getAttribute("name");
         const subtitle = this.getAttribute("subtitle") ?? "";
         const tooltip = this.getAttribute("tooltip");
         const width = this.getAttribute("width");
+        if (this.hasAttribute("hidden"))
+            this.style.display = "none";
 
         this.innerHTML = /* html */`
             <span class="info" ${tooltip ? `tooltip="${tooltip}"` : ''}>
@@ -29,8 +43,6 @@ class SettingItem extends HTMLElement {
         }
         else if (this.getAttribute("type") === "number") {
             const defaultValue = this.getAttribute("default");
-            const min = this.getAttribute("min");
-            const max = this.getAttribute("max");
             const suffix = this.getAttribute("suffix") ?? "";
             this.innerHTML += /* html */`
                 <div style="float: right;">
@@ -40,6 +52,8 @@ class SettingItem extends HTMLElement {
             `;
             this.querySelector('.setting-input')?.addEventListener('blur', (e) => {
                 const input = e.target as HTMLInputElement;
+                const min = this.getAttribute("min");
+                const max = this.getAttribute("max");
                 if (min !== null && parseFloat(input.value) < parseFloat(min))
                     input.value = min;
                 if (max !== null && parseFloat(input.value) > parseFloat(max))
