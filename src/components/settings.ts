@@ -73,7 +73,7 @@ class SettingItem extends HTMLElement {
             this.innerHTML += /* html */ `
                 <div style="float: right;">
                     <input class="setting-input start" type="number" inputmode="decimal" step="any" value="0.0" style="width: ${width ?? '3rem'};">
-                    <span style="vertical-align: 2px; min-width: 12ch; margin-right: -0.1rem; margin-left: -0.1rem; font-size: 15px; font-variation-settings: 'wght' 550; opacity: 0.5">-</span>
+                    <span style="vertical-align: 1px; min-width: 12ch; margin-right: -0.1rem; margin-left: -0.1rem; font-size: 15px; font-variation-settings: 'wght' 550; opacity: 0.5">-</span>
                     <input class="setting-input end" type="number" inputmode="decimal" step="any" value="${Number(this.getAttribute("duration"))?.toFixed(1) ?? '10.0'}" style="width: ${width ?? '3rem'};">
                 </div>
             `;

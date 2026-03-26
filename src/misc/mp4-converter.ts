@@ -320,7 +320,7 @@ async function convertToMp4() {
         console.log("File size:", (downloadSize / (1024 * 1024)).roundTo(2), "MB");
 
         try {
-            void FFmpegHelper.deleteFiles([`input.${ext}`, 'output.mp4']);
+            await FFmpegHelper.deleteFiles([`input.${ext}`, 'output.mp4']);
         }
         catch {}
                 
