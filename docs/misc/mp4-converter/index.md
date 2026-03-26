@@ -34,6 +34,7 @@ screen so it can be used offline.</p>
       id="setting-reencode"
       type="dropdown"
       name="Reencode Video"
+      width="4.5rem"
       tooltip="Reencode the video or just change the container to MP4.&#10;Reencoding takes significantly longer but can fix compatibility issues and reduce file size."
       options="true:Yes,false:No"
       default="false">
@@ -43,6 +44,8 @@ screen so it can be used offline.</p>
         id="setting-speed"
         type="dropdown"
         name="Speed"
+        width="7rem"
+        tooltip="Faster presets result in faster encoding but larger file sizes and potentially lower quality"
         options="ultrafast:Ultra Fast,superfast:Super Fast,veryfast:Very Fast,faster:Faster,fast:Fast,medium:Medium,slow:Slow,slower:Slower,veryslow:Very Slow"
         default="veryfast">
       </setting-item>

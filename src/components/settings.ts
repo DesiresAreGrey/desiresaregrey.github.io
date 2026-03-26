@@ -7,6 +7,7 @@ class SettingItem extends HTMLElement {
         const name = this.getAttribute("name");
         const subtitle = this.getAttribute("subtitle") ?? "";
         const tooltip = this.getAttribute("tooltip");
+        const width = this.getAttribute("width");
 
         this.innerHTML = /* html */`
             <span class="info" ${tooltip ? `tooltip="${tooltip}"` : ''}>
@@ -20,9 +21,9 @@ class SettingItem extends HTMLElement {
             const [defaultWidth, defaultHeight] = defaultValue.split("x").map(Number);
             this.innerHTML += /* html */`
                 <div style="float: right;">
-                    <input class="setting-input width" type="number" inputmode="decimal" step="1" value="${defaultWidth}" style="width: 3rem;">
+                    <input class="setting-input width" type="number" inputmode="decimal" step="1" value="${defaultWidth}" style="width: ${width ?? '3rem'};">
                     <span style="min-width: 12ch; margin-right: -0.1rem; margin-left: -0.1rem; font-size: 12px; font-variation-settings: 'wght' 400; opacity: 0.5">x</span>
-                    <input class="setting-input height" type="number" inputmode="decimal" step="1" value="${defaultHeight}" style="width: 3rem;">
+                    <input class="setting-input height" type="number" inputmode="decimal" step="1" value="${defaultHeight}" style="width: ${width ?? '3rem'};">
                 </div>
             `;
         }
@@ -33,7 +34,7 @@ class SettingItem extends HTMLElement {
             const suffix = this.getAttribute("suffix") ?? "";
             this.innerHTML += /* html */`
                 <div style="float: right;">
-                    <input class="setting-input" type="number" inputmode="decimal" step="1" value="${defaultValue}" style="width: 3rem;">
+                    <input class="setting-input" type="number" inputmode="decimal" step="1" value="${defaultValue}" style="width: ${width ?? '3rem'};">
                     <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; margin-left: -0.1rem; font-size: 14px; font-variation-settings: 'wght' 400; opacity: 0.5">${suffix}</span>
                 </div>
             `;
@@ -51,7 +52,7 @@ class SettingItem extends HTMLElement {
             const suffix = this.getAttribute("suffix") ?? "";
             this.innerHTML += /* html */`
                 <div style="float: right;">
-                    <select class="setting-input" style="width: 5.5rem;">
+                    <select class="setting-input" style="width: ${width ?? '5.5rem'};">
                         ${options.map(o => `<option value="${o.value}" ${o.value === defaultValue ? 'selected' : ''}>${o.label}</option>`).join('')}
                     </select>
                     <span style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; margin-left: -0.1rem; font-size: 14px; font-variation-settings: 'wght' 400; opacity: 0.5">${suffix}</span>
