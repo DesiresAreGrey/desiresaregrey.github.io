@@ -266,7 +266,8 @@ async function convertToMp4() {
             command = [
                 '-i', `input.${ext}`, 
                 '-c:v', 'copy',
-                '-c:a', video.audioStreams[0]?.codec_name === 'aac' || video.audioStreams[0]?.codec_name === 'mp3'? 'copy' : 'aac',
+                '-c:a', video.audioStreams[0]?.codec_name === 'aac' || video.audioStreams[0]?.codec_name === 'mp3' ? 'copy' : 'aac',
+                '-movflags', '+faststart',
                 'output.mp4'
             ];
         }
@@ -290,6 +291,7 @@ async function convertToMp4() {
                 '-crf', qualitySetting.input.value,
                 '-c:a', 'aac',
                 '-vf', 'format=yuv420p',
+                '-movflags', '+faststart',
                 'output.mp4'
             ];
         }

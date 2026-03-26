@@ -45,7 +45,7 @@ screen so it can be used offline.</p>
         type="dropdown"
         name="Speed"
         width="7rem"
-        tooltip="Faster presets result in faster encoding but larger file sizes and potentially lower quality.&#10;Ultra Fast produces very large files compared to the rest, usually not worth using over Super Fast."
+        tooltip="Faster presets result in faster encoding but larger file sizes and potentially lower quality.&#10;Ultra Fast produces very large files compared to the rest, while also having significantly more artifacts. Almost never worth using over Super Fast."
         options="ultrafast:Ultra Fast,superfast:Super Fast,veryfast:Very Fast,faster:Faster,fast:Fast,medium:Medium,slow:Slow,slower:Slower,veryslow:Very Slow"
         default="veryfast">
       </setting-item>
