@@ -1,27 +1,45 @@
 class SettingItem extends HTMLElement {
-    get input() {
+    get input(): HTMLInputElement | HTMLSelectElement {
         return this.querySelector('.setting-input') as HTMLInputElement | HTMLSelectElement;
     }
-    get value() {
+    get value(): string | number {
+        if (this.getAttribute("type") === "number")
+            return Number(this.input.value);
         return this.input.value;
     }
     set value(val: string | number) {
         this.input.value = val.toString();
     }
 
-    get inputs() {
+    get inputs(): HTMLInputElement[] {
         return [...this.querySelectorAll('.setting-input')] as HTMLInputElement[];
     }
 
+    show() {
+        this.removeAttribute("hidden");
+    }
     hide() {
         this.setAttribute("hidden", "");
     }
-    show() {
-        this.removeAttribute("hidden");
+    enable() {
+        this.removeAttribute("disabled");
+    }
+    disable() {
+        this.setAttribute("disabled", "");
     }
 
     set subtitle(value: string) {
         this.setAttribute("subtitle", value);
+    }
+
+    get duration() {
+        return this.getAttribute("duration") ? Number(this.getAttribute("duration")) : null;
+    }
+    set duration(value: number | null) {
+        if (value === null)
+            this.removeAttribute("duration");
+        else
+            this.setAttribute("duration", value.toString());
     }
 
     static get observedAttributes() {
@@ -34,7 +52,7 @@ class SettingItem extends HTMLElement {
     attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
         if (this.querySelector('.setting-input.end') && name === "duration") {
             const input = this.querySelector('.setting-input.end') as HTMLInputElement;
-            const duration = Number(this.getAttribute("duration"));
+            const duration = Number(newValue);
             if (duration !== null)
                 input.value = Number(duration.toFixed(2)).toString();
         }
@@ -132,4 +150,25 @@ class SettingItem extends HTMLElement {
         }
     }
 }
+
+class SettingGroup extends HTMLElement {
+    get items(): SettingItem[] {
+        return [...this.querySelectorAll('setting-item')];
+    }
+
+    show() {
+        this.removeAttribute("hidden");
+    }
+    hide() {
+        this.setAttribute("hidden", "");
+    }
+    enable() {
+        this.removeAttribute("disabled");
+    }
+    disable() {
+        this.setAttribute("disabled", "");
+    }
+}
+
 customElements.define("setting-item", SettingItem);
+customElements.define("setting-group", SettingGroup);

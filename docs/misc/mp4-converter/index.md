@@ -31,7 +31,7 @@ screen so it can be used offline.</p>
 
   <setting-group disabled>
     <setting-item 
-      id="setting-reencode"
+      id="setting-transcode"
       type="dropdown"
       name="Transcode"
       width="4.5rem"
@@ -39,7 +39,7 @@ screen so it can be used offline.</p>
       options="true:Yes,false:No"
       default="false">
     </setting-item>
-    <setting-group id="reencode-settings" style="margin-top: 0">
+    <setting-group id="transcoding-settings" style="margin-top: 0">
       <setting-item 
         id="setting-speed"
         type="dropdown"
@@ -57,7 +57,7 @@ screen so it can be used offline.</p>
         tooltip="The quality of the output video using Constant Rate Factor.&#10;A lower value generally leads to higher quality, consider 17 or 18 to be visually lossless or nearly so. The range is exponential, so increasing the CRF value +6 results in roughly half the bitrate / file size, while -6 leads to roughly twice the bitrate."
         min="17"
         max="28"
-        default="25">
+        default="23">
       </setting-item>
       <setting-item 
         id="setting-start-end"

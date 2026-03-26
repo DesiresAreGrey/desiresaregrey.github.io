@@ -1,4 +1,4 @@
-const version = "1.4.2.6";
+const version = "1.4.2.7";
 
 const cacheUrls = [
     "/misc/gif-converter/",

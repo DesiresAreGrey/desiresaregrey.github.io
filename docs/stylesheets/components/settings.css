@@ -118,6 +118,10 @@ setting-group {
   gap: 0.25rem;
   margin-top: 0.5rem;
 
+  &[hidden] {
+    display: none;
+  }
+
   &[disabled] {
     opacity: 0.5;
     pointer-events: none;

@@ -66,23 +66,25 @@ if (window.matchMedia('(display-mode: standalone)').matches) {
     });
 }
 
-const reencodeSetting = $id('setting-reencode') as SettingItem;
-reencodeSetting.input.addEventListener('change', changedReencodeSetting);
+const transcodeSetting = $id('setting-transcode') as DropdownSettingItem;
+transcodeSetting.input.addEventListener('change', changedReencodeSetting);
 
 function changedReencodeSetting() {
-    if (reencodeSetting.input.value === 'true') {
-        $id('reencode-settings')?.removeAttribute('disabled');
+    const transcodingSettings = $id('transcoding-settings') as SettingGroup;
+
+    if (transcodeSetting.value === 'true') {
+        transcodingSettings.enable();
     }
     else {
-        $id('reencode-settings')?.setAttribute('disabled', '');
+        transcodingSettings.disable();
     }
 }
 
 // settings
-const speedSetting = $id('setting-speed') as SettingItem;
-const qualitySetting = $id('setting-quality') as SettingItem;
+const speedSetting = $id('setting-speed') as NumberSettingItem;
+const qualitySetting = $id('setting-quality') as NumberSettingItem;
 
-const startEndSetting = $id('setting-start-end') as SettingItem;
+const startEndSetting = $id('setting-start-end') as StartEndSettingItem;
 const [startInput, endInput] = startEndSetting.inputs;
 
 inVideoPreview.addEventListener('play', () => requestAnimationFrame(updateTime));
@@ -221,12 +223,12 @@ async function selectedVideo() {
     }
 
     if (video.videoStream.codec_name === 'h264') {
-        reencodeSetting.input.value = 'false';
-        reencodeSetting.removeAttribute('disabled');
+        transcodeSetting.value = 'false';
+        transcodeSetting.enable();
     }
     else {
-        reencodeSetting.input.value = 'true';
-        reencodeSetting.setAttribute('disabled', '');
+        transcodeSetting.value = 'true';
+        transcodeSetting.disable();
     }
     changedReencodeSetting();
 
@@ -262,7 +264,7 @@ async function convertToMp4() {
         convertButton.textContent = "Converting...";
 
         let command: string[];
-        if (reencodeSetting.input.value === 'false') {
+        if (transcodeSetting.value === 'false') {
             command = [
                 '-i', `input.${ext}`, 
                 '-c:v', 'copy',
@@ -287,8 +289,8 @@ async function convertToMp4() {
                 '-i', `input.${ext}`,
                 ...trimArgs,
                 '-c:v', 'libx264', 
-                '-preset', speedSetting.input.value,
-                '-crf', qualitySetting.input.value,
+                '-preset', speedSetting.value.toString(),
+                '-crf', qualitySetting.value.toString(),
                 '-c:a', 'aac',
                 '-vf', 'format=yuv420p',
                 '-movflags', '+faststart',
