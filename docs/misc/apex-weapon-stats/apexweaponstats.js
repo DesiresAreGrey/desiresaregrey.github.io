@@ -8,6 +8,14 @@ await new Promise(resolve => document.readyState === "loading" ? document.addEve
 
 let numColumns = 2;
 
+if (window.matchMedia('(display-mode: standalone)').matches) {
+    $('header .md-header__title .md-header__ellipsis')?.addEventListener('click', () => {
+        console.log("Copying URL to clipboard");
+        navigator.clipboard.writeText(window.location.href);
+        haptics.trigger(defaultPatterns.selection);
+    });
+}
+
 updateColumnButtonStyles(false);
 const comparison = document.querySelector(".comparison");
 const columntemplate = document.getElementById("column-template").cloneNode(true);
@@ -886,15 +894,6 @@ function utils() {
         get autoHideRows() { return !document.getElementById("auto-hide-rows-toggle").checked; },
         get saveToURL() { return !document.getElementById("save-to-url-toggle").checked; },
     };
-
-    Object.defineProperty(NodeList.prototype, 'toArray', { value: function() { return [...this]; } });
-    Object.defineProperty(HTMLCollection.prototype, 'toArray', { value: function() { return [...this]; } });
-
-    Object.defineProperty(Number.prototype, 'roundTo', { value: function(precision = 0) { return this.toFixed(precision) / 1 } });
-    Object.defineProperty(Number.prototype, 'floorTo', { value: function(precision = 0) { return Math.floor(this * Math.pow(10, precision)) / Math.pow(10, precision) } });
-    Object.defineProperty(Number.prototype, 'mult', { value: function(multiplier) { return this * multiplier } });
-    Object.defineProperty(Number.prototype, 'multFloor', { value: function(multiplier) { return Math.floor(this * multiplier) } });
-    Object.defineProperty(Number.prototype, 'multRound', { value: function(multiplier) { return Math.round(this * multiplier) } });
 
     Object.defineProperty(Number.prototype, 'toMeters', { value: function(precision = 0) { return (this * 0.0254).roundTo(precision) } });
 
