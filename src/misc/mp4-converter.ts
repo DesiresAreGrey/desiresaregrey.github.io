@@ -16,12 +16,7 @@ OutLog.show();
 
 LoadingBar.startFullTrickle();
 
-const headerTitle = $('.md-header__inner.md-grid .md-header__title .md-header__topic[data-md-component="header-topic"] > span');
-if (headerTitle) {
-    headerTitle.innerHTML += /* html */`
-        <span style="font-size: 0.55em; opacity: 0.7; margin-left: -3px;">v${await SWHelper.getVersion()}</span>
-    `;
-}
+void SWHelper.addVersionToHeader();
 
 await pwaSetup();
 
