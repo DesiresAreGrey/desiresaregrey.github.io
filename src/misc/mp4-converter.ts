@@ -9,15 +9,23 @@ import { ErrorPopup } from '../ui/errorpopup.js';
 import { API } from '../utils/api.js';
 import { JsonFetch } from '../utils/jsonfetch.js';
 import Catbox from '../utils/catbox.js';
+import SWHelper from '../utils/swhelper.js';
 import '../utils/utils.js';
 
 OutLog.show();
 
+LoadingBar.startFullTrickle();
+
+const headerTitle = $('.md-header__inner.md-grid .md-header__title .md-header__topic[data-md-component="header-topic"] > span');
+if (headerTitle) {
+    headerTitle.innerHTML += /* html */`
+        <span style="font-size: 0.55em; opacity: 0.7; margin-left: -3px;">v${await SWHelper.getVersion()}</span>
+    `;
+}
+
 await pwaSetup();
 
 const haptics = new WebHaptics();
-
-LoadingBar.startFullTrickle();
 
 console.log("Loading FFmpeg...");
 await FFmpegHelper.loadFFmpeg();
