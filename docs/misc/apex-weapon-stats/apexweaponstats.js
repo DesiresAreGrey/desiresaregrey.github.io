@@ -242,7 +242,7 @@ function updateWeaponStats(column) {
 
     column.querySelector("#burst-count").textContent = column.mode.Firing.BurstCount > 0 ? column.mode.Firing.BurstCount ?? "-" : "-";
 
-    if (column.mode.Firing.BurstDelay != null) {
+    if (column.mode.Firing.BurstDelay != null && column.mode.Firing.BurstCount > 1) {
         column.querySelector("#burst-delay").innerHTML = column.mode.Firing.BurstDelay;
 
         if (u.usingConvertedValues) {
