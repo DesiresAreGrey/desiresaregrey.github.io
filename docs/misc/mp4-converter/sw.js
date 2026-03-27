@@ -19,6 +19,7 @@ const cacheUrls = [
     "/js/ui/errorpopup.js",
     "/js/ui/popup.js",
     "/js/ui/outlog.js",
+    "/js/utils/swhelper.js",
     "/js/utils/timespan.js",
     "/js/utils/utils.js",
     "/js/utils/ffmpeg.js",
