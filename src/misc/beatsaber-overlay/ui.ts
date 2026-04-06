@@ -1,24 +1,25 @@
 const ui = (() => {
-	var main = document.getElementById("overlay");
+	var main = document.getElementById("overlay")!;
 
-	var mapData;
+	var mapData: any;
 	const setData = (() => {
-		return (data) => {
+		return (data: any) => {
 			mapData = data;
 		};
 	})();
 
 	const performance = (() => {
-		var rank = document.getElementById("rank");
-		var percentage = document.getElementById("percentage");
-		var score = document.getElementById("score");
-		var combo = document.getElementById("combo");
+		var rank = document.getElementById("rank")!;
+		var percentage = document.getElementById("percentage")!;
+		var score = document.getElementById("score")!;
+		var combo = document.getElementById("combo")!;
+		var combotext = document.getElementById("combotext")!;
 
-		function format(number) {
+		function format(number: number) {
 			return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		}
 
-		return (data) => {
+		return (data: any) => {
 			score.innerText = format(data.score);
 			combo.innerText = data.combo;
 			combotext.innerText = (data.missedNotes === 0 ? ("Full Combo") : ("Combo"));
@@ -31,19 +32,19 @@ const ui = (() => {
 		const radius = 35;
 		const circumference = radius * Math.PI * 2;
 
-		var bar = document.getElementById("progress");
-		var text = document.getElementById("progress-text");
+		var bar = document.getElementById("progress")!;
+		var text = document.getElementById("progress-text")!;
 
 		var active = false;
 
-		var began;
-		var duration;
+		var began: number | undefined;
+		var duration: number | undefined;
 
-		var display;
+		var display: number | undefined;
 
-		function format(time) {
+		function format(time: number) {
 			var minutes = Math.floor(time / 60);
-			var seconds = time % 60;
+			var seconds: number | string = time % 60;
 
 			if (seconds < 10) {
 				seconds = "0" + seconds;
@@ -52,7 +53,10 @@ const ui = (() => {
 			return `${minutes}:${seconds}`;
 		}
 
-		function update(time) {
+		function update(time?: number) {
+			if (!began || !duration)
+				return;
+
 			time = time || Date.now();
 
 			var delta = (time - began) * mapData.mod.songSpeedMultiplier;
@@ -77,7 +81,7 @@ const ui = (() => {
 		}
 
 		return {
-			start(time, length) {
+			start(time: number, length: number) {
 				active = true;
 				
 				began = time;
@@ -86,7 +90,7 @@ const ui = (() => {
 				loop();
 			},
 
-			pause(time) {
+			pause(time: number) {
 				active = false;
 
 				update(time);
@@ -101,15 +105,15 @@ const ui = (() => {
 	})();
 
 	const beatmap = (() => {
-		var cover = document.getElementById("image");
+		var cover = document.getElementById("image")!;
 
-		var title = document.getElementById("title");
-		var subtitle = document.getElementById("subtitle");
-		var artist = document.getElementById("artist");
+		var title = document.getElementById("title")!;
+		var subtitle = document.getElementById("subtitle")!;
+		var artist = document.getElementById("artist")!;
 
-		var difficulty = document.getElementById("difficulty");
-		var bpm = document.getElementById("bpm");
-		var njs = document.getElementById("njs");
+		var difficulty = document.getElementById("difficulty")!;
+		var bpm = document.getElementById("bpm")!;
+		var njs = document.getElementById("njs")!;
 		
 		function format(number: number) {
 			if (Number.isNaN(number)) {
@@ -129,7 +133,7 @@ const ui = (() => {
 			return number.toString();
 		}
 
-		return (data, time) => {
+		return (data: any, time: number) => {
 			if (data.difficulty === "ExpertPlus") {
 				data.difficulty = "Expert+";
 			}
