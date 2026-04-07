@@ -501,10 +501,19 @@ ___
 
 <div style="margin-top: -0.5rem;">
   <p style="margin-top: 0.25rem; font-size: 0.7rem; opacity: 0.7;">
-    Data was extracted from the game using RSX (exported as .vdf files), then later parsed into json using a C# program. The folder linked above contains a _index.json file, which is the list of all the seasons. sXX.json is the json file loaded by the site, while the sXX-archive.zip file contains all the vdf files, individual weapon json files, and csv files of all the blast/recoil patterns.
+    Season versions are formatted as <code>Season.Split.Hotfix</code>.
+  </p>
+  <p style="margin-top: 0.25rem; font-size: 0.7rem; opacity: 0.7;">
+    Data was extracted from the game using RSX (exported as .vdf files), then later parsed into json using a C# program. The folder linked above
+    contains a _index.json file, which is the list of all the seasons. sXX.json is the json file loaded by the site, while the sXX-archive.zip file
+    contains all the vdf files, individual weapon json files, and csv files of all the blast/recoil patterns.
+  </p>
+  <p style="margin-top: 0.25rem; font-size: 0.7rem; opacity: 0.7;">
+    Hotfixes are created manually using info released in posts by Respawn rather than pulling the stats using the files from the game, since hotfixes
+    are usually serversided.
   </p>
   <p style="margin-top: 0; font-size: 0.7rem; opacity: 0.7;">
-    The process is mostly automated so it should be very easy to update as Apex updates with new seasons/splits.
+    The process is somewhat automated so it should be very easy to update as Apex updates with new seasons/splits.
   </p>
   <div>
     <a href="https://github.com/DesiresAreGrey/Website/tree/main/docs/assets/misc/apex-weapon-stats/data">Browse/Download data</a>

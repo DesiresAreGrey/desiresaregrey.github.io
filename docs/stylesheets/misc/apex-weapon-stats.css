@@ -36,7 +36,7 @@ h1 {
   transition: none;
 }
 .column h3[id] {
-  scroll-margin-top: 8.5rem;
+  scroll-margin-top: 8.5rem !important;
 }
 
 /* dropdowns */

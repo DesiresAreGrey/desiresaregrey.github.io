@@ -963,7 +963,7 @@ function saveToURL() {
         return;
     
     const cols = u.columns.toArray().map(c => {
-        const seasonID = c.season?.ID.replaceAll(".", "p");
+        const seasonID = c.season?.ID.replace('.', 'p').replace('.', 'h').replaceAll(".", "p");
         const weaponID = c.weapon?.ID.replaceAll("_", "-");
         const modeName = c.mode?.Name.replaceAll(" ", "-").toLowerCase();
 
@@ -1001,7 +1001,7 @@ function loadURLParams() {
         const weaponDropdown = u.columns[index].querySelector(".weapon-dropdown");
         const modeDropdown = u.columns[index].querySelector(".mode-dropdown");
 
-        const seasonIndex = seasonDropdown.children.toArray().findIndex(c => c.value === seasonID?.replaceAll("p", "."));
+        const seasonIndex = seasonDropdown.children.toArray().findIndex(c => c.value === seasonID?.replaceAll("p", ".").replaceAll("h", "."));
         seasonDropdown.selectedIndex = seasonIndex >= 0 ? seasonIndex : 0;
 
         u.columns[index].season = seasons.find(s => s.ID === seasonDropdown.value);
