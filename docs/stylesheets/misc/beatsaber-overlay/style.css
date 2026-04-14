@@ -23,7 +23,7 @@ body {
 	
 	position: absolute;
 	left: var(--margin);
-	bottom: var(--margin);
+	bottom: calc(var(--margin) - 0.5rem);
 }
 
 /* Beatmap */
@@ -174,8 +174,8 @@ body {
 #performance {
 	display: flex;
 	flex-direction: column;
-	margin: 0 0 4px 0;
-	line-height: 1;
+	margin: 0 0 2px 0;
+	line-height: 1.025;
 }
 
 .performance-group {
