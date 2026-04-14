@@ -1,5 +1,5 @@
 :root {
-	--margin: 32px;
+	--margin: 28px;
 
   --drop-shadow: drop-shadow(0px 0px 4px #000000d8);
 	--text-shadow: 0 0 4px #000000d8;
@@ -69,22 +69,22 @@ body {
 }
 
 #title {
-	font-size: 24px;
+	font-size: 26px;
 	font-weight: 600;
 }
 
 #subtitle {
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: 500;
 	opacity: 0.67;
-	margin: 0 4px 4px 4px;
+	margin: 0 4px 4.5px 4px;
 }
 
 #artist {
 	display: block;
 	font-size: 16px;
 	font-weight: 500;
-	margin: -2px 0 0 0;
+	margin: -8px 0 0 0;
 	text-shadow: var(--text-shadow);
 
 	#level-author {
@@ -165,7 +165,7 @@ body {
 }
 
 #progress-text {
-	font-size: 20px;
+	font-size: 22px;
 	font-weight: 400;
 }
 
@@ -175,7 +175,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	margin: 0 0 4px 0;
-	line-height: 1.1;
+	line-height: 1;
 }
 
 .performance-group {
@@ -185,14 +185,14 @@ body {
 .performance-group .text {
 	display: inline-block;
 
-	font-size: 22px;
+	font-size: 28px;
 	font-weight: 500;
 }
 
 .performance-group .subtext {
 	display: inline-block;
 
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: 500;
 	letter-spacing: 0.5px;
 	text-transform: uppercase;
@@ -210,7 +210,7 @@ body {
 
 #score {
 	display: block;
-	font-size: 34px;
+	font-size: 40px;
 	font-weight: 500;
 	letter-spacing: 0px;
 	text-shadow: var(--text-shadow);
