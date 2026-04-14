@@ -23,7 +23,7 @@ body {
 	
 	position: absolute;
 	left: var(--margin);
-	bottom: calc(var(--margin) - 0.67rem);
+	bottom: calc(var(--margin) - 0.65rem);
 }
 
 /* Beatmap */
