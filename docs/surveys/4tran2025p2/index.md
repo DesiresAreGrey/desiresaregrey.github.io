@@ -264,6 +264,41 @@ No surprise that everyone is white.
   </div>
 </div>
 
+Here is the chart for just the US.
+
+<p style="font-size: 12px; color: #888; margin-top: -12px;">Added 7/29/2026 by request</p>
+
+<div class="chart-set">
+  <input id="ethnicity-us-a" class="vh" type="radio" name="view-ethnicity-us" checked>
+  <input id="ethnicity-us-b" class="vh" type="radio" name="view-ethnicity-us">
+  
+  <div class="chart-stack" style="min-height: 450px;">
+    <div id="ethnicity-us-bar" 
+      class="apexchart chart-layer layer-a"
+      style="height: 450px;"
+      data-chart="bar"
+      data-datakey="ethnicity_us_flipped"
+      data-title="Ethnicity (US)"
+      data-subtitle="Bar"
+      >
+    </div>
+    <div id="ethnicity-us-ratio" 
+      class="apexchart chart-layer layer-b"
+      style="height: 450px;"
+      data-chart="ratio-bar"
+      data-datakey="ethnicity_us"
+      data-title="Ethnicity (US)"
+      data-subtitle="Ratio Bar"
+      data-colors='["#008FFB", "#00E396", "#FEB019", "#FF4560", "#775DD0", "#3c57f1"]'
+      >
+    </div>
+  </div>
+  <div class="toggle">
+    <label for="ethnicity-us-a" class="noselect">Bar</label>
+    <label for="ethnicity-us-b" class="noselect">Ratio</label>
+  </div>
+</div>
+
 ### Sex At Birth
 
 <h4>Cis People</h4>
