@@ -35,8 +35,11 @@ h1 {
   color: #ccc;
   transition: none;
 }
+
 .column h3[id] {
-  scroll-margin-top: 8.5rem !important;
+  padding-top: 7rem;
+  margin-top: calc(0.75em - 7rem);
+  scroll-margin-top: 1.75rem !important;
 }
 
 /* dropdowns */
