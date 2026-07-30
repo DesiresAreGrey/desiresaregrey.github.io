@@ -2,15 +2,12 @@
   "devDependencies": {
     "@types/d3": "^7.4.3",
     "@types/d3-cloud": "^1.2.9",
-    "typescript": "^5.9.3"
+    "typescript": "^7.0.2"
   },
   "name": "website",
   "version": "1.0.0",
+  "private": true,
   "description": "",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
   "scripts": {
     "build-ts": "tsc",
     "watch-ts": "tsc --watch"
@@ -19,14 +16,8 @@
     "type": "git",
     "url": "git+https://github.com/DesiresAreGrey/Website.git"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/DesiresAreGrey/Website/issues"
-  },
-  "homepage": "https://github.com/DesiresAreGrey/Website#readme",
   "dependencies": {
     "@ffmpeg/core": "^0.12.10",
     "@ffmpeg/ffmpeg": "^0.12.15",

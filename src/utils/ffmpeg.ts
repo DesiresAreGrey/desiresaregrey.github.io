@@ -1,4 +1,4 @@
-import { FFmpeg, FileData } from '@ffmpeg/ffmpeg';
+import { FFmpeg, type FileData } from '@ffmpeg/ffmpeg';
 import { fetchFile } from '@ffmpeg/util';
 
 export class FFmpegHelper {
