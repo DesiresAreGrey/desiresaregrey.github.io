@@ -602,3 +602,24 @@ ___
 <div style="margin-top: 1em;">
   <a href="https://github.com/DesiresAreGrey/Website/blob/main/docs/misc/apex-weapon-stats/apex-weapon-stats.js">View Page Code</a>
 </div>
+
+<!-- fake toc -->
+## Settings {#settings style="display: none"}
+
+## Weapon {#weapon style="display: none"}
+### Ammo {#ammo style="display: none"}
+### Firing {#firing style="display: none"}
+#### Shot {#shot style="display: none"}
+##### Projectile Damage {#projectile-damage style="display: none"}
+##### Shot Damage {#shot-damage style="display: none"}
+##### Shots to Kill {#shots-to-kill style="display: none"}
+##### Damage Per Second {#dps style="display: none"}
+##### Total Damage Per Magazine {#tdpm style="display: none"}
+##### Time To Kill {#ttk style="display: none"}
+##### Projectile Size {#projectile-size style="display: none"}
+#### Patterns {#patterns style="display: none"}
+### Reload Time {#reload-time style="display: none"}
+### Handling {#handling style="display: none"}
+### Spread {#spread style="display: none"}
+
+## Info {#info style="display: none"}
