@@ -12,9 +12,7 @@
     "removeComments": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "inlineSources": true,
-    "incremental": true,
-    "tsBuildInfoFile": ".cache/tsconfig.tsbuildinfo",
+    "inlineSources": true
   },
 
   "include": ["src/**/*"],
