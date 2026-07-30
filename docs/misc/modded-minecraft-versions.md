@@ -10,6 +10,8 @@ image: https://desiresaregrey.com/assets/misc/minecraft/thumb.png
 
 # Popularity of Modded Minecraft Versions
 
+***Update: Curseforge now caps at 10,000 mods per query so the Curseforge data is no longer accurate. Modrinth data is still accurate.***
+
 Charts are Interactive! You can click on legend items to toggle the different options, and you can hover over points for total counts. Data is fetched
 from Modrinth and Curseforge APIs, and are cached for 1 day (may take a bit to load the first time).
 
@@ -52,6 +54,8 @@ ___
 </div>
 
 ___
+
+**Curseforge currently caps at 10,000 mods per query so the Curseforge data is no longer accurate.**
 
 <div class="chart-set">
   <input id="curseforge-a" class="vh" type="radio" name="view-curseforge" checked>

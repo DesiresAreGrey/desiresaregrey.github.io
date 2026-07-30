@@ -82,7 +82,7 @@ async function loadOverallCharts(loadStart = 0, loadEnd = 1) {
 
     LoadingBar.update(0.9.remap(loadStart, loadEnd));
     $id("overall-total")!.innerHTML = "";
-    Apex.createBarChart("overall-total", total, "All Mods", `Data Updated ${Utils.readableDate(total.lastUpdated)}`, [], ['#f16436', '#1bd96a'], 500, false, false, "mods");
+    Apex.createBarChart("overall-total", total, "All Mods", `Data Updated ${Utils.readableDate(total.lastUpdated)}`, [0], ['#f16436', '#1bd96a'], 500, false, false, "mods");
 
     if (loadEnd === 1)
         LoadingBar.finish();

@@ -22,7 +22,7 @@ h1 {
     </a>
     <a class="card" id="modded-minecraft-versions-card" href="modded-minecraft-versions" style="--scale: 1.1;">
       <h2>Popular Modded Minecraft Versions</h2>
-      <p>Charts showing the number of mods for different Minecraft versions on Modrinth and Curseforge</p>
+      <p>Charts showing the number of mods for different Minecraft versions on Modrinth</p>
     </a>
     <a class="card loaded" href="gif-converter" style="--image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Rotating_earth_%28large%29.gif/250px-Rotating_earth_%28large%29.gif'); --scale: 1.1;">
       <h2>MP4 to GIF Converter</h2>
