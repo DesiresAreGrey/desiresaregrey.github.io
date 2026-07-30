@@ -19,7 +19,8 @@ const startingVersions = [
     "1.21.1",
     "1.21.10",
     "1.21.11",
-    "26.1"
+    "26.1",
+    "26.2"
 ];
 
 const parseVersions = (input: string) => input
