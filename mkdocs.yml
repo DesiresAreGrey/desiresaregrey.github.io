@@ -3,6 +3,7 @@ site_description: "DesiresAreGrey's Website"
 site_url: https://desiresaregrey.com/
 theme:
   name: material
+  variant: classic
   logo: assets/DesiresAreGrey-Circle.png
   favicon: assets/DesiresAreGrey-Circle.png
   palette:
@@ -28,35 +29,13 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.superfences
   - pymdownx.details
-plugins:
-  - mkdocs-video
-  - glightbox:
-      touchNavigation: true
-      loop: false
-      effect: zoom
-      slide_effect: slide
-      width: 100%
+  - zensical.extensions.glightbox:
+      width: "100%"
       height: auto
-      zoomable: true
-      draggable: false
       skip_classes:
-       - no-lb
+        - no-lb
       auto_caption: false
       caption_position: bottom
-  - minify:
-      minify_css: true
-      css_files:
-        - stylesheets/extra.css
-  - redirects:
-      redirect_maps:
-        '4transurvey2025/index.md': 'surveys/4tran2025/index.md'
-        '4transurvey2025/2.md': 'surveys/4tran2025/2.md'
-        '4transurvey2025/3.md': 'surveys/4tran2025/3.md'
-        '4transurvey2025/4.md': 'surveys/4tran2025/4.md'
-        '4transurvey2025/jealouscat.md': 'surveys/4tran2025/jealouscat.md'
-        '4transurvey2025/ratgirltwink.md': 'surveys/4tran2025/ratgirltwink.md'
-        'apex.md': 'misc/apex-weapon-stats/index.md'
-        'apex-weapon-stats.md': 'misc/apex-weapon-stats/index.md'
 extra:
   generator: false
   analytics:
@@ -71,13 +50,6 @@ extra:
       name: Twitter
 extra_css:
   - stylesheets/extra.css
-
-exclude_docs: |
-  csharp/
-
-hooks:
-  - 'scripts/misc/apex-weapon-stats/toc.py'
-  #- 'scripts/css-js-hasher.py'
 
 nav:
   - Home: 'index.md'
