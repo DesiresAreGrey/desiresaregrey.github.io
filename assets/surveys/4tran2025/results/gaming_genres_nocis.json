@@ -1,0 +1,89 @@
+{
+  "categories": [
+    "Man (FtM)",
+    "Woman (MtF)",
+    "Nonbinary"
+  ],
+  "series": [
+    {
+      "name": "Action",
+      "data": [
+        79,
+        245,
+        16
+      ]
+    },
+    {
+      "name": "Adventure",
+      "data": [
+        98,
+        286,
+        17
+      ]
+    },
+    {
+      "name": "Puzzle",
+      "data": [
+        66,
+        151,
+        10
+      ]
+    },
+    {
+      "name": "RPG (Role-Playing)",
+      "data": [
+        158,
+        543,
+        34
+      ]
+    },
+    {
+      "name": "Simulation",
+      "data": [
+        82,
+        248,
+        8
+      ]
+    },
+    {
+      "name": "Strategy",
+      "data": [
+        74,
+        343,
+        21
+      ]
+    },
+    {
+      "name": "Sports",
+      "data": [
+        8,
+        14,
+        1
+      ]
+    },
+    {
+      "name": "Shooter (FPS/TPS)",
+      "data": [
+        108,
+        350,
+        23
+      ]
+    },
+    {
+      "name": "Sandbox",
+      "data": [
+        77,
+        286,
+        24
+      ]
+    },
+    {
+      "name": "Other",
+      "data": [
+        3,
+        7,
+        2
+      ]
+    }
+  ]
+}

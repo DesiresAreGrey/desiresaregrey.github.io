@@ -1,0 +1,21 @@
+{
+  "name": "Apex Legends Weapon Stats",
+  "short_name": "Weapon Stats",
+  "icons": [
+    {
+      "src": "https://api.desiresaregrey.com/misc/apex/season-icon.png?size=192",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://api.desiresaregrey.com/misc/apex/season-icon.png?size=512",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "id": "/misc/apex-weapon-stats/",
+  "display": "standalone",
+  "theme_color": "black",
+  "background_color": "black"
+}

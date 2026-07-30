@@ -1,0 +1,49 @@
+{
+  "categories": [
+    "Man (FtM)",
+    "Woman (MtF)",
+    "Nonbinary"
+  ],
+  "series": [
+    {
+      "name": "TERF",
+      "data": [
+        18,
+        10,
+        2
+      ]
+    },
+    {
+      "name": "MRA",
+      "data": [
+        12,
+        48,
+        4
+      ]
+    },
+    {
+      "name": "MAGA",
+      "data": [
+        8,
+        39,
+        4
+      ]
+    },
+    {
+      "name": "\"Red Pill\" / Manosphere",
+      "data": [
+        24,
+        88,
+        4
+      ]
+    },
+    {
+      "name": "None of these",
+      "data": [
+        249,
+        854,
+        54
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "labels": [
+    "Man (FtM)",
+    "Woman (MtF)",
+    "Nonbinary",
+    "Man (Cis)",
+    "Woman (Cis)"
+  ],
+  "series": [
+    308,
+    1030,
+    63,
+    41,
+    15
+  ]
+}

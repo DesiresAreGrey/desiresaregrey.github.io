@@ -1,0 +1,41 @@
+{
+  "categories": [
+    "Man (FtM)",
+    "Woman (MtF)",
+    "Nonbinary",
+    "Man (Cis)",
+    "Woman (Cis)"
+  ],
+  "series": [
+    {
+      "name": "Top",
+      "data": [
+        101,
+        51,
+        13,
+        11,
+        1
+      ]
+    },
+    {
+      "name": "Vers",
+      "data": [
+        90,
+        216,
+        21,
+        9,
+        4
+      ]
+    },
+    {
+      "name": "Bottom",
+      "data": [
+        26,
+        587,
+        21,
+        11,
+        6
+      ]
+    }
+  ]
+}

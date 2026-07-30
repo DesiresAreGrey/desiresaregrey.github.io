@@ -1,0 +1,33 @@
+{
+  "categories": [
+    "Man (FtM)",
+    "Woman (MtF)",
+    "Nonbinary"
+  ],
+  "series": [
+    {
+      "name": "Officially diagnosed",
+      "data": [
+        95,
+        229,
+        15
+      ]
+    },
+    {
+      "name": "Self diagnosed",
+      "data": [
+        51,
+        340,
+        26
+      ]
+    },
+    {
+      "name": "No",
+      "data": [
+        161,
+        449,
+        20
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "categories": [
+    "Man (FtM)",
+    "Woman (MtF)",
+    "Nonbinary"
+  ],
+  "series": [
+    {
+      "name": "Yes",
+      "data": [
+        88,
+        361,
+        14
+      ]
+    },
+    {
+      "name": "No, just not for me",
+      "data": [
+        87,
+        199,
+        13
+      ]
+    },
+    {
+      "name": "No, too mentally ill",
+      "data": [
+        131,
+        455,
+        36
+      ]
+    }
+  ]
+}

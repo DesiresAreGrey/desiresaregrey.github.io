@@ -1,0 +1,33 @@
+{
+  "categories": [
+    "Man (FtM)",
+    "Woman (MtF)",
+    "Nonbinary"
+  ],
+  "series": [
+    {
+      "name": "T4T",
+      "data": [
+        99,
+        348,
+        24
+      ]
+    },
+    {
+      "name": "T4C",
+      "data": [
+        41,
+        160,
+        6
+      ]
+    },
+    {
+      "name": "No preference",
+      "data": [
+        167,
+        509,
+        32
+      ]
+    }
+  ]
+}

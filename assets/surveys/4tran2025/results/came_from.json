@@ -1,0 +1,73 @@
+{
+  "categories": [
+    "r/4Tranistan",
+    "r/4tran2",
+    "r/4tran4",
+    "r/Tranistan",
+    "r/4trancirclejerk",
+    "r/ttttrans",
+    "Discord"
+  ],
+  "series": [
+    {
+      "name": "Man (FtM)",
+      "data": [
+        97,
+        87,
+        63,
+        30,
+        23,
+        6,
+        2
+      ]
+    },
+    {
+      "name": "Woman (MtF)",
+      "data": [
+        282,
+        279,
+        214,
+        61,
+        84,
+        61,
+        46
+      ]
+    },
+    {
+      "name": "Nonbinary",
+      "data": [
+        15,
+        22,
+        16,
+        5,
+        0,
+        4,
+        1
+      ]
+    },
+    {
+      "name": "Man (Cis)",
+      "data": [
+        13,
+        14,
+        6,
+        2,
+        2,
+        0,
+        4
+      ]
+    },
+    {
+      "name": "Woman (Cis)",
+      "data": [
+        3,
+        4,
+        2,
+        2,
+        0,
+        2,
+        0
+      ]
+    }
+  ]
+}

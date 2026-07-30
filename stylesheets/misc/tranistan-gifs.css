@@ -1,0 +1,229 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
+
+gif-list {
+  display: block;
+  column-count: 3;
+  column-gap: 8px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    column-count: 2;
+  }
+
+  gif-item {
+    position: relative;
+    display: block;
+    break-inside: avoid;
+    margin-bottom: 8px;
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      corner-shape: squircle;
+      border-radius: calc(8px * var(--br-mult));
+    }
+
+    #name {
+      position: absolute;
+      bottom: 4px;
+      width: 100%;
+      justify-content: center;
+      display: flex;
+      opacity: 0;
+      transition: opacity 200ms ease;
+
+      a {
+        color: #fff;
+        text-shadow: 
+          0 0 8px rgba(0, 0, 0, 0.5),
+          0 0 4px rgba(0, 0, 0, 0.75),
+          0 0 1px rgba(0, 0, 0, 1);
+        text-align: center;
+        line-height: 100%;
+
+        @media (hover: hover) {
+          &:hover {
+            color: #fff;
+            text-decoration: underline;
+          }
+        }
+        &:active {
+          color: #fff;
+          text-decoration: underline;
+        }
+        
+        &:focus, &:visited {
+          color: #fff;
+        }
+      }
+    }
+
+    .buttons {
+      position: absolute;
+      display: flex;
+      gap: 4px;
+      top: 8px;
+      right: 8px;
+      opacity: 0;
+      transition: opacity 200ms ease;
+
+      .button {
+        cursor: pointer;
+        background: rgba(0, 0, 0, 0.67);
+        backdrop-filter: blur(4px);
+        corner-shape: squircle;
+        border-radius: calc(8px * var(--br-mult));
+        border: 1px solid #333;
+        color: #fff;
+        font-size: 16px;
+        text-shadow: 0 0 4px rgba(0, 0, 0, 1);
+        transition: color 200ms ease;
+        
+        padding: 2px 6px;
+        width: fit-content;
+        text-align: center;
+
+        @media (hover: hover) {
+          &:hover {
+            color: #aaa;
+          }
+        }
+        &:active {
+          color: #aaa;
+        }
+      }
+    }
+
+    #rank {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      color: #fff;
+      opacity: 0;
+      text-shadow: 
+        0 0 8px rgba(0, 0, 0, 0.5),
+        0 0 4px rgba(0, 0, 0, 0.75),
+        0 0 1px rgba(0, 0, 0, 1);
+      transition: opacity 200ms ease;
+    }
+
+    &:hover {
+      #name, .buttons, #rank {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.options {
+  position: relative;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.input {
+  height: 30px;
+  max-height: 30px;
+  background: #252525;
+  border: .1rem solid;
+  border-radius: 50vw;
+  border-color: transparent;
+  font-weight: 200;
+  font-size: 17px;
+  font-family: Inter, sans-serif;
+  text-align: center;
+  text-align-last: center;
+  color: #ccc;
+  transition: border-color 200ms ease;
+  &:hover {
+    border-color: var(--md-primary-fg-color);
+  }
+  &:focus-visible {
+    border-color: #9152ff;
+  }
+}
+
+.search-container {
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  @media (max-width: 670px) {
+    position: relative;
+    margin-bottom: 0.25rem;
+  }
+
+  i {
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    transform: translateY(-50%);
+    color: #999;
+    pointer-events: none;
+  }
+
+  #search-input {
+    width: 15rem;
+
+    @media (max-width: 670px) {
+      width: 100%;
+    }
+  }
+}
+
+@media (display-mode: standalone) {
+  header {
+    .md-header__inner {
+      padding: 0;
+    }
+    .md-header__button.md-icon[for="__drawer"], .md-header__button.md-logo, .md-tabs {
+      display: none;
+    }
+    .md-header__title {
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+
+      .md-header__topic, .md-ellipsis {
+        display: none;
+        width: 100%;
+      }
+      .md-header__topic[data-md-component="header-topic"], .md-ellipsis {
+        transform: none !important;
+        opacity: 1;
+        display: block;
+        width: 100%;
+        transition: none;
+      }
+    }
+  }
+
+  .md-main__inner.md-grid {
+    margin-top: 0rem;
+
+    article {
+      h1 {
+        display: none;
+      }
+      .description {
+        display: none;
+      }
+    }
+  }
+
+  footer {
+    display: none;
+  }
+}
+
+@media (display-mode: standalone) and (max-width: 768px) {
+  .md-main__inner.md-grid {
+    margin-top: 0rem;
+
+    article {
+      padding-bottom: 1.25rem;
+    }
+  }
+}

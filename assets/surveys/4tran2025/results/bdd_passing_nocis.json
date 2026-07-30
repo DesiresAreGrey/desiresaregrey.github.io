@@ -1,0 +1,41 @@
+{
+  "categories": [
+    "Gigapassoid",
+    "Passoid",
+    "Semipassoid",
+    "Nonpassoid",
+    "Gigahon/Gigapoon"
+  ],
+  "series": [
+    {
+      "name": "Officially diagnosed",
+      "data": [
+        3,
+        19,
+        31,
+        32,
+        7
+      ]
+    },
+    {
+      "name": "Self diagnosed",
+      "data": [
+        11,
+        50,
+        157,
+        150,
+        32
+      ]
+    },
+    {
+      "name": "No",
+      "data": [
+        19,
+        141,
+        303,
+        269,
+        121
+      ]
+    }
+  ]
+}

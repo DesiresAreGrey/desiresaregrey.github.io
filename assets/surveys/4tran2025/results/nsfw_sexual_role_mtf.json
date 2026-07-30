@@ -1,0 +1,37 @@
+{
+  "categories": [
+    "Straight",
+    "Bisexual / Pansexual",
+    "Gay / Lesbian",
+    "Asexual"
+  ],
+  "series": [
+    {
+      "name": "Dominant",
+      "data": [
+        1,
+        12,
+        14,
+        0
+      ]
+    },
+    {
+      "name": "Switch",
+      "data": [
+        19,
+        162,
+        61,
+        10
+      ]
+    },
+    {
+      "name": "Submissive",
+      "data": [
+        129,
+        338,
+        87,
+        29
+      ]
+    }
+  ]
+}

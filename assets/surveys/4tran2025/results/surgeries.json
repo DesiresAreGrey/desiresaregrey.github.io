@@ -1,0 +1,131 @@
+{
+  "categories": [
+    "Man (FtM)",
+    "Woman (MtF)",
+    "Nonbinary",
+    "Man (Cis)",
+    "Woman (Cis)"
+  ],
+  "series": [
+    {
+      "name": "Facial Masculinization Surgery",
+      "data": [
+        4,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Facial Feminization Surgery",
+      "data": [
+        0,
+        60,
+        1,
+        2,
+        2
+      ]
+    },
+    {
+      "name": "Top Surgery (FTM)",
+      "data": [
+        66,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Breast Augmentation (Implant)",
+      "data": [
+        0,
+        10,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Breast Augmentation (Fat Transfer)",
+      "data": [
+        0,
+        3,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Phalloplasty",
+      "data": [
+        3,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Metoidioplasty",
+      "data": [
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Orchiectomy",
+      "data": [
+        0,
+        30,
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Vaginoplasty (Penile Inversion)",
+      "data": [
+        0,
+        12,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Vaginoplasty (Other Method)",
+      "data": [
+        0,
+        16,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "Nullectomy",
+      "data": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Other",
+      "data": [
+        3,
+        5,
+        0,
+        0,
+        0
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "File Uploader",
+  "short_name": "File Uploader",
+  "icons": [
+    {
+      "src": "/assets/DesiresAreGrey192x.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/assets/DesiresAreGrey512x.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "id": "/misc/upload/",
+  "display": "standalone",
+  "theme_color": "black",
+  "background_color": "black"
+}

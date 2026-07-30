@@ -1,0 +1,190 @@
+[
+  {
+    "id": "US-CA",
+    "value": 92
+  },
+  {
+    "id": "US-TX",
+    "value": 45
+  },
+  {
+    "id": "US-WA",
+    "value": 43
+  },
+  {
+    "id": "US-NY",
+    "value": 34
+  },
+  {
+    "id": "US-PA",
+    "value": 30
+  },
+  {
+    "id": "US-FL",
+    "value": 25
+  },
+  {
+    "id": "US-IL",
+    "value": 25
+  },
+  {
+    "id": "US-CO",
+    "value": 23
+  },
+  {
+    "id": "US-NJ",
+    "value": 20
+  },
+  {
+    "id": "US-MI",
+    "value": 18
+  },
+  {
+    "id": "US-NC",
+    "value": 17
+  },
+  {
+    "id": "US-VA",
+    "value": 16
+  },
+  {
+    "id": "US-GA",
+    "value": 15
+  },
+  {
+    "id": "US-MA",
+    "value": 15
+  },
+  {
+    "id": "US-IN",
+    "value": 14
+  },
+  {
+    "id": "US-MD",
+    "value": 14
+  },
+  {
+    "id": "US-OH",
+    "value": 13
+  },
+  {
+    "id": "US-CT",
+    "value": 11
+  },
+  {
+    "id": "US-OR",
+    "value": 10
+  },
+  {
+    "id": "US-AZ",
+    "value": 9
+  },
+  {
+    "id": "US-MN",
+    "value": 9
+  },
+  {
+    "id": "US-MO",
+    "value": 9
+  },
+  {
+    "id": "US-WI",
+    "value": 9
+  },
+  {
+    "id": "US-KS",
+    "value": 8
+  },
+  {
+    "id": "US-OK",
+    "value": 7
+  },
+  {
+    "id": "US-IA",
+    "value": 5
+  },
+  {
+    "id": "US-MS",
+    "value": 5
+  },
+  {
+    "id": "US-TN",
+    "value": 5
+  },
+  {
+    "id": "US-AL",
+    "value": 4
+  },
+  {
+    "id": "US-AK",
+    "value": 4
+  },
+  {
+    "id": "US-ME",
+    "value": 4
+  },
+  {
+    "id": "US-NE",
+    "value": 4
+  },
+  {
+    "id": "US-NM",
+    "value": 4
+  },
+  {
+    "id": "US-SC",
+    "value": 4
+  },
+  {
+    "id": "US-UT",
+    "value": 4
+  },
+  {
+    "id": "US-AR",
+    "value": 3
+  },
+  {
+    "id": "US-HI",
+    "value": 3
+  },
+  {
+    "id": "US-KY",
+    "value": 3
+  },
+  {
+    "id": "US-NV",
+    "value": 3
+  },
+  {
+    "id": "US-RI",
+    "value": 3
+  },
+  {
+    "id": "US-DE",
+    "value": 2
+  },
+  {
+    "id": "US-ID",
+    "value": 2
+  },
+  {
+    "id": "US-LA",
+    "value": 2
+  },
+  {
+    "id": "US-NH",
+    "value": 2
+  },
+  {
+    "id": "US-SD",
+    "value": 2
+  },
+  {
+    "id": "US-VT",
+    "value": 2
+  },
+  {
+    "id": "US-WY",
+    "value": 1
+  }
+]

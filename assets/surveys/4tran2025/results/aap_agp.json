@@ -1,0 +1,41 @@
+{
+  "categories": [
+    "Man (FtM)",
+    "Woman (MtF)",
+    "Nonbinary",
+    "Man (Cis)",
+    "Woman (Cis)"
+  ],
+  "series": [
+    {
+      "name": "AAP",
+      "data": [
+        105,
+        48,
+        11,
+        4,
+        2
+      ]
+    },
+    {
+      "name": "AGP",
+      "data": [
+        38,
+        318,
+        23,
+        16,
+        2
+      ]
+    },
+    {
+      "name": "No",
+      "data": [
+        188,
+        692,
+        40,
+        18,
+        12
+      ]
+    }
+  ]
+}

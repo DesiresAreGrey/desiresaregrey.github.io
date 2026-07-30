@@ -1,0 +1,61 @@
+{
+  "categories": [
+    "Man (FtM)",
+    "Woman (MtF)",
+    "Nonbinary",
+    "Man (Cis)",
+    "Woman (Cis)"
+  ],
+  "series": [
+    {
+      "name": "Gigapassoid",
+      "data": [
+        59,
+        100,
+        4,
+        9,
+        6
+      ]
+    },
+    {
+      "name": "Passoid",
+      "data": [
+        164,
+        386,
+        13,
+        1,
+        4
+      ]
+    },
+    {
+      "name": "Semipassoid",
+      "data": [
+        62,
+        375,
+        36,
+        3,
+        2
+      ]
+    },
+    {
+      "name": "Nonpassoid",
+      "data": [
+        11,
+        90,
+        6,
+        9,
+        1
+      ]
+    },
+    {
+      "name": "Gigahon/Gigapoon",
+      "data": [
+        12,
+        58,
+        4,
+        10,
+        0
+      ]
+    }
+  ]
+}

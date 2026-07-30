@@ -1,0 +1,140 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
+
+.gif-converter-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.preview-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 320px;
+  background: #000;
+  overflow: hidden;
+
+  corner-shape: squircle;
+  border-radius: calc(16px * var(--br-mult));
+  border: 1px solid #333;
+
+  .preview {
+    height: inherit !important;
+    width: 100%;
+    object-fit: contain;
+  }
+}
+img:not([src]), 
+img[src=""] {
+    visibility: hidden;
+}
+
+.drop-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.333);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 24px;
+  font-family: Inter, sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease, backdrop-filter 200ms ease;
+  z-index: 999;
+
+  &.active {
+    backdrop-filter: blur(4px);
+    opacity: 1;
+  }
+}
+
+button {
+  flex: 1;
+}
+
+.button-row {
+  display: flex;
+  gap: 0.25rem;
+}
+
+@media (display-mode: standalone) {
+  header {
+    .md-header__inner {
+      padding: 0;
+    }
+    .md-header__button.md-icon[for="__drawer"], .md-header__button.md-logo, .md-tabs {
+      display: none;
+    }
+    .md-header__title {
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+
+      .md-header__topic, .md-ellipsis {
+        display: none;
+        width: 100%;
+      }
+      .md-header__topic[data-md-component="header-topic"], .md-ellipsis {
+        transform: none !important;
+        opacity: 1;
+        display: block;
+        width: 100%;
+        transition: none;
+      }
+      .md-header__ellipsis {
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        cursor: pointer;
+        transition: opacity 200ms ease;
+        @media (hover: hover) {
+          &:hover {
+            opacity: 0.67;
+          }
+        }
+        @media (hover: none) {
+          &:active {
+            opacity: 0.67;
+            transition: opacity 10ms ease;
+          }
+        }
+      }
+    }
+  }
+
+  .md-main__inner.md-grid {
+    margin-top: 0.5rem;
+
+    article {
+      h1 {
+        display: none;
+      }
+      .description {
+        display: none;
+      }
+      .gif-converter-container {
+        margin-top: -1.5rem;
+      }
+    }
+  }
+
+  footer {
+    display: none;
+  }
+}
+
+@media (display-mode: standalone) and (max-width: 768px) {
+  .md-main__inner.md-grid {
+    margin-top: 1rem;
+
+    article {
+      padding-bottom: 1.25rem;
+    }
+  }
+}

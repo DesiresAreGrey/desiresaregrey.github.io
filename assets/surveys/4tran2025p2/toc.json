@@ -1,0 +1,14 @@
+[
+    ["", "Demographics"],
+    ["measurements", "Measurements"],
+    ["socialmedia", "Social Media"],
+    ["transition", "Transition"],
+    ["sexuality", "Sexuality"],
+    ["relationships", "Relationships"],
+    ["heightpreferences", "Height Preferences"],
+    ["health", "Health"],
+    ["selfdescribing", "Self Describing"],
+    ["misc", "Misc"],
+    ["nsfw", "NSFW"],
+    ["conclusion", "Feedback & Conclusion"]
+]

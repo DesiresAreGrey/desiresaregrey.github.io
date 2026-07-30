@@ -1,0 +1,41 @@
+{
+  "categories": [
+    "Man (FtM)",
+    "Woman (MtF)",
+    "Nonbinary",
+    "Man (Cis)",
+    "Woman (Cis)"
+  ],
+  "series": [
+    {
+      "name": "Dominant",
+      "data": [
+        71,
+        27,
+        5,
+        8,
+        2
+      ]
+    },
+    {
+      "name": "Switch",
+      "data": [
+        119,
+        252,
+        26,
+        11,
+        5
+      ]
+    },
+    {
+      "name": "Submissive",
+      "data": [
+        26,
+        583,
+        24,
+        13,
+        4
+      ]
+    }
+  ]
+}

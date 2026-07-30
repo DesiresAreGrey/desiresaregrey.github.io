@@ -1,0 +1,37 @@
+{
+  "categories": [
+    "Straight",
+    "Bisexual / Pansexual",
+    "Gay / Lesbian",
+    "Asexual"
+  ],
+  "series": [
+    {
+      "name": "T4T",
+      "data": [
+        25,
+        59,
+        11,
+        4
+      ]
+    },
+    {
+      "name": "T4C",
+      "data": [
+        17,
+        14,
+        10,
+        0
+      ]
+    },
+    {
+      "name": "No preference",
+      "data": [
+        29,
+        88,
+        28,
+        22
+      ]
+    }
+  ]
+}

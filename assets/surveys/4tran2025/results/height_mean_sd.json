@@ -1,0 +1,17 @@
+[
+  {
+    "Gender": "Man (FtM)",
+    "Mean": 65.47,
+    "SD": 2.57
+  },
+  {
+    "Gender": "Woman (MtF)",
+    "Mean": 69.04,
+    "SD": 3.01
+  },
+  {
+    "Gender": "Nonbinary",
+    "Mean": 68.24,
+    "SD": 3.52
+  }
+]

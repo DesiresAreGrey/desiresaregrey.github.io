@@ -1,0 +1,55 @@
+.wordcloud-word {
+  transition: fill 200ms ease, font-variation-settings 200ms ease, opacity 200ms ease;
+  will-change: font-variation-settings;
+  fill: oklch(from var(--color) calc(l * var(--opacity)) calc(c * var(--opacity)) h);
+  font-variation-settings: 'wght' 700;
+  &:hover {
+    font-variation-settings: 'wght' 750;
+    fill: oklch(from var(--color) calc(l + 0.1) c h) !important;
+  }
+}
+
+.wordcloud-tooltip {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  padding: 7px 10px;
+
+  width: max-content;
+
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1000;
+
+  background: rgba(8, 8, 8, .8) !important;
+  box-shadow: 2px 2px 6px -4px #000 !important;
+  backdrop-filter: blur(3px) saturate(150%);
+  outline: solid;
+  outline-width: thin;
+  outline-color: #333333;
+  outline-offset: -1px;
+  border-radius: 0.5rem;
+
+  line-height: 125%;
+
+  transition: opacity 200ms ease, top 100ms ease, left 100ms ease;
+
+  & .word {
+    font-size: 15px;
+    font-variation-settings: 'wght' 700;
+  }
+  & .place {
+    font-size: 13px;
+    font-variation-settings: 'wght' 700;
+  }
+  & .count {
+    font-size: 13px;
+    font-variation-settings: 'wght' 400;
+  }
+
+  &.active {
+    opacity: 1;
+  }
+}
+

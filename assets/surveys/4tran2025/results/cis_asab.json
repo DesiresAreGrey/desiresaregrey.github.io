@@ -1,0 +1,64 @@
+{
+  "categories": [
+    "Man (Cis)",
+    "Woman (Cis)"
+  ],
+  "series": [
+    {
+      "name": "Assigned Male (No HRT)",
+      "data": [
+        23,
+        0
+      ]
+    },
+    {
+      "name": "Assigned Male (On HRT)",
+      "data": [
+        12,
+        4
+      ]
+    },
+    {
+      "name": "Assigned Female (No HRT)",
+      "data": [
+        0,
+        6
+      ]
+    },
+    {
+      "name": "Assigned Female (On HRT)",
+      "data": [
+        0,
+        2
+      ]
+    },
+    {
+      "name": "Assigned Intersex (No HRT)",
+      "data": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Assigned Intersex (On HRT)",
+      "data": [
+        1,
+        2
+      ]
+    },
+    {
+      "name": "Unspecified (No HRT)",
+      "data": [
+        2,
+        0
+      ]
+    },
+    {
+      "name": "Unspecified (On HRT)",
+      "data": [
+        3,
+        1
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "categories": [
+    "Straight",
+    "Bisexual / Pansexual",
+    "Gay / Lesbian"
+  ],
+  "series": [
+    {
+      "name": "Top",
+      "data": [
+        12,
+        18,
+        3
+      ]
+    },
+    {
+      "name": "Vers",
+      "data": [
+        5,
+        19,
+        1
+      ]
+    },
+    {
+      "name": "Bottom",
+      "data": [
+        1,
+        2,
+        0
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "categories": [
+    "Man (FtM)",
+    "Woman (MtF)",
+    "Nonbinary",
+    "Man (Cis)",
+    "Woman (Cis)"
+  ],
+  "series": [
+    {
+      "name": "Yes",
+      "data": [
+        23,
+        61,
+        1,
+        2,
+        1
+      ]
+    },
+    {
+      "name": "No",
+      "data": [
+        283,
+        942,
+        60,
+        34,
+        14
+      ]
+    }
+  ]
+}

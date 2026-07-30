@@ -1,0 +1,61 @@
+@import "/stylesheets/charts/apexcharts.css";
+@import "/stylesheets/charts/amcharts.css";
+
+/* height percentile */
+.percentile-container {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.percentile-container > div {
+  background: #141414;
+  padding: 0.5rem 0.5rem;
+  border-radius: 1rem;
+  color: var(--md-typeset-color);
+  font-size: .75rem;
+  font-variation-settings: 'wght' 400;
+  /*box-shadow: var(--shadow-m);*/
+}
+
+#hp-gender, #hp-unit {
+  padding: .15rem;
+  background: #252525;
+  border: .1rem solid;
+  border-radius: 0.5rem;
+  border-color: transparent;
+  font-weight: 200;
+  font-size: 17px;
+  font-family: Inter, sans-serif;
+  text-align: center;
+  color: #ccc;
+  transition: all 200ms ease;
+  /*box-shadow: var(--shadow-s);*/
+}
+#hp-gender:hover,
+#hp-val:hover,
+#hp-unit:hover {
+  border-color: var(--md-primary-fg-color);
+}
+#hp-gender:focus,
+#hp-val:focus,
+#hp-unit:focus {
+  border-color: #9152ff;
+}
+
+#hp-val {
+  width: 1.8rem;
+  padding: .15rem;
+  background: #252525;
+  border: .1rem solid;
+  border-radius: 0.5rem;
+  border-color: transparent;
+  font-weight: 200;
+  font-size: 17px;
+  font-family: Inter, sans-serif;
+  text-align: center;
+  color: #ccc;
+  transition: all 200ms ease;
+  box-shadow: var(--shadow-s);
+}

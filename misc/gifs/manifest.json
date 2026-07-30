@@ -1,0 +1,21 @@
+{
+  "name": "Tranistan GIFs",
+  "short_name": "Tranistan GIFs",
+  "icons": [
+    {
+      "src": "/assets/misc/tranistan/Tranistan192x.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/assets/misc/tranistan/Tranistan512x.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "id": "/misc/gifs/",
+  "display": "standalone",
+  "theme_color": "black",
+  "background_color": "black"
+}

@@ -1,0 +1,49 @@
+{
+  "categories": [
+    "Man (FtM)",
+    "Woman (MtF)",
+    "Nonbinary"
+  ],
+  "series": [
+    {
+      "name": "Daily",
+      "data": [
+        96,
+        352,
+        22
+      ]
+    },
+    {
+      "name": "Several times per week",
+      "data": [
+        100,
+        334,
+        22
+      ]
+    },
+    {
+      "name": "Several times per month",
+      "data": [
+        47,
+        153,
+        12
+      ]
+    },
+    {
+      "name": "Rarely",
+      "data": [
+        54,
+        155,
+        5
+      ]
+    },
+    {
+      "name": "Never",
+      "data": [
+        10,
+        28,
+        2
+      ]
+    }
+  ]
+}

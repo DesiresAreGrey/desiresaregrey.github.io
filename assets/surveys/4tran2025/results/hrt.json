@@ -1,0 +1,31 @@
+{
+  "categories": [
+    "Man (FtM)",
+    "Woman (MtF)",
+    "Nonbinary",
+    "Man (Cis)",
+    "Woman (Cis)"
+  ],
+  "series": [
+    {
+      "name": "On HRT",
+      "data": [
+        229,
+        913,
+        45,
+        16,
+        9
+      ]
+    },
+    {
+      "name": "Not on HRT",
+      "data": [
+        79,
+        117,
+        18,
+        25,
+        6
+      ]
+    }
+  ]
+}
