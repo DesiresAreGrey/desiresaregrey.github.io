@@ -604,22 +604,22 @@ ___
 </div>
 
 <!-- fake toc -->
-## Settings {#settings style="display: none"}
+## Settings {#settings .faketoc}
 
-## Weapon {#weapon style="display: none"}
-### Ammo {#ammo style="display: none"}
-### Firing {#firing style="display: none"}
-#### Shot {#shot style="display: none"}
-##### Projectile Damage {#projectile-damage style="display: none"}
-##### Shot Damage {#shot-damage style="display: none"}
-##### Shots to Kill {#shots-to-kill style="display: none"}
-##### Damage Per Second {#dps style="display: none"}
-##### Total Damage Per Magazine {#tdpm style="display: none"}
-##### Time To Kill {#ttk style="display: none"}
-##### Projectile Size {#projectile-size style="display: none"}
-#### Patterns {#patterns style="display: none"}
-### Reload Time {#reload-time style="display: none"}
-### Handling {#handling style="display: none"}
-### Spread {#spread style="display: none"}
+## Weapon {#weapon .faketoc}
+### Ammo {#ammo .faketoc}
+### Firing {#firing .faketoc}
+#### Shot {#shot .faketoc}
+##### Projectile Damage {#projectile-damage .faketoc}
+##### Shot Damage {#shot-damage .faketoc}
+##### Shots to Kill {#shots-to-kill .faketoc}
+##### Damage Per Second {#dps .faketoc}
+##### Total Damage Per Magazine {#tdpm .faketoc}
+##### Time To Kill {#ttk .faketoc}
+##### Projectile Size {#projectile-size .faketoc}
+#### Patterns {#patterns .faketoc}
+### Reload Time {#reload-time .faketoc}
+### Handling {#handling .faketoc}
+### Spread {#spread .faketoc}
 
-## Info {#info style="display: none"}
+## Info {#info .faketoc}

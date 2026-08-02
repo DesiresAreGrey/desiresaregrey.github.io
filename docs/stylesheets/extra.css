@@ -195,9 +195,9 @@ script[src*="/assets/javascripts/bundle"] + div[style*="position: fixed"][style*
   border-radius: 0.75em;
 }
 
-.md-sidebar--primary .nav-overview {
-  /* text-decoration: underline; */
-}
+/* .md-sidebar--primary .nav-overview {
+  text-decoration: underline; 
+} */
 
 /* Footer */
 .md-footer,
@@ -463,4 +463,8 @@ input[type="file"] {
 
 .testline {
   outline: 1px solid #fff;
+}
+
+.faketoc {
+  display: none;
 }
