@@ -1,5 +1,5 @@
 const colors = ['#259efa', '#ff4f69', '#00E396', '#3f51b5', '#D7263D'];
-const path = document.currentScript.dataset.path || "/assets/surveys/4tran2025/results/";
+const path = "/assets/surveys/4tran2025/results/";
 
 function createBarChart(chartId, dataUrl, title = undefined, subtitle = undefined, hideSeries = [], customColors = undefined, height = 500) {
     fetch(path + dataUrl).then(response => response.json()).then(data => {

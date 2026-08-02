@@ -1,6 +1,8 @@
 ---
 description: Results of the 2025 4tran Survey (Jealous Cat)
 image: https://desiresaregrey.com/assets/surveys/4tran2025/thumb.png
+tags:
+  - survey
 ---
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="stylesheet" href="/stylesheets/surveys/4tran2025.css">
@@ -72,12 +74,12 @@ image: https://desiresaregrey.com/assets/surveys/4tran2025/thumb.png
 <h6 style="margin: 0 0.2rem">Jealous Cat's Analysis</h6>
 
 <div class="nav-links">
-  <a href="../">Page 1</a> - 
-  <a href="../2">Page 2</a> - 
-  <a href="../3">Page 3</a> - 
-  <a href="../4">Page 4</a> - 
-  <a href="../jealouscat" class="active">Jealous Cat</a> - 
-  <a href="../ratgirltwink">Ratgirltwink</a>
+  <a href="./">Page 1</a> - 
+  <a href="2">Page 2</a> - 
+  <a href="3">Page 3</a> - 
+  <a href="4">Page 4</a> - 
+  <a href="jealouscat" class="active">Jealous Cat</a> - 
+  <a href="ratgirltwink">Ratgirltwink</a>
 </div>
 
 <p>
@@ -808,7 +810,6 @@ ___
 ___
 
 <div class="button-container">
-  <!--<a class="big-button" href="../amekyras">Previous Page</a>-->
-  <a class="big-button" href="../4">Previous Page</a>
-  <a class="big-button" href="../ratgirltwink">Next Page</a>
+  <a class="big-button" href="./4">Previous Page</a>
+  <a class="big-button" href="./ratgirltwink">Next Page</a>
 </div>

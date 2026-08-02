@@ -2,6 +2,8 @@
 title: "Extended 4tran Survey (2025.2) Results: Sexuality"
 description: The results page for the Extended 4tran Survey (2025.2), a follow up survey to the original 2025 4tran Survey
 image: https://desiresaregrey.com/assets/surveys/4tran2025p2/thumb-sexuality.png
+tags:
+  - survey
 ---
 <script src="/js/utils/header-title-changer.js" data-title="Page 5 - Sexuality"></script>
 

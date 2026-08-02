@@ -1,6 +1,8 @@
 ---
 description: Results of the 2025 4tran Survey (Ratgirltwink)
 image: https://desiresaregrey.com/assets/surveys/4tran2025/thumb.png
+tags:
+  - survey
 ---
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="stylesheet" href="/stylesheets/surveys/4tran2025.css">
@@ -21,12 +23,12 @@ image: https://desiresaregrey.com/assets/surveys/4tran2025/thumb.png
 <h6 style="margin: 0 0.2rem">Ratgirltwink's Analysis</h6>
 
 <div class="nav-links">
-  <a href="../">Page 1</a> - 
-  <a href="../2">Page 2</a> - 
-  <a href="../3">Page 3</a> - 
-  <a href="../4">Page 4</a> - 
-  <a href="../jealouscat">Jealous Cat</a> - 
-  <a href="../ratgirltwink" class="active">Ratgirltwink</a>
+  <a href="./">Page 1</a> - 
+  <a href="2">Page 2</a> - 
+  <a href="3">Page 3</a> - 
+  <a href="4">Page 4</a> - 
+  <a href="jealouscat">Jealous Cat</a> - 
+  <a href="ratgirltwink" class="active">Ratgirltwink</a>
 </div>
 
 <p>
@@ -137,5 +139,5 @@ Hsts > agp lol
 ___
 
 <div class="button-container">
-  <a class="big-button" href="../jealouscat">Previous Page</a>
+  <a class="big-button" href="./jealouscat">Previous Page</a>
 </div>
