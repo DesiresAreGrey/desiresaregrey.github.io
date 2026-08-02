@@ -70,10 +70,6 @@ extra:
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/DesiresAreGrey
       name: Twitter
-  tags:
-    Surveys: survey
-    Misc: misc
-
 extra_css:
   - stylesheets/extra.css
   - stylesheets/zensical-ports.css

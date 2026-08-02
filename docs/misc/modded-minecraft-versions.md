@@ -3,7 +3,7 @@ title: Popularity of Modded Minecraft Versions
 description: Charts showing the number of mods for different Minecraft versions on Modrinth and Curseforge.
 image: https://desiresaregrey.com/assets/misc/minecraft/thumb.png
 tags:
-  - misc
+  - Miscellaneous
 hide:
   - tags
 ---

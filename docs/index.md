@@ -15,7 +15,7 @@ image: https://desiresaregrey.com/assets/DesiresAreGrey.png
   text-align: center;
   min-height: 70vh;
   opacity: 0;
-  animation: fadeInUp 750ms ease-out 250ms forwards;
+  animation: fadeInUp 500ms ease-out 250ms forwards;
 }
 
 @keyframes fadeInUp {

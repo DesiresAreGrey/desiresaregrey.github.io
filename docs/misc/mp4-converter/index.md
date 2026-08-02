@@ -2,7 +2,7 @@
 title: Video to MP4 Converter
 description: Convert and compress videos into MP4/H.264 files entirely in your browser without uploading them to a server.
 tags:
-  - misc
+  - Miscellaneous
 hide:
   - tags
 extra_head: |

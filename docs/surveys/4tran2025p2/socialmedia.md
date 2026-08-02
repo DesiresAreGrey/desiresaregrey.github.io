@@ -3,7 +3,8 @@ title: "Extended 4tran Survey (2025.2) Results: Social Media"
 description: The results page for the Extended 4tran Survey (2025.2), a follow up survey to the original 2025 4tran Survey
 image: https://desiresaregrey.com/assets/surveys/4tran2025p2/thumb-socialmedia.png
 tags:
-  - survey
+  - All Surveys
+  - 4tran Survey [2025.2]
 hide:
   - tags
 ---
