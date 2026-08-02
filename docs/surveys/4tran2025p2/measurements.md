@@ -4,6 +4,8 @@ description: The results page for the Extended 4tran Survey (2025.2), a follow u
 image: https://desiresaregrey.com/assets/surveys/4tran2025p2/thumb-measurements.png
 tags:
   - survey
+hide:
+  - tags
 ---
 <script src="/js/utils/header-title-changer.js" data-title="Page 2 - Measurements"></script>
 

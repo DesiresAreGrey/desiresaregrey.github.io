@@ -3,6 +3,8 @@ description: Results of the 2025 4tran Survey
 image: https://desiresaregrey.com/assets/surveys/4tran2025/thumb.png
 tags:
   - survey
+hide:
+  - tags
 ---
 <link rel="stylesheet" href="/stylesheets/surveys/4tran2025.css">
 <link rel="stylesheet" href="/stylesheets/socialmedia.css">

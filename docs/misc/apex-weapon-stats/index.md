@@ -519,7 +519,7 @@ ___
     <a href="https://github.com/DesiresAreGrey/Website/tree/main/docs/assets/misc/apex-weapon-stats/data">Browse/Download data</a>
   </div>
 
-  <h3>Calculations</h3>
+  <h3 id="info-calculations">Calculations</h3>
   <div style="margin-top: 0.25rem; font-size: 0.7rem; opacity: 0.7;">
     <p style="margin-bottom: 0.35rem;">
       <span style="font-weight: bold;">Meters:</span> 
