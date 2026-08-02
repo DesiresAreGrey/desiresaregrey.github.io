@@ -128,7 +128,7 @@ h1, h2, h3, h4, h5, h6 {
       display: none !important;
     }
     .md-tabs__list {
-      padding-inline-end: 3rem;
+      padding-inline-end: 2.75rem;
     }
   }
 
@@ -193,6 +193,10 @@ script[src*="/assets/javascripts/bundle"] + div[style*="position: fixed"][style*
 
 .round-corners {
   border-radius: 0.75em;
+}
+
+.md-sidebar--primary .nav-overview {
+  /* text-decoration: underline; */
 }
 
 /* Footer */

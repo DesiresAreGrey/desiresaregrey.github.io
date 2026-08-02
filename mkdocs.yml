@@ -16,6 +16,14 @@ theme:
     - navigation.tabs.sticky
   custom_dir: overrides
   icon:
+    close: lucide/x
+    previous: lucide/arrow-left
+    next: lucide/arrow-right
+    alternate: lucide/languages
+    share: lucide/share-2
+    top: lucide/circle-arrow-up
+    edit: lucide/file-pen
+    view: lucide/file-code-2
     admonition:
       note: lucide/paperclip
       abstract: lucide/notebook-text
@@ -65,6 +73,9 @@ extra:
 extra_css:
   - stylesheets/extra.css
   - stylesheets/zensical-ports.css
+extra_javascript:
+  - path: js/extra.js
+    type: module
 
 nav:
   - Home: 'index.md'
@@ -90,7 +101,7 @@ nav:
       - The 2025 4tran Survey [Page 4]: 'surveys/4tran2025/4.md'
       - The 2025 4tran Survey [Jealous Cat]: 'surveys/4tran2025/jealouscat.md'
       - The 2025 4tran Survey [Ratgirltwink]: 'surveys/4tran2025/ratgirltwink.md'
-  - Miscellaneous:
+  - Misc:
     - Overview: 'misc/index.md'
     - Apex Legends Weapon Stats: 'misc/apex-weapon-stats/index.md'
     - Popular Modded Minecraft Versions: 'misc/modded-minecraft-versions.md'
