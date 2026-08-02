@@ -2,7 +2,6 @@ site_name: DesiresAreGrey
 site_description: "DesiresAreGrey's Website"
 site_url: https://desiresaregrey.com/
 theme:
-  name: material
   variant: classic
   logo: assets/DesiresAreGrey-Circle.png
   favicon: assets/DesiresAreGrey-Circle.png
@@ -16,10 +15,25 @@ theme:
     - navigation.tabs
     - navigation.tabs.sticky
   custom_dir: overrides
+  icon:
+    admonition:
+      note: lucide/paperclip
+      abstract: lucide/notebook-text
+      info: lucide/info
+      tip: lucide/flame
+      success: lucide/check
+      question: lucide/circle-question-mark
+      warning: lucide/triangle-alert
+      failure: lucide/octagon-alert
+      danger: lucide/zap
+      bug: lucide/bug
+      example: lucide/flask-conical
+      quote: lucide/message-square-quote
 markdown_extensions:
   - attr_list
   - md_in_html
   - meta
+  - admonition
   - pymdownx.keys
   - pymdownx.highlight:
       anchor_linenums: true
@@ -50,11 +64,12 @@ extra:
       name: Twitter
 extra_css:
   - stylesheets/extra.css
+  - stylesheets/zensical-ports.css
 
 nav:
   - Home: 'index.md'
   - Surveys:
-    - 'surveys/index.md'
+    - Overview: 'surveys/index.md'
     - Extended 4tran Survey (2025.2): 
       - Page 1 - Demographics: 'surveys/4tran2025p2/index.md'
       - Page 2 - Measurements: 'surveys/4tran2025p2/measurements.md'
@@ -75,8 +90,8 @@ nav:
       - The 2025 4tran Survey [Page 4]: 'surveys/4tran2025/4.md'
       - The 2025 4tran Survey [Jealous Cat]: 'surveys/4tran2025/jealouscat.md'
       - The 2025 4tran Survey [Ratgirltwink]: 'surveys/4tran2025/ratgirltwink.md'
-  - Misc:
-    - 'misc/index.md'
+  - Miscellaneous:
+    - Overview: 'misc/index.md'
     - Apex Legends Weapon Stats: 'misc/apex-weapon-stats/index.md'
     - Popular Modded Minecraft Versions: 'misc/modded-minecraft-versions.md'
     - MP4 to GIF Converter: 'misc/gif-converter/index.md'

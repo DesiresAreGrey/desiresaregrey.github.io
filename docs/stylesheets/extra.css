@@ -160,6 +160,11 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* fix zindex on search box */
+script[src*="/assets/javascripts/bundle"] + div[style*="position: fixed"][style*="height: 100%"][style*="top: 0px"] {
+  z-index: 101 !important;
+}
+
 /* Tab list inside header */
 @media (min-width: 60rem) {
   .md-header .md-tabs {

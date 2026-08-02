@@ -1,0 +1,112 @@
+/* Port modern Zensical admonitions */
+.md-typeset {
+  .admonition, details {
+    background-color: #448aff1a;
+    border: 0;
+    border-radius: 0.4rem;
+    box-shadow: none !important;
+    padding: 0 0.8rem;
+    transition: none;
+  }
+
+  :is(.admonition, details) > :is(.admonition-title, summary) {
+    background-color: transparent;
+    border: 0;
+    border-radius: 0;
+    margin: 0.6rem 0 1em;
+    padding-block: 0;
+
+    &:is(.admonition-title, summary):last-child {
+      margin-bottom: 1em;
+    }
+  }
+
+  :is(.admonition-title, summary)::before {
+    top: 0.125em;
+  }
+
+  details:not([open]) > summary {
+    margin-bottom: 0.6rem;
+  }
+
+  summary::after {
+    top: 0.125em;
+  }
+
+  :is(.admonition, details) {
+    &.note {
+      background-color: #448aff1a;
+    }
+    &.abstract {
+      background-color: #00b0ff1a;
+    }
+    &.info {
+      background-color: #00b8d41a;
+    }
+    &.tip {
+      background-color: #00bfa51a;
+    }
+    &.success {
+      background-color: #00c8531a;
+    }
+    &.question {
+      background-color: #64dd171a;
+    }
+    &.warning {
+      background-color: #ff91001a;
+    }
+    &.failure {
+      background-color: #ff52521a;
+    }
+    &.danger {
+      background-color: #ff17441a;
+    }
+    &.bug {
+      background-color: #f500571a;
+    }
+    &.example {
+      background-color: #7c4dff1a;
+    }
+    &.quote {
+      background-color: #9e9e9e1a;
+    }
+  }
+}
+
+[dir="ltr"] .md-typeset {
+  :is(.admonition-title, summary) {
+    padding-left: 1.6rem;
+    padding-right: 0.8rem;
+
+    &::before {
+      left: 0;
+    }
+  }
+
+  summary {
+    padding-right: 1.6rem;
+
+    &::after {
+      right: 0;
+    }
+  }
+}
+
+[dir="rtl"] .md-typeset {
+  :is(.admonition-title, summary) {
+    padding-left: 0.8rem;
+    padding-right: 1.6rem;
+
+    &::before {
+      right: 0;
+    }
+  }
+
+  summary {
+    padding-left: 1.6rem;
+
+    &::after {
+      left: 0;
+    }
+  }
+}
