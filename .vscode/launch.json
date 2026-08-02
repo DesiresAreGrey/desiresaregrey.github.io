@@ -2,10 +2,17 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "TypeScript Watch",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run watch-ts",
+      "cwd": "${workspaceFolder}"
+    },
+    {
       "name": "Zensical Serve",
       "type": "node-terminal",
       "request": "launch",
-      "command": "powershell -ExecutionPolicy Bypass -File server.ps1",
+      "command": "py -m zensical serve",
       "cwd": "${workspaceFolder}"
     },
     {
@@ -18,8 +25,13 @@
   ],
   "compounds": [
     {
-      "name": "ngrok + Zensical Serve",
-      "configurations": ["Zensical Serve", "ngrok Tunnel"],
+      "name": "Zensical/TS",
+      "configurations": ["TypeScript Watch", "Zensical Serve"],
+      "stopAll": true
+    },
+    {
+      "name": "ngrok + Zensical/TS",
+      "configurations": ["TypeScript Watch", "Zensical Serve", "ngrok Tunnel"],
       "stopAll": true
     }
   ]
