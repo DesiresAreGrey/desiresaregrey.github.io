@@ -602,3 +602,24 @@ ___
 <div style="margin-top: 1em;">
   <a href="https://github.com/DesiresAreGrey/Website/blob/main/docs/misc/apex-weapon-stats/apex-weapon-stats.js">View Page Code</a>
 </div>
+
+<!-- fake toc -->
+## Settings {#settings .faketoc}
+
+## Weapon {#weapon .faketoc}
+### Ammo {#ammo .faketoc}
+### Firing {#firing .faketoc}
+#### Shot {#shot .faketoc}
+##### Projectile Damage {#projectile-damage .faketoc}
+##### Shot Damage {#shot-damage .faketoc}
+##### Shots to Kill {#shots-to-kill .faketoc}
+##### Damage Per Second {#dps .faketoc}
+##### Total Damage Per Magazine {#tdpm .faketoc}
+##### Time To Kill {#ttk .faketoc}
+##### Projectile Size {#projectile-size .faketoc}
+#### Patterns {#patterns .faketoc}
+### Reload Time {#reload-time .faketoc}
+### Handling {#handling .faketoc}
+### Spread {#spread .faketoc}
+
+## Info {#info .faketoc}

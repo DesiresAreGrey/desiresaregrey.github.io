@@ -1,34 +1,33 @@
-name: ci 
+name: Documentation 
 on:
   push:
     branches:
-      - master 
       - main
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 jobs:
   deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - uses: actions/configure-pages@v6
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
         with:
           python-version: 3.x
-      - uses: actions/setup-node@v4
+      - run: pip install zensical
+      - uses: actions/setup-node@v6
         with:
-          node-version: '22'
-      - run: |
-          npm ci
-      - uses: actions/cache@v3
-        with:
-          key: mkdocs-material-${{ github.ref }} 
-          path: .cache
-          restore-keys: |
-            mkdocs-material-
-      - run: pip install mkdocs-material 
-      - run: pip install mkdocs-glightbox 
-      - run: pip install mkdocs-video 
-      - run: pip install mkdocs-redirects 
-      - run: pip install mkdocs-minify-plugin 
+          node-version: '24'
+      - run: npm ci
       - run: npm run build-ts
-      - run: mkdocs gh-deploy --force
+      - run: zensical build --clean
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+      - uses: actions/deploy-pages@v5
+        id: deployment
