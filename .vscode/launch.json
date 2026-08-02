@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "MkDocs Serve",
+      "name": "Zensical Serve",
       "type": "node-terminal",
       "request": "launch",
       "command": "powershell -ExecutionPolicy Bypass -File server.ps1",
@@ -18,8 +18,8 @@
   ],
   "compounds": [
     {
-      "name": "ngrok + MkDocs Serve",
-      "configurations": ["MkDocs Serve", "ngrok Tunnel"],
+      "name": "ngrok + Zensical Serve",
+      "configurations": ["Zensical Serve", "ngrok Tunnel"],
       "stopAll": true
     }
   ]
