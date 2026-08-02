@@ -71,7 +71,8 @@ extra:
       link: https://twitter.com/DesiresAreGrey
       name: Twitter
   tags:
-    Survey: survey
+    Surveys: survey
+    Misc: misc
 
 extra_css:
   - stylesheets/extra.css

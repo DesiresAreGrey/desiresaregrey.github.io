@@ -2,6 +2,10 @@
 title: Apex Legends Weapon Stats
 description: Compare detailed weapon stats for Apex Legends weapons across across seasons, firing modes, and weapon variants.
 image: https://api.desiresaregrey.com/misc/apex/season-icon.png
+tags:
+  - misc
+hide:
+  - tags
 extra_head: |
   <link rel="manifest" href="/misc/apex-weapon-stats/manifest.json"/>
   <link rel="apple-touch-icon" href="https://api.desiresaregrey.com/misc/apex/season-icon.png?size=192"/>
