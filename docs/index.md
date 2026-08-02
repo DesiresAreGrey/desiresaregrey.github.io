@@ -1,4 +1,6 @@
 ---
+title: Home
+description: passoid of color
 image: https://desiresaregrey.com/assets/DesiresAreGrey.png
 ---
 <link rel="stylesheet" href="/stylesheets/socialmedia.css">
