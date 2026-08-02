@@ -1,0 +1,28 @@
+{% extends "main.html" %}
+
+{% block extrahead %}
+  <script>
+    const redirects = {
+      "/4transurvey2025": "/surveys/4tran2025/",
+      "/4transurvey2025/2": "/surveys/4tran2025/2/",
+      "/4transurvey2025/3": "/surveys/4tran2025/3/",
+      "/4transurvey2025/4": "/surveys/4tran2025/4/",
+      "/4transurvey2025/jealouscat": "/surveys/4tran2025/jealouscat/",
+      "/4transurvey2025/ratgirltwink": "/surveys/4tran2025/ratgirltwink/",
+      "/apex": "/misc/apex-weapon-stats/",
+      "/apex-weapon-stats": "/misc/apex-weapon-stats/",
+    }
+
+    const path = location.pathname
+      .replace(/\/index\.html$/, "")
+      .replace(/\.html$/, "")
+      .replace(/\/+$/, "") || "/";
+
+    if (redirects[path])
+      location.replace(redirects[path] + location.search + location.hash);
+  </script>
+{% endblock %}
+
+{% block content %}
+  <h1>404 - Not found</h1>
+{% endblock %}
