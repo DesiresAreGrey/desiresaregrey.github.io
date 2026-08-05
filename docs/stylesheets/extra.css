@@ -160,6 +160,13 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* remove search when its a webapp */
+@media (display-mode: standalone) {
+  .md-header__button[for="__search"] {
+    display: none !important;
+  }
+}
+
 /* fix zindex on search box */
 script[src*="/assets/javascripts/bundle"] + div[style*="position: fixed"][style*="height: 100%"][style*="top: 0px"] {
   z-index: 101 !important;
