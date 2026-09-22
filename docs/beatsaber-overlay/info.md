@@ -1,5 +1,5 @@
 ---
-title: Beatsaber Overlay: Info
+title: "Beatsaber Overlay: Info"
 description: Test
 ---
 
