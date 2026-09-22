@@ -133,6 +133,6 @@ really touched with some of the nice comments people left in the feedback sectio
 ___
 
 <div class="button-container">
-  <a class="big-button" href="../nsfw">Previous Page</a>
+  <a class="big-button" href="./nsfw">Previous Page</a>
   <a class="big-button" disabled></a>
 </div>

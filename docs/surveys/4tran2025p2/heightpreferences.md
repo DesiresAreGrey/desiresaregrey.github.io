@@ -271,6 +271,6 @@ Honestly, I have no idea whats the best way to show this data.
 ___
 
 <div class="button-container">
-  <a class="big-button" href="../relationships">Previous Page</a>
-  <a class="big-button" href="../health">Next Page</a>
+  <a class="big-button" href="./relationships">Previous Page</a>
+  <a class="big-button" href="./health">Next Page</a>
 </div>

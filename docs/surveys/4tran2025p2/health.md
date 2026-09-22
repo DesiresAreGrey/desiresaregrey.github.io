@@ -337,6 +337,6 @@ Men seem to currently be in therapy the least, but women are slightly more likel
 ___
 
 <div class="button-container">
-  <a class="big-button" href="../heightpreferences">Previous Page</a>
-  <a class="big-button" href="../selfdescribing">Next Page</a>
+  <a class="big-button" href="./heightpreferences">Previous Page</a>
+  <a class="big-button" href="./selfdescribing">Next Page</a>
 </div>

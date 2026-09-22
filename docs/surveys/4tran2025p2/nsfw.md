@@ -41,7 +41,7 @@ I would eventually like to do a general trans reddit survey to see how it compar
   >
 </div>
 
-Everyone talks about PIVP**ns, but they don't seem as common in 4tran circles compared to mainstream trans communities. As expected, gay men
+Everyone talks about PIVP\*\*ns, but they don't seem as common in 4tran circles compared to mainstream trans communities. As expected, gay men
 would be the most likely to be into natal PIV, with straight men being the least likely (ignoring asexuals).
 
 <div id="natal-piv-ftm-ratio" 
@@ -395,6 +395,6 @@ Pretty expected and similar to position, except for lesbians who top more than t
 ___
 
 <div class="button-container">
-  <a class="big-button" href="../misc">Previous Page</a>
-  <a class="big-button" href="../conclusion">Next Page</a>
+  <a class="big-button" href="./misc">Previous Page</a>
+  <a class="big-button" href="./conclusion">Next Page</a>
 </div>

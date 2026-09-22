@@ -158,6 +158,6 @@ about the survey. I made it a bit more granular than last time and added differe
 ___
 
 <div class="button-container">
-  <a class="big-button" href="../measurements">Previous Page</a>
-  <a class="big-button" href="../transition">Next Page</a>
+  <a class="big-button" href="./measurements">Previous Page</a>
+  <a class="big-button" href="./transition">Next Page</a>
 </div>

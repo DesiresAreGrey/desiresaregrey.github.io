@@ -438,6 +438,6 @@ Asexual people didnt really change much and are mostly full of outliers, not sur
 ___
 
 <div class="button-container">
-  <a class="big-button" href="../transition">Previous Page</a>
-  <a class="big-button" href="../relationships">Next Page</a>
+  <a class="big-button" href="./transition">Previous Page</a>
+  <a class="big-button" href="./relationships">Next Page</a>
 </div>

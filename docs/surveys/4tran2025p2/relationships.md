@@ -304,6 +304,6 @@ Men aren't doing too well, though not by a huge margin.
 ___
 
 <div class="button-container">
-  <a class="big-button" href="../sexuality">Previous Page</a>
-  <a class="big-button" href="../heightpreferences">Next Page</a>
+  <a class="big-button" href="./sexuality">Previous Page</a>
+  <a class="big-button" href="./heightpreferences">Next Page</a>
 </div>

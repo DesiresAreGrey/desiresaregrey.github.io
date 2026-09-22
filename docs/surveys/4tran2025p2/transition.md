@@ -529,6 +529,6 @@ perfectly 50/50 on the chart, it would mean that the same proportion of men and 
 ___
 
 <div class="button-container">
-  <a class="big-button" href="../socialmedia">Previous Page</a>
-  <a class="big-button" href="../sexuality">Next Page</a>
+  <a class="big-button" href="./socialmedia">Previous Page</a>
+  <a class="big-button" href="./sexuality">Next Page</a>
 </div>

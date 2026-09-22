@@ -289,6 +289,6 @@ genders. I wish I added a dedicated option for typing in custom terms so that pe
 ___
 
 <div class="button-container">
-  <a class="big-button" href="../health">Previous Page</a>
-  <a class="big-button" href="../misc">Next Page</a>
+  <a class="big-button" href="./health">Previous Page</a>
+  <a class="big-button" href="./misc">Next Page</a>
 </div>
