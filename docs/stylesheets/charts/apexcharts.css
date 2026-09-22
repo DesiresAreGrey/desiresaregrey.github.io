@@ -98,7 +98,7 @@
 }
 
 .apexcharts-tooltip:has(.apexcharts-tooltip-scatter) {
-  transform: translateY(35px);
+  transform: translateY(6px);
 }
 
 .apexchart {

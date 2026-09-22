@@ -1,5 +1,6 @@
 import ApexCharts from 'apexcharts';
-import "../utils/utils.js";
+import type { ApexOptions } from 'apexcharts';
+import 'apexcharts/features/renderer-canvas';
 
 interface ChartData {
     id: string;
@@ -25,7 +26,7 @@ export class Apex {
             }
         });
         data.categories = data.categories.map((c: string) => replaceXThanWithSymbol(c));
-        const options = {
+        const options: ApexOptions = {
             chart: {
                 id: chartId,
                 type: 'bar',
@@ -57,7 +58,6 @@ export class Apex {
             series: data.series,
             xaxis: {
                 categories: data.categories,
-                show: false,
                 labels: {
                     show: false
                 },
@@ -128,7 +128,7 @@ export class Apex {
             colors: colors
         };
         const start = performance.now();
-        new ApexCharts($id(chartId), options).render();
+        new ApexCharts($id(chartId)!, options).render();
         Apex.#charts.push({
             id: chartId,
             title: title,
@@ -145,7 +145,7 @@ export class Apex {
             }
         });
         data.categories = data.categories.map((c: string) => replaceXThanWithSymbol(c));
-        const options = {
+        const options: ApexOptions = {
             chart: {
                 id: chartId,
                 type: 'bar',
@@ -225,7 +225,7 @@ export class Apex {
             colors: colors
         };
         const start = performance.now();
-        new ApexCharts($id(chartId), options).render();
+        new ApexCharts($id(chartId)!, options).render();
         Apex.#charts.push({
             id: chartId,
             title: title,
@@ -346,7 +346,7 @@ export class Apex {
             }
         }
         const start = performance.now();
-        new ApexCharts($id(chartId), options).render();
+        new ApexCharts($id(chartId)!, options).render();
         Apex.#charts.push({
             id: chartId,
             title: title,
@@ -357,7 +357,7 @@ export class Apex {
     }
 
     static createPieChart(chartId: string, data: any, title: string | undefined, colors: string[], height: number) {
-        const options = {
+        const options: ApexOptions = {
             chart: {
                 id: chartId,
                 type: 'pie',
@@ -413,7 +413,7 @@ export class Apex {
             colors: colors
         };
         const start = performance.now();
-        new ApexCharts($id(chartId), options).render();
+        new ApexCharts($id(chartId)!, options).render();
         Apex.#charts.push({
             id: chartId,
             title: title,
@@ -599,7 +599,7 @@ export class Apex {
         }
 
         const start = performance.now();
-        new ApexCharts($id(chartId), options).render();
+        new ApexCharts($id(chartId)!, options).render();
         Apex.#charts.push({
             id: chartId,
             title: title,
@@ -615,10 +615,11 @@ export class Apex {
                 data[index].hidden = true;
             }
         });
-        const options = {
+        const options: ApexOptions = {
             chart: {
                 id: chartId,
                 type: 'scatter',
+                renderer: 'canvas',
                 height: height,
                 toolbar: { show: false },
                 background: '#090909',
@@ -719,7 +720,7 @@ export class Apex {
         };
         
         const start = performance.now();
-        new ApexCharts($id(chartId), { ...options, ...customOptions }).render();
+        new ApexCharts($id(chartId)!, { ...options, ...customOptions }).render();
         Apex.#charts.push({
             id: chartId,
             title: title,
@@ -730,7 +731,7 @@ export class Apex {
     }
 
     static createHeatmap(chartId: string, data: any, title: string | undefined, subtitle: string | undefined, color: string, height: number, customOptions?: any) {
-        const options = {
+        const options: ApexOptions = {
             chart: {
                 id: chartId,
                 type: 'heatmap',
@@ -836,7 +837,7 @@ export class Apex {
             colors: [color],
         };
         const start = performance.now();
-        new ApexCharts($id(chartId), { ...options, ...customOptions }).render();
+        new ApexCharts($id(chartId)!, { ...options, ...customOptions }).render();
         Apex.#charts.push({
             id: chartId,
             title: title,
