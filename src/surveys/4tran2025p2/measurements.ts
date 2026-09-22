@@ -11,10 +11,14 @@ const heightInput = $("#height-input") as HTMLInputElement;
 const heightFeetInput = $("#height-feet-input") as HTMLInputElement;
 
 const weightInput = $("#weight-input") as HTMLInputElement;
+const weightSection = $id("weight-section") as HTMLDivElement;
 
 const infoHeight = $("#info-height") as HTMLElement;
 const infoWeight = $("#info-weight") as HTMLElement;
 const infoBmi = $("#info-bmi") as HTMLElement;
+
+const weightToggle = $("#measurements-weight-toggle") as HTMLInputElement;
+const weightEnabled = () => !weightToggle.checked;
 
 const scatterplotChartToggle = $("#scatterplot-type-toggle") as HTMLInputElement;
 const scatterplotChartEnabled = () => !scatterplotChartToggle.checked;
@@ -40,29 +44,32 @@ const heightStats = Object.fromEntries(heightData.map((r: any) => [r.Gender, { m
 unitsSelect.addEventListener("change", (e: any) => {
     changeUnit(e.target.dataset.oldValue, e.target.value);
     e.target.dataset.oldValue = e.target.value;
-    update();
+    updateCalculator();
 });
 unitsSelect.dataset.oldValue = unitsSelect.value;
 
-heightInput.addEventListener("input", update);
+heightInput.addEventListener("input", updateCalculator);
 heightInput.addEventListener("keydown", exitOnEnter);
 heightInput.addEventListener("focus", focusInput);
 heightInput.addEventListener("blur", updateScatterPlot);
 
-heightFeetInput.addEventListener("input", update);
+heightFeetInput.addEventListener("input", updateCalculator);
 heightFeetInput.addEventListener("keydown", exitOnEnter);
 heightFeetInput.addEventListener("focus", focusInput);
 heightFeetInput.addEventListener("blur", updateScatterPlot);
 
-weightInput.addEventListener("input", update);
+weightInput.addEventListener("input", updateCalculator);
 weightInput.addEventListener("keydown", exitOnEnter);
 weightInput.addEventListener("focus", focusInput);
 weightInput.addEventListener("blur", updateScatterPlot);
 
+weightToggle.addEventListener("change", toggleChanged);
 scatterplotChartToggle.addEventListener("change", toggleChanged);
 scatterplotSelfToggle.addEventListener("change", toggleChanged);
+updateToggles();
 
-update();
+window.addEventListener('resize', windowResized);
+windowResized();
 
 function focusInput(e: Event) {
     if (window.innerWidth > 768) return;
@@ -79,7 +86,7 @@ function getTotalHeight(oldUnit: UnitSystem): number {
     return height ?? 0;
 }
 
-function update(e?: Event) {
+function updateCalculator(e?: Event) {
     if (e)
         (e.target as HTMLInputElement).value = (e.target as HTMLInputElement).value.replace(/[^0-9.]/g, '');
 
@@ -87,6 +94,17 @@ function update(e?: Event) {
     let weight = weightInput.value?.parseFloat() ?? 0;
 
     infoHeight.textContent = `${height?.toFeetInches(1, getUnits())} - ${height.asCm(getUnits()).roundTo(2)} cm`;
+    
+    if (weightEnabled()) {
+        weightSection.style.removeProperty("display");
+        infoWeight.style.removeProperty("display");
+        infoBmi.style.removeProperty("display");
+    }
+    else {
+        weightSection.style.display = "none";
+        infoWeight.style.display = "none";
+        infoBmi.style.display = "none";
+    }
     infoWeight.textContent = `${weight.asPounds(getUnits()).roundTo(1)} lbs - ${weight.asKg(getUnits()).roundTo(1)} kg`;
 
     infoBmi.textContent = `${(weight.asKg(getUnits()) / ((height.asCm(getUnits()) / 100) ** 2)).roundTo(2)} BMI`;
@@ -353,9 +371,41 @@ function updateScatterPlot() {
     });
 }
 
+function updateToggles() {
+    const scatterplotTypeToggleContainer = $id('scatterplot-type-toggle-container')!;
+    const scatterplotSelfToggleContainer = $id('scatterplot-self-toggle-container')!;
+    if (weightToggle.checked){
+        scatterplotChartToggle.checked = true;
+        scatterplotTypeToggleContainer.style.opacity = '0.5';
+    }
+    else {
+        scatterplotTypeToggleContainer.style.opacity = '1';
+    }
+
+    if (scatterplotChartToggle.checked) {
+        scatterplotSelfToggleContainer.style.opacity = '0.5';
+    }
+    else {
+        scatterplotSelfToggleContainer.style.opacity = '1';
+    }
+    updateCalculator();
+    localStorage.setItem('4tran2025p2-scatterplot-type-toggle-checked', scatterplotChartToggle.checked.toJson());
+    localStorage.setItem('4tran2025p2-measurements-weight-toggle-checked', weightToggle.checked.toJson());
+}
+
 function toggleChanged() {
+    updateToggles();
     updateScatterPlot();
-    localStorage.setItem('scatterplot-type-toggle-checked', scatterplotChartToggle.checked.toJson());
+}
+
+function windowResized() {
+    const calculatorLeft = $id("calculator-left") as HTMLDivElement;
+    if (window.innerWidth > 640) {
+        calculatorLeft.style.height = `${$(".right-panel")!.offsetHeight}px`;
+    }
+    else {
+        calculatorLeft.style.height = 'auto';
+    }
 }
 
 function exitOnEnter(e: KeyboardEvent) {
