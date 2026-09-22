@@ -39,7 +39,7 @@ Honestly, I have no idea whats the best way to show this data.
         data-datakey="dating_height_haspref_ftm_male_min"
         data-title="Has Minimum Height Preference for Men"
         data-subtitle="FtM"
-        data-colors='["#008FFB", "#1a4566"]'
+        data-colors='#008FFB, #1a4566'
         >
       </div>
       <div id="dating-height-haspref-ftm-male-min-boxplot"
@@ -63,7 +63,7 @@ Honestly, I have no idea whats the best way to show this data.
         data-datakey="dating_height_haspref_mtf_male_min"
         data-title="Has Minimum Height Preference for Men"
         data-subtitle="MtF"
-        data-colors='["#FF4560", "#661a24"]'
+        data-colors='#FF4560, #661a24'
         >
       </div>
       <div id="dating-height-haspref-mtf-male-min-boxplot"
@@ -99,7 +99,7 @@ Honestly, I have no idea whats the best way to show this data.
         data-datakey="dating_height_haspref_ftm_male_max"
         data-title="Has Maximum Height Preference for Men"
         data-subtitle="FtM"
-        data-colors='["#008FFB", "#1a4566"]'
+        data-colors='#008FFB, #1a4566'
         >
       </div>
       <div id="dating-height-haspref-ftm-male-max-boxplot"
@@ -123,7 +123,7 @@ Honestly, I have no idea whats the best way to show this data.
         data-datakey="dating_height_haspref_mtf_male_max"
         data-title="Has Maximum Height Preference for Men"
         data-subtitle="MtF"
-        data-colors='["#FF4560", "#661a24"]'
+        data-colors='#FF4560, #661a24'
         >
       </div>
       <div id="dating-height-haspref-mtf-male-max-boxplot"
@@ -161,7 +161,7 @@ Honestly, I have no idea whats the best way to show this data.
         data-datakey="dating_height_haspref_ftm_female_min"
         data-title="Has Minimum Height Preference for Women"
         data-subtitle="FtM"
-        data-colors='["#008FFB", "#1a4566"]'
+        data-colors='#008FFB, #1a4566'
         >
       </div>
       <div id="dating-height-haspref-ftm-female-min-boxplot"
@@ -185,7 +185,7 @@ Honestly, I have no idea whats the best way to show this data.
         data-datakey="dating_height_haspref_mtf_female_min"
         data-title="Has Minimum Height Preference for Women"
         data-subtitle="MtF"
-        data-colors='["#FF4560", "#661a24"]'
+        data-colors='#FF4560, #661a24'
         >
       </div>
       <div id="dating-height-haspref-mtf-female-min-boxplot"
@@ -221,7 +221,7 @@ Honestly, I have no idea whats the best way to show this data.
         data-datakey="dating_height_haspref_ftm_female_max"
         data-title="Has Maximum Height Preference for Women"
         data-subtitle="FtM"
-        data-colors='["#008FFB", "#1a4566"]'
+        data-colors='#008FFB, #1a4566'
         >
       </div>
       <div id="dating-height-haspref-ftm-female-max-boxplot"
@@ -245,7 +245,7 @@ Honestly, I have no idea whats the best way to show this data.
         data-datakey="dating_height_haspref_mtf_female_max"
         data-title="Has Maximum Height Preference for Women"
         data-subtitle="MtF"
-        data-colors='["#FF4560", "#661a24"]'
+        data-colors='#FF4560, #661a24'
         >
       </div>
       <div id="dating-height-haspref-mtf-female-max-boxplot"
@@ -271,6 +271,6 @@ Honestly, I have no idea whats the best way to show this data.
 ___
 
 <div class="button-container">
-  <a class="big-button" href="./relationships">Previous Page</a>
-  <a class="big-button" href="./health">Next Page</a>
+  <a class="big-button" href="relationships.md">Previous Page</a>
+  <a class="big-button" href="health.md">Next Page</a>
 </div>

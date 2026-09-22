@@ -30,7 +30,7 @@ hide:
   data-chart="ratio-bar"
   data-datakey="sexuality_label"
   data-title="Sexuality Label"
-  data-colors='["#8AA0B3", "#8E5CF1", "#FF4D88", "#2E294E"]'
+  data-colors='#8AA0B3, #8E5CF1, #FF4D88, #2E294E'
   >
 </div>
 
@@ -438,6 +438,6 @@ Asexual people didnt really change much and are mostly full of outliers, not sur
 ___
 
 <div class="button-container">
-  <a class="big-button" href="./transition">Previous Page</a>
-  <a class="big-button" href="./relationships">Next Page</a>
+  <a class="big-button" href="transition.md">Previous Page</a>
+  <a class="big-button" href="relationships.md">Next Page</a>
 </div>

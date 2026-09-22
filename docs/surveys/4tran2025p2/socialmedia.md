@@ -77,7 +77,7 @@ Microcelebs are rare, especially among men where there are no current microceleb
   data-chart="ratio-bar"
   data-datakey="microceleb"
   data-title="Microceleb Status"
-  data-colors='["#FF9800", "#00E0B8", "#7B61FF", "#3c57f1"]'
+  data-colors='#FF9800, #00E0B8, #7B61FF, #3c57f1'
   >
 </div>
 
@@ -91,7 +91,7 @@ There are more 4chan users than I thought, though maybe "occasionally" is too br
   data-chart="ratio-bar"
   data-datakey="usage_4chan"
   data-title="4Chan Usage"
-  data-colors='["#FF9800", "#00E0B8", "#7B61FF", "#3c57f1"]'
+  data-colors='#FF9800, #00E0B8, #7B61FF, #3c57f1'
   >
 </div>
 
@@ -104,7 +104,7 @@ If you selected Frequently/Occasionally, then you were asked when was the last t
   data-chart="ratio-bar"
   data-datakey="last_visit_4chan"
   data-title="Last Time Visiting 4Chan"
-  data-colors='["#FF9800", "#00E0B8", "#3c57f1", "#7B61FF", "#A300D6"]'
+  data-colors='#FF9800, #00E0B8, #3c57f1, #7B61FF, #A300D6'
   >
 </div>
 
@@ -158,6 +158,6 @@ about the survey. I made it a bit more granular than last time and added differe
 ___
 
 <div class="button-container">
-  <a class="big-button" href="./measurements">Previous Page</a>
-  <a class="big-button" href="./transition">Next Page</a>
+  <a class="big-button" href="measurements.md">Previous Page</a>
+  <a class="big-button" href="transition.md">Next Page</a>
 </div>

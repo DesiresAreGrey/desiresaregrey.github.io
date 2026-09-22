@@ -37,7 +37,7 @@ I would eventually like to do a general trans reddit survey to see how it compar
   data-datakey="natal_piv"
   data-title="Natal PIV"
   data-subtitle="Overall"
-  data-colors='["#7B61FF", "#5642bd", "#2E294E"]'
+  data-colors='#7B61FF, #5642bd, #2E294E'
   >
 </div>
 
@@ -51,7 +51,7 @@ would be the most likely to be into natal PIV, with straight men being the least
   data-datakey="natal_piv_ftm"
   data-title="Natal PIV"
   data-subtitle="FtM"
-  data-colors='["#008FFB", "#15598c", "#1b3b4d"]'
+  data-colors='#008FFB, #15598c, #1b3b4d'
   >
 </div>
 
@@ -64,7 +64,7 @@ This seems pretty equal to the men, though bi women are slightly less into natal
   data-datakey="natal_piv_mtf"
   data-title="Natal PIV"
   data-subtitle="MtF"
-  data-colors='["#FF4560", "#801927", "#4d1f2a"]'
+  data-colors='#FF4560, #801927, #4d1f2a'
   >
 </div>
 
@@ -81,7 +81,7 @@ general than for specifically PIV.
   data-datakey="natal_using"
   data-title="Using Natal Genitalia"
   data-subtitle="Overall"
-  data-colors='["#7B61FF", "#5642bd", "#2E294E"]'
+  data-colors='#7B61FF, #5642bd, #2E294E'
   >
 </div>
 
@@ -96,7 +96,7 @@ Generally the same as PIV, though gay men are slightly more open to this compare
   data-datakey="natal_using_ftm"
   data-title="Using Natal Genitalia"
   data-subtitle="FtM"
-  data-colors='["#008FFB", "#15598c", "#1b3b4d"]'
+  data-colors='#008FFB, #15598c, #1b3b4d'
   >
 </div>
 
@@ -121,7 +121,7 @@ It is interesting how there is 1 straight trans man who would want to be penetra
       data-datakey="natal_using_ftm_straight"
       data-title="Using Natal Genitalia x Most Preferred Gender"
       data-subtitle="FtM (Straight)"
-      data-colors='["#008FFB", "#15598c", "#1b3b4d"]'
+      data-colors='#008FFB, #15598c, #1b3b4d'
       >
     </div>
     <div id="natal-using-ftm-bisexual-ratio" 
@@ -131,7 +131,7 @@ It is interesting how there is 1 straight trans man who would want to be penetra
       data-datakey="natal_using_ftm_bisexual"
       data-title="Using Natal Genitalia x Most Preferred Gender"
       data-subtitle="FtM (Bisexual)"
-      data-colors='["#008FFB", "#15598c", "#1b3b4d"]'
+      data-colors='#008FFB, #15598c, #1b3b4d'
       >
     </div>
     <div id="natal-using-ftm-gay-ratio" 
@@ -141,7 +141,7 @@ It is interesting how there is 1 straight trans man who would want to be penetra
       data-datakey="natal_using_ftm_gay"
       data-title="Using Natal Genitalia x Most Preferred Gender"
       data-subtitle="FtM (Gay)"
-      data-colors='["#008FFB", "#15598c", "#1b3b4d"]'
+      data-colors='#008FFB, #15598c, #1b3b4d'
       >
     </div>
     <div id="natal-using-ftm-asexual-ratio" 
@@ -151,7 +151,7 @@ It is interesting how there is 1 straight trans man who would want to be penetra
       data-datakey="natal_using_ftm_asexual"
       data-title="Using Natal Genitalia x Most Preferred Gender"
       data-subtitle="FtM (Asexual)"
-      data-colors='["#008FFB", "#15598c", "#1b3b4d"]'
+      data-colors='#008FFB, #15598c, #1b3b4d'
       >
     </div>
   </div>
@@ -174,7 +174,7 @@ The chart here is pretty similar to men.
   data-datakey="natal_using_mtf"
   data-title="Using Natal Genitalia"
   data-subtitle="MtF"
-  data-colors='["#FF4560", "#801927", "#4d1f2a"]'
+  data-colors='#FF4560, #801927, #4d1f2a'
   >
 </div>
 
@@ -201,7 +201,7 @@ want to be penetrated by a trans woman. Made for each other?
       data-datakey="natal_using_mtf_straight"
       data-title="Using Natal Genitalia x Most Preferred Gender"
       data-subtitle="MtF (Straight)"
-      data-colors='["#FF4560", "#801927", "#4d1f2a"]'
+      data-colors='#FF4560, #801927, #4d1f2a'
       >
     </div>
     <div id="natal-using-mtf-bisexual-ratio" 
@@ -211,7 +211,7 @@ want to be penetrated by a trans woman. Made for each other?
       data-datakey="natal_using_mtf_bisexual"
       data-title="Using Natal Genitalia x Most Preferred Gender"
       data-subtitle="MtF (Bisexual)"
-      data-colors='["#FF4560", "#801927", "#4d1f2a"]'
+      data-colors='#FF4560, #801927, #4d1f2a'
       >
     </div>
     <div id="natal-using-mtf-lesbian-ratio" 
@@ -221,7 +221,7 @@ want to be penetrated by a trans woman. Made for each other?
       data-datakey="natal_using_mtf_lesbian"
       data-title="Using Natal Genitalia x Most Preferred Gender"
       data-subtitle="MtF (Lesbian)"
-      data-colors='["#FF4560", "#801927", "#4d1f2a"]'
+      data-colors='#FF4560, #801927, #4d1f2a'
       >
     </div>
     <div id="natal-using-mtf-asexual-ratio" 
@@ -231,7 +231,7 @@ want to be penetrated by a trans woman. Made for each other?
       data-datakey="natal_using_mtf_asexual"
       data-title="Using Natal Genitalia x Most Preferred Gender"
       data-subtitle="MtF (Asexual)"
-      data-colors='["#FF4560", "#801927", "#4d1f2a"]'
+      data-colors='#FF4560, #801927, #4d1f2a'
       >
     </div>
   </div>
@@ -257,7 +257,7 @@ do not want to.
   data-datakey="natal_does_piv"
   data-title="Performing PIV"
   data-subtitle="Overall"
-  data-colors='["#7B61FF", "#2E294E"]'
+  data-colors='#7B61FF, #2E294E'
   >
 </div>
 
@@ -271,7 +271,7 @@ with trans women).
   data-datakey="natal_does_piv_ftm"
   data-title="Performing PIV"
   data-subtitle="FtM"
-  data-colors='["#008FFB", "#183d52"]'
+  data-colors='#008FFB, #183d52'
   >
 </div>
 
@@ -285,7 +285,7 @@ lower than the amount of straight men performing PIV, interestingly enough.
   data-datakey="natal_does_piv_mtf"
   data-title="Performing PIV"
   data-subtitle="MtF"
-  data-colors='["#FF4560", "#521b28"]'
+  data-colors='#FF4560, #521b28'
   >
 </div>
 
@@ -318,11 +318,11 @@ switches than women.
   data-datakey="sexual_role"
   data-title="Preferred Sexual Role"
   data-subtitle="Overall"
-  data-colors='["#7B61FF", "#5642bd", "#2E294E"]'
+  data-colors='#7B61FF, #5642bd, #2E294E'
   >
 </div>
 
-Straight men being the most dominant is once again expected, and bi men are the most switchy. When compared to the [previous survey](/surveys/4tran2025/4/#nsfw){ target="_blank" rel="noopener" }, 
+Straight men being the most dominant is once again expected, and bi men are the most switchy. When compared to the [previous survey](../4tran2025/4.md#nsfw){ target="_blank" rel="noopener" }, 
 there is a noticeable increase in the dominance of all men.
 
 <div id="sexual-role-ftm-ratio" 
@@ -332,7 +332,7 @@ there is a noticeable increase in the dominance of all men.
   data-datakey="sexual_role_ftm"
   data-title="Preferred Sexual Role"
   data-subtitle="FtM"
-  data-colors='["#008FFB", "#15598c", "#1b3b4d"]'
+  data-colors='#008FFB, #15598c, #1b3b4d'
   >
 </div>
 
@@ -345,7 +345,7 @@ Straight women are almost all submissives, with 95% being submissive and 5% bein
   data-datakey="sexual_role_mtf"
   data-title="Preferred Sexual Role"
   data-subtitle="MtF"
-  data-colors='["#FF4560", "#801927", "#4d1f2a"]'
+  data-colors='#FF4560, #801927, #4d1f2a'
   >
 </div>
 
@@ -361,7 +361,7 @@ pretty sure this difference between the genders applies to cis people as well.
   data-datakey="sexual_position"
   data-title="Preferred Sexual Position"
   data-subtitle="Overall"
-  data-colors='["#7B61FF", "#5642bd", "#2E294E"]'
+  data-colors='#7B61FF, #5642bd, #2E294E'
   >
 </div>
 
@@ -375,7 +375,7 @@ consistent with the previous survey. It would be interesting to see how this com
   data-datakey="sexual_position_ftm"
   data-title="Preferred Sexual Position"
   data-subtitle="FtM"
-  data-colors='["#008FFB", "#15598c", "#1b3b4d"]'
+  data-colors='#008FFB, #15598c, #1b3b4d'
   >
 </div>
 
@@ -388,13 +388,13 @@ Pretty expected and similar to position, except for lesbians who top more than t
   data-datakey="sexual_position_mtf"
   data-title="Preferred Sexual Position"
   data-subtitle="MtF"
-  data-colors='["#FF4560", "#801927", "#4d1f2a"]'
+  data-colors='#FF4560, #801927, #4d1f2a'
   >
 </div>
 
 ___
 
 <div class="button-container">
-  <a class="big-button" href="./misc">Previous Page</a>
-  <a class="big-button" href="./conclusion">Next Page</a>
+  <a class="big-button" href="misc.md">Previous Page</a>
+  <a class="big-button" href="conclusion.md">Next Page</a>
 </div>

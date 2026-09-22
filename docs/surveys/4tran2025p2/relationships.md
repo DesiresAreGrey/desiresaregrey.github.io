@@ -47,7 +47,7 @@ to dating trans women and even cis women?).
       data-datakey="dating_preferred_genders_ftm_straight"
       data-title="Genders Open to Dating"
       data-subtitle="Straight (FtM)"
-      data-colors='["#259efa"]'
+      data-colors='#259efa'
       >
     </div>
     <div id="datingpreferred-ftm-bisexual-bar" 
@@ -57,7 +57,7 @@ to dating trans women and even cis women?).
       data-datakey="dating_preferred_genders_ftm_bisexual"
       data-title="Genders Open to Dating"
       data-subtitle="Bisexual (FtM)"
-      data-colors='["#259efa"]'
+      data-colors='#259efa'
       >
     </div>
     <div id="datingpreferred-ftm-gay-bar"
@@ -67,7 +67,7 @@ to dating trans women and even cis women?).
       data-datakey="dating_preferred_genders_ftm_gay"
       data-title="Genders Open to Dating"
       data-subtitle="Gay (FtM)"
-      data-colors='["#259efa"]'
+      data-colors='#259efa'
       >
     </div>
     <div id="datingpreferred-ftm-asexual-bar"
@@ -77,7 +77,7 @@ to dating trans women and even cis women?).
       data-datakey="dating_preferred_genders_ftm_asexual"
       data-title="Genders Open to Dating"
       data-subtitle="Asexual (FtM)"
-      data-colors='["#259efa"]'
+      data-colors='#259efa'
       >
     </div>
   </div>
@@ -106,7 +106,7 @@ Bi trans women are most open to dating other trans women (bi trans men were most
       data-datakey="dating_preferred_genders_mtf_straight"
       data-title="Genders Open to Dating"
       data-subtitle="Straight (MtF)"
-      data-colors='["#ff4f69"]'
+      data-colors='#ff4f69'
       >
     </div>
     <div id="datingpreferred-mtf-bisexual-bar" 
@@ -116,7 +116,7 @@ Bi trans women are most open to dating other trans women (bi trans men were most
       data-datakey="dating_preferred_genders_mtf_bisexual"
       data-title="Genders Open to Dating"
       data-subtitle="Bisexual (MtF)"
-      data-colors='["#ff4f69"]'
+      data-colors='#ff4f69'
       >
     </div>
     <div id="datingpreferred-mtf-lesbian-bar"
@@ -126,7 +126,7 @@ Bi trans women are most open to dating other trans women (bi trans men were most
       data-datakey="dating_preferred_genders_mtf_lesbian"
       data-title="Genders Open to Dating"
       data-subtitle="Lesbian (MtF)"
-      data-colors='["#ff4f69"]'
+      data-colors='#ff4f69'
       >
     </div>
     <div id="datingpreferred-mtf-asexual-bar"
@@ -136,7 +136,7 @@ Bi trans women are most open to dating other trans women (bi trans men were most
       data-datakey="dating_preferred_genders_mtf_asexual"
       data-title="Genders Open to Dating"
       data-subtitle="Asexual (MtF)"
-      data-colors='["#ff4f69"]'
+      data-colors='#ff4f69'
       >
     </div>
   </div>
@@ -167,7 +167,7 @@ prefer trans men over cis men. Trans men in general seem to prefer trans men ove
   data-datakey="dating_most_preferred_gender_ftm"
   data-title="Most Preferred Gender for Dating"
   data-subtitle="FtM"
-  data-colors='["#259efa", "#3f51b5", "#ff4f69", "#D7263D", "#00E396"]'
+  data-colors='#259efa, #3f51b5, #ff4f69, #D7263D, #00E396'
   >
 </div>
 
@@ -184,7 +184,7 @@ No idea why 1 transbian preferred trans men the most, and 2 transbians preferred
   data-datakey="dating_most_preferred_gender_mtf"
   data-title="Most Preferred Gender for Dating"
   data-subtitle="MtF"
-  data-colors='["#259efa", "#3f51b5", "#ff4f69", "#D7263D", "#00E396"]'
+  data-colors='#259efa, #3f51b5, #ff4f69, #D7263D, #00E396'
   >
 </div>
 
@@ -200,7 +200,7 @@ trans men, they are more likely to be dating a cis man over a trans man.
   data-datakey="current_partner_gender_ftm"
   data-title="Current Partner Gender"
   data-subtitle="FtM"
-  data-colors='["#259efa", "#3f51b5", "#ff4f69", "#D7263D", "#00E396"]'
+  data-colors='#259efa, #3f51b5, #ff4f69, #D7263D, #00E396'
   >
 </div>
 
@@ -214,7 +214,7 @@ lesbians, gay trans men are more likely to be dating cis men however lesbian tra
   data-datakey="current_partner_gender_mtf"
   data-title="Current Partner Gender"
   data-subtitle="MtF"
-  data-colors='["#259efa", "#3f51b5", "#ff4f69", "#D7263D", "#00E396"]'
+  data-colors='#259efa, #3f51b5, #ff4f69, #D7263D, #00E396'
   >
 </div>
 
@@ -229,7 +229,7 @@ preferred gender charts to see how they compare.
   data-chart="ratio-bar"
   data-datakey="relationship_status"
   data-title="Relationship Status"
-  data-colors='["#FF9800", "#00E0B8", "#7B61FF", "#3c57f1"]'
+  data-colors='#FF9800, #00E0B8, #7B61FF, #3c57f1'
   >
 </div>
 
@@ -243,7 +243,7 @@ Seems to be similar rates throughout the genders
   data-chart="ratio-bar"
   data-datakey="is_polyamorous"
   data-title="Polyamory"
-  data-colors='["#7B61FF", "#00E0B8"]'
+  data-colors='#7B61FF, #00E0B8'
   >
 </div>
 
@@ -270,7 +270,7 @@ This one surprised me tbh, I expected women to be virgins (expectations maybe sk
   data-chart="ratio-bar"
   data-datakey="is_virgin"
   data-title="Virginity"
-  data-colors='["#7B61FF", "#00E0B8"]'
+  data-colors='#7B61FF, #00E0B8'
   >
 </div>
 
@@ -284,7 +284,7 @@ These are so similar to each other than any differences are probably just statis
   data-chart="ratio-bar"
   data-datakey="virgin_types"
   data-title="Virgin Types"
-  data-colors='["#FF9800", "#00E0B8", "#7B61FF", "#3c57f1"]'
+  data-colors='#FF9800, #00E0B8, #7B61FF, #3c57f1'
   >
 </div>
 
@@ -297,13 +297,13 @@ Men aren't doing too well, though not by a huge margin.
   data-datakey="khhv"
   data-title="Kissless, Handholdless, Hugless, Sexless Virgin"
   data-subtitle="Virgins Only"
-  data-colors='["#7B61FF", "#00E0B8"]'
+  data-colors='#7B61FF, #00E0B8'
   >
 </div>
 
 ___
 
 <div class="button-container">
-  <a class="big-button" href="./sexuality">Previous Page</a>
-  <a class="big-button" href="./heightpreferences">Next Page</a>
+  <a class="big-button" href="sexuality.md">Previous Page</a>
+  <a class="big-button" href="heightpreferences.md">Next Page</a>
 </div>

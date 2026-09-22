@@ -61,7 +61,7 @@ here was in 12th place for men but only 30th place for women.
       data-datakey="describing_terms_serious_mtf_flipped"
       data-title="Describing Terms - Serious"
       data-subtitle="MtF"
-      data-colors='["#ff4f69"]'
+      data-colors='#ff4f69'
       >
     </div>
   </div>
@@ -189,7 +189,7 @@ didn't expect AGP to be second (same with AAP being third for men, right under T
       data-datakey="describing_terms_ironic_mtf_flipped"
       data-title="Describing Terms - Ironic"
       data-subtitle="MtF"
-      data-colors='["#ff4f69"]'
+      data-colors='#ff4f69'
       >
     </div>
   </div>
@@ -289,6 +289,6 @@ genders. I wish I added a dedicated option for typing in custom terms so that pe
 ___
 
 <div class="button-container">
-  <a class="big-button" href="./health">Previous Page</a>
-  <a class="big-button" href="./misc">Next Page</a>
+  <a class="big-button" href="health.md">Previous Page</a>
+  <a class="big-button" href="misc.md">Next Page</a>
 </div>

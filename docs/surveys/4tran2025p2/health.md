@@ -32,7 +32,7 @@ I guess it makes sense that men use drugs the most.
   data-chart="ratio-bar"
   data-datakey="does_recreational_drugs"
   data-title="Does Recreational Drugs"
-  data-colors='["#7B61FF", "#00E0B8"]'
+  data-colors='#7B61FF, #00E0B8'
   >
 </div>
 
@@ -61,7 +61,7 @@ more popular than nicotine. Do men smoke a lot?
       data-datakey="recreational_drugs_mtf_flipped"
       data-title="Drugs Used"
       data-subtitle="MtF"
-      data-colors='["#ff4f69"]'
+      data-colors='#ff4f69'
       >
     </div>
     <div id="drugsused-total-bar" 
@@ -103,7 +103,7 @@ STDs aren't very common thankfully...
   data-chart="ratio-bar"
   data-datakey="has_stds"
   data-title="Has STDs"
-  data-colors='["#7B61FF", "#00E0B8"]'
+  data-colors='#7B61FF, #00E0B8'
   >
 </div>
 
@@ -129,7 +129,7 @@ STDs aren't very common thankfully...
       data-datakey="stds_mtf_flipped"
       data-title="STDs"
       data-subtitle="MtF"
-      data-colors='["#ff4f69"]'
+      data-colors='#ff4f69'
       >
     </div>
     <div id="stds-total-bar" 
@@ -192,7 +192,7 @@ compared to women, while BPD, BDD, Anorexia, and Binge Eating Disorder seem to b
       data-datakey="disorders_officially_diagnosed_mtf_flipped"
       data-title="Disorders Officially Diagnosed"
       data-subtitle="MtF"
-      data-colors='["#ff4f69"]'
+      data-colors='#ff4f69'
       >
     </div>
     
@@ -276,7 +276,7 @@ Seems pretty similar to the previous one.
       data-datakey="disorders_self_diagnosed_mtf_flipped"
       data-title="Disorders Self Diagnosed"
       data-subtitle="MtF"
-      data-colors='["#ff4f69"]'
+      data-colors='#ff4f69'
       >
     </div>
     
@@ -330,13 +330,13 @@ Men seem to currently be in therapy the least, but women are slightly more likel
   data-chart="ratio-bar"
   data-datakey="in_therapy"
   data-title="In Therapy"
-  data-colors='["#7B61FF", "#5642bd", "#2E294E"]'
+  data-colors='#7B61FF, #5642bd, #2E294E'
   >
 </div>
 
 ___
 
 <div class="button-container">
-  <a class="big-button" href="./heightpreferences">Previous Page</a>
-  <a class="big-button" href="./selfdescribing">Next Page</a>
+  <a class="big-button" href="heightpreferences.md">Previous Page</a>
+  <a class="big-button" href="selfdescribing.md">Next Page</a>
 </div>

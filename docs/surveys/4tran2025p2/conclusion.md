@@ -48,7 +48,7 @@ Glad to see that most people liked the survey :)
       data-datakey="survey_rating"
       data-title="Survey Rating"
       data-subtitle="Ratio"
-      data-colors='["#13003F","#2C0079","#470BB6","#5F3DDA","#6D4FEC","#7B61FF"]'
+      data-colors='#13003F, #2C0079, #470BB6, #5F3DDA, #6D4FEC, #7B61FF'
       >
     </div>
   </div>
@@ -72,7 +72,7 @@ who took the first survey, but I guess the turnover rate for people in 4t4 is pr
   data-chart="ratio-bar"
   data-datakey="participant_of_first_survey"
   data-title="First Survey Participation"
-  data-colors='["#7B61FF", "#00E0B8"]'
+  data-colors='#7B61FF, #00E0B8'
   >
 </div>
 
@@ -88,7 +88,7 @@ the 4 pages of the first survey.
   data-chart="ratio-bar"
   data-datakey="survey_length"
   data-title="Survey Length Rating"
-  data-colors='["#7B61FF", "#5642bd", "#2E294E"]'
+  data-colors='#7B61FF, #5642bd, #2E294E'
   >
 </div>
 
@@ -133,6 +133,6 @@ really touched with some of the nice comments people left in the feedback sectio
 ___
 
 <div class="button-container">
-  <a class="big-button" href="./nsfw">Previous Page</a>
+  <a class="big-button" href="nsfw.md">Previous Page</a>
   <a class="big-button" disabled></a>
 </div>

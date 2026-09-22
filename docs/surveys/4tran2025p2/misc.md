@@ -53,7 +53,7 @@ outliers) value for nonbinary people, but the lowest outlier is 0 with 2 respond
       data-datakey="views_on_diy"
       data-title="Views On DIY"
       data-subtitle="Ratio"
-      data-colors='["#02000D","#080025","#13003F","#1F005B","#2C0079","#390099","#470BB6","#5328C8","#5F3DDA","#6D4FEC","#7B61FF"]'
+      data-colors='#02000D,#080025,#13003F,#1F005B,#2C0079,#390099,#470BB6,#5328C8,#5F3DDA,#6D4FEC,#7B61FF'
       >
     </div>
   </div>
@@ -73,7 +73,7 @@ Men are the least likely to be a NEET (Not in Education, Employment, or Training
   data-chart="ratio-bar"
   data-datakey="is_neet"
   data-title="Is NEET"
-  data-colors='["#7B61FF", "#00E0B8"]'
+  data-colors='#7B61FF, #00E0B8'
   >
 </div>
 
@@ -88,7 +88,7 @@ to believe in it, since the concept is more binary in nature.
   data-chart="ratio-bar"
   data-datakey="belief_in_xbrained"
   data-title="Believes in Malebrained/Fembrained"
-  data-colors='["#7B61FF", "#5642bd", "#2E294E"]'
+  data-colors='#7B61FF, #5642bd, #2E294E'
   >
 </div>
 
@@ -111,7 +111,7 @@ roles where 42% are unsure compared to 36% of men.
   data-chart="ratio-bar"
   data-datakey="conform_gender_roles"
   data-title="Conforms to Gender Roles"
-  data-colors='["#259efa", "#ff4f69", "#7B61FF", "#2E294E"]'
+  data-colors='#259efa, #ff4f69, #7B61FF, #2E294E'
   >
 </div>
 
@@ -143,7 +143,7 @@ mostly negative or negative though).
   data-chart="ratio-bar"
   data-datakey="feelings_on_being_trans"
   data-title="Feelings on Being Trans"
-  data-colors='["#7B61FF", "#5642bd", "#2E294E"]'
+  data-colors='#7B61FF, #5642bd, #2E294E'
   >
 </div>
 
@@ -157,7 +157,7 @@ The trans flag is generally liked rather than disliked, however men are by far t
   data-chart="ratio-bar"
   data-datakey="view_on_trans_flag"
   data-title="Views on the Trans Flag"
-  data-colors='["#7B61FF", "#5642bd", "#2E294E"]'
+  data-colors='#7B61FF, #5642bd, #2E294E'
   >
 </div>
 
@@ -171,7 +171,7 @@ The common theme seems to be that men have the least connection with the idea of
   data-chart="ratio-bar"
   data-datakey="view_on_trans_community"
   data-title="Views on the Trans Community"
-  data-colors='["#7B61FF", "#5642bd", "#2E294E"]'
+  data-colors='#7B61FF, #5642bd, #2E294E'
   >
 </div>
 
@@ -185,7 +185,7 @@ Most people do not have tattoos/piercings, but men are more likely to have them 
   data-chart="ratio-bar"
   data-datakey="has_tattoos_piercings"
   data-title="Has Tattoos or Piercings"
-  data-colors='["#7B61FF", "#00E0B8"]'
+  data-colors='#7B61FF, #00E0B8'
   >
 </div>
 
@@ -240,7 +240,7 @@ Unsurprisingly, the most common aestheics among both men and women are casual an
       data-datakey="aesthetic_mtf_flipped"
       data-title="Aesthetic"
       data-subtitle="MtF"
-      data-colors='["#ff4f69"]'
+      data-colors='#ff4f69'
       >
     </div>
     
@@ -302,6 +302,6 @@ look beautiful?
 ___
 
 <div class="button-container">
-  <a class="big-button" href="./selfdescribing">Previous Page</a>
-  <a class="big-button" href="./nsfw">Next Page</a>
+  <a class="big-button" href="selfdescribing.md">Previous Page</a>
+  <a class="big-button" href="nsfw.md">Next Page</a>
 </div>

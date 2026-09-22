@@ -61,7 +61,7 @@ There are slightly more male reppressers than female (not a massive difference),
   data-chart="ratio-bar"
   data-datakey="is_repper"
   data-title="Reppressers"
-  data-colors='["#7B61FF", "#00E0B8"]'
+  data-colors='#7B61FF, #00E0B8'
   >
 </div>
 
@@ -76,7 +76,7 @@ that men are more likely to pass and be stealth.
   data-chart="ratio-bar"
   data-datakey="social_transition"
   data-title="Social Transition"
-  data-colors='["#7B61FF", "#3c57f1", "#00E0B8"]'
+  data-colors='#7B61FF, #3c57f1, #00E0B8'
   >
 </div>
 
@@ -93,7 +93,7 @@ I didn't expect nonbinary people to have a pretty high amount of medical transit
   data-chart="ratio-bar"
   data-datakey="medical_transition"
   data-title="Medical Transition"
-  data-colors='["#7B61FF", "#00E0B8"]'
+  data-colors='#7B61FF, #00E0B8'
   >
 </div>
 
@@ -161,7 +161,7 @@ FtM diy hrt being a bit harder to get and severely stigmatized in FtM spaces.
   data-chart="ratio-bar"
   data-datakey="diy_or_prescribed"
   data-title="DIY or Prescribed"
-  data-colors='["#7B61FF", "#00E0B8"]'
+  data-colors='#7B61FF, #00E0B8'
   >
 </div>
 
@@ -185,7 +185,7 @@ pills would likely be for women.
       data-chart="ratio-bar"
       data-datakey="hrt_method"
       data-title="HRT Method"
-      data-colors='["#008FFB", "#00E396", "#FEB019", "#FF4560", "#775DD0", "#3c57f1"]'
+      data-colors='#008FFB, #00E396, #FEB019, #FF4560, #775DD0, #3c57f1'
       >
     </div>
     <div id="hrt-method-bar" 
@@ -234,7 +234,7 @@ pretty cool that Pio is pretty common, which I didn't expect.
       data-datakey="hrt_supplemental_mtf_flipped"
       data-title="Supplemental HRT"
       data-subtitle="MtF"
-      data-colors='["#ff4f69"]'
+      data-colors='#ff4f69'
       >
     </div>
     <div id="hrtsuppl-total-bar" 
@@ -266,7 +266,7 @@ Pretty expected results tbh, testosterone affects voice while estrogen does not.
   data-chart="ratio-bar"
   data-datakey="voice_passes"
   data-title="Voice Passes"
-  data-colors='["#7B61FF", "#00E0B8"]'
+  data-colors='#7B61FF, #00E0B8'
   >
 </div>
 
@@ -280,7 +280,7 @@ The differences between genders here is pretty expected, however I didn't expect
   data-chart="ratio-bar"
   data-datakey="voice_trained"
   data-title="Voice Trained"
-  data-colors='["#7B61FF", "#00E0B8"]'
+  data-colors='#7B61FF, #00E0B8'
   >
 </div>
 
@@ -295,7 +295,7 @@ to see though regardless.
   data-chart="ratio-bar"
   data-datakey="voice_trained_passes"
   data-title="Voice Passes and Trained"
-  data-colors='["#7B61FF", "#3c57f1", "#FF4560", "#FEB019"]'
+  data-colors='#7B61FF, #3c57f1, #FF4560, #FEB019'
   >
 </div>
 
@@ -453,7 +453,7 @@ Unsurprisingly, men are way more likely to be stealth.
   data-chart="ratio-bar"
   data-datakey="stealth"
   data-title="Stealth"
-  data-colors='["#7B61FF", "#3c57f1", "#00E0B8"]'
+  data-colors='#7B61FF, #3c57f1, #00E0B8'
   >
 </div>
 
@@ -470,7 +470,7 @@ communities. For nonbinary people its a bit lower, at 89%, but still a pretty so
   data-chart="ratio-bar"
   data-datakey="has_dysphoria"
   data-title="Has Dysphoria"
-  data-colors='["#7B61FF", "#00E0B8"]'
+  data-colors='#7B61FF, #00E0B8'
   >
 </div>
 
@@ -515,7 +515,7 @@ perfectly 50/50 on the chart, it would mean that the same proportion of men and 
       data-datakey="dysphoria_types_mtf_flipped"
       data-title="Dysphoria Types"
       data-subtitle="MtF"
-      data-colors='["#ff4f69"]'
+      data-colors='#ff4f69'
       >
     </div>
   </div>
@@ -529,6 +529,6 @@ perfectly 50/50 on the chart, it would mean that the same proportion of men and 
 ___
 
 <div class="button-container">
-  <a class="big-button" href="./socialmedia">Previous Page</a>
-  <a class="big-button" href="./sexuality">Next Page</a>
+  <a class="big-button" href="socialmedia.md">Previous Page</a>
+  <a class="big-button" href="sexuality.md">Next Page</a>
 </div>

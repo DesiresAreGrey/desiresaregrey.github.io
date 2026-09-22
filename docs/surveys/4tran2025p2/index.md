@@ -213,7 +213,7 @@ last time.
   data-chart="ratio-bar"
   data-datakey="adults"
   data-title="Adulthood"
-  data-colors='["#7B61FF", "#03a9f4", "#00E0B8"]'
+  data-colors='#7B61FF, #03a9f4, #00E0B8'
   >
 </div>
 
@@ -230,7 +230,7 @@ If you're wondering where Height and Weight are, I made a dedicated measurements
   data-chart="ratio-bar"
   data-datakey="unit_systems"
   data-title="Unit System"
-  data-colors='["#7B61FF", "#00E0B8"]'
+  data-colors='#7B61FF, #00E0B8'
   >
 </div>
 
@@ -259,7 +259,7 @@ No surprise that everyone is white.
       data-datakey="ethnicity"
       data-title="Ethnicity"
       data-subtitle="Ratio Bar"
-      data-colors='["#008FFB", "#00E396", "#FEB019", "#FF4560", "#775DD0", "#3c57f1"]'
+      data-colors='#008FFB, #00E396, #FEB019, #FF4560, #775DD0, #3c57f1'
       >
     </div>
   </div>
@@ -294,7 +294,7 @@ Here is the chart for just the US.
       data-datakey="ethnicity_us"
       data-title="Ethnicity (US)"
       data-subtitle="Ratio Bar"
-      data-colors='["#008FFB", "#00E396", "#FEB019", "#FF4560", "#775DD0", "#3c57f1"]'
+      data-colors='#008FFB, #00E396, #FEB019, #FF4560, #775DD0, #3c57f1'
       >
     </div>
   </div>
@@ -338,5 +338,5 @@ We can also use sex at birth to separate nonbinary people (controversial).
 
 ___
 <div class="button-container">
-  <a class="big-button" href="measurements">Next Page</a>
+  <a class="big-button" href="measurements.md">Next Page</a>
 </div>

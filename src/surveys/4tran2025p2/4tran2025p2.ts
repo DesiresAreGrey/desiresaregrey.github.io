@@ -22,7 +22,7 @@ if (charts.length > 0) {
         const title = el.dataset.title;
         const subtitle = el.dataset.subtitle;
         const hideSeries = el.dataset.hideseries?.parseJson() ?? [];
-        const colors = el.dataset.colors?.parseJson() ?? ['#259efa', '#ff4f69', '#00E396', '#FEB019'];
+        const colors = parseColorList(el.dataset.colors, chartId) ?? ['#259efa', '#ff4f69', '#00E396', '#FEB019'];
         const color = el.dataset.color ?? '#259efa';
         const height = el.style.height.replace("px", "")?.parseFloat() ?? 300;
         const horizontal = el.dataset.horizontal != undefined;
@@ -102,5 +102,19 @@ function showPerformancePopup() {
     debugLoadTimeDiv.style.textAlign = 'right';
     setTimeout(() => debugLoadTimeDiv.style.setProperty('opacity', '0'), 4000);
     document.body.appendChild(debugLoadTimeDiv);
+}
+
+function parseColorList(str: string | null | undefined, chartIdDebug?: string) {
+    try {
+        const colors = str?.split(',').map(c => c.trim()) ?? null;
+        if (colors?.every(c => /^#[0-9A-F]{6}$/i.test(c)))
+            return colors;
+        else if (str)
+            console.log(`Invalid color format: ${str} ${chartIdDebug ? `\n(Chart: ${chartIdDebug})` : ''}`);
+    }
+    catch (e) {
+        console.log(`Error parsing color list: ${e} ${chartIdDebug ? `\n(Chart: ${chartIdDebug})` : ''}`);
+    }
+    return null;
 }
 

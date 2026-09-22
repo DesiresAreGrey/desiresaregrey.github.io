@@ -82,7 +82,7 @@ be able to get it. I still feel really happy that things changed and I was able 
     <a class="card loaded" href="/surveys" style="--image: url('/assets/surveys/4tran2025p2/thumb.png'); --scale: 1.1;">
       <h2 style="font-size: 42px; padding-bottom: 0.5rem;">Surveys</h2>
     </a>
-    <a class="card loaded" href="/misc/" style="--image: url('/assets/misc/apex-weapon-stats/apex-primaryart.jpg'); --scale: 1.1;">
+    <a class="card loaded" href="/misc" style="--image: url('/assets/misc/apex-weapon-stats/apex-primaryart.jpg'); --scale: 1.1;">
       <h2 style="font-size: 42px; padding-bottom: 0.5rem;">Misc</h2>
     </a>
   </div>
