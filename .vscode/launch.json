@@ -19,7 +19,7 @@
       "name": "Tailscale Serve",
       "type": "node-terminal",
       "request": "launch",
-      "command": "tailscale serve 8000",
+      "command": "tailscale serve --tcp=8000 tcp://127.0.0.1:8000",
       "cwd": "${workspaceFolder}"
     }
   ],
