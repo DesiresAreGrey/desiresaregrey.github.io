@@ -173,7 +173,7 @@ script[src*="/assets/javascripts/bundle"] + div[style*="position: fixed"][style*
   
   /* ios 27 :( */
   @media (max-width: 60rem) {
-    height: calc(100% - 48px) !important;
+    height: unset !important;
   }
 }
 
