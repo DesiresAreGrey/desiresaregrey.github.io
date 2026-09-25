@@ -1,0 +1,46 @@
+{
+  "component": {
+    "type": 17,
+    "accent_color": 5126301,
+    "components": [
+      {
+        "type": 9,
+        "components": [
+          {
+            "type": 10,
+            "content": "## DesiresAreGrey\npassoid of color"
+          }
+        ],
+        "accessory": {
+          "type": 11,
+          "media": {
+            "url": "https://desiresaregrey.com/assets/DesiresAreGrey.png"
+          }
+        }
+      },
+      {
+        "type": 1,
+        "components": [
+          {
+            "type": 2,
+            "style": 5,
+            "url": "https://desiresaregrey.com/",
+            "label": "Home"
+          },
+          {
+            "type": 2,
+            "style": 5,
+            "url": "https://desiresaregrey.com/surveys/",
+            "label": "Surveys"
+          },
+          {
+            "type": 2,
+            "style": 5,
+            "url": "https://desiresaregrey.com/misc/",
+            "label": "Misc"
+          }
+        ]
+      }
+    ]
+  }
+}
