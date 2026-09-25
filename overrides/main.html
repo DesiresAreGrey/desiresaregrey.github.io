@@ -23,6 +23,11 @@
     {% set extra_head = page.meta.extra_head %}
   {% endif %}
 
+  {% set discord_embed = None %}
+  {% if page and page.meta and page.meta.discord_embed %}
+    {% set discord_embed = page.meta.discord_embed %}
+  {% endif %}
+
   <meta property="og:type" content="website" />
   <meta property="og:title" content="{{ title }}" />
   <meta property="og:site_name" content="{{ config.site_name }}" />
@@ -49,6 +54,9 @@
     }
   </script>
   <script type="module" src="/js/utils/utils.js"></script>
+  {% if discord_embed %}
+    <link rel="discord:component-embed" type="application/json" href="https://desiresaregrey.com/embeds{{ discord_embed }}">
+  {% endif %}
   {% if extra_head %}
     {{ extra_head }}
   {% endif %}
