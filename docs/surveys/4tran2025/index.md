@@ -10,7 +10,7 @@ hide:
 <link rel="stylesheet" href="/stylesheets/surveys/4tran2025.css">
 <link rel="stylesheet" href="/stylesheets/socialmedia.css">
 
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts@7.5.1"></script>
 <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
 <script src="https://cdn.amcharts.com/lib/5/map.js"></script>
 <script src="https://cdn.amcharts.com/lib/5/geodata/usaLow.js"></script>

@@ -16,10 +16,10 @@
       "cwd": "${workspaceFolder}"
     },
     {
-      "name": "ngrok Tunnel",
+      "name": "Tailscale Serve",
       "type": "node-terminal",
       "request": "launch",
-      "command": "ngrok http 8000",
+      "command": "tailscale serve --tcp=8000 tcp://127.0.0.1:8000",
       "cwd": "${workspaceFolder}"
     }
   ],
@@ -30,8 +30,8 @@
       "stopAll": true
     },
     {
-      "name": "ngrok + Zensical/TS",
-      "configurations": ["TypeScript Watch", "Zensical Serve", "ngrok Tunnel"],
+      "name": "Tailscale + Zensical/TS",
+      "configurations": ["TypeScript Watch", "Zensical Serve", "Tailscale Serve"],
       "stopAll": true
     }
   ]

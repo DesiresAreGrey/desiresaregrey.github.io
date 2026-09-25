@@ -167,9 +167,14 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* fix zindex on search box */
+/* fix search */
 script[src*="/assets/javascripts/bundle"] + div[style*="position: fixed"][style*="height: 100%"][style*="top: 0px"] {
   z-index: 101 !important;
+  
+  /* ios 27 :( */
+  @media (max-width: 768px) {
+    height: calc(100% - 48px) !important;
+  }
 }
 
 /* Tab list inside header */

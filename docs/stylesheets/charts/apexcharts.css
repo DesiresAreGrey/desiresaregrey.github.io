@@ -15,6 +15,7 @@
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   margin-bottom: 2px;
+  color: #fff;
 }
 .apexcharts-tooltip-series-group.apexcharts-active, 
 .apexcharts-tooltip-series-group:last-child {
@@ -98,7 +99,7 @@
 }
 
 .apexcharts-tooltip:has(.apexcharts-tooltip-scatter) {
-  transform: translateY(35px);
+  transform: translateY(6px);
 }
 
 .apexchart {

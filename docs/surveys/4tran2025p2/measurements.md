@@ -291,7 +291,7 @@ ___
 
 ## Calculator
 
-<div class="panel">
+<div id="calculator-left" class="panel">
   <div class="container">
     <select id="units" class="input" style="width: 10rem;">
       <option value="imperial">Imperial</option>
@@ -310,7 +310,7 @@ ___
     </div>
   </div>
 
-  <div style="margin-top: 6px;" class="container">
+  <div id="weight-section" style="margin-top: 6px;" class="container">
     <div>
       <input id="weight-input" class="input" type="number" inputmode="decimal" step="1" value="170" style="width: 3rem;">
       <span id="weight-units-label" style="min-width: 12ch; margin-top: 4px; margin-bottom: -0.325rem; font-size: 14px; font-variation-settings: 'wght' 400; opacity: 0.75">Pounds</span>
@@ -319,9 +319,9 @@ ___
 
   <div style="margin-top: 6px;">
     <div style="border-radius: 1rem;">
-      <span id="info-height" class="container" style="min-width: 12ch; font-size: 14px; font-variation-settings: 'wght' 400; opacity: 0.75">0'0" - 0.0 cm</span>
-      <span id="info-weight" class="container" style="min-width: 12ch; margin-top: 0; font-size: 14px; font-variation-settings: 'wght' 400; opacity: 0.75">0 lbs - 0 kg</span>
-      <span id="info-bmi" class="container" style="min-width: 12ch; margin-top: 0; font-size: 14px; font-variation-settings: 'wght' 400; opacity: 0.75">0 BMI</span>
+      <span id="info-height" class="container" style="min-width: 12ch; font-size: 14px; font-variation-settings: 'wght' 400; opacity: 0.75; transition: opacity 200ms ease-in-out;">0'0" - 0.0 cm</span>
+      <span id="info-weight" class="container" style="min-width: 12ch; margin-top: 0; font-size: 14px; font-variation-settings: 'wght' 400; opacity: 0.75; transition: opacity 200ms ease-in-out;">0 lbs - 0 kg</span>
+      <span id="info-bmi" class="container" style="min-width: 12ch; margin-top: 0; font-size: 14px; font-variation-settings: 'wght' 400; opacity: 0.75; transition: opacity 200ms ease-in-out;">0 BMI</span>
     </div>
   </div>
 
@@ -346,7 +346,19 @@ ___
 
 <div id="height-weight-scatter" style="height: 500px; margin-bottom: 0.69rem;" class="scatterapexchart"></div>
 
-<div class="center-container">
+<div id="measurements-weight-toggle-container" class="center-container" style="transition: opacity 200ms ease-in-out;">
+  <div class="label" style="width: 7rem;">Weight
+    <div class="label-subtitle">Shows weight/BMI</div>
+  </div>
+  <div class="toggle-container">
+    <input type="checkbox" id="measurements-weight-toggle" class="toggleCheckbox" />
+    <label for="measurements-weight-toggle" class='toggleContainer'>
+      <div class="noselect" style="margin-right: 16px; margin-left: 16px;">Show</div>   
+      <div class="noselect" style="margin-right: 16px; margin-left: 16px;">Hide</div>
+    </label>
+  </div>
+</div>
+<div id="scatterplot-type-toggle-container" class="center-container" style="transition: opacity 200ms ease-in-out;">
   <div class="label" style="width: 7rem;">Scatter Plot
     <div class="label-subtitle">May be heavy on mobile</div>
   </div>
@@ -358,7 +370,7 @@ ___
     </label>
   </div>
 </div>
-<div class="center-container">
+<div id="scatterplot-self-toggle-container" class="center-container" style="transition: opacity 200ms ease-in-out;">
   <div class="label" style="width: 7rem;">Show Self
     <div class="label-subtitle">Shows your height/weight</div>
   </div>
@@ -371,13 +383,16 @@ ___
   </div>
 </div>
 <script>
-  const typeChecked = localStorage.getItem('scatterplot-type-toggle-checked');
+  const typeChecked = localStorage.getItem('4tran2025p2-scatterplot-type-toggle-checked');
   if (typeChecked != null) {
     document.getElementById('scatterplot-type-toggle').checked = JSON.parse(typeChecked);
   }
   else if (window.innerWidth <= 768) {
     document.getElementById('scatterplot-type-toggle').checked = true;
   }
+  const weightChecked = localStorage.getItem('4tran2025p2-measurements-weight-toggle-checked');
+  if (weightChecked != null)
+    document.getElementById('measurements-weight-toggle').checked = JSON.parse(weightChecked);
 </script>
 
 ___

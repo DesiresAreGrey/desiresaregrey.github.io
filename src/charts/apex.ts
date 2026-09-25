@@ -1,5 +1,6 @@
 import ApexCharts from 'apexcharts';
-import "../utils/utils.js";
+import type { ApexOptions } from 'apexcharts';
+import 'apexcharts/features/renderer-canvas';
 
 interface ChartData {
     id: string;
@@ -18,14 +19,14 @@ export class Apex {
         return [...Apex.#charts]; 
     }
 
-    static createRatioBarChart(chartId: string, data: any, title: string | undefined, subtitle: string | undefined, hideSeries: number[], colors: string[], height: number, normalized: boolean = false, units: string = "respondents") {
+    static async createRatioBarChart(chartId: string, data: any, title: string | undefined, subtitle: string | undefined, hideSeries: number[], colors: string[], height: number, normalized: boolean = false, units: string = "respondents") {
         hideSeries.forEach(index => {
             if (data.series[index]) {
                 data.series[index].hidden = true;
             }
         });
         data.categories = data.categories.map((c: string) => replaceXThanWithSymbol(c));
-        const options = {
+        const options: ApexOptions = {
             chart: {
                 id: chartId,
                 type: 'bar',
@@ -57,7 +58,6 @@ export class Apex {
             series: data.series,
             xaxis: {
                 categories: data.categories,
-                show: false,
                 labels: {
                     show: false
                 },
@@ -128,7 +128,7 @@ export class Apex {
             colors: colors
         };
         const start = performance.now();
-        new ApexCharts($id(chartId), options).render();
+        await new ApexCharts($id(chartId)!, options).render();
         Apex.#charts.push({
             id: chartId,
             title: title,
@@ -138,14 +138,14 @@ export class Apex {
         })
     }
 
-    static createBarChart(chartId: string, data: any, title: string | undefined, subtitle: string | undefined, hideSeries: number[], colors: string[], height: number, horizontal: boolean, stacked: boolean = true, units: string = "respondents") {
+    static async createBarChart(chartId: string, data: any, title: string | undefined, subtitle: string | undefined, hideSeries: number[], colors: string[], height: number, horizontal: boolean, stacked: boolean = true, units: string = "respondents") {
         hideSeries.forEach(index => {
             if (data.series[index]) {
                 data.series[index].hidden = true;
             }
         });
         data.categories = data.categories.map((c: string) => replaceXThanWithSymbol(c));
-        const options = {
+        const options: ApexOptions = {
             chart: {
                 id: chartId,
                 type: 'bar',
@@ -225,7 +225,7 @@ export class Apex {
             colors: colors
         };
         const start = performance.now();
-        new ApexCharts($id(chartId), options).render();
+        await new ApexCharts($id(chartId)!, options).render();
         Apex.#charts.push({
             id: chartId,
             title: title,
@@ -235,7 +235,7 @@ export class Apex {
         })
     }
 
-    static createPopPyramidChart(chartId: string, data: any, title: string | undefined, subtitle: string | undefined, hideSeries: number[], colors: string[], height: number, bounds: number, horizontal?: boolean) {
+    static async createPopPyramidChart(chartId: string, data: any, title: string | undefined, subtitle: string | undefined, hideSeries: number[], colors: string[], height: number, bounds: number, horizontal?: boolean) {
         data.categories = data.categories.map((c: string) => replaceXThanWithSymbol(c));
         const options: any = {
             chart: {
@@ -346,7 +346,7 @@ export class Apex {
             }
         }
         const start = performance.now();
-        new ApexCharts($id(chartId), options).render();
+        await new ApexCharts($id(chartId)!, options).render();
         Apex.#charts.push({
             id: chartId,
             title: title,
@@ -356,8 +356,8 @@ export class Apex {
         })
     }
 
-    static createPieChart(chartId: string, data: any, title: string | undefined, colors: string[], height: number) {
-        const options = {
+    static async createPieChart(chartId: string, data: any, title: string | undefined, colors: string[], height: number) {
+        const options: ApexOptions = {
             chart: {
                 id: chartId,
                 type: 'pie',
@@ -413,7 +413,7 @@ export class Apex {
             colors: colors
         };
         const start = performance.now();
-        new ApexCharts($id(chartId), options).render();
+        await new ApexCharts($id(chartId)!, options).render();
         Apex.#charts.push({
             id: chartId,
             title: title,
@@ -423,7 +423,7 @@ export class Apex {
         })
     }
 
-    static createBoxPlot(chartId: string, data: any, title: string | undefined, subtitle: string | undefined, height = 300, bounds?: number, vertical: boolean = false, change: boolean = false, upperColor: string = '#775DD0', lowerColor: string = '#6649ca', heightInches: boolean = false) {
+    static async createBoxPlot(chartId: string, data: any, title: string | undefined, subtitle: string | undefined, height = 300, bounds?: number, vertical: boolean = false, change: boolean = false, upperColor: string = '#775DD0', lowerColor: string = '#6649ca', heightInches: boolean = false) {
         const options: any = {
             chart: {
                 id: chartId,
@@ -599,7 +599,7 @@ export class Apex {
         }
 
         const start = performance.now();
-        new ApexCharts($id(chartId), options).render();
+        await new ApexCharts($id(chartId)!, options).render();
         Apex.#charts.push({
             id: chartId,
             title: title,
@@ -609,16 +609,17 @@ export class Apex {
         })
     }
 
-    static createScatterPlot(chartId: string, data: any, title: string | undefined, subtitle: string | undefined, hideSeries: number[], colors: string[], height: number, tickAmount: number = 10, customOptions?: any) {
+    static async createScatterPlot(chartId: string, data: any, title: string | undefined, subtitle: string | undefined, hideSeries: number[], colors: string[], height: number, tickAmount: number = 10, customOptions?: any) {
         hideSeries.forEach(index => {
             if (data[index]) {
                 data[index].hidden = true;
             }
         });
-        const options = {
+        const options: ApexOptions = {
             chart: {
                 id: chartId,
                 type: 'scatter',
+                renderer: 'canvas',
                 height: height,
                 toolbar: { show: false },
                 background: '#090909',
@@ -719,7 +720,7 @@ export class Apex {
         };
         
         const start = performance.now();
-        new ApexCharts($id(chartId), { ...options, ...customOptions }).render();
+        await new ApexCharts($id(chartId)!, { ...options, ...customOptions }).render();
         Apex.#charts.push({
             id: chartId,
             title: title,
@@ -729,8 +730,8 @@ export class Apex {
         })
     }
 
-    static createHeatmap(chartId: string, data: any, title: string | undefined, subtitle: string | undefined, color: string, height: number, customOptions?: any) {
-        const options = {
+    static async createHeatmap(chartId: string, data: any, title: string | undefined, subtitle: string | undefined, color: string, height: number, customOptions?: any) {
+        const options: ApexOptions = {
             chart: {
                 id: chartId,
                 type: 'heatmap',
@@ -836,7 +837,7 @@ export class Apex {
             colors: [color],
         };
         const start = performance.now();
-        new ApexCharts($id(chartId), { ...options, ...customOptions }).render();
+        await new ApexCharts($id(chartId)!, { ...options, ...customOptions }).render();
         Apex.#charts.push({
             id: chartId,
             title: title,
