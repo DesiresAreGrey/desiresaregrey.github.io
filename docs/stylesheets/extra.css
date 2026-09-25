@@ -172,8 +172,8 @@ script[src*="/assets/javascripts/bundle"] + div[style*="position: fixed"][style*
   z-index: 101 !important;
   
   /* ios 27 :( */
-  @media (max-width: 60rem) {
-    height: unset !important;
+  @media (max-width: 768px) {
+    height: calc(100% - 48px) !important;
   }
 }
 
