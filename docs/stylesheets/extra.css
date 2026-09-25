@@ -11,15 +11,6 @@
   --br-mult: 1;
 }
 
-/* fix overscroll on mobile (i think thats what its called) */
-body {
-  background-color: #000;
-
-  .md-main {
-    background-color: var(--md-default-bg-color);
-  }
-}
-
 @supports (corner-shape: squircle) {
   :root {
     --br-mult: 2;
@@ -49,6 +40,15 @@ body {
 ::-webkit-scrollbar-corner {
   background: #111111;
   border-left: #191919 solid 1px;
+}
+
+/* fix overscroll on mobile (i think thats what its called) */
+body {
+  background-color: #000;
+
+  .md-main {
+    background-color: var(--md-default-bg-color);
+  }
 }
 
 /* Scroll Margin */
