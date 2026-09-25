@@ -23,6 +23,32 @@ export class Utils {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
+    static async waitForSelector(selector: string, timeout: number = 5000, parent?: HTMLElement | ShadowRoot): Promise<HTMLElement | null> {
+        return new Promise((resolve) => {
+            const element = (parent ?? document).querySelector(selector) as HTMLElement | null;
+            if (element) {
+                resolve(element);
+                return;
+            }
+
+            const startTime = Date.now();
+            const check = () => {
+                const element = (parent ?? document).querySelector(selector) as HTMLElement | null;
+                if (element) {
+                    resolve(element);
+                } 
+                else if (Date.now() - startTime < timeout) {
+                    requestAnimationFrame(check);
+                } 
+                else {
+                    resolve(null);
+                }
+            };
+
+            requestAnimationFrame(check);
+        });
+    }
+
     static runAfter(callback: () => void, delay: number, element?: HTMLElement): void {
         if (!element)
             element = document.documentElement;
@@ -78,6 +104,10 @@ declare global {
         $$<T extends HTMLElement>(selector: string): NodeListOf<T>;
         appendHtml(htmlString: string): void;
         runAfter(callback: () => void, delay: number): void;
+        waitForSelector(selector: string, timeout?: number): Promise<HTMLElement | null>;
+    }
+    interface ShadowRoot {
+        waitForSelector(selector: string, timeout?: number): Promise<HTMLElement | null>;
     }
 
     interface Object {
@@ -136,8 +166,19 @@ Object.defineProperty(HTMLElement.prototype, 'appendHtml', {
 Object.defineProperty(HTMLElement.prototype, 'runAfter', { 
     value: function(this: HTMLElement, callback: () => void, delay: number) { 
         Utils.runAfter(callback, delay, this);
-    } 
+    }
 });
+Object.defineProperty(HTMLElement.prototype, 'waitForSelector', { 
+    value: function(this: HTMLElement, selector: string, timeout: number = 5000) { 
+        return Utils.waitForSelector(selector, timeout, this);
+    }
+});
+Object.defineProperty(ShadowRoot.prototype, 'waitForSelector', { 
+    value: function(this: ShadowRoot, selector: string, timeout: number = 5000) { 
+        return Utils.waitForSelector(selector, timeout, this);
+    }
+});
+
 
 Object.defineProperty(Object.prototype, 'toJson', { 
     value: function(this: object) { 
