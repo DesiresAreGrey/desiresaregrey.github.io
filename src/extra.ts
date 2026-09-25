@@ -10,6 +10,7 @@ const searchDiv = $('script[src*="/assets/javascripts/bundle"] + div[style*="pos
 if (matchMedia('(max-width: 768px)').matches && searchDiv && searchDiv.shadowRoot) {
     const a = searchDiv.shadowRoot.querySelector('.a') as HTMLElement;
     const p = a.querySelector('.p') as HTMLElement;
+    const input = a.querySelector('input[role="combobox"]') as HTMLInputElement;
 
     new MutationObserver(() => {
         if (p.classList.contains('v')) {
@@ -19,6 +20,8 @@ if (matchMedia('(max-width: 768px)').matches && searchDiv && searchDiv.shadowRoo
         else {
             a.style.height = 'calc(100% + 48px)';
             searchDiv.style.display = '';
+            
+            input.focus({ preventScroll: true });
         }
     }).observe(p, { attributes: true, attributeFilter: ['class'] });
 }
