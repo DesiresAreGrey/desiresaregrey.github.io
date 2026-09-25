@@ -3,7 +3,7 @@ title: Home
 description: passoid of color
 image: https://desiresaregrey.com/assets/DesiresAreGrey.png
 extra_head: |
-  <link rel="discord:component-embed" type="application/json" href="/embeds/index.json">
+  <link rel="discord:component-embed" type="application/json" href="https://desiresaregrey.com/embeds/index.json">
 ---
 <link rel="stylesheet" href="/stylesheets/socialmedia.css">
 <link rel="preload" href="assets/DesiresAreGrey.png" as="image">
