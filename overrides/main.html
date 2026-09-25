@@ -35,6 +35,9 @@
   {% if image %}<meta property="og:image" content="{{ image }}" />{% endif %}
   <meta name="theme-color" data-react-helmet="true" content="#4e389d"/>
   <meta name="darkreader-lock" />
+  {% if discord_embed %}
+    <link rel="discord:component-embed" type="application/json" href="https://desiresaregrey.com/json/page{{ discord_embed }}">
+  {% endif %}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -54,9 +57,6 @@
     }
   </script>
   <script type="module" src="/js/utils/utils.js"></script>
-  {% if discord_embed %}
-    <link rel="discord:component-embed" type="application/json" href="https://desiresaregrey.com/json/page{{ discord_embed }}">
-  {% endif %}
   {% if extra_head %}
     {{ extra_head }}
   {% endif %}
