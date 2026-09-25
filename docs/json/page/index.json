@@ -40,7 +40,19 @@
             "label": "Misc"
           }
         ]
+      },
+      {
+        "type": 18,
+        "label": "File Upload",
+        "description": "Please upload a screenshot or other image that shows the bug you encountered.",
+        "component": {
+          "type": 19,
+          "custom_id": "file_upload",
+          "min_values": 1,
+          "max_values": 10,
+          "required": true
+        }
       }
-    ]
+    ] 
   }
 }
