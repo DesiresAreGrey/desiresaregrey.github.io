@@ -8,7 +8,7 @@
         "components": [
           {
             "type": 10,
-            "content": "## DesiresAreGrey\npassoid of color"
+            "content": "## DesiresAreGrey\n-# passoid of color"
           }
         ],
         "accessory": {
@@ -41,6 +41,6 @@
           }
         ]
       }
-    ] 
+    ]
   }
 }
