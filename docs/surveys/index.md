@@ -1,3 +1,9 @@
+---
+description: Surveys I've conducted
+image: https://desiresaregrey.com/assets/surveys/4tran2025p2/thumb.png
+discord_embed: /surveys/index.json
+---
+
 # Surveys
 
 <link rel="stylesheet" href="/stylesheets/cards.css">
