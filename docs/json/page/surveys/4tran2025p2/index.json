@@ -52,18 +52,18 @@
             "style": 5,
             "url": "https://desiresaregrey.com/surveys/4tran2025p2/transition",
             "label": "Transition"
-          },
-          {
-            "type": 2,
-            "style": 5,
-            "url": "https://desiresaregrey.com/surveys/4tran2025p2/sexuality",
-            "label": "Sexuality"
           }
         ]
       },
       {
         "type": 1,
         "components": [
+          {
+            "type": 2,
+            "style": 5,
+            "url": "https://desiresaregrey.com/surveys/4tran2025p2/sexuality",
+            "label": "Sexuality"
+          },
           {
             "type": 2,
             "style": 5,
@@ -81,7 +81,12 @@
             "style": 5,
             "url": "https://desiresaregrey.com/surveys/4tran2025p2/health",
             "label": "Health"
-          },
+          }
+        ]
+      },
+      {
+        "type": 1,
+        "components": [
           {
             "type": 2,
             "style": 5,
@@ -93,12 +98,7 @@
             "style": 5,
             "url": "https://desiresaregrey.com/surveys/4tran2025p2/misc",
             "label": "Misc"
-          }
-        ]
-      },
-      {
-        "type": 1,
-        "components": [
+          },
           {
             "type": 2,
             "style": 5,
