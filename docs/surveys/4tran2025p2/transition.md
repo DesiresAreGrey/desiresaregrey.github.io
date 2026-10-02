@@ -7,6 +7,7 @@ tags:
   - 4tran Survey [2025.2]
 hide:
   - tags
+discord_embed: /surveys/4tran2025p2/transition.json
 ---
 <script src="/js/utils/header-title-changer.js" data-title="Page 4 - Transition"></script>
 
