@@ -96,7 +96,7 @@ function showPerformancePopup() {
     }
     else {
         debugLoadTimeDiv.innerHTML = `
-        <span style="font-size: 0.8em; opacity: 0.5;">${rendererString}</span><br>
+            <span style="font-size: 0.8em; opacity: 0.5;">${rendererString}</span><br>
             ${Apex.charts.length} Charts (${Apex.charts.map(c => c.loadTime).reduce((a, b) => a + b, 0).roundTo(0)} ms)<br>
         `;
     }
