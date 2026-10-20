@@ -90,7 +90,7 @@ function showPerformancePopup() {
     if (WordCloud.wordclouds.length > 0) {
         debugLoadTimeDiv.innerHTML = `
             <span style="font-size: 0.8em; opacity: 0.5;">${rendererString}</span><br>
-            ${Apex.charts.length} Charts (${Apex.charts.map(c => c.loadTime).reduce((a, b) => a + b, 0).roundTo(0)} ms) <br>
+            ${Apex.charts.length} Charts (${Apex.charts.map(c => c.loadTime).reduce((a, b) => a + b, 0).roundTo(0)} ms)<br>
             ${WordCloud.wordclouds.length} Clouds (${WordCloud.wordclouds.map(c => c.loadTime).reduce((a, b) => a + b, 0).roundTo(0)} ms)<br>
         `;
     }
