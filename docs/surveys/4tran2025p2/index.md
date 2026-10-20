@@ -8,6 +8,7 @@ tags:
 hide:
   - tags
 discord_embed: /surveys/4tran2025p2/index.json
+settings: ApexCharts
 ---
 <script src="/js/utils/header-title-changer.js" data-title="Page 1 - Demographics"></script>
 
@@ -118,30 +119,10 @@ Its heavily recommended you view this site on desktop! The charts are interactiv
 }
 </style>
 
-<div class="center-container">
-  <div class="label">Chart Animations
-    <div class="label-subtitle">Turn off to improve performance</div>
-    <div class="label-subtitle">Requires reload</div>
-  </div>
-  <div class="toggle-container">
-    <input type="checkbox" id="chart-animations-toggle" class="toggleCheckbox" />
-    <label for="chart-animations-toggle" class='toggleContainer'>
-      <div class="noselect">On</div>   
-      <div class="noselect">Off</div>
-    </label>
-  </div>
-</div>
-<script>
-  const toggle = document.getElementById('chart-animations-toggle');
-  const typeChecked = localStorage.getItem('chart-animations-enabled');
-  if (typeChecked != null) {
-    toggle.checked = !JSON.parse(typeChecked);
-  }
-  else if (window.innerWidth <= 768) {
-    toggle.checked = true;
-  }
-  toggle.addEventListener("change", () => localStorage.setItem('chart-animations-enabled', JSON.stringify(!toggle.checked)));
-</script>
+<p style="font-size: 12px; color: #888">Enable canvas rendering in the settings for improved performance (it also fixes the bug on iOS where the
+browser sometimes refreshes for no reason).</p>
+
+<button class="settings-button"><i class="fa-solid fa-gear"></i> Open Settings</button>
 
 ## Demographics
 

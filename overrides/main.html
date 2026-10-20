@@ -28,6 +28,11 @@
     {% set discord_embed = page.meta.discord_embed %}
   {% endif %}
 
+  {% set settings = None %}
+  {% if page and page.meta and page.meta.settings %}
+    {% set settings = page.meta.settings %}
+  {% endif %}
+
   <meta property="og:type" content="website" />
   <meta property="og:title" content="{{ title }}" />
   <meta property="og:site_name" content="{{ config.site_name }}" />
@@ -57,6 +62,11 @@
     }
   </script>
   <script type="module" src="/js/utils/utils.js"></script>
+  <script src="/js/components/settings.js"></script>
+  <link rel="stylesheet" href="/stylesheets/components/settings.css">
+  {% if settings %}
+    <script type="module" src="/js/utils/site-settings.js" data-setting-types="{{ settings }}"></script>
+  {% endif %}
   {% if extra_head %}
     {{ extra_head }}
   {% endif %}

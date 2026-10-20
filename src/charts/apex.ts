@@ -1,6 +1,7 @@
 import ApexCharts from 'apexcharts';
 import type { ApexOptions } from 'apexcharts';
 import 'apexcharts/features/renderer-canvas';
+import { getSettings } from '../utils/site-settings.js';
 
 interface ChartData {
     id: string;
@@ -12,7 +13,11 @@ interface ChartData {
 
 export class Apex {
     static get isMobile() { return window.innerWidth > 768 ? false : true; }
-    static get animationEnabled(): boolean { return localStorage.getItem('chart-animations-enabled')?.parseJson() ?? !Apex.isMobile; }
+
+    static settings = getSettings().ApexCharts;
+    static get animationEnabled(): boolean { return Apex.settings?.ChartAnimations?.value ?? !Apex.isMobile; }
+    static get canvasRendering(): boolean { return Apex.settings?.CanvasRendering?.value ?? false; }
+    static get renderer(): "svg" | "canvas" { return Apex.canvasRendering ? 'canvas' : 'svg'; }
 
     static #charts: ChartData[] = [];
     static get charts() {
@@ -39,6 +44,7 @@ export class Apex {
                 animations: {
                     enabled: Apex.animationEnabled
                 },
+                renderer: Apex.renderer,
             },
             title: {
                 text: title,
@@ -84,7 +90,11 @@ export class Apex {
                         const pct = total ? ((val / total) * 100).toFixed(1) : 0;
                         return `${val} ${units} (${pct}%)`;
                     }
-                }
+                },
+                shared: Apex.canvasRendering ? true : undefined,
+                intersect: Apex.canvasRendering ? false : true,
+                arrow: Apex.canvasRendering ? false : true,
+                followCursor: Apex.canvasRendering ? true : false,
             },
             plotOptions: {
                 bar: {
@@ -157,6 +167,7 @@ export class Apex {
                 animations: {
                     enabled: Apex.animationEnabled
                 },
+                renderer: Apex.renderer,
             },
             title: {
                 text: title,
@@ -191,7 +202,11 @@ export class Apex {
                         const pct = total ? ((val / total) * 100).toFixed(1) : 0;
                         return `${val} ${units} (${pct}%)`;
                     }
-                }
+                },
+                shared: Apex.canvasRendering ? true : undefined,
+                intersect: Apex.canvasRendering ? false : true,
+                arrow: Apex.canvasRendering ? false : true,
+                followCursor: Apex.canvasRendering ? true : false,
             },
             plotOptions: {
                 bar: {
@@ -249,6 +264,7 @@ export class Apex {
                 animations: {
                     enabled: Apex.animationEnabled
                 },
+                renderer: Apex.renderer,
             },
             title: {
                 text: title,
@@ -302,6 +318,10 @@ export class Apex {
                         return Math.abs(val/10) + "%";
                     }
                 },
+                shared: Apex.canvasRendering ? true : undefined,
+                intersect: Apex.canvasRendering ? false : true,
+                arrow: Apex.canvasRendering ? false : true,
+                followCursor: Apex.canvasRendering ? true : false,
             },
             plotOptions: {
                 bar: {
@@ -619,7 +639,6 @@ export class Apex {
             chart: {
                 id: chartId,
                 type: 'scatter',
-                renderer: 'canvas',
                 height: height,
                 toolbar: { show: false },
                 background: '#090909',
@@ -630,6 +649,7 @@ export class Apex {
                 animations: {
                     enabled: Apex.animationEnabled
                 },
+                renderer: Apex.renderer,
             },
             title: {
                 text: title,
@@ -681,7 +701,10 @@ export class Apex {
                         </div>
                     </div>`;
                 },
-
+                shared: Apex.canvasRendering ? true : undefined,
+                intersect: Apex.canvasRendering ? false : true,
+                arrow: Apex.canvasRendering ? false : true,
+                followCursor: Apex.canvasRendering ? true : false,
             },
             grid: {
                 yaxis: {
@@ -745,6 +768,7 @@ export class Apex {
                 animations: {
                     enabled: Apex.animationEnabled
                 },
+                renderer: Apex.renderer,
             },
             title: {
                 text: title,

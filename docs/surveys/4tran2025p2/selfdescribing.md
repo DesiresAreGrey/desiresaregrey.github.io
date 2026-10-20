@@ -8,6 +8,7 @@ tags:
 hide:
   - tags
 discord_embed: /surveys/4tran2025p2/selfdescribing.json
+settings: ApexCharts
 ---
 <script src="/js/utils/header-title-changer.js" data-title="Page 9 - Self Describing"></script>
 

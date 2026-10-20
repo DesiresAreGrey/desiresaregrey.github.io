@@ -68,7 +68,7 @@ setting-item {
           left: 0;
           top: 100%;
           margin-top: 4px;
-          max-width: calc(100vw - (16px * 2));
+          max-width: calc(100vw - (48px * 2));
         }
       }
       &:hover::after {

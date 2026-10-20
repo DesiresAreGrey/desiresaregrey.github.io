@@ -8,6 +8,7 @@ tags:
 hide:
   - tags
 discord_embed: /surveys/4tran2025p2/transition.json
+settings: ApexCharts
 ---
 <script src="/js/utils/header-title-changer.js" data-title="Page 4 - Transition"></script>
 

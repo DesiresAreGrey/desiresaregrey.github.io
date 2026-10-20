@@ -257,3 +257,9 @@
   opacity: 1;
   pointer-events: auto;
 }
+
+@media (hover: hover) {
+  .apexcharts-bar-area:hover {
+    filter: brightness(1.2);
+  }
+}

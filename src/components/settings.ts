@@ -77,7 +77,8 @@ class SettingItem extends HTMLElement {
         this.innerHTML = /* html */ `
             <span class="info" ${tooltip ? `tooltip="${tooltip}"` : ''}>
                 <span class="name">${name}</span>
-                <span class="subtitle">${subtitle}</span>
+                ${tooltip && !subtitle ? `<i class="fa-solid fa-circle-info" style="font-size: 12px; margin-left: -0.15rem;"></i>` : ''}
+                <span class="subtitle">${subtitle}</span>   
             </span>
         `;
 

@@ -2,7 +2,10 @@ import { Apex } from "../../charts/apex.js";
 import { JsonFetch } from "../../utils/jsonfetch.js";
 import { LoadingBar } from "../../ui/loadingbar.js";
 import { WordCloud } from "../../charts/wordcloud.js";
+import { openSettingsPopup } from "../../utils/site-settings.js";
 import "../../utils/utils.js";
+
+$('.settings-button')?.addEventListener('click', openSettingsPopup);
 
 const charts = [...$$('.apexchart'), ...$$('.wordcloud')];
 if (charts.length > 0) {
