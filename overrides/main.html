@@ -50,8 +50,8 @@
   <script type="importmap">
     {
       "imports": {
-        "apexcharts": "https://esm.sh/apexcharts@7.5.1",
-        "apexcharts/features/renderer-canvas": "https://esm.sh/apexcharts@7.5.1/features/renderer-canvas",
+        "apexcharts": "https://esm.sh/apexcharts@8.3.1",
+        "apexcharts/features/renderer-canvas": "https://esm.sh/apexcharts@8.3.1/features/renderer-canvas",
         "d3": "https://esm.sh/d3@7.9.0",
         "d3-cloud": "https://esm.sh/d3-cloud@1.2.8",
         "@ffmpeg/ffmpeg": "/assets/misc/ffmpeg/ffmpeg/index.js",
@@ -65,7 +65,7 @@
   <script src="/js/components/settings.js"></script>
   <link rel="stylesheet" href="/stylesheets/components/settings.css">
   {% if settings %}
-    <script type="module" src="/js/utils/site-settings.js" data-setting-types="{{ settings }}"></script>
+    <script type="module" src="/js/utils/site-settings.js" data-setting-groups="{{ settings }}"></script>
   {% endif %}
   {% if extra_head %}
     {{ extra_head }}
