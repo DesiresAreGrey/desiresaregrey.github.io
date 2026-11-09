@@ -2,7 +2,6 @@
 title: File Uploader
 description: Quickly upload files to FreeimageHost or Catbox.moe
 extra_head: |
-  <script src="/js/components/settings.js"></script>
   <link rel="stylesheet" href="/stylesheets/components/settings.css">
   <link rel="manifest" href="/misc/upload/manifest.json"/>
   <link rel="apple-touch-icon" href="/assets/DesiresAreGrey192x.png"/>
