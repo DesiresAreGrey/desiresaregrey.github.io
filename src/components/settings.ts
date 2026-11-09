@@ -1,3 +1,5 @@
+type SettingItemType = "width-height" | "start-end" | "number" | "dropdown" | "toggle";
+
 class SettingItem extends HTMLElement {
     get input(): HTMLInputElement | HTMLSelectElement {
         return this.querySelector('.setting-input') as HTMLInputElement | HTMLSelectElement;
@@ -18,6 +20,10 @@ class SettingItem extends HTMLElement {
 
     get inputs(): HTMLInputElement[] {
         return [...this.querySelectorAll('.setting-input')] as HTMLInputElement[];
+    }
+
+    get type() {
+        return this.getAttribute("type") as SettingItemType;
     }
 
     show() {
@@ -82,7 +88,7 @@ class SettingItem extends HTMLElement {
             </span>
         `;
 
-        if (this.getAttribute("type") === "width-height") {
+        if (this.type === "width-height") {
             const defaultValue = this.getAttribute("default") || "1920x1080";
             const [defaultWidth, defaultHeight] = defaultValue.split("x").map(Number);
             this.innerHTML += /* html */ `
@@ -93,7 +99,7 @@ class SettingItem extends HTMLElement {
                 </div>
             `;
         }
-        else if (this.getAttribute("type") === "start-end") {
+        else if (this.type === "start-end") {
             this.innerHTML += /* html */ `
                 <div style="float: right;">
                     <input id="${this.id}-input-start" class="setting-input start" type="number" inputmode="decimal" step="any" value="0.0" style="width: ${width ?? '3rem'};">
@@ -121,7 +127,7 @@ class SettingItem extends HTMLElement {
                 input.value = Number(Number(input.value).toFixed(2)).toString();
             });
         }
-        else if (this.getAttribute("type") === "number") {
+        else if (this.type === "number") {
             const defaultValue = this.getAttribute("default") ?? "0";
             const suffix = this.getAttribute("suffix") ?? "";
             const step = this.getAttribute("step") ?? "1";
@@ -141,7 +147,7 @@ class SettingItem extends HTMLElement {
                     input.value = max;
             });
         }
-        else if (this.getAttribute("type") === "dropdown") {
+        else if (this.type === "dropdown") {
             const defaultValue = this.getAttribute("default");
             const options = this.getAttribute("options")?.split(",").map(o => ({ value: o.split(":")[0], label: o.split(":")[1] })) ?? [];
             const suffix = this.getAttribute("suffix") ?? "";
@@ -154,7 +160,7 @@ class SettingItem extends HTMLElement {
                 </div>
             `;
         }
-        else if (this.getAttribute("type") === "toggle") {
+        else if (this.type === "toggle") {
             const defaultValue = this.getAttribute("default") ?? "true";
             this.innerHTML += /* html */ `
                 <div style="float: right;">

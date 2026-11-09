@@ -1,5 +1,36 @@
 import { Popup } from "../ui/popup.js";
 
+const defaultSettings = () => ({
+    apexCharts: {
+        name: "ApexCharts",
+        settings: {
+            canvasRendering: {
+                name: "Canvas Rendering", 
+                info: "Use canvas rendering for ApexCharts instead of SVG, improving performance.\nAffects all charts except for pie charts.\n\nRequires reloading the page",
+                value: window.innerWidth < 768, 
+                type: "toggle"
+            },
+            chartAnimations: {
+                name: "Chart Animations", 
+                info: "Use chart animations for ApexCharts.\nTurn off to improve performance\n\nRequires reloading the page", 
+                value: true, 
+                type: "toggle"
+            }
+        }
+    },
+    log: {
+        name: "Log",
+        settings: {
+            showLoggingWindow: {
+                name: "Show Logging window", 
+                info: "Adds a small log popup to the bottom right corner.\n\nRequires reloading the page", 
+                value: false, 
+                type: "toggle"
+            }
+        }
+    }
+} as Settings);
+
 const settingsButton = $id('settings-button');
 if (settingsButton) {
     settingsButton.addEventListener('click', openSettingsPopup);
@@ -11,25 +42,18 @@ type Settings = {
         name: string;
         settings: {
             [key: string]: {
-                value: any;
                 name: string;
                 info?: string;
-                type: string;
+                value: any;
+                options?: any[];
+                type: SettingItemType;
             }
         }
     }
 }
 
 export function getSettings() {
-    const settings = {
-        apexCharts: {
-            name: "ApexCharts",
-            settings: {
-                canvasRendering: {value: window.innerWidth < 768, name: "Canvas Rendering", info: "Use canvas rendering for ApexCharts instead of SVG, improving performance.\nAffects all charts except for pie charts.\n\nRequires reloading the page", type: "toggle"},
-                chartAnimations: {value: true, name: "Chart Animations", info: "Use chart animations for ApexCharts.\nTurn off to improve performance\n\nRequires reloading the page", type: "toggle"}
-            }
-        }
-    } as Settings;
+    const settings = defaultSettings();
 
     const savedSettings = localStorage.getItem("site-settings");
     if (savedSettings) {
@@ -78,6 +102,7 @@ export async function openSettingsPopup() {
                                 type="${value.type}"
                                 name="${value.name}"
                                 ${value.info ? `tooltip="${value.info}"` : ''}
+                                ${value.options ? `options="${value.options.join(',')}"` : ''}
                                 default="${JSON.stringify(value.value)}">
                             </setting-item>
                         `).join('')

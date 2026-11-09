@@ -5,6 +5,7 @@ tags:
   - Miscellaneous
 hide:
   - tags
+settings: Video,Log
 extra_head: |
   <script src="/js/components/settings.js"></script>
   <link rel="stylesheet" href="/stylesheets/components/settings.css">
