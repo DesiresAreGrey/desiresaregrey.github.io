@@ -3,14 +3,13 @@ import { defaultPatterns, WebHaptics } from 'web-haptics';
 import { LoadingBar } from '../ui/loadingbar.js';
 import OutLog from '../ui/outlog.js';
 import { Popup } from '../ui/popup.js';
-import { FFmpegHelper, Video } from '../utils/ffmpeg.js';
 import { TimeSpan } from '../utils/timespan.js';
 import { ErrorPopup } from '../ui/errorpopup.js';
-import { API } from '../utils/api.js';
-import { JsonFetch } from '../utils/jsonfetch.js';
 import Catbox from '../utils/catbox.js';
 import SWHelper from '../utils/swhelper.js';
 import { getSettings, openSettingsPopup } from '../utils/site-settings.js';
+import { BufferTarget, Conversion, Mp4OutputFormat, Output, Quality } from 'mediabunny';
+import { VideoInput } from '../utils/mediabunny-helper.js';
 
 if (getSettings().log.settings.showLoggingWindow.value)
     OutLog.show();
@@ -42,15 +41,11 @@ if (window.matchMedia('(display-mode: standalone)').matches) {
 
 const haptics = new WebHaptics();
 
-console.log("Loading FFmpeg...");
-await FFmpegHelper.loadFFmpeg();
-console.log("FFmpeg loaded");
-
 await customElements.whenDefined('setting-item');
 
 LoadingBar.finish();
 
-let video: Video | null = null;
+let video: VideoInput | null = null;
 
 const inVideoPreview = $id('in-video-preview') as HTMLVideoElement;
 
@@ -92,7 +87,6 @@ function changedReencodeSetting() {
 }
 
 // settings
-const presetSetting = $id('setting-preset') as NumberSettingItem;
 const qualitySetting = $id('setting-quality') as NumberSettingItem;
 
 const resolutionSetting = $id('setting-resolution') as WidthHeightSettingItem;
@@ -105,7 +99,7 @@ const [startInput, endInput] = startEndSetting.inputs;
 
 inVideoPreview.addEventListener('play', () => requestAnimationFrame(updateTime));
 function updateTime() {
-    if (video && (inVideoPreview.currentTime < Number(startInput.value) || (!Number(endInput.value).approx(video.format.duration, 0.05) && inVideoPreview.currentTime >= Number(endInput.value))))
+    if (video && (inVideoPreview.currentTime < Number(startInput.value) || (!Number(endInput.value).approx(video.duration, 0.05) && inVideoPreview.currentTime >= Number(endInput.value))))
         inVideoPreview.currentTime = Number(startInput.value);
 
     if (!inVideoPreview.paused && !inVideoPreview.ended)
@@ -113,12 +107,12 @@ function updateTime() {
 }
 
 heightInput.addEventListener('input', () => {
-    if (video?.videoStream == null)
+    if (video == null)
         return;
 
     let height = parseInt(heightInput.value);
-    if (height > video.videoStream.height)
-        height = video.videoStream.height;
+    if (height > video.height)
+        height = video.height;
     else if (height < 1)
         height = 1;
     const width = Math.round(height * video.aspectRatio);
@@ -128,12 +122,12 @@ heightInput.addEventListener('input', () => {
     updatePercentages();
 });
 widthInput.addEventListener('input', () => {
-    if (video?.videoStream == null)
+    if (video == null)
         return;
 
     let width = parseInt(widthInput.value);
-    if (width > video.videoStream.width)
-        width = video.videoStream.width;
+    if (width > video.width)
+        width = video.width;
     else if (width < 1)
         width = 1;
     const height = Math.round(width / video.aspectRatio);
@@ -154,15 +148,15 @@ fpsSetting.input.addEventListener('blur', () => {
 });
 
 async function updatePercentages() {
-    if (!video?.videoStream)
+    if (!video)
         return;
 
     const width = Number(widthInput.value);
-    resolutionSetting.subtitle = `${((width / video.videoStream.width) * 100).roundTo(1)}%`;
+    resolutionSetting.subtitle = `${((width / video.width) * 100).roundTo(1)}%`;
 
     const speed = 1;
     
-    const fpsPercentValue = (fpsSetting.value / (video.fps * speed)) * 100;
+    const fpsPercentValue = (fpsSetting.value / (video.frameRateMetrics.bestGuessFrameRate * speed)) * 100;
     if (fpsPercentValue >= 5)
         fpsSetting.subtitle = fpsPercentValue.roundTo(2) + "%";
     else
@@ -176,7 +170,7 @@ function startEndChanged() {
     const startValue = Number(startInput.value);
     const endValue = Number(endInput.value);
     inVideoPreview.currentTime = startValue;
-    if (startValue !== 0 || (!endValue.approx(video?.format.duration ?? 0, 0.05) && endValue > startValue)) {
+    if (startValue !== 0 || (!endValue.approx(video?.duration ?? 0, 0.05) && endValue > startValue)) {
         startEndSetting.subtitle = 'Enabled';
     }
     else {
@@ -287,15 +281,17 @@ async function selectedVideo() {
     inVideoPreview.src = URL.createObjectURL(file);
 
     LoadingBar.startTrickle();
-    video = await Video.fromFile(file);
-    LoadingBar.finish();
-    
-    if (!video.videoStream) {
+
+    video = await VideoInput.fromFile(file);
+
+    if (!video) {
         console.log('No video stream found in the file.');
         return;
     }
 
-    if (video.videoStream.codec_name === 'h264') {
+    LoadingBar.finish();
+
+    if (video.codec === 'avc') {
         transcodeSetting.value = false;
         transcodeSetting.enable();
     }
@@ -305,15 +301,15 @@ async function selectedVideo() {
     }
     changedReencodeSetting();
     
-    heightInput.value = video.videoStream.height.toString();
-    widthInput.value = video.videoStream.width.toString();
+    heightInput.value = video.height.toString();
+    widthInput.value = video.width.toString();
     resolutionSetting.show();
     
-    fpsSetting.value = video.fps.roundTo(2);
+    fpsSetting.value = video.frameRateMetrics.bestGuessFrameRate.roundTo(1);
     fpsSetting.show();
 
     startInput.value = '0';
-    startEndSetting.setAttribute('duration', video.format.duration.toString());
+    startEndSetting.setAttribute('duration', video.duration.toString());
     startEndSetting.show();
 
     const infoEl = $id('video-info') as HTMLParagraphElement;
@@ -323,7 +319,7 @@ async function selectedVideo() {
 }
 
 async function convertToMp4() {
-    if (!video?.videoStream)
+    if (!video)
         return;
 
     haptics.trigger(defaultPatterns.selection);
@@ -337,69 +333,81 @@ async function convertToMp4() {
         convertButton.textContent = "Loading...";
 
         const ext = video.file.name.split('.').slice(-1)[0];
-        const fileData = await FFmpegHelper.fetchFile(video);
-        await FFmpegHelper.writeFile(`input.${ext}`, fileData);
+        const startSeconds = Number(startInput.value);
+        const endSeconds = Number(endInput.value);
+        
+        const output = new Output({
+            format: new Mp4OutputFormat(),
+            target: new BufferTarget()
+        });
+
+        const conversion = await Conversion.init({
+            input: video.input,
+            output,
+            tracks: 'primary',
+
+            video: transcodeSetting.value ? {
+                codec: 'avc',
+                width: Math.max(2, Math.round(Number(widthInput.value) / 2) * 2),
+                frameRate: !video.frameRateMetrics.bestGuessFrameRate.approx(fpsSetting.value, 0.05) ? fpsSetting.value : undefined,
+                quality: new Quality({
+                    quantizer: Math.max(0, Math.min(51, qualitySetting.value))
+                }),
+                hardwareAcceleration: 'no-preference',
+                forceTranscode: true
+            } : {
+                codec: 'avc'
+            },
+            audio: {
+                codec: 'aac'
+            },
+
+            trim: transcodeSetting.value && (startSeconds > 0 || !endSeconds.approx(video.duration, 0.05) && endSeconds > startSeconds) ? {
+                start: startSeconds,
+                end: endSeconds > startSeconds ? endSeconds : video.duration
+            } : undefined
+        });
+
+        console.log(conversion);
+        if (conversion.utilizedTracks.length > 0)
+            console.log("Utilized tracks: ", conversion.utilizedTracks);
+        if (conversion.discardedTracks.length > 0)
+            console.log("Discarded tracks: ", conversion.discardedTracks);
+        if (!conversion.isValid) {
+            console.error("Conversion is not valid");
+            throw "Conversion is not valid";
+        }
     
         LoadingBar.update(0.1);
         convertButton.textContent = "Converting...";
-
-        let command: string[];
-        if (!transcodeSetting.value) {
-            command = [
-                '-i', `input.${ext}`, 
-                '-c:v', 'copy',
-                '-c:a', video.audioStreams[0]?.codec_name === 'aac' || video.audioStreams[0]?.codec_name === 'mp3' ? 'copy' : 'aac',
-                '-movflags', '+faststart',
-                'output.mp4'
-            ];
-        }
-        else {
-            const startSeconds = Number(startInput.value);
-            const endSeconds = Number(endInput.value);
-            FFmpegHelper.durationMod = () => (endSeconds - startSeconds) / 1;
-
-            const trimArgs: string[] = [
-                ...(startSeconds > 0 ? ['-ss', String(startSeconds)] : []),
-                ...(!endSeconds.approx(video.format.duration, 0.05) && endSeconds > startSeconds
-                    ? ['-t', (endSeconds - startSeconds).toString()]
-                    : [])
-            ];
-
-            const filters = [
-                !video.fps.approx(fpsSetting.value, 0.05) ? `fps=${fpsSetting.value}` : null,
-                !video.videoStream!.width.approx(Number(widthInput.value), 0.25) ? `scale=${widthInput.value.parseFloat()?.roundTo(0) ?? video.videoStream!.width}:-2:flags=lanczos` : null,
-                `format=yuv420p` 
-            ];
-
-            command = [
-                '-i', `input.${ext}`,
-                ...trimArgs,
-                '-c:v', 'libx264', 
-                '-preset', presetSetting.value.toString(),
-                '-crf', qualitySetting.value.toString(),
-                '-c:a', 'aac',
-                '-vf', filters.filter(f => f !== null).join(','),
-                '-movflags', '+faststart',
-                'output.mp4'
-            ];
-        }
         
-        console.log("FFmpeg", command.join(' '));
-        FFmpegHelper.onProgress = (progress: number) => LoadingBar.update(progress.remap(0.1, 1));
-        if (await FFmpegHelper.run(video, command) !== 0)
-            throw "FFMpeg error(s):<br>" + [...FFmpegHelper.errors].join('<br>');
+        let lastProgress = 0;
+        conversion.onProgress = (progress: number) => {
+            if (progress - lastProgress >= 0.01) {
+                lastProgress = progress;
+                LoadingBar.update(progress.remap(0.1, 1));
+                convertButton.textContent = `Converting... ${Math.round(progress * 100)}%`;
+                console.log(`Conversion progress: ${Math.round(progress * 100)}%`);
+            }
+        };
 
-        console.log("FFmpeg completed in", ((performance.now() - start) / 1000).roundTo(2), "seconds");
+        await conversion.execute();
 
-        const data = await FFmpegHelper.readFile('output.mp4');
-        const blob = new Blob([new Uint8Array(data as Uint8Array)], { type: 'video/mp4' });
+        console.log("Mediabunny completed in", ((performance.now() - start) / 1000).roundTo(2), "seconds");
+
+        const buffer = output.target.buffer;
+        if (!buffer)
+            throw new Error('No MP4 output was produced.');
+
+        const blob = new Blob([buffer], { type: 'video/mp4' });
+
         const url = URL.createObjectURL(blob);
         outputVideo.src = url;
         inVideoPreview.pause();
 
         const infoEl = $id('mp4-info') as HTMLParagraphElement;
         if (infoEl)
-            infoEl.innerHTML = getInfoHtml(await Video.fromFile(new File([blob], video.file.name.split('.').slice(0, -1).join('.') + ".mp4")));
+            infoEl.innerHTML = getInfoHtml(await VideoInput.fromFile(new File([blob], video.file.name.split('.').slice(0, -1).join('.') + ".mp4")));
 
         downloadButton.disabled = false;
         shareButton.disabled = false;
@@ -408,20 +416,16 @@ async function convertToMp4() {
         downloadSize = blob.size;
 
         console.log("File size:", (downloadSize / (1024 * 1024)).roundTo(2), "MB");
-
-        try {
-            await FFmpegHelper.deleteFiles([`input.${ext}`, 'output.mp4']);
-        }
-        catch {}
                 
         haptics.trigger(defaultPatterns.success);
 
         console.log("Conversion completed in", ((performance.now() - start) / 1000).roundTo(2), "seconds");
 
-        if (downloadSize <= 50 * 1024 * 1024 && await JsonFetch.isReachable(await API.url))
-            uploadButton.disabled = false;
-        else
-            uploadButton.disabled = true;   
+        uploadButton.disabled = true;
+        // if (downloadSize <= 50 * 1024 * 1024 && await JsonFetch.isReachable(await API.url))
+        //     uploadButton.disabled = false;
+        // else
+        //     uploadButton.disabled = true;   
     }
     catch (e) {
         haptics.trigger(defaultPatterns.error);
@@ -431,26 +435,26 @@ async function convertToMp4() {
         convertButton.textContent = "Convert to MP4";
         convertButton.disabled = false;
         LoadingBar.finish();
-        FFmpegHelper.resetOnProgress();
         $("setting-group")?.removeAttribute('disabled');
     }
 }
 
-function getInfoHtml(video: Video) {
+function getInfoHtml(video: VideoInput | null) {
     console.log(video);
+    if (!video)
+        return "";
     return /* html */ `
-        Size: <span style="font-weight: bold;">${(video.format.size / (1024 * 1024)).roundTo(2)} MB</span>
+        Size: <span style="font-weight: bold;">${(video.size / (1024 * 1024)).roundTo(2)} MB</span>
         •
-        Format: <span style="font-weight: bold;">${video.format.filename.split('.').slice(-1)[0].toUpperCase()}</span>
+        Format: <span style="font-weight: bold;">${video.file.name.split('.').slice(-1)[0].toUpperCase()}</span>
         •
-        Codec: <span style="font-weight: bold;">${video.videoStream?.codec_long_name?.split('/')[0].trim()
-            .replace('H.265', "HEVC") ?? "Unknown"}</span>
+        Codec: <span style="font-weight: bold;">${video.codec?.toUpperCase() ?? "Unknown"}</span>
         •
-        Dimensions: <span style="font-weight: bold;">${video.videoStream?.width ?? "??"}x${video.videoStream?.height ?? "??"}</span>
+        Dimensions: <span style="font-weight: bold;">${video.width ?? "??"}x${video.height ?? "??"}</span>
         •
-        FPS: <span style="font-weight: bold;">${video.fps.roundTo(2)}</span>
+        FPS: <span style="font-weight: bold;">${video.frameRateMetrics.bestGuessFrameRate.roundTo(1)}</span>
         •
-        Duration: <span style="font-weight: bold;">${TimeSpan.fromSeconds(video.format.duration).toTrimmedHms()}</span>
+        Duration: <span style="font-weight: bold;">${TimeSpan.fromSeconds(video.duration).toTrimmedHms()}</span>
     `
 }
 

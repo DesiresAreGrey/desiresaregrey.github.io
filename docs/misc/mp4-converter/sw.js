@@ -1,4 +1,4 @@
-const version = "1.0.6.6";
+const version = "1.1.0.0";
 
 const cacheUrls = [
     "/misc/mp4-converter/",
@@ -22,25 +22,13 @@ const cacheUrls = [
     "/js/utils/swhelper.js",
     "/js/utils/timespan.js",
     "/js/utils/utils.js",
-    "/js/utils/ffmpeg.js",
+    "/js/utils/mediabunny-helper.js",
     "/assets/DesiresAreGrey192x.png",
     "/assets/DesiresAreGrey-Circle.png",
-    "/assets/misc/ffmpeg/core/ffmpeg-core.js",
-    "/assets/misc/ffmpeg/core/ffmpeg-core.wasm",
-    "/assets/misc/ffmpeg/ffmpeg/classes.js",
-    "/assets/misc/ffmpeg/ffmpeg/const.js",
-    "/assets/misc/ffmpeg/ffmpeg/empty.mjs",
-    "/assets/misc/ffmpeg/ffmpeg/errors.js",
-    "/assets/misc/ffmpeg/ffmpeg/index.js",
-    "/assets/misc/ffmpeg/ffmpeg/types.js",
-    "/assets/misc/ffmpeg/ffmpeg/utils.js",
-    "/assets/misc/ffmpeg/ffmpeg/worker.js",
-    "/assets/misc/ffmpeg/util/const.js",
-    "/assets/misc/ffmpeg/util/errors.js",
-    "/assets/misc/ffmpeg/util/index.js",
-    "/assets/misc/ffmpeg/util/types.js",
     "https://esm.sh/web-haptics",
-    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css",
+    "https://esm.sh/mediabunny@1.65.2",
+    "https://esm.sh/mediabunny@1.65.2/es2022/mediabunny.mjs"
 ];
 
 self.addEventListener('install', (event) => {
