@@ -4,12 +4,16 @@ const cacheUrls = [
     "/misc/mp4-converter/",
     "/misc/mp4-converter/index.html",
     "/misc/mp4-converter/manifest.json",
+
     "/stylesheets/extra.min.css",
+    "/stylesheets/extra.css",
+    "/stylesheets/zensical-ports.css",
     "/stylesheets/misc/mp4-converter.css",
     "/stylesheets/ui/errorpopup.css",
     "/stylesheets/ui/popup.css",
     "/stylesheets/ui/outlog.css",
     "/stylesheets/components/settings.css",
+
     "/js/components/settings.js",
     "/js/misc/mp4-converter.js",
     "/js/utils/api.js",
@@ -26,8 +30,11 @@ const cacheUrls = [
     "/js/utils/site-settings.js",
     "/js/utils/cache.js",
     "/js/utils/catbox.js",
+    "/js/extra.js",
+
     "/assets/DesiresAreGrey192x.png",
     "/assets/DesiresAreGrey-Circle.png",
+
     "https://esm.sh/web-haptics",
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css",
     "https://esm.sh/mediabunny@1.65.2",

@@ -23,6 +23,8 @@ const cacheUrls = [
     "/js/utils/timespan.js",
     "/js/utils/utils.js",
     "/js/utils/ffmpeg.js",
+    "/js/utils/site-settings.js",
+    "/js/utils/cache.js",
     "/assets/DesiresAreGrey192x.png",
     "/assets/DesiresAreGrey-Circle.png",
     "/assets/misc/ffmpeg/core/ffmpeg-core.js",
