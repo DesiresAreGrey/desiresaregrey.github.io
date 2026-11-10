@@ -49,6 +49,10 @@ export class Utils {
         });
     }
 
+    static waitForNextPaint(): Promise<void> {
+        return new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
+    }
+
     static runAfter(callback: () => void, delay: number, element?: HTMLElement): void {
         if (!element)
             element = document.documentElement;

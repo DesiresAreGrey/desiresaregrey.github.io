@@ -8,8 +8,9 @@ import { ErrorPopup } from '../ui/errorpopup.js';
 import Catbox from '../utils/catbox.js';
 import SWHelper from '../utils/swhelper.js';
 import { getSettings, openSettingsPopup } from '../utils/site-settings.js';
-import { BufferTarget, Conversion, Mp4OutputFormat, Output, Quality, type QualityLevel } from 'mediabunny';
+import { BufferTarget, Conversion, Mp4OutputFormat, Output, Quality, type ConversionOptions, type QualityLevel } from 'mediabunny';
 import { VideoInput } from '../utils/mediabunny-helper.js';
+import { Utils } from '../utils/utils.js';
 
 if (getSettings().log.settings.showLoggingWindow.value)
     OutLog.show();
@@ -366,10 +367,13 @@ async function convertToMp4() {
     LoadingBar.start();
     const start = performance.now();
 
+    let percentFrame: number | null = null;
+
     try {
         convertButton.textContent = "Loading...";
 
-        const ext = video.file.name.split('.').slice(-1)[0];
+        await Utils.waitForNextPaint();
+
         const startSeconds = Number(startInput.value);
         const endSeconds = Number(endInput.value);
         
@@ -378,7 +382,7 @@ async function convertToMp4() {
             target: new BufferTarget()
         });
 
-        const conversion = await Conversion.init({
+        const conversionOptions = {
             input: video.input,
             output,
             tracks: 'primary',
@@ -400,13 +404,21 @@ async function convertToMp4() {
                 codec: 'aac'
             },
 
+            copy: !transcodeSetting.value ? {
+                mode: 'forced'
+            } : undefined,
+
             trim: transcodeSetting.value && (startSeconds > 0 || !endSeconds.approx(video.duration, 0.05) && endSeconds > startSeconds) ? {
                 start: startSeconds,
                 end: endSeconds > startSeconds ? endSeconds : video.duration
             } : undefined
-        });
+        } as ConversionOptions;
 
-        console.log(conversion);
+        console.log("ConversionOptions", conversionOptions);
+
+        const conversion = await Conversion.init(conversionOptions);
+
+        console.log("Conversion", conversion);
         if (conversion.utilizedTracks.length > 0)
             console.log("Utilized tracks: ", conversion.utilizedTracks);
         if (conversion.discardedTracks.length > 0)
@@ -415,23 +427,44 @@ async function convertToMp4() {
             console.error("Conversion is not valid");
             throw "Conversion is not valid";
         }
-    
+
         LoadingBar.update(0.1);
         convertButton.textContent = "Converting...";
+
+        await Utils.waitForNextPaint();
         
+        LoadingBar.transition = "width 250ms linear";
         let lastProgress = 0;
+        let lastUpdate = 0;
         conversion.onProgress = (progress: number) => {
-            if (progress - lastProgress >= 0.01) {
-                lastProgress = progress;
-                LoadingBar.update(progress.remap(0.1, 1));
-                convertButton.textContent = `Converting ${Math.round(progress * 100)}%...`;
-                console.log(`Conversion progress: ${Math.round(progress * 100)}%`);
+            if (progress - lastProgress >= 0.01 || progress == 0) {
+                const percent = (progress * 100).roundTo();
+
+                if (percentFrame)
+                    cancelAnimationFrame(percentFrame);
+                percentFrame = requestAnimationFrame(() => {
+                    percentFrame = null;
+                    convertButton.textContent = `${percent}%`;
+                });
+
+                const now = performance.now();
+                if (now - lastUpdate >= 250) {
+                    console.log(`Conversion progress: ${percent}%`);
+                    lastUpdate = now;
+                    lastProgress = progress;
+                    LoadingBar.update(progress.remap(0.1, 0.99));
+                }
+            }
+            if (progress >= 1 && lastProgress != 1) {
+                lastProgress = 1;
+                convertButton.textContent = "99%";
+                console.log("Conversion progress: 99%");
             }
         };
 
         await conversion.execute();
 
-        console.log("Mediabunny completed in", ((performance.now() - start) / 1000).roundTo(2), "seconds");
+        LoadingBar.resetTransition();
 
         const buffer = output.target.buffer;
         if (!buffer)
@@ -443,9 +476,13 @@ async function convertToMp4() {
         outputVideo.src = url;
         inVideoPreview.pause();
 
+        const completionTime = ((performance.now() - start) / 1000).roundTo(2);
+
         const infoEl = $id('mp4-info') as HTMLParagraphElement;
-        if (infoEl)
+        if (infoEl) {
             infoEl.innerHTML = getInfoHtml(await VideoInput.fromFile(new File([blob], video.file.name.split('.').slice(0, -1).join('.') + ".mp4")));
+            infoEl.innerHTML += `<div style="font-size: 10px;">Conversion: <span style="font-weight: bold;">${completionTime}</span>s</div>`;
+        }
 
         downloadButton.disabled = false;
         shareButton.disabled = false;
@@ -457,7 +494,7 @@ async function convertToMp4() {
                 
         haptics.trigger(defaultPatterns.success);
 
-        console.log("Conversion completed in", ((performance.now() - start) / 1000).roundTo(2), "seconds");
+        console.log("Conversion completed in", completionTime, "seconds");
 
         uploadButton.disabled = true;
         // if (downloadSize <= 50 * 1024 * 1024 && await JsonFetch.isReachable(await API.url))
@@ -474,6 +511,7 @@ async function convertToMp4() {
         convertButton.disabled = false;
         LoadingBar.finish();
         $("setting-group")?.removeAttribute('disabled');
+        if (percentFrame) cancelAnimationFrame(percentFrame);
     }
 }
 
@@ -486,7 +524,7 @@ function getInfoHtml(video: VideoInput | null) {
         •
         Format: <span style="font-weight: bold;">${video.file.name.split('.').slice(-1)[0].toUpperCase()}</span>
         •
-        Codec: <span style="font-weight: bold;">${video.codec?.toUpperCase() ?? "Unknown"}</span>
+        Codec: <span style="font-weight: bold;">${video.codec?.toUpperCase().replace("AVC", "H.264") ?? "Unknown"}</span>
         •
         Dimensions: <span style="font-weight: bold;">${video.width ?? "??"}x${video.height ?? "??"}</span>
         •

@@ -15,6 +15,22 @@ export class LoadingBar {
         return this._progress;
     };
 
+    static readonly defaultTransition = "width 500ms ease-out";
+    private static _transition = this.defaultTransition;
+    static set transition(value: string) {
+        if (LoadingBar.instance) {
+            LoadingBar.instance.element.style.transition = LoadingBar.instance.element.style.transition.replace(LoadingBar._transition, value);
+        }
+
+        LoadingBar._transition = value;
+    }
+    static get transition(): string {
+        return LoadingBar._transition;
+    }
+    static resetTransition(): void {
+        LoadingBar.transition = LoadingBar.defaultTransition;
+    }
+
     private lastUpdateTime: number = performance.now();
     private startTime: number = performance.now();
 
@@ -66,7 +82,7 @@ export class LoadingBar {
         void bar.element.offsetWidth;
 
         bar.element.style.opacity = '1';
-        bar.element.style.transition = 'width 500ms ease-out, opacity 250ms ease';
+        bar.element.style.transition = `${LoadingBar.transition}, opacity 250ms ease`;
 
         bar._progress = 0;
         bar.lastUpdateTime = performance.now();
@@ -88,7 +104,7 @@ export class LoadingBar {
         void bar.element.offsetWidth;
 
         bar.element.style.opacity = '1';
-        bar.element.style.transition = 'width 500ms ease-out, opacity 250ms ease';
+        bar.element.style.transition = `${LoadingBar.transition}, opacity 250ms ease`;
 
         bar._progress = 0;
         bar.lastUpdateTime = performance.now();
@@ -157,7 +173,7 @@ export class LoadingBar {
             bar.animation = bar.element.animate([ { width: currentWidth }, { width: "100%" } ], { duration: 200, fill: 'forwards' });
         }
         else {
-            bar.element.style.transition = 'width 500ms ease-out, opacity 500ms ease';
+            bar.element.style.transition = `${LoadingBar.transition}, opacity 500ms ease`;
             void bar.element.offsetWidth;
         }
 

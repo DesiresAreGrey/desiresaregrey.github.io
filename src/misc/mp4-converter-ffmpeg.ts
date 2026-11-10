@@ -398,8 +398,10 @@ async function convertToMp4() {
         inVideoPreview.pause();
 
         const infoEl = $id('mp4-info') as HTMLParagraphElement;
-        if (infoEl)
+        if (infoEl) {
             infoEl.innerHTML = getInfoHtml(await Video.fromFile(new File([blob], video.file.name.split('.').slice(0, -1).join('.') + ".mp4")));
+            infoEl.innerHTML += `<div style="font-size: 10px;">Conversion: <span style="font-weight: bold;">${((performance.now() - start) / 1000).roundTo(2)}</span>s</div>`;
+        }
 
         downloadButton.disabled = false;
         shareButton.disabled = false;

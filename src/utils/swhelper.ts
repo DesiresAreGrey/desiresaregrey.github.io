@@ -5,7 +5,10 @@ export default class SWHelper {
             const js = await response.text();
             console.log(js);
             const match = js.match(/version\s*=\s*"([^"]+)"/);
-            return match?.[1] ?? null;
+            let result = match?.[1];
+            if (result?.endsWith(".0"))
+                result = result.slice(0, -2);
+            return result ?? null;
         } 
         catch {
             return null;

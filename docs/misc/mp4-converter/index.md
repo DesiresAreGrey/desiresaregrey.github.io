@@ -30,7 +30,7 @@ screen so it can be used offline.</p>
     <div class="preview-wrapper noselect">
       <video id="in-video-preview" class="preview" autoplay controls playsinline disablePictureInPicture></video>
     </div>
-    <p id="video-info" style="font-size: 13px; color: #999; margin-top: 0.1rem; margin-bottom: 0; text-align: center;">Input Video</p>
+    <div id="video-info" style="font-size: 13px; color: #999; margin-top: 0.1rem; margin-bottom: 0; text-align: center;">Input Video</div>
   </div>
 
   <setting-group disabled>
@@ -92,7 +92,7 @@ screen so it can be used offline.</p>
     <div class="preview-wrapper noselect">
       <video id="out-video-preview" class="preview" autoplay controls playsinline disablePictureInPicture></video>
     </div>
-    <p id="mp4-info" style="font-size: 13px; color: #999; margin-top: 0.1rem; margin-bottom: 0; text-align: center;">Output MP4</p>
+    <div id="mp4-info" style="font-size: 13px; color: #999; margin-top: 0.1rem; margin-bottom: 0; text-align: center;">Output MP4</div>
   </div>
   
   <div class="button-row">

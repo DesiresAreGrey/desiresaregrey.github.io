@@ -104,4 +104,3 @@ export default class OutLog {
         }
     }
 }
-void OutLog.init();
