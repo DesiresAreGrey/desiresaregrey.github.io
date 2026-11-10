@@ -1,4 +1,5 @@
 import { CSSUtils } from "../utils/css.js";
+import { getSettings } from "../utils/site-settings.js";
 
 export default class OutLog {
     private static minimized = true;
@@ -104,3 +105,5 @@ export default class OutLog {
         }
     }
 }
+if (getSettings().log.settings.showLoggingWindow.value)
+    void OutLog.init();
