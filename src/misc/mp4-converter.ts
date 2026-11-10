@@ -327,7 +327,6 @@ async function selectedVideo() {
     LoadingBar.finish();
 
     if (video.codec === 'avc') {
-        transcodeSetting.value = false;
         transcodeSetting.enable();
     }
     else {

@@ -15,7 +15,7 @@ extra_head: |
 <link rel="stylesheet" href="/stylesheets/misc/mp4-converter.css">
 
 # Video to MP4 Converter
-<p class="description">The conversion happens in your browser without being uploaded/processed on a server. The page can also be added to your home
+<p class="description">The conversion happens in your browser using <a href="https://mediabunny.dev" target="_blank">Mediabunny</a> without being uploaded/processed on a server. The page can also be added to your home
 screen so it can be used offline.</p>
 
 <div class="drop-overlay" style="display: none;">
@@ -39,7 +39,7 @@ screen so it can be used offline.</p>
       type="toggle"
       name="Transcode"
       tooltip="Transcode the video or just change the container to MP4.&#10;Transcoding takes significantly longer but can fix compatibility issues and reduce file size."
-      default="false">
+      default="true">
     </setting-item>
     <setting-group id="transcoding-settings">
       <setting-item 
@@ -72,8 +72,7 @@ screen so it can be used offline.</p>
         name="Quality Level"
         width="6rem"
         options="custom:Custom,very-high:Very High,high:High,medium:Medium,low:Low,very-low:Very Low"
-        default="medium"
-        hidden>
+        default="medium">
       </setting-item>
       <setting-item 
         id="setting-size-target"
@@ -82,8 +81,7 @@ screen so it can be used offline.</p>
         subtitle="MB"
         tooltip="The target file size for the output video.&#10;The converter will adjust the quality to try and meet this target."
         min="0"
-        max="100"
-        hidden>
+        max="100">
       </setting-item>
     </setting-group>
   </setting-group>

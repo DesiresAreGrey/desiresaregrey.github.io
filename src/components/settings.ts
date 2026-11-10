@@ -175,6 +175,7 @@ class SettingItem extends HTMLElement {
 
             const select = this.querySelector('.setting-input') as HTMLSelectElement;
             select.addEventListener('change', () => select.setAttribute("selected", select.value));
+            select.setAttribute("selected", select.value);
         }
     }
 }
