@@ -139,6 +139,8 @@ class SettingItem extends HTMLElement {
             `;
             this.querySelector('.setting-input')?.addEventListener('blur', (e) => {
                 const input = e.target as HTMLInputElement;
+                if (input.value === "")
+                    input.value = "0";
                 const min = this.getAttribute("min");
                 const max = this.getAttribute("max");
                 if (min !== null && parseFloat(input.value) < parseFloat(min))

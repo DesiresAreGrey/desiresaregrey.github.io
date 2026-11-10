@@ -4,14 +4,14 @@ export class VideoInput {
     readonly input: Input;
     readonly file: File;
 
-    videoTrack: InputVideoTrack;
-    audioTracks: InputAudioTrack[];
+    readonly videoTrack: InputVideoTrack;
+    readonly audioTracks: InputAudioTrack[];
 
-    duration: number;
-    width: number;
-    height: number;
-    codec: VideoCodec | null;
-    frameRateMetrics: FrameRateMetrics;
+    readonly duration: number;
+    readonly width: number;
+    readonly height: number;
+    readonly codec: VideoCodec | null;
+    readonly frameRateMetrics: FrameRateMetrics;
 
     get size() { return this.file.size; }
     get aspectRatio() { return this.width / this.height; }

@@ -22,7 +22,7 @@ const defaultSettings = () => ({
         name: "Log",
         settings: {
             showLoggingWindow: {
-                name: "Show Logging window", 
+                name: "Logging Window",
                 info: "Adds a small log popup to the bottom right corner.\n\nRequires reloading the page", 
                 value: false, 
                 type: "toggle"

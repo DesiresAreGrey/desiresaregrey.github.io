@@ -68,13 +68,22 @@ screen so it can be used offline.</p>
       </setting-item>
       <setting-item 
         id="setting-quality"
+        type="dropdown"
+        name="Quality Level"
+        width="6rem"
+        options="custom:Custom,very-high:Very High,high:High,medium:Medium,low:Low,very-low:Very Low"
+        default="medium"
+        hidden>
+      </setting-item>
+      <setting-item 
+        id="setting-size-target"
         type="number"
-        name="Quality"
-        subtitle="CRF"
-        tooltip="The quality of the output video using Constant Rate Factor.&#10;A lower value generally leads to higher quality, consider 17 or 18 to be visually lossless or nearly so. The range is exponential, so increasing the CRF value +6 results in roughly half the bitrate / file size, while -6 leads to roughly twice the bitrate."
-        min="17"
-        max="28"
-        default="23">
+        name="File Size Target"
+        subtitle="MB"
+        tooltip="The target file size for the output video.&#10;The converter will adjust the quality to try and meet this target."
+        min="0"
+        max="100"
+        hidden>
       </setting-item>
     </setting-group>
   </setting-group>

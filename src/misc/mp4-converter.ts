@@ -8,7 +8,7 @@ import { ErrorPopup } from '../ui/errorpopup.js';
 import Catbox from '../utils/catbox.js';
 import SWHelper from '../utils/swhelper.js';
 import { getSettings, openSettingsPopup } from '../utils/site-settings.js';
-import { BufferTarget, Conversion, Mp4OutputFormat, Output, Quality } from 'mediabunny';
+import { BufferTarget, Conversion, Mp4OutputFormat, Output, Quality, type QualityLevel } from 'mediabunny';
 import { VideoInput } from '../utils/mediabunny-helper.js';
 
 if (getSettings().log.settings.showLoggingWindow.value)
@@ -87,7 +87,10 @@ function changedReencodeSetting() {
 }
 
 // settings
-const qualitySetting = $id('setting-quality') as NumberSettingItem;
+const qualityLevelSetting = $id('setting-quality') as DropdownSettingItem;
+type QualitySettingOptions = "custom" | "very-high" | "high" | "medium" | "low" | "very-low";
+
+const sizeTargetSetting = $id('setting-size-target') as NumberSettingItem;
 
 const resolutionSetting = $id('setting-resolution') as WidthHeightSettingItem;
 const [widthInput, heightInput] = resolutionSetting.inputs;
@@ -147,6 +150,38 @@ fpsSetting.input.addEventListener('blur', () => {
     updatePercentages();
 });
 
+let prevQualityLevel = qualityLevelSetting.value as QualityLevel;
+async function updateQualitySettings() {
+    const qualityLevel = qualityLevelSetting.value as QualitySettingOptions;
+    
+    if (sizeTargetSetting.value > 0) {
+        if (qualityLevel !== "custom")
+            prevQualityLevel = qualityLevel as QualityLevel;
+        qualityLevelSetting.subtitle = "Using Size Target";
+        sizeTargetSetting.subtitle = `~${sizeTargetSetting.value} MB`;
+        qualityLevelSetting.value = "custom"
+    }
+    else {
+        if (qualityLevel === "custom")
+            qualityLevelSetting.value = prevQualityLevel;
+        qualityLevelSetting.subtitle = "";
+        sizeTargetSetting.subtitle = "Using Quality Level";
+    }
+
+    updatePercentages();
+}
+
+sizeTargetSetting.input.addEventListener('input', updateQualitySettings);
+qualityLevelSetting.input.addEventListener('input', () => {
+    const qualityLevel = qualityLevelSetting.value as QualitySettingOptions;
+    if (qualityLevel === "custom" && sizeTargetSetting.value == 0)
+        sizeTargetSetting.value = 10;
+    else if (qualityLevel !== "custom" && sizeTargetSetting.value > 0)
+        sizeTargetSetting.value = 0;
+    updateQualitySettings();
+});
+updateQualitySettings();
+
 async function updatePercentages() {
     if (!video)
         return;
@@ -156,7 +191,7 @@ async function updatePercentages() {
 
     const speed = 1;
     
-    const fpsPercentValue = (fpsSetting.value / (video.frameRateMetrics.bestGuessFrameRate * speed)) * 100;
+    const fpsPercentValue = (fpsSetting.value / (video.frameRateMetrics.bestGuessFrameRate.roundTo(1) * speed)) * 100;
     if (fpsPercentValue >= 5)
         fpsSetting.subtitle = fpsPercentValue.roundTo(2) + "%";
     else
@@ -312,6 +347,9 @@ async function selectedVideo() {
     startEndSetting.setAttribute('duration', video.duration.toString());
     startEndSetting.show();
 
+    qualityLevelSetting.show();
+    sizeTargetSetting.show();
+
     const infoEl = $id('video-info') as HTMLParagraphElement;
     infoEl.innerHTML = getInfoHtml(video);
     convertButton.disabled = false;
@@ -350,9 +388,10 @@ async function convertToMp4() {
                 codec: 'avc',
                 width: Math.max(2, Math.round(Number(widthInput.value) / 2) * 2),
                 frameRate: !video.frameRateMetrics.bestGuessFrameRate.approx(fpsSetting.value, 0.05) ? fpsSetting.value : undefined,
-                quality: new Quality({
-                    quantizer: Math.max(0, Math.min(51, qualitySetting.value))
-                }),
+                quality: new Quality(qualityLevelSetting.value === "custom" ? {
+                    bitrate: Math.floor((sizeTargetSetting.value * 1024 * 1024 * 8) / video.duration),
+                    bitrateMode: 'variable'
+                } : qualityLevelSetting.value as QualityLevel),
                 hardwareAcceleration: 'no-preference',
                 forceTranscode: true
             } : {
@@ -386,7 +425,7 @@ async function convertToMp4() {
             if (progress - lastProgress >= 0.01) {
                 lastProgress = progress;
                 LoadingBar.update(progress.remap(0.1, 1));
-                convertButton.textContent = `Converting... ${Math.round(progress * 100)}%`;
+                convertButton.textContent = `Converting ${Math.round(progress * 100)}%...`;
                 console.log(`Conversion progress: ${Math.round(progress * 100)}%`);
             }
         };
