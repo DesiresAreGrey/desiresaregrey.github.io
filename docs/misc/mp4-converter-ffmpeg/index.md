@@ -8,7 +8,7 @@ hide:
 settings: Video,Log
 extra_head: |
   <link rel="stylesheet" href="/stylesheets/components/settings.css">
-  <link rel="manifest" href="/misc/mp4-converter/manifest.json"/>
+  <link rel="manifest" href="/misc/mp4-converter-ffmpeg/manifest.json"/>
   <link rel="apple-touch-icon" href="/assets/DesiresAreGrey192x.png"/>
 ---
 <script type="module" src="/js/misc/mp4-converter-ffmpeg.js"></script>
