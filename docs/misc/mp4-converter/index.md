@@ -79,7 +79,7 @@ screen so it can be used offline.</p>
         type="number"
         name="File Size Target"
         subtitle="MB"
-        tooltip="The target file size for the output video.&#10;The converter will adjust the quality to try and meet this target."
+        tooltip="The target file size for the output video.&#10;Calculates the bitrate using the input and duration."
         min="0"
         max="100">
       </setting-item>
