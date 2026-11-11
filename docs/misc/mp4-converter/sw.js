@@ -38,7 +38,9 @@ const cacheUrls = [
     "https://esm.sh/web-haptics",
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css",
     "https://esm.sh/mediabunny@1.65.2",
-    "https://esm.sh/mediabunny@1.65.2/es2022/mediabunny.mjs"
+    "https://esm.sh/mediabunny@1.65.2/es2022/mediabunny.mjs",
+    "https://esm.sh/@mediabunny/ac3@1.65.2?external=mediabunny",
+    "https://esm.sh/@mediabunny/ac3@1.65.2/X-ZW1lZGlhYnVubnk/es2022/ac3.mjs"
 ];
 
 self.addEventListener('install', (event) => {

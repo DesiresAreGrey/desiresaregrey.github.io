@@ -4,12 +4,14 @@ const cacheUrls = [
     "/misc/mp4-converter-ffmpeg/",
     "/misc/mp4-converter-ffmpeg/index.html",
     "/misc/mp4-converter-ffmpeg/manifest.json",
+
     "/stylesheets/extra.min.css",
     "/stylesheets/misc/mp4-converter.css",
     "/stylesheets/ui/errorpopup.css",
     "/stylesheets/ui/popup.css",
     "/stylesheets/ui/outlog.css",
     "/stylesheets/components/settings.css",
+
     "/js/components/settings.js",
     "/js/misc/mp4-converter-ffmpeg.js",
     "/js/utils/api.js",
@@ -25,8 +27,10 @@ const cacheUrls = [
     "/js/utils/ffmpeg.js",
     "/js/utils/site-settings.js",
     "/js/utils/cache.js",
+
     "/assets/DesiresAreGrey192x.png",
     "/assets/DesiresAreGrey-Circle.png",
+    
     "/assets/misc/ffmpeg/core/ffmpeg-core.js",
     "/assets/misc/ffmpeg/core/ffmpeg-core.wasm",
     "/assets/misc/ffmpeg/ffmpeg/classes.js",
@@ -41,6 +45,7 @@ const cacheUrls = [
     "/assets/misc/ffmpeg/util/errors.js",
     "/assets/misc/ffmpeg/util/index.js",
     "/assets/misc/ffmpeg/util/types.js",
+
     "https://esm.sh/web-haptics",
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 ];

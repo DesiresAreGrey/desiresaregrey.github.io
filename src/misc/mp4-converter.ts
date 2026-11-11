@@ -9,6 +9,7 @@ import Catbox from '../utils/catbox.js';
 import SWHelper from '../utils/swhelper.js';
 import { getSettings, openSettingsPopup } from '../utils/site-settings.js';
 import { BufferTarget, Conversion, Mp4OutputFormat, Output, Quality, type ConversionOptions, type QualityLevel } from 'mediabunny';
+import { registerAc3Decoder } from '@mediabunny/ac3';
 import { VideoInput } from '../utils/mediabunny-helper.js';
 import { Utils } from '../utils/utils.js';
 
@@ -18,6 +19,8 @@ if (getSettings().log.settings.showLoggingWindow.value)
 LoadingBar.startFullTrickle();
 
 void SWHelper.addVersionToHeader();
+
+registerAc3Decoder();
 
 await pwaSetup();
 if (window.matchMedia('(display-mode: standalone)').matches) {
@@ -30,9 +33,7 @@ if (window.matchMedia('(display-mode: standalone)').matches) {
             </a>
         </div>
     `;
-    titlebar.$('#settings-button')?.addEventListener('click', () => {
-        openSettingsPopup();
-    });
+    titlebar.$('#settings-button')?.addEventListener('click', openSettingsPopup);
     titlebar.$('.md-header__ellipsis')?.addEventListener('click', () => {
         console.log("Copying URL to clipboard");
         navigator.clipboard.writeText(window.location.href);
